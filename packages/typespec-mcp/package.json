@@ -11,6 +11,10 @@
     "./testing": {
       "import": "./dist/testing/index.js",
       "types": "./dist/testing/index.d.ts"
+    },
+    "./typekit": {
+      "import": "./dist/src/typekit/index.js",
+      "types": "./dist/src/typekit/index.d.ts"
     }
   },
   "peerDependencies": {

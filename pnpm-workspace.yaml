@@ -14,7 +14,8 @@ catalog:
   "@typespec/compiler": ^1.0.0-rc.0
   "@typespec/emitter-framework": ^0.5.0
   "@typespec/http": ^1.0.0-rc.0
+  concurrently: ^9.1.2
   prettier: ^3.5.3
   typescript: ^5.8.3
-  typespec-zod: ^1.0.0-preview.4
+  typespec-zod: ^1.0.0-preview.5
   vitest: ^3.1.1

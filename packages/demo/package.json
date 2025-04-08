@@ -1,15 +1,17 @@
 {
-  "name": "typespec-mcp",
+  "name": "demo",
+  "private": true,
   "version": "1.0.0",
   "description": "",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "typespec-mcp": "workspace:*",
     "typespec-mcp-server-js": "workspace:*",
+    "@typespec/compiler": "catalog:"
+  },
+  "devDependencies": {
     "typescript": "catalog:",
     "@types/node": "catalog:",
-    "prettier": "^3.5.3",
-    "@typespec/compiler": "catalog:"
+    "prettier": "^3.5.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
