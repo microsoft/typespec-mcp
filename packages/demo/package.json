@@ -1,0 +1,21 @@
+{
+  "name": "typespec-mcp",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {},
+  "devDependencies": {
+    "typespec-mcp": "workspace:*",
+    "typespec-mcp-server-js": "workspace:*",
+    "typescript": "catalog:",
+    "@types/node": "catalog:",
+    "prettier": "^3.5.3",
+    "@typespec/compiler": "catalog:"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}

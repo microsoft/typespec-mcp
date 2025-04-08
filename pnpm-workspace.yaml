@@ -1,0 +1,20 @@
+packages:
+  - 'packages/**'
+
+catalog:
+  "@alloy-js/core": ^0.10.0
+  "@alloy-js/typescript": ^0.10.0
+  "@alloy-js/babel-preset": ^0.2.0
+  "@alloy-js/rollup-plugin": ^0.1.0
+  "@babel/cli": ^7.27.0
+  "@babel/core": ^7.26.10
+  "@babel/preset-typescript": ^7.27.0
+  "@rollup/plugin-babel": ^6.0.4
+  "@types/node": ^22.14.0
+  "@typespec/compiler": ^1.0.0-rc.0
+  "@typespec/emitter-framework": ^0.5.0
+  "@typespec/http": ^1.0.0-rc.0
+  prettier: ^3.5.3
+  typescript: ^5.8.3
+  typespec-zod: ^1.0.0-preview.4
+  vitest: ^3.1.1
