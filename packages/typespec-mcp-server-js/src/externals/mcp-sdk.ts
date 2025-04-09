@@ -2,12 +2,12 @@ import { createPackage } from "@alloy-js/typescript";
 
 export const mcpSdk = createPackage({
   name: "@modelcontextprotocol/sdk",
-  version: "^1.6.1",
+  version: "^1.9.0",
   descriptor: {
     "./server/index.js": {
-      named: ["server"],
+      named: ["Server"],
     },
-    "./types": {
+    "./types.js": {
       named: [
         "CallToolRequestSchema",
         "ListResourcesRequestSchema",

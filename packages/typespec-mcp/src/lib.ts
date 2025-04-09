@@ -5,6 +5,9 @@ export const $lib = createTypeSpecLibrary({
   diagnostics: {},
   state: {
     tool: { description: "An MCP tool" },
+    serializeAsText: {
+      description: "Holds the type which is serialized to text",
+    },
   },
 } as const);
 

@@ -5,24 +5,24 @@ import { $ } from "@typespec/compiler/experimental/typekit";
 import { zodToJsonSchema } from "../externals/zodToJsonSchema.js";
 import { FunctionCallExpression, ObjectExpression } from "@alloy-js/typescript";
 import { refkey } from "@alloy-js/core";
+import { useMCPServerContext } from "../context/McpServer.js";
 
-export interface ListToolsHandlerProps {
-  tools: Operation[];
-}
+export interface ListToolsHandlerProps {}
 
 /**
  * Generates the handler which lists all the tools privided by this
  * MCP server.
  */
 export function ListToolsHandler(props: ListToolsHandlerProps) {
-  const toolDescriptors = props.tools
+  const { tools } = useMCPServerContext();
+  const toolDescriptors = tools
     .map((type) => operationToToolDescriptor(type))
     .filter(Boolean);
 
   return (
     <RequestHandler
       name="listTools"
-      schema={mcpSdk["./types"].ListToolsRequestSchema}
+      schema={mcpSdk["./types.js"].ListToolsRequestSchema}
     >
       {(request) => {
         return (

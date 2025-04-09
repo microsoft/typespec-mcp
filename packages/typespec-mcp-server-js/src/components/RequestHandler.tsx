@@ -5,6 +5,7 @@ import {
   FunctionDeclaration,
 } from "@alloy-js/typescript";
 import { mcpSdk } from "../externals/mcp-sdk.js";
+import { useMCPServerContext } from "../context/McpServer.js";
 
 export interface RequestHandlerProps {
   /**
@@ -30,10 +31,12 @@ export interface RequestHandlerProps {
  */
 export function RequestHandler(props: RequestHandlerProps) {
   const requestParam = refkey();
-
+  const {
+    keys: { server, getToolHandler },
+  } = useMCPServerContext();
   return (
     <FunctionCallExpression
-      target={<>{mcpSdk["./server/index.js"].server}.setRequestHandler</>}
+      target={<>{server}.setRequestHandler</>}
       args={[
         props.schema,
         <FunctionDeclaration
