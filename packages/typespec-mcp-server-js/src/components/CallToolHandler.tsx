@@ -32,6 +32,7 @@ import {
   useMCPServerContext,
 } from "../context/McpServer.js";
 import { $ } from "@typespec/compiler/experimental/typekit";
+import { zodValidationError } from "../externals/zod-validation-error.js";
 
 export interface CallToolHandlerProps {
   tool: ToolDescriptor;
@@ -52,7 +53,7 @@ export function CallToolHandler(props: CallToolHandlerProps) {
           </VarDeclaration>
           {code`
             if (!parsed.success) {
-              throw new Error("Invalid parameters for ${props.tool.op.name}: " + parsed.error);
+              throw ${zodValidationError.fromZodError}(parsed.error, { prefix: "Request validation error" });
             }
           `}
         </List>
@@ -75,7 +76,7 @@ export function CallToolHandler(props: CallToolHandlerProps) {
         </VarDeclaration>
         {code`
           if (!maybeResult.success) {
-            throw new Error("Invalid return type for ${props.tool.op.name}: " + maybeResult.error);
+            throw ${zodValidationError.fromZodError}(maybeResult.error, { prefix: "Response validation error"});
           }
         `}
         <VarDeclaration name="result" refkey={parseResultKey}>

@@ -2,6 +2,7 @@ import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { ListToolsRequestSchema, CallToolRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import { zodToJsonSchema } from "zod-to-json-schema";
 import { addVectorParameters, subVectorParameters, crossProductParameters, dotProductParameters, addVectorReturnType, subVectorReturnType, crossProductReturnType, dotProductReturnType } from "./types.js";
+import { fromZodError } from "zod-validation-error";
 import { toolHandler } from "./tools.js";
 
 export const server = new Server(
@@ -75,12 +76,12 @@ server.setRequestHandler(
       case "addVector": {
         const parsed = addVectorParameters.safeParse(args);
         if (!parsed.success) {
-          throw new Error("Invalid parameters for addVector: " + parsed.error);
+          throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
         const rawResult = toolHandler.addVector(parsed.data.v1, parsed.data.v2);
         const maybeResult = addVectorReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
-          throw new Error("Invalid return type for addVector: " + maybeResult.error);
+          throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
         const result = maybeResult.data;
         return {
@@ -96,12 +97,12 @@ server.setRequestHandler(
       case "subVector": {
         const parsed = subVectorParameters.safeParse(args);
         if (!parsed.success) {
-          throw new Error("Invalid parameters for subVector: " + parsed.error);
+          throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
         const rawResult = toolHandler.subVector(parsed.data.v1, parsed.data.v2);
         const maybeResult = subVectorReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
-          throw new Error("Invalid return type for subVector: " + maybeResult.error);
+          throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
         const result = maybeResult.data;
         return {
@@ -117,7 +118,7 @@ server.setRequestHandler(
       case "crossProduct": {
         const parsed = crossProductParameters.safeParse(args);
         if (!parsed.success) {
-          throw new Error("Invalid parameters for crossProduct: " + parsed.error);
+          throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
         const rawResult = toolHandler.crossProduct(
           parsed.data.v1,
@@ -125,7 +126,7 @@ server.setRequestHandler(
         );
         const maybeResult = crossProductReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
-          throw new Error("Invalid return type for crossProduct: " + maybeResult.error);
+          throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
         const result = maybeResult.data;
         return {
@@ -141,7 +142,7 @@ server.setRequestHandler(
       case "dotProduct": {
         const parsed = dotProductParameters.safeParse(args);
         if (!parsed.success) {
-          throw new Error("Invalid parameters for dotProduct: " + parsed.error);
+          throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
         const rawResult = toolHandler.dotProduct(
           parsed.data.v1,
@@ -149,7 +150,7 @@ server.setRequestHandler(
         );
         const maybeResult = dotProductReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
-          throw new Error("Invalid return type for dotProduct: " + maybeResult.error);
+          throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
         const result = maybeResult.data;
         return {
