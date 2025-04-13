@@ -1,9 +1,9 @@
 import { For, List, refkey } from "@alloy-js/core";
-import { ZodSchemaDeclaration } from "typespec-zod";
+import { ZodSchema, ZodSchemaDeclaration } from "typespec-zod";
 import { useMCPServerContext } from "../context/McpServer.js";
-import { getNonErrorReturnTypes } from "../utils.js";
 import { $ } from "@typespec/compiler/experimental/typekit";
 import { VarDeclaration } from "@alloy-js/typescript";
+import { getPlausibleName } from "../utils.js";
 
 export function ZodTypes() {
   const { tools, allTypes } = useMCPServerContext();
@@ -12,7 +12,7 @@ export function ZodTypes() {
       <For each={allTypes} semicolon doubleHardline enderPunctuation>
         {(type) => {
           const rk = refkey(type, "zodSchema");
-          const name = (type as any).name ?? "unknown";
+          const name = getPlausibleName(type);
           return (
             <ZodSchemaDeclaration export name={name} type={type} refkey={rk} />
           );
@@ -20,48 +20,33 @@ export function ZodTypes() {
       </For>
       <For each={tools} doubleHardline>
         {(tool) => {
-          const parametersRk = refkey(tool, "parameters");
-          const parametersName = tool.name + "Parameters";
-          const returnTypes = getNonErrorReturnTypes(tool);
-          const returnType =
-            returnTypes.length > 1
-              ? $.union.create({
-                  variants: returnTypes.map((type) => {
-                    return $.unionVariant.create({ type });
-                  }),
-                })
-              : returnTypes[0];
+          // todo: these are only needed because I can't access members inside
+          // ZodSchemaDeclaration props without causing an error.
+          const parametersRk = tool.keys.zodParametersSchema;
+          const returnTypeRk = tool.keys.zodReturnSchema;
 
-          const returnTypeRk = refkey(tool, "returnType");
-          const returnTypeName = tool.name + "ReturnType";
+          const parametersName = tool.op.name + "Parameters";
+          const returnTypeName = tool.op.name + "ReturnType";
 
           const schemas = [
             <ZodSchemaDeclaration
               export
               name={parametersName}
-              type={tool.parameters}
+              type={tool.op.parameters}
               refkey={parametersRk}
             />,
           ];
-          if (returnTypes.length > 1) {
-            schemas.push(
-              <ZodSchemaDeclaration
-                export
-                type={returnType}
-                name={returnTypeName}
-                refkey={returnTypeRk}
-              />
-            );
-          } else {
-            schemas.push(
-              <VarDeclaration
-                export
-                name={returnTypeName}
-                refkey={returnTypeRk}
-                initializer={refkey(returnType, "zodSchema")}
-              />
-            );
-          }
+          schemas.push(
+            <VarDeclaration
+              export
+              name={returnTypeName}
+              refkey={returnTypeRk}
+              initializer={
+                <ZodSchema nested type={tool.implementationOp.returnType} />
+              }
+            />
+          );
+
           return (
             <List
               doubleHardline

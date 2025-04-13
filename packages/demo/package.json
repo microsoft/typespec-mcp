@@ -13,10 +13,14 @@
   },
   "devDependencies": {
     "@types/node": "catalog:",
+    "@wong2/mcp-cli": "^1.6.0",
     "prettier": "^3.5.3",
     "typescript": "catalog:"
   },
   "scripts": {
+    "build-tsp": "tsp compile . --emit typespec-mcp-server-js",
+    "build-ts": "tsc -p .",
+    "mcp": "mcp-cli node dist/src/mcp-server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

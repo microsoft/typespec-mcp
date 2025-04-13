@@ -3,9 +3,10 @@ import {
   Model,
   Operation,
   Scalar,
+  Type,
   Union,
 } from "@typespec/compiler";
-import { $, defineKit, Typekit } from "@typespec/compiler/experimental/typekit";
+import { $, defineKit } from "@typespec/compiler/experimental/typekit";
 import { stateKeys } from "../lib.js";
 export interface McpKit {
   tools: {
@@ -15,6 +16,7 @@ export interface McpKit {
     TextResult: Model;
     LRO: Model;
     ImageResult: Model;
+    AudioResult: Model;
     EmbeddedResource: Model;
     TextResource: Model;
     BinaryResource: Model;
@@ -22,6 +24,21 @@ export interface McpKit {
     FileData: Scalar;
     MCPError: Model;
   };
+  textResult: {
+    is(type: Type): boolean;
+    getSerializedType(type: Model): Type | undefined;
+  };
+  audioResult: {
+    is(type: Type): boolean;
+  };
+  imageResult: {
+    is(type: Type): boolean;
+  };
+  resourceResult: {
+    is(type: Type): boolean;
+  };
+
+  isKnownMcpResult(type: Type): boolean;
 }
 interface TypekitExtension {
   /**
@@ -65,6 +82,11 @@ defineKit<TypekitExtension>({
           $.program.resolveTypeReference("MCP.ImageResult")
         )! as Model;
       },
+      get AudioResult() {
+        return ignoreDiagnostics(
+          $.program.resolveTypeReference("MCP.AudioResult")
+        )! as Model;
+      },
       get EmbeddedResource() {
         return ignoreDiagnostics(
           $.program.resolveTypeReference("MCP.EmbeddedResource")
@@ -90,6 +112,42 @@ defineKit<TypekitExtension>({
           $.program.resolveTypeReference("MCP.Resource")
         )! as Union;
       },
+    },
+
+    textResult: {
+      is(type: Type) {
+        return type.kind === "Model" && type.name === "TextResult";
+      },
+      getSerializedType(type: Model): Type | undefined {
+        return $.program.stateMap(stateKeys.serializeAsText).get(type).dataType;
+      },
+    },
+
+    audioResult: {
+      is(type: Type) {
+        return type.kind === "Model" && type.name === "AudioResult";
+      },
+    },
+
+    imageResult: {
+      is(type: Type) {
+        return type.kind === "Model" && type.name === "ImageResult";
+      },
+    },
+
+    resourceResult: {
+      is(type: Type) {
+        return type.kind === "Model" && type.name === "Resource";
+      },
+    },
+
+    isKnownMcpResult(type) {
+      return (
+        $.mcp.textResult.is(type) ||
+        $.mcp.audioResult.is(type) ||
+        $.mcp.imageResult.is(type) ||
+        $.mcp.resourceResult.is(type)
+      );
     },
   },
 });

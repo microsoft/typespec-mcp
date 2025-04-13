@@ -1,10 +1,9 @@
-import { Block, Refkey, refkey } from "@alloy-js/core";
+import { Refkey, refkey } from "@alloy-js/core";
 import { Children } from "@alloy-js/core/jsx-runtime";
 import {
   FunctionCallExpression,
   FunctionDeclaration,
 } from "@alloy-js/typescript";
-import { mcpSdk } from "../externals/mcp-sdk.js";
 import { useMCPServerContext } from "../context/McpServer.js";
 
 export interface RequestHandlerProps {

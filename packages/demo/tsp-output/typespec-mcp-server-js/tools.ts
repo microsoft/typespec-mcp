@@ -1,57 +1,37 @@
-interface TextResult {
-  "type": "text";
-  "text": string;
-}
-
-interface MCPError {
-  "code": number;
-  "message": string;
-
-}
-
-interface ResourceNotFoundError extends MCPError {
-  "code": 404;
-  "message": "Resource not found";
-}
-
-interface InvalidFileLocation extends MCPError {
-  "code": 500;
-}
-
-interface Point3D {
+interface Vec3 {
   "x": number;
   "y": number;
   "z": number;
 }
 
-interface TextResult_2 {
-  "type": "text";
-  "text": string;
-}
-
 interface Tools {
   /**
-   * Get an item value.
+   * Adds two vectors together. Use this when you want to combine two vectors to
+   * get a resultant vector. For example, adding a movement vector to a position
+   * vector to get a new position.
    **/
-  getItem(id: string): TextResult | ResourceNotFoundError;
+  addVector(v1: Vec3, v2: Vec3): Vec3;
 
   /**
-   * Set an item value.
+   * Subtracts one vector from another. Use this to find the difference between
+   * two vectors. For example, calculating the direction and distance from one
+   * point to another.
    **/
-  setItem(id_2: string, value: string): TextResult | ResourceNotFoundError;
+  subVector(v1_2: Vec3, v2_2: Vec3): Vec3;
 
   /**
-   * Write content to a file at the specified path.
+   * Computes the cross product of two vectors. Use this to find a vector that is
+   * perpendicular to both input vectors. This is useful in 3D graphics for
+   * calculating surface normals or rotational axes.
    **/
-  writeFile(path: string, content: string): TextResult | InvalidFileLocation;
+  crossProduct(v1_3: Vec3, v2_3: Vec3): Vec3;
 
   /**
-   * Get the distance between two points in 3D space.
+   * Computes the dot product of two vectors. Use this to find the scalar
+   * projection of one vector onto another. This is useful for determining angles
+   * between vectors or checking if they are pointing in the same direction.
    **/
-  getDistance(p1: Point3D, p2: Point3D): TextResult;
-
-
-  getPoint(): TextResult_2;
+  dotProduct(v1_4: Vec3, v2_4: Vec3): number;
 }
 
 export let toolHandler: Tools = undefined as any;

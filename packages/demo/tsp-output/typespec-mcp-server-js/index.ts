@@ -1,16 +1,18 @@
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { ListToolsRequestSchema, CallToolRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import { zodToJsonSchema } from "zod-to-json-schema";
-import { getItemParameters, setItemParameters, writeFileParameters, getDistanceParameters, getPointParameters, getItemReturnType, setItemReturnType, writeFileReturnType, TextResult, TextResult_2 } from "./types.js";
+import { addVectorParameters, subVectorParameters, crossProductParameters, dotProductParameters, addVectorReturnType, subVectorReturnType, crossProductReturnType, dotProductReturnType } from "./types.js";
 import { toolHandler } from "./tools.js";
 
-const server = new Server(
+export const server = new Server(
   {
     name: "My MCP Server",
     version: "1.0.0",
   },
   {
-    capabilities: {},
+    capabilities: {
+      tools: {},
+    },
   }
 )
 
@@ -20,29 +22,44 @@ server.setRequestHandler(
     return {
       tools: [
         {
-          name: "getItem",
-          description: "Get an item value.",
-          inputSchema: zodToJsonSchema(getItemParameters),
+          name: "addVector",
+          description: "Adds two vectors together. Use this when you want to combine two vectors to\nget a resultant vector. For example, adding a movement vector to a position\nvector to get a new position.",
+          inputSchema: zodToJsonSchema(
+            addVectorParameters,
+            {
+              $refStrategy: "none",
+            }
+          ),
         },
         {
-          name: "setItem",
-          description: "Set an item value.",
-          inputSchema: zodToJsonSchema(setItemParameters),
+          name: "subVector",
+          description: "Subtracts one vector from another. Use this to find the difference between\ntwo vectors. For example, calculating the direction and distance from one\npoint to another.",
+          inputSchema: zodToJsonSchema(
+            subVectorParameters,
+            {
+              $refStrategy: "none",
+            }
+          ),
         },
         {
-          name: "writeFile",
-          description: "Write content to a file at the specified path.",
-          inputSchema: zodToJsonSchema(writeFileParameters),
+          name: "crossProduct",
+          description: "Computes the cross product of two vectors. Use this to find a vector that is\nperpendicular to both input vectors. This is useful in 3D graphics for\ncalculating surface normals or rotational axes.",
+          inputSchema: zodToJsonSchema(
+            crossProductParameters,
+            {
+              $refStrategy: "none",
+            }
+          ),
         },
         {
-          name: "getDistance",
-          description: "Get the distance between two points in 3D space.",
-          inputSchema: zodToJsonSchema(getDistanceParameters),
-        },
-        {
-          name: "getPoint",
-          description: "",
-          inputSchema: zodToJsonSchema(getPointParameters),
+          name: "dotProduct",
+          description: "Computes the dot product of two vectors. Use this to find the scalar\nprojection of one vector onto another. This is useful for determining angles\nbetween vectors or checking if they are pointing in the same direction.",
+          inputSchema: zodToJsonSchema(
+            dotProductParameters,
+            {
+              $refStrategy: "none",
+            }
+          ),
         }
       ],
     };
@@ -55,77 +72,93 @@ server.setRequestHandler(
     const name = request.params.name;
     const args = request.params.arguments;
     switch (name) {
-      case "getItem": {
-        const parsed = getItemParameters.safeParse(args);
+      case "addVector": {
+        const parsed = addVectorParameters.safeParse(args);
         if (!parsed.success) {
-          throw new Error("Invalid parameters for getItem: " + parsed.error);
+          throw new Error("Invalid parameters for addVector: " + parsed.error);
         }
-        const result = toolHandler.getItem(parsed.data.id);
-        const returnParsed = getItemReturnType.safeParse(result);
-        if (!returnParsed.success) {
-          throw new Error("Invalid return type for getItem: " + returnParsed.error);
+        const rawResult = toolHandler.addVector(parsed.data.v1, parsed.data.v2);
+        const maybeResult = addVectorReturnType.safeParse(rawResult);
+        if (!maybeResult.success) {
+          throw new Error("Invalid return type for addVector: " + maybeResult.error);
         };
+        const result = maybeResult.data;
         return {
-          content: returnParsed.data,
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify(result, null, 2),
+            }
+          ],
         };
       }
 
-      case "setItem": {
-        const parsed = setItemParameters.safeParse(args);
+      case "subVector": {
+        const parsed = subVectorParameters.safeParse(args);
         if (!parsed.success) {
-          throw new Error("Invalid parameters for setItem: " + parsed.error);
+          throw new Error("Invalid parameters for subVector: " + parsed.error);
         }
-        const result = toolHandler.setItem(parsed.data.id, parsed.data.value);
-        const returnParsed = setItemReturnType.safeParse(result);
-        if (!returnParsed.success) {
-          throw new Error("Invalid return type for setItem: " + returnParsed.error);
+        const rawResult = toolHandler.subVector(parsed.data.v1, parsed.data.v2);
+        const maybeResult = subVectorReturnType.safeParse(rawResult);
+        if (!maybeResult.success) {
+          throw new Error("Invalid return type for subVector: " + maybeResult.error);
         };
+        const result = maybeResult.data;
         return {
-          content: returnParsed.data,
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify(result, null, 2),
+            }
+          ],
         };
       }
 
-      case "writeFile": {
-        const parsed = writeFileParameters.safeParse(args);
+      case "crossProduct": {
+        const parsed = crossProductParameters.safeParse(args);
         if (!parsed.success) {
-          throw new Error("Invalid parameters for writeFile: " + parsed.error);
+          throw new Error("Invalid parameters for crossProduct: " + parsed.error);
         }
-        const result = toolHandler.writeFile(
-          parsed.data.path,
-          parsed.data.content
+        const rawResult = toolHandler.crossProduct(
+          parsed.data.v1,
+          parsed.data.v2
         );
-        const returnParsed = writeFileReturnType.safeParse(result);
-        if (!returnParsed.success) {
-          throw new Error("Invalid return type for writeFile: " + returnParsed.error);
+        const maybeResult = crossProductReturnType.safeParse(rawResult);
+        if (!maybeResult.success) {
+          throw new Error("Invalid return type for crossProduct: " + maybeResult.error);
         };
+        const result = maybeResult.data;
         return {
-          content: returnParsed.data,
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify(result, null, 2),
+            }
+          ],
         };
       }
 
-      case "getDistance": {
-        const parsed = getDistanceParameters.safeParse(args);
+      case "dotProduct": {
+        const parsed = dotProductParameters.safeParse(args);
         if (!parsed.success) {
-          throw new Error("Invalid parameters for getDistance: " + parsed.error);
+          throw new Error("Invalid parameters for dotProduct: " + parsed.error);
         }
-        const result = toolHandler.getDistance(parsed.data.p1, parsed.data.p2);
-        const returnParsed = TextResult.safeParse(result);
-        if (!returnParsed.success) {
-          throw new Error("Invalid return type for getDistance: " + returnParsed.error);
+        const rawResult = toolHandler.dotProduct(
+          parsed.data.v1,
+          parsed.data.v2
+        );
+        const maybeResult = dotProductReturnType.safeParse(rawResult);
+        if (!maybeResult.success) {
+          throw new Error("Invalid return type for dotProduct: " + maybeResult.error);
         };
+        const result = maybeResult.data;
         return {
-          content: returnParsed.data,
-        };
-      }
-
-      case "getPoint": {
-        const result = toolHandler.getPoint();
-        const returnParsed = TextResult_2.safeParse(result);
-        if (!returnParsed.success) {
-          throw new Error("Invalid return type for getPoint: " + returnParsed.error);
-        };
-        return {
-          content: returnParsed.data,
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify(result, null, 2),
+            }
+          ],
         };
       }
     };

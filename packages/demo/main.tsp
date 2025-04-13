@@ -1,45 +1,39 @@
 import "typespec-mcp";
 using MCP;
 
-model ResourceNotFoundError extends MCPError {
-  code: 404;
-  message: "Resource not found";
-}
-
-model InvalidFileLocation extends MCPError {
-  code: 500;
-}
-
 /**
- * Get an item value.
+ * A vector in 3D space.
  */
-@tool op getItem(id: string): TextResult | ResourceNotFoundError;
-
-/**
- * Set an item value.
- */
-@tool op setItem(id: string, value: string): TextResult | ResourceNotFoundError;
-
-/**
- * Write content to a file at the specified path.
- */
-@tool op writeFile(
-  path: string,
-  content: string,
-): TextResult | InvalidFileLocation;
-
-/**
- * A point in 3D space.
- */
-model Point3D {
-  x: float64;
-  y: float64;
-  z: float64;
+model Vec3 {
+  x: int32;
+  y: int32;
+  z: int32;
 }
 
 /**
- * Get the distance between two points in 3D space.
+ * Adds two vectors together. Use this when you want to combine two vectors to
+ * get a resultant vector. For example, adding a movement vector to a position
+ * vector to get a new position.
  */
-@tool op getDistance(p1: Point3D, p2: Point3D): TextResult;
+@tool op addVector(v1: Vec3, v2: Vec3): Vec3;
 
-@tool op getPoint(): TextResult<Point3D>;
+/**
+ * Subtracts one vector from another. Use this to find the difference between
+ * two vectors. For example, calculating the direction and distance from one
+ * point to another.
+ */
+@tool op subVector(v1: Vec3, v2: Vec3): Vec3;
+
+/**
+ * Computes the cross product of two vectors. Use this to find a vector that is
+ * perpendicular to both input vectors. This is useful in 3D graphics for
+ * calculating surface normals or rotational axes.
+ */
+@tool op crossProduct(v1: Vec3, v2: Vec3): Vec3;
+
+/**
+ * Computes the dot product of two vectors. Use this to find the scalar
+ * projection of one vector onto another. This is useful for determining angles
+ * between vectors or checking if they are pointing in the same direction.
+ */
+@tool op dotProduct(v1: Vec3, v2: Vec3): float64;

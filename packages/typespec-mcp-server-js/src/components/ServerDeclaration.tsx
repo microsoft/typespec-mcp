@@ -30,7 +30,7 @@ export function ServerDeclaration(props: ServerDeclarationProps) {
   };
 
   return (
-    <VarDeclaration name="server" refkey={mcpContext.keys.server}>
+    <VarDeclaration export name="server" refkey={mcpContext.keys.server}>
       new{" "}
       <FunctionCallExpression
         target={mcpSdk["./server/index.js"].Server}

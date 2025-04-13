@@ -4,19 +4,18 @@ import { RequestHandler } from "./RequestHandler.jsx";
 import { $ } from "@typespec/compiler/experimental/typekit";
 import { zodToJsonSchema } from "../externals/zodToJsonSchema.js";
 import { FunctionCallExpression, ObjectExpression } from "@alloy-js/typescript";
-import { refkey } from "@alloy-js/core";
-import { useMCPServerContext } from "../context/McpServer.js";
+import { ToolDescriptor, useMCPServerContext } from "../context/McpServer.js";
 
 export interface ListToolsHandlerProps {}
 
 /**
- * Generates the handler which lists all the tools privided by this
+ * Generates the handler which lists all the tools provided by this
  * MCP server.
  */
 export function ListToolsHandler(props: ListToolsHandlerProps) {
   const { tools } = useMCPServerContext();
   const toolDescriptors = tools
-    .map((type) => operationToToolDescriptor(type))
+    .map((desc) => operationToToolDescriptor(desc))
     .filter(Boolean);
 
   return (
@@ -35,17 +34,20 @@ export function ListToolsHandler(props: ListToolsHandlerProps) {
   );
 }
 
-function operationToToolDescriptor(operation: Operation) {
-  const doc = getDoc($.program, operation);
+function operationToToolDescriptor(tool: ToolDescriptor) {
+  const doc = getDoc($.program, tool.op);
 
   return {
-    name: operation.name,
+    name: tool.op.name,
     description: doc ?? "",
     inputSchema: () => (
       <>
         <FunctionCallExpression
           target={zodToJsonSchema.zodToJsonSchema}
-          args={[refkey(operation, "parameters")]}
+          args={[
+            tool.keys.zodParametersSchema,
+            <ObjectExpression jsValue={{ $refStrategy: "none" }} />,
+          ]}
         />
       </>
     ),

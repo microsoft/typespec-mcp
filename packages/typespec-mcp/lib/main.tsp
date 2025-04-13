@@ -26,6 +26,17 @@ model ImageResult<MimeType extends string = string> {
   mimeType: MimeType;
 }
 
+model AudioResult<MimeType extends string = string> {
+  type: "audio";
+  data: FileData;
+  mimeType: MimeType;
+}
+
+model ResourceResult<TResourceType extends Resource = Resource> {
+  type: "resource";
+  resource: TResourceType;
+}
+
 model EmbeddedResource {
   type: "resource";
   resource: Resource;
