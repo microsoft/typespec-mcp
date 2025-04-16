@@ -29,6 +29,6 @@ jobs:
         run: pnpm build
 
       - name: Publish to GitHub npm registry
-        run: pnpm publish --access public
+        run: pnpm publish --access public -y
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
