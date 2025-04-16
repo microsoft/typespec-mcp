@@ -19,8 +19,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22.x
-          cache: 'pnpm'
+          cache: "pnpm"
           registry-url: "https://npm.pkg.github.com/"
+          scope: "@name"
 
       - name: Install dependencies
         run: pnpm install
@@ -28,12 +29,7 @@ jobs:
       - name: Build
         run: pnpm build
 
-      # - name: Publish to GitHub npm registry
-      #   run: pnpm publish  -r --no-git-checks --registry https://npm.pkg.github.com/
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish to GitHub npm registry
-        run: npm publish
-        working-directory: packages/typespec-mcp
+        run: pnpm publish  -r --no-git-checks --registry https://npm.pkg.github.com/
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
