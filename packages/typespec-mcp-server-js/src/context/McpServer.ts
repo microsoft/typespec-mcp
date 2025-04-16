@@ -15,6 +15,12 @@ import {
 } from "@typespec/compiler";
 import { $ } from "@typespec/compiler/experimental/typekit";
 import { splitOutErrors } from "../utils.js";
+import {
+  unsafe_mutateSubgraph,
+  unsafe_MutableType,
+  unsafe_MutatorFlow,
+} from "@typespec/compiler/experimental";
+import { EnumToUnion } from "../mutators.jsx";
 
 export interface MCPServerKeys {
   server: Refkey;
@@ -139,7 +145,13 @@ export function createMCPServerContext(options: {
   const toolOps = $.mcp.tools.list();
   const toolDescriptors: ToolDescriptor[] = [];
 
-  for (const toolOp of toolOps) {
+  for (const rawToolOp of toolOps) {
+    const toolOpMutation = unsafe_mutateSubgraph(
+      $.program,
+      [EnumToUnion],
+      rawToolOp
+    );
+    const toolOp = toolOpMutation.type as Operation;
     const { successes, errors } = splitOutErrors(toolOp);
 
     // the declared return type is the type of the successful results from the
@@ -271,11 +283,6 @@ function resultDescriptorFromDeclaredArrayType(
   };
 }
 
-let fileType: Type | undefined;
-
-function createFileType() {
-  return fileType!;
-}
 function discoverTypesFrom(types: Type[]) {
   const discoveredTypes = new Set<Type>();
 
