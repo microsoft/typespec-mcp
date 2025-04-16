@@ -1,5 +1,4 @@
-import { writeFile } from "node:fs";
-import { readFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 const scope = "@bterlson";
