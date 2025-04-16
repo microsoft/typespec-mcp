@@ -9,7 +9,7 @@ const root = resolve(import.meta.dirname, "../../");
 
 for (const path of packages) {
   const pkgJsonPath = resolve(root, path, "package.json");
-  const content = JSON.parse(await readFile(pkgJsonPath));
+  const content = (await readFile(pkgJsonPath)).toString();
   const pkgJson = JSON.parse(content);
 
   pkgJson.name = `${scope}/${pkgJson.name}`;
