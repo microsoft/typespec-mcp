@@ -64,52 +64,52 @@ defineKit<TypekitExtension>({
     builtins: {
       get BinaryResource() {
         return ignoreDiagnostics(
-          $.program.resolveTypeReference("MCP.BinaryResource")
+          $.program.resolveTypeReference("MCP.BinaryResource"),
         )! as Model;
       },
       get TextResult() {
         return ignoreDiagnostics(
-          $.program.resolveTypeReference("MCP.TextResult")
+          $.program.resolveTypeReference("MCP.TextResult"),
         )! as Model;
       },
       get LRO() {
         return ignoreDiagnostics(
-          $.program.resolveTypeReference("MCP.LRO")
+          $.program.resolveTypeReference("MCP.LRO"),
         )! as Model;
       },
       get ImageResult() {
         return ignoreDiagnostics(
-          $.program.resolveTypeReference("MCP.ImageResult")
+          $.program.resolveTypeReference("MCP.ImageResult"),
         )! as Model;
       },
       get AudioResult() {
         return ignoreDiagnostics(
-          $.program.resolveTypeReference("MCP.AudioResult")
+          $.program.resolveTypeReference("MCP.AudioResult"),
         )! as Model;
       },
       get EmbeddedResource() {
         return ignoreDiagnostics(
-          $.program.resolveTypeReference("MCP.EmbeddedResource")
+          $.program.resolveTypeReference("MCP.EmbeddedResource"),
         )! as Model;
       },
       get TextResource() {
         return ignoreDiagnostics(
-          $.program.resolveTypeReference("MCP.TextResource")
+          $.program.resolveTypeReference("MCP.TextResource"),
         )! as Model;
       },
       get FileData() {
         return ignoreDiagnostics(
-          $.program.resolveTypeReference("MCP.FileData")
+          $.program.resolveTypeReference("MCP.FileData"),
         )! as Scalar;
       },
       get MCPError() {
         return ignoreDiagnostics(
-          $.program.resolveTypeReference("MCP.MCPError")
+          $.program.resolveTypeReference("MCP.MCPError"),
         )! as Model;
       },
       get Resource() {
         return ignoreDiagnostics(
-          $.program.resolveTypeReference("MCP.Resource")
+          $.program.resolveTypeReference("MCP.Resource"),
         )! as Union;
       },
     },

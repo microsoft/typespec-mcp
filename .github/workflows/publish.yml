@@ -1,5 +1,5 @@
 name: Publish
-on: 
+on:
   push:
     branches:
       - main
@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22.x
-          registry-url: 'https://npm.pkg.github.com/'
+          registry-url: "https://npm.pkg.github.com/"
       - uses: pnpm/action-setup@v4
 
       - name: Install dependencies

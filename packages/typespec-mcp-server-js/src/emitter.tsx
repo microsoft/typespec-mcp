@@ -56,6 +56,6 @@ export async function $onEmit(context: EmitContext) {
         </SourceFile>
       </MCPServerContext.Provider>
     </Output>,
-    context.emitterOutputDir
+    context.emitterOutputDir,
   );
 }

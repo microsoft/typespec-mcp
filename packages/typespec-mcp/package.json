@@ -21,7 +21,7 @@
     "@typespec/compiler": "catalog:"
   },
   "scripts": {
-    "build": "npm run build-tsc && npm run build-src",
+    "build": "npm run build-tsc",
     "build-tsc": "tsc -p .",
     "watch-tsc": "tsc -p . --watch",
     "watch": "npm run watch-tsc",

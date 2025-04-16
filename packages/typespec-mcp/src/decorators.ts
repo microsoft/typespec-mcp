@@ -8,7 +8,7 @@ export function $tool(context: DecoratorContext, target: Operation) {
 export function $serializeAsText(
   context: DecoratorContext,
   target: Type,
-  dataType: Type
+  dataType: Type,
 ) {
   context.program.stateMap(stateKeys.serializeAsText).set(target, {
     dataType,

@@ -25,7 +25,7 @@ export function ServerDeclaration(props: ServerDeclarationProps) {
         prev[curr] = {};
         return prev;
       },
-      {} as Record<string, {}>
+      {} as Record<string, {}>,
     ),
   };
 
