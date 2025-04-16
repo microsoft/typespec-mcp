@@ -1,9 +1,9 @@
 name: Publish
-on: push
-branches:
-  only:
-    - main
-    - add-ci
+on: 
+  push:
+    branches:
+      - main
+      - add-ci
 
 permissions:
   contents: read
