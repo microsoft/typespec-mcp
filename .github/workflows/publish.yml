@@ -28,9 +28,12 @@ jobs:
       - name: Build
         run: pnpm build
 
+      # - name: Publish to GitHub npm registry
+      #   run: pnpm publish  -r --no-git-checks --registry https://npm.pkg.github.com/
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish to GitHub npm registry
-        run: |
-          pnpm set //npm.pkg.github.com/:_authToken="$NODE_AUTH_TOKEN"
-          pnpm publish  -r --no-git-checks --registry https://npm.pkg.github.com/
+        run: npm publish
+        working-directory: packages/typespec-mcp
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
