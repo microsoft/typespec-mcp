@@ -7,8 +7,9 @@ import { toolHandler } from "./tools.js";
 
 export const server = new Server(
   {
-    name: "My MCP Server",
+    name: "VectorMCP",
     version: "1.0.0",
+    instructions: "Use this MCP server to perform vector operations in 3D space.",
   },
   {
     capabilities: {

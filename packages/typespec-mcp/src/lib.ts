@@ -8,6 +8,9 @@ export const $lib = createTypeSpecLibrary({
     serializeAsText: {
       description: "Holds the type which is serialized to text",
     },
+    mcpServer: {
+      description: "Metadata about an MCP Server",
+    },
   },
 } as const);
 

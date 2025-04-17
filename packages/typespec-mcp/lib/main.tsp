@@ -1,7 +1,23 @@
 import "../dist/src/decorators.js";
 namespace MCP;
 
+/**
+ * Declare an operation that is an MCP Tool.
+ */
 extern dec tool(target: Reflection.Operation);
+
+/**
+ * Declare a namespace or interface as an MCP Server and provide server
+ * metadata.
+ */
+extern dec mcpServer(
+  target: Reflection.Namespace | Reflection.Operation,
+  options?: valueof {
+    name?: string,
+    version?: string,
+    instructions?: string,
+  }
+);
 
 namespace Private {
   extern dec serializeAsText(target: Reflection.Model, type: unknown);

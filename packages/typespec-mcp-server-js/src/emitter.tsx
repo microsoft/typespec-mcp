@@ -28,11 +28,7 @@ import { ToolHandlerAccessors } from "./components/ToolHandlerAccessors.jsx";
 import { zodValidationError } from "./externals/zod-validation-error.js";
 import { TsTypes } from "./components/TsTypes.jsx";
 export async function $onEmit(context: EmitContext) {
-  const mcpServerContext: MCPServerContext = createMCPServerContext({
-    name: "My MCP Server",
-    version: "1.0.0",
-    capabilities: ["tools"],
-  });
+  const mcpServerContext: MCPServerContext = createMCPServerContext();
 
   const libs = [mcpSdk, zod, zodToJsonSchema, zodValidationError];
 
@@ -60,6 +56,6 @@ export async function $onEmit(context: EmitContext) {
         </SourceFile>
       </MCPServerContext.Provider>
     </Output>,
-    context.emitterOutputDir,
+    context.emitterOutputDir
   );
 }

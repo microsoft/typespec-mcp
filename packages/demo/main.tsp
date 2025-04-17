@@ -1,6 +1,13 @@
 import "typespec-mcp";
 using MCP;
 
+@mcpServer(#{
+  name: "VectorMCP",
+  version: "1.0.0",
+  instructions: "Use this MCP server to perform vector operations in 3D space.",
+})
+namespace VectorMCP;
+
 /**
  * A vector in 3D space.
  */

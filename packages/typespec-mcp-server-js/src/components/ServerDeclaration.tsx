@@ -17,6 +17,7 @@ export function ServerDeclaration(props: ServerDeclarationProps) {
   const serverMetadata = {
     name: mcpContext.name,
     version: mcpContext.version,
+    instructions: mcpContext.instructions,
   };
 
   const capabilities = {
@@ -25,7 +26,7 @@ export function ServerDeclaration(props: ServerDeclarationProps) {
         prev[curr] = {};
         return prev;
       },
-      {} as Record<string, {}>,
+      {} as Record<string, {}>
     ),
   };
 
