@@ -44,7 +44,7 @@ export function ZodTypes() {
               initializer={
                 <ZodSchema nested type={tool.implementationOp.returnType} />
               }
-            />
+            />,
           );
 
           return (

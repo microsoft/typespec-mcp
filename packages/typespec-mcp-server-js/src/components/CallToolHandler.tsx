@@ -136,7 +136,7 @@ export interface MarshalSingleResultProps {
 export function MarshalSingleResult(props: MarshalSingleResultProps) {
   if ($.union.is(props.result.resultType)) {
     const variantTypes = Array.from(
-      props.result.resultType.variants.values()
+      props.result.resultType.variants.values(),
     ).map((v) => v.type);
     if (variantTypes.some($.mcp.isKnownMcpResult)) {
       // special handling of top-level unions-of-known-results

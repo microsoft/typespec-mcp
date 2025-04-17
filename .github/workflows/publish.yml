@@ -1,0 +1,36 @@
+name: Publish
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: "pnpm"
+          registry-url: "https://npm.pkg.github.com/"
+          scope: "@bterlson"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
+
+      - run: node .github/workflows/gh-scope-patch.mjs
+        name: Patch package.json with GitHub scope
+      - name: Publish to GitHub npm registry
+        run: pnpm publish  -r --no-git-checks --registry https://npm.pkg.github.com/
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
