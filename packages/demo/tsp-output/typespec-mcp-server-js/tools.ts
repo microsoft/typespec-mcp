@@ -1,8 +1,4 @@
-interface Vec3 {
-  "x": number;
-  "y": number;
-  "z": number;
-}
+import { Vec3 } from "./ts-types.js";
 
 interface Tools {
   /**

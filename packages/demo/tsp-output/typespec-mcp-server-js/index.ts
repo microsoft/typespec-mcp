@@ -1,7 +1,7 @@
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { ListToolsRequestSchema, CallToolRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import { zodToJsonSchema } from "zod-to-json-schema";
-import { addVectorParameters, subVectorParameters, crossProductParameters, dotProductParameters, addVectorReturnType, subVectorReturnType, crossProductReturnType, dotProductReturnType } from "./types.js";
+import { addVectorParameters, subVectorParameters, crossProductParameters, dotProductParameters, addVectorReturnType, subVectorReturnType, crossProductReturnType, dotProductReturnType } from "./zod-types.js";
 import { fromZodError } from "zod-validation-error";
 import { toolHandler } from "./tools.js";
 

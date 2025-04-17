@@ -26,6 +26,7 @@ import {
 import { ServerDeclaration } from "./components/ServerDeclaration.jsx";
 import { ToolHandlerAccessors } from "./components/ToolHandlerAccessors.jsx";
 import { zodValidationError } from "./externals/zod-validation-error.js";
+import { TsTypes } from "./components/TsTypes.jsx";
 export async function $onEmit(context: EmitContext) {
   const mcpServerContext: MCPServerContext = createMCPServerContext({
     name: "My MCP Server",
@@ -38,8 +39,11 @@ export async function $onEmit(context: EmitContext) {
   writeOutput(
     <Output externals={libs}>
       <MCPServerContext.Provider value={mcpServerContext}>
-        <SourceFile path="types.ts">
+        <SourceFile path="zod-types.ts">
           <ZodTypes />
+        </SourceFile>
+        <SourceFile path="ts-types.ts">
+          <TsTypes />
         </SourceFile>
         <SourceFile path="index.ts">
           <List doubleHardline>
