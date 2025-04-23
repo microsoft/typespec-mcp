@@ -1,7 +1,10 @@
 import { isErrorModel, Operation, Program, Type } from "@typespec/compiler";
 import { $ } from "@typespec/compiler/experimental/typekit";
 
-export function splitOutErrors(program: Program, op: Operation): {
+export function splitOutErrors(
+  program: Program,
+  op: Operation,
+): {
   successes: Type[];
   errors: Type[];
 } {

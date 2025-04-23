@@ -17,7 +17,7 @@ export function $tool(context: DecoratorContext, target: Operation) {
 export function $serializeAsText(
   context: DecoratorContext,
   target: Type,
-  dataType: Type
+  dataType: Type,
 ) {
   context.program.stateMap(stateKeys.serializeAsText).set(target, {
     dataType,
@@ -39,7 +39,7 @@ export interface McpServer extends MCPServerOptions {
 export function $mcpServer(
   context: DecoratorContext,
   target: Namespace | Interface,
-  options: MCPServerOptions = {}
+  options: MCPServerOptions = {},
 ) {
   const meta: McpServer = {
     ...options,
@@ -53,7 +53,7 @@ export interface StateContext {
   program: Program;
 }
 export function mcpServerState(
-  context: StateContext
+  context: StateContext,
 ): Map<Namespace | Interface, McpServer> {
   return context.program.stateMap(stateKeys.mcpServer) as any;
 }

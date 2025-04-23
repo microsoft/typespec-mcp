@@ -23,7 +23,7 @@ export const EnumToUnion: unsafe_Mutator = {
         variants: [...en.members.values()].map((enumMember) => {
           return $(program).unionVariant.create({
             type: $(program).literal.create(
-              enumMember.value ?? enumMember.name
+              enumMember.value ?? enumMember.name,
             ),
           });
         }),

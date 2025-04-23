@@ -150,7 +150,7 @@ export function createMCPServerContext(program: Program): MCPServerContext {
     const toolOpMutation = unsafe_mutateSubgraph(
       tk.program,
       [EnumToUnion],
-      rawToolOp
+      rawToolOp,
     );
     const toolOp = toolOpMutation.type as Operation;
     const { successes, errors } = splitOutErrors(program, toolOp);
@@ -171,8 +171,10 @@ export function createMCPServerContext(program: Program): MCPServerContext {
     }
 
     // Next we need to determine the types we expect from the implementation.
-    const resultDescriptor =
-      resultDescriptorFromDeclaredType(program, declaredReturnType);
+    const resultDescriptor = resultDescriptorFromDeclaredType(
+      program,
+      declaredReturnType,
+    );
 
     // finally we can make the signature we expect the business logic to
     // implement.
@@ -204,7 +206,7 @@ export function createMCPServerContext(program: Program): MCPServerContext {
     toolDescriptors.flatMap((tool) => [
       tool.op.parameters,
       tool.implementationOp.returnType,
-    ])
+    ]),
   );
 
   return {
@@ -226,7 +228,7 @@ export function createMCPServerContext(program: Program): MCPServerContext {
 
 function resultDescriptorFromDeclaredType(
   program: Program,
-  type: Type
+  type: Type,
 ): ResultDescriptor {
   if ($(program).array.is(type)) {
     return resultDescriptorFromDeclaredArrayType(program, type);
@@ -240,7 +242,7 @@ function resultDescriptorFromDeclaredType(
 function resultTypeFromDeclaredType(program: Program, type: Type): Type {
   if ($(program).union.is(type)) {
     const variantResultTypes = Array.from(type.variants.values()).map((v) =>
-      resultTypeFromDeclaredType(program, v.type)
+      resultTypeFromDeclaredType(program, v.type),
     );
 
     return $(program).union.create({
@@ -253,7 +255,7 @@ function resultTypeFromDeclaredType(program: Program, type: Type): Type {
   // todo: this should use $(program).type.isInstantiationOf or somesuch.
   if ($(program).mcp.textResult.is(type)) {
     const serializedType = $(program).mcp.textResult.getSerializedType(
-      type as Model
+      type as Model,
     );
 
     if (serializedType && !isNeverType(serializedType)) {
@@ -272,7 +274,7 @@ function resultTypeFromDeclaredType(program: Program, type: Type): Type {
 
 function resultDescriptorFromDeclaredSingleType(
   program: Program,
-  type: Type
+  type: Type,
 ): SingleResultDescriptor {
   return {
     kind: "single",
@@ -282,10 +284,13 @@ function resultDescriptorFromDeclaredSingleType(
 
 function resultDescriptorFromDeclaredArrayType(
   program: Program,
-  type: Type
+  type: Type,
 ): ArrayResultDescriptor {
   const elementType = (type as Model).indexer!.value;
-  const elementDescriptor = resultDescriptorFromDeclaredSingleType(program, elementType);
+  const elementDescriptor = resultDescriptorFromDeclaredSingleType(
+    program,
+    elementType,
+  );
 
   return {
     kind: "array",
@@ -306,7 +311,7 @@ function discoverTypesFrom(program: Program, types: Type[]) {
         union: collectType,
         scalar: collectType,
       },
-      { includeTemplateDeclaration: false }
+      { includeTemplateDeclaration: false },
     );
   }
 
@@ -416,7 +421,7 @@ export function createCycleSets(types: Type[]): Type[][] {
 
       case "Union":
         return [...type.variants.values()].map((v) =>
-          v.kind === "UnionVariant" ? v.type : v
+          v.kind === "UnionVariant" ? v.type : v,
         );
       case "UnionVariant":
         return [type.type];

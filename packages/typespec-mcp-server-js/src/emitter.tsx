@@ -23,7 +23,7 @@ import { zodValidationError } from "./externals/zod-validation-error.js";
 import { TsTypes } from "./components/TsTypes.jsx";
 export async function $onEmit(context: EmitContext) {
   const mcpServerContext: MCPServerContext = createMCPServerContext(
-    context.program
+    context.program,
   );
 
   const libs = [mcpSdk, zod, zodToJsonSchema, zodValidationError];
@@ -53,6 +53,6 @@ export async function $onEmit(context: EmitContext) {
         </SourceFile>
       </MCPServerContext.Provider>
     </Output>,
-    context.emitterOutputDir
+    context.emitterOutputDir,
   );
 }
