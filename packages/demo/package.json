@@ -21,6 +21,7 @@
   "scripts": {
     "build-tsp": "tsp compile . --emit typespec-mcp-server-js",
     "build-ts": "tsc -p .",
+    "build": "pnpm build-tsp && pnpm build-ts",
     "mcp": "mcp-cli node dist/src/mcp-server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
