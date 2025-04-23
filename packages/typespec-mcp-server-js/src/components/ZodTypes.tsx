@@ -4,15 +4,17 @@ import { useMCPServerContext } from "../context/McpServer.js";
 import { $ } from "@typespec/compiler/experimental/typekit";
 import { VarDeclaration } from "@alloy-js/typescript";
 import { getPlausibleName } from "../utils.js";
+import { useTsp } from "@typespec/emitter-framework";
 
 export function ZodTypes() {
   const { tools, allTypes } = useMCPServerContext();
+  const { program } = useTsp();
   return (
     <List doubleHardline>
       <For each={allTypes} semicolon doubleHardline enderPunctuation>
         {(type) => {
           const rk = refkey(type, "zodSchema");
-          const name = getPlausibleName(type);
+          const name = getPlausibleName(program, type);
           return (
             <ZodSchemaDeclaration export name={name} type={type} refkey={rk} />
           );

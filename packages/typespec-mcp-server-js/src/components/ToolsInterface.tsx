@@ -7,6 +7,7 @@ import {
   InterfaceMember,
 } from "@typespec/emitter-framework/typescript";
 import { useMCPServerContext } from "../context/McpServer.js";
+import { useTsp } from "@typespec/emitter-framework";
 
 export interface ToolsInterfaceProps {}
 
@@ -15,6 +16,7 @@ export function ToolsInterface(props: ToolsInterfaceProps) {
     tools,
     keys: { toolsInterface },
   } = useMCPServerContext();
+  const { $ } = useTsp();
 
   return (
     <List doubleHardline>

@@ -1,17 +1,11 @@
-import { List, Output } from "@alloy-js/core";
+import { List } from "@alloy-js/core";
 import {
   FunctionDeclaration,
   SourceFile,
   VarDeclaration,
 } from "@alloy-js/typescript";
-import {
-  EmitContext,
-  ListenerFlow,
-  navigateType,
-  Type,
-} from "@typespec/compiler";
-import { $ } from "@typespec/compiler/experimental/typekit";
-import { writeOutput } from "@typespec/emitter-framework";
+import { EmitContext } from "@typespec/compiler";
+import { writeOutput, Output } from "@typespec/emitter-framework";
 import { ToolsInterface } from "./components/ToolsInterface.jsx";
 import { mcpSdk } from "./externals/mcp-sdk.js";
 import { zod } from "typespec-zod";
@@ -28,12 +22,15 @@ import { ToolHandlerAccessors } from "./components/ToolHandlerAccessors.jsx";
 import { zodValidationError } from "./externals/zod-validation-error.js";
 import { TsTypes } from "./components/TsTypes.jsx";
 export async function $onEmit(context: EmitContext) {
-  const mcpServerContext: MCPServerContext = createMCPServerContext();
+  const mcpServerContext: MCPServerContext = createMCPServerContext(
+    context.program
+  );
 
   const libs = [mcpSdk, zod, zodToJsonSchema, zodValidationError];
 
   writeOutput(
-    <Output externals={libs}>
+    context.program,
+    <Output program={context.program} externals={libs}>
       <MCPServerContext.Provider value={mcpServerContext}>
         <SourceFile path="zod-types.ts">
           <ZodTypes />
