@@ -33,6 +33,7 @@ import {
 } from "../context/McpServer.js";
 import { $ } from "@typespec/compiler/experimental/typekit";
 import { zodValidationError } from "../externals/zod-validation-error.js";
+import { useTsp } from "@typespec/emitter-framework";
 
 export interface CallToolHandlerProps {
   tool: ToolDescriptor;
@@ -134,6 +135,7 @@ export interface MarshalSingleResultProps {
 }
 
 export function MarshalSingleResult(props: MarshalSingleResultProps) {
+  const { $ } = useTsp();
   if ($.union.is(props.result.resultType)) {
     const variantTypes = Array.from(
       props.result.resultType.variants.values(),
@@ -186,6 +188,7 @@ interface MaybeEnvelopeProps {
 }
 
 function MaybeResultEnvelope(props: MaybeEnvelopeProps) {
+  const { $ } = useTsp();
   // When we have a single result, the only thing that doesn't need an envelope
   // added is a single audio or image result. Everything else will come in from
   // business logic as the naked type and needs to be packed into a results
@@ -214,6 +217,8 @@ interface MaybeSerializeProps {
 }
 
 function MaybeSerialize(props: MaybeSerializeProps) {
+  const { $ } = useTsp();
+
   const resultType = props.resultType;
   if ($.scalar.extendsString(resultType)) {
     // nothing to do for strings

@@ -12,21 +12,22 @@ import {
 import { $, defineKit } from "@typespec/compiler/experimental/typekit";
 import { stateKeys } from "../lib.js";
 import { mcpServerState, McpServer } from "../decorators.js";
+
 export interface McpKit {
   tools: {
     list(server?: McpServer): Operation[];
   };
   builtins: {
-    TextResult: Model;
-    LRO: Model;
-    ImageResult: Model;
-    AudioResult: Model;
-    EmbeddedResource: Model;
-    TextResource: Model;
-    BinaryResource: Model;
-    Resource: Union;
-    FileData: Scalar;
-    MCPError: Model;
+    get TextResult(): Model;
+    get LRO(): Model;
+    get ImageResult(): Model;
+    get AudioResult(): Model;
+    get EmbeddedResource(): Model;
+    get TextResource(): Model;
+    get BinaryResource(): Model;
+    get Resource(): Union;
+    get FileData(): Scalar;
+    get MCPError(): Model;
   };
   textResult: {
     is(type: Type): boolean;
@@ -62,7 +63,7 @@ defineKit<TypekitExtension>({
   mcp: {
     tools: {
       list(server?: McpServer) {
-        const toolState = $.program.stateMap(stateKeys.tool);
+        const toolState = this.program.stateMap(stateKeys.tool);
         const allToolOps = Array.from(toolState.keys()) as Operation[];
 
         if (!server) {
@@ -73,60 +74,60 @@ defineKit<TypekitExtension>({
           return allToolOps.filter((op) =>
             isDeclaredInNamespace(op, server.container as Namespace, {
               recursive: true,
-            })
+            }),
           );
         }
       },
     },
     builtins: {
-      get BinaryResource() {
+      get BinaryResource(): Model {
         return ignoreDiagnostics(
-          $.program.resolveTypeReference("MCP.BinaryResource")
+          this.program.resolveTypeReference("MCP.BinaryResource"),
         )! as Model;
       },
-      get TextResult() {
+      get TextResult(): Model {
         return ignoreDiagnostics(
-          $.program.resolveTypeReference("MCP.TextResult")
+          this.program.resolveTypeReference("MCP.TextResult"),
         )! as Model;
       },
-      get LRO() {
+      get LRO(): Model {
         return ignoreDiagnostics(
-          $.program.resolveTypeReference("MCP.LRO")
+          this.program.resolveTypeReference("MCP.LRO"),
         )! as Model;
       },
-      get ImageResult() {
+      get ImageResult(): Model {
         return ignoreDiagnostics(
-          $.program.resolveTypeReference("MCP.ImageResult")
+          this.program.resolveTypeReference("MCP.ImageResult"),
         )! as Model;
       },
-      get AudioResult() {
+      get AudioResult(): Model {
         return ignoreDiagnostics(
-          $.program.resolveTypeReference("MCP.AudioResult")
+          this.program.resolveTypeReference("MCP.AudioResult"),
         )! as Model;
       },
-      get EmbeddedResource() {
+      get EmbeddedResource(): Model {
         return ignoreDiagnostics(
-          $.program.resolveTypeReference("MCP.EmbeddedResource")
+          this.program.resolveTypeReference("MCP.EmbeddedResource"),
         )! as Model;
       },
-      get TextResource() {
+      get TextResource(): Model {
         return ignoreDiagnostics(
-          $.program.resolveTypeReference("MCP.TextResource")
+          this.program.resolveTypeReference("MCP.TextResource"),
         )! as Model;
       },
-      get FileData() {
+      get FileData(): Scalar {
         return ignoreDiagnostics(
-          $.program.resolveTypeReference("MCP.FileData")
+          this.program.resolveTypeReference("MCP.FileData"),
         )! as Scalar;
       },
-      get MCPError() {
+      get MCPError(): Model {
         return ignoreDiagnostics(
-          $.program.resolveTypeReference("MCP.MCPError")
+          this.program.resolveTypeReference("MCP.MCPError"),
         )! as Model;
       },
-      get Resource() {
+      get Resource(): Union {
         return ignoreDiagnostics(
-          $.program.resolveTypeReference("MCP.Resource")
+          this.program.resolveTypeReference("MCP.Resource"),
         )! as Union;
       },
     },
@@ -136,7 +137,8 @@ defineKit<TypekitExtension>({
         return type.kind === "Model" && type.name === "TextResult";
       },
       getSerializedType(type: Model): Type | undefined {
-        return $.program.stateMap(stateKeys.serializeAsText).get(type).dataType;
+        return this.program.stateMap(stateKeys.serializeAsText).get(type)
+          .dataType;
       },
     },
 
@@ -160,16 +162,16 @@ defineKit<TypekitExtension>({
 
     servers: {
       list() {
-        return Array.from(mcpServerState($).values());
+        return Array.from(mcpServerState(this).values());
       },
     },
 
     isKnownMcpResult(type) {
       return (
-        $.mcp.textResult.is(type) ||
-        $.mcp.audioResult.is(type) ||
-        $.mcp.imageResult.is(type) ||
-        $.mcp.resourceResult.is(type)
+        this.mcp.textResult.is(type) ||
+        this.mcp.audioResult.is(type) ||
+        this.mcp.imageResult.is(type) ||
+        this.mcp.resourceResult.is(type)
       );
     },
   },

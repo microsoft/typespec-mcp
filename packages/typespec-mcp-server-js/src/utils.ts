@@ -1,14 +1,17 @@
-import { isErrorModel, Operation, Type } from "@typespec/compiler";
+import { isErrorModel, Operation, Program, Type } from "@typespec/compiler";
 import { $ } from "@typespec/compiler/experimental/typekit";
 
-export function splitOutErrors(op: Operation): {
+export function splitOutErrors(
+  program: Program,
+  op: Operation,
+): {
   successes: Type[];
   errors: Type[];
 } {
   const type = op.returnType;
 
   if (type.kind !== "Union") {
-    if ($.type.isError(type)) {
+    if ($(program).type.isError(type)) {
       return { successes: [], errors: [type] };
     }
     return { successes: [type], errors: [] };
@@ -16,21 +19,21 @@ export function splitOutErrors(op: Operation): {
 
   const successes = [...type.variants.values()]
     .map((v) => v.type)
-    .filter((t) => !isErrorModel($.program, t));
+    .filter((t) => !isErrorModel(program, t));
 
   const errors = [...type.variants.values()]
     .map((v) => v.type)
-    .filter((t) => isErrorModel($.program, t));
+    .filter((t) => isErrorModel(program, t));
 
   return { successes, errors };
 }
 
-export function getPlausibleName(type: Type): string {
+export function getPlausibleName(program: Program, type: Type): string {
   if (type.kind === "Model" && type.name === "Array") {
-    return getPlausibleName(type.indexer!.value) + "Array";
+    return getPlausibleName(program, type.indexer!.value) + "Array";
   }
 
-  return capitalize($.type.getPlausibleName(type as any));
+  return capitalize($(program).type.getPlausibleName(type as any));
 }
 
 function capitalize(str: string): string {

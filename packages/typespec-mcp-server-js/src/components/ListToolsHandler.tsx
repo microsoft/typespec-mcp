@@ -5,6 +5,7 @@ import { $ } from "@typespec/compiler/experimental/typekit";
 import { zodToJsonSchema } from "../externals/zodToJsonSchema.js";
 import { FunctionCallExpression, ObjectExpression } from "@alloy-js/typescript";
 import { ToolDescriptor, useMCPServerContext } from "../context/McpServer.js";
+import { useTsp } from "@typespec/emitter-framework";
 
 export interface ListToolsHandlerProps {}
 
@@ -35,6 +36,7 @@ export function ListToolsHandler(props: ListToolsHandlerProps) {
 }
 
 function operationToToolDescriptor(tool: ToolDescriptor) {
+  const { $ } = useTsp();
   const doc = getDoc($.program, tool.op);
 
   return {

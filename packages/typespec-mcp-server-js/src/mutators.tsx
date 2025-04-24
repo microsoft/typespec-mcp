@@ -18,11 +18,13 @@ export const EnumToUnion: unsafe_Mutator = {
     filter: (type) => {
       return unsafe_MutatorFlow.MutateAndRecur;
     },
-    replace(en) {
-      return $.union.create({
+    replace(en, _, program) {
+      return $(program).union.create({
         variants: [...en.members.values()].map((enumMember) => {
-          return $.unionVariant.create({
-            type: $.literal.create(enumMember.value ?? enumMember.name),
+          return $(program).unionVariant.create({
+            type: $(program).literal.create(
+              enumMember.value ?? enumMember.name,
+            ),
           });
         }),
       });

@@ -10,6 +10,7 @@ import {
   Model,
   navigateType,
   Operation,
+  Program,
   Tuple,
   Type,
 } from "@typespec/compiler";
@@ -139,45 +140,48 @@ export function useMCPServerContext(): MCPServerContext {
   return context;
 }
 
-export function createMCPServerContext(): MCPServerContext {
-  const server = $.mcp.servers.list()[0] as McpServer | undefined;
-  const toolOps = $.mcp.tools.list(server);
+export function createMCPServerContext(program: Program): MCPServerContext {
+  const tk = $(program);
+  const server = tk.mcp.servers.list()[0] as McpServer | undefined;
+  const toolOps = tk.mcp.tools.list(server);
   const toolDescriptors: ToolDescriptor[] = [];
 
   for (const rawToolOp of toolOps) {
     const toolOpMutation = unsafe_mutateSubgraph(
-      $.program,
+      tk.program,
       [EnumToUnion],
-      rawToolOp
+      rawToolOp,
     );
     const toolOp = toolOpMutation.type as Operation;
-    const { successes, errors } = splitOutErrors(toolOp);
+    const { successes, errors } = splitOutErrors(program, toolOp);
 
     // the declared return type is the type of the successful results from the
     // MCP server, as declared in the TypeSpec.
     let declaredReturnType: Type;
     if (successes.length === 0) {
-      declaredReturnType = $.program.checker.voidType;
+      declaredReturnType = tk.program.checker.voidType;
     } else if (successes.length === 1) {
       declaredReturnType = successes[0];
     } else {
-      declaredReturnType = $.union.create({
+      declaredReturnType = tk.union.create({
         variants: successes.map((type) => {
-          return $.unionVariant.create({ type });
+          return tk.unionVariant.create({ type });
         }),
       });
     }
 
     // Next we need to determine the types we expect from the implementation.
-    const resultDescriptor =
-      resultDescriptorFromDeclaredType(declaredReturnType);
+    const resultDescriptor = resultDescriptorFromDeclaredType(
+      program,
+      declaredReturnType,
+    );
 
     // finally we can make the signature we expect the business logic to
     // implement.
-    const implementationOp = $.operation.create({
+    const implementationOp = tk.operation.create({
       name: toolOp.name,
       parameters: Array.from(toolOp.parameters.properties.values()).map((p) => {
-        return $.type.clone(p);
+        return tk.type.clone(p);
       }),
       returnType: resultDescriptor.resultType,
     });
@@ -198,10 +202,11 @@ export function createMCPServerContext(): MCPServerContext {
   }
 
   const allTypes = discoverTypesFrom(
+    program,
     toolDescriptors.flatMap((tool) => [
       tool.op.parameters,
       tool.implementationOp.returnType,
-    ])
+    ]),
   );
 
   return {
@@ -221,41 +226,46 @@ export function createMCPServerContext(): MCPServerContext {
   };
 }
 
-function resultDescriptorFromDeclaredType(type: Type): ResultDescriptor {
-  if ($.array.is(type)) {
-    return resultDescriptorFromDeclaredArrayType(type);
-    // } else if ($.tuple.is(type)) {
+function resultDescriptorFromDeclaredType(
+  program: Program,
+  type: Type,
+): ResultDescriptor {
+  if ($(program).array.is(type)) {
+    return resultDescriptorFromDeclaredArrayType(program, type);
+    // } else if ($(program).tuple.is(type)) {
     //   return resultDescriptorFromDeclaredTupleType(type);
   } else {
-    return resultDescriptorFromDeclaredSingleType(type);
+    return resultDescriptorFromDeclaredSingleType(program, type);
   }
 }
 
-function resultTypeFromDeclaredType(type: Type): Type {
-  if ($.union.is(type)) {
+function resultTypeFromDeclaredType(program: Program, type: Type): Type {
+  if ($(program).union.is(type)) {
     const variantResultTypes = Array.from(type.variants.values()).map((v) =>
-      resultTypeFromDeclaredType(v.type)
+      resultTypeFromDeclaredType(program, v.type),
     );
 
-    return $.union.create({
+    return $(program).union.create({
       variants: variantResultTypes.map((type) => {
-        return $.unionVariant.create({ type });
+        return $(program).unionVariant.create({ type });
       }),
     });
   }
 
-  // todo: this should use $.type.isInstantiationOf or somesuch.
-  if ($.mcp.textResult.is(type)) {
-    const serializedType = $.mcp.textResult.getSerializedType(type as Model);
+  // todo: this should use $(program).type.isInstantiationOf or somesuch.
+  if ($(program).mcp.textResult.is(type)) {
+    const serializedType = $(program).mcp.textResult.getSerializedType(
+      type as Model,
+    );
 
     if (serializedType && !isNeverType(serializedType)) {
       return serializedType;
     } else {
-      return $.builtin.string;
+      return $(program).builtin.string;
     }
-  } else if ($.mcp.imageResult.is(type)) {
+  } else if ($(program).mcp.imageResult.is(type)) {
     return type;
-  } else if ($.mcp.audioResult.is(type)) {
+  } else if ($(program).mcp.audioResult.is(type)) {
     return type;
   } else {
     return type;
@@ -263,28 +273,33 @@ function resultTypeFromDeclaredType(type: Type): Type {
 }
 
 function resultDescriptorFromDeclaredSingleType(
-  type: Type
+  program: Program,
+  type: Type,
 ): SingleResultDescriptor {
   return {
     kind: "single",
-    resultType: resultTypeFromDeclaredType(type),
+    resultType: resultTypeFromDeclaredType(program, type),
   };
 }
 
 function resultDescriptorFromDeclaredArrayType(
-  type: Type
+  program: Program,
+  type: Type,
 ): ArrayResultDescriptor {
   const elementType = (type as Model).indexer!.value;
-  const elementDescriptor = resultDescriptorFromDeclaredSingleType(elementType);
+  const elementDescriptor = resultDescriptorFromDeclaredSingleType(
+    program,
+    elementType,
+  );
 
   return {
     kind: "array",
     elementDescriptor,
-    resultType: $.array.create(elementDescriptor.resultType),
+    resultType: $(program).array.create(elementDescriptor.resultType),
   };
 }
 
-function discoverTypesFrom(types: Type[]) {
+function discoverTypesFrom(program: Program, types: Type[]) {
   const discoveredTypes = new Set<Type>();
 
   for (const type of types) {
@@ -296,24 +311,24 @@ function discoverTypesFrom(types: Type[]) {
         union: collectType,
         scalar: collectType,
       },
-      { includeTemplateDeclaration: false }
+      { includeTemplateDeclaration: false },
     );
   }
 
   return createCycleSets([...discoveredTypes]).flat();
 
   function collectType(type: Type) {
-    if (shouldReference(type)) {
+    if (shouldReference(program, type)) {
       discoveredTypes.add(type);
     }
   }
 }
 
-export function shouldReference(type: Type) {
-  return isDeclaration(type) && !isBuiltIn(type);
+export function shouldReference(program: Program, type: Type) {
+  return isDeclaration(program, type) && !isBuiltIn(program, type);
 }
 
-export function isDeclaration(type: Type): boolean {
+export function isDeclaration(program: Program, type: Type): boolean {
   switch (type.kind) {
     case "Namespace":
     case "Interface":
@@ -326,7 +341,10 @@ export function isDeclaration(type: Type): boolean {
       return false;
 
     case "Model":
-      if (($.array.is(type) || $.record.is(type)) && isBuiltIn(type)) {
+      if (
+        ($(program).array.is(type) || $(program).record.is(type)) &&
+        isBuiltIn(program, type)
+      ) {
         return false;
       }
 
@@ -342,12 +360,12 @@ export function isDeclaration(type: Type): boolean {
   }
 }
 
-export function isBuiltIn(type: Type) {
+export function isBuiltIn(program: Program, type: Type) {
   if (!("namespace" in type) || type.namespace === undefined) {
     return false;
   }
 
-  const globalNs = $.program.getGlobalNamespaceType();
+  const globalNs = program.getGlobalNamespaceType();
   let tln = type.namespace;
   if (tln === globalNs) {
     return false;
@@ -403,7 +421,7 @@ export function createCycleSets(types: Type[]): Type[][] {
 
       case "Union":
         return [...type.variants.values()].map((v) =>
-          v.kind === "UnionVariant" ? v.type : v
+          v.kind === "UnionVariant" ? v.type : v,
         );
       case "UnionVariant":
         return [type.type];
