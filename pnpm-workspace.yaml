@@ -11,7 +11,7 @@ catalog:
   "@babel/preset-typescript": ^7.27.0
   "@rollup/plugin-babel": ^6.0.4
   "@types/node": ^22.14.0
-  "@typespec/compiler": ^1.0.0-rc.1
+  "@typespec/compiler": ^1.0.0-rc.2-dev.2
   "@typespec/emitter-framework": ^0.6.0
   "@typespec/http": ^1.0.0-rc.1
   concurrently: ^9.1.2
