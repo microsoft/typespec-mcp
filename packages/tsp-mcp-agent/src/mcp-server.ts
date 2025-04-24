@@ -51,6 +51,7 @@ setToolHandler({
       `Project can be used as follow:`,
       "- Build with `build` tool(preferred) or `npm run build`",
       "- Start the server with `node ./dist/src/mcp-server.js`",
+      "- It can be configured with command: node and args:`${workspaceFolder}/dist/src/mcp-server.js` in vscode mcp.json",
     ].join("\n");
   },
   async compile({ entrypoint }) {

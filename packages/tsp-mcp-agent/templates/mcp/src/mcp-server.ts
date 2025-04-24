@@ -10,15 +10,9 @@ const client = new Client({
 await client.connect();
 
 // Drop table and create a new one with sample data
-await client.query("DROP TABLE IF EXISTS todos;");
 await client.query(
-  "CREATE TABLE todos (id SERIAL PRIMARY KEY, data JSONB NOT NULL);"
+  "CREATE TABLE IF NOT EXISTS todos (id SERIAL PRIMARY KEY, data JSONB NOT NULL);"
 );
-await client.query("INSERT INTO todos (data) VALUES ($1), ($2), ($3)", [
-  { text: "Learn TypeSpec", status: "todo" },
-  { text: "Learn Model Context Protocol", status: "todo" },
-  { text: "Learn TypeSpec MCP Agent", status: "todo" },
-]);
 
 setToolHandler({
   addTodo: async (text) => {
