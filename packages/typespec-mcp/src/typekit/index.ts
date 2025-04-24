@@ -74,7 +74,7 @@ defineKit<TypekitExtension>({
           return allToolOps.filter((op) =>
             isDeclaredInNamespace(op, server.container as Namespace, {
               recursive: true,
-            })
+            }),
           );
         }
       },
@@ -82,52 +82,52 @@ defineKit<TypekitExtension>({
     builtins: {
       get BinaryResource() {
         return ignoreDiagnostics(
-          (this as any).program.resolveTypeReference("MCP.BinaryResource")
+          (this as any).program.resolveTypeReference("MCP.BinaryResource"),
         )! as Model;
       },
       get TextResult() {
         return ignoreDiagnostics(
-          (this as any).program.resolveTypeReference("MCP.TextResult")
+          (this as any).program.resolveTypeReference("MCP.TextResult"),
         )! as Model;
       },
       get LRO() {
         return ignoreDiagnostics(
-          (this as any).program.resolveTypeReference("MCP.LRO")
+          (this as any).program.resolveTypeReference("MCP.LRO"),
         )! as Model;
       },
       get ImageResult() {
         return ignoreDiagnostics(
-          (this as any).program.resolveTypeReference("MCP.ImageResult")
+          (this as any).program.resolveTypeReference("MCP.ImageResult"),
         )! as Model;
       },
       get AudioResult() {
         return ignoreDiagnostics(
-          (this as any).program.resolveTypeReference("MCP.AudioResult")
+          (this as any).program.resolveTypeReference("MCP.AudioResult"),
         )! as Model;
       },
       get EmbeddedResource() {
         return ignoreDiagnostics(
-          (this as any).program.resolveTypeReference("MCP.EmbeddedResource")
+          (this as any).program.resolveTypeReference("MCP.EmbeddedResource"),
         )! as Model;
       },
       get TextResource() {
         return ignoreDiagnostics(
-          (this as any).program.resolveTypeReference("MCP.TextResource")
+          (this as any).program.resolveTypeReference("MCP.TextResource"),
         )! as Model;
       },
       get FileData() {
         return ignoreDiagnostics(
-          (this as any).program.resolveTypeReference("MCP.FileData")
+          (this as any).program.resolveTypeReference("MCP.FileData"),
         )! as Scalar;
       },
       get MCPError() {
         return ignoreDiagnostics(
-          (this as any).program.resolveTypeReference("MCP.MCPError")
+          (this as any).program.resolveTypeReference("MCP.MCPError"),
         )! as Model;
       },
       get Resource() {
         return ignoreDiagnostics(
-          (this as any).program.resolveTypeReference("MCP.Resource")
+          (this as any).program.resolveTypeReference("MCP.Resource"),
         )! as Union;
       },
     },
