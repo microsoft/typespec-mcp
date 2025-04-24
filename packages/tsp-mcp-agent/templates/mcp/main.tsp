@@ -6,7 +6,7 @@ using MCP;
 namespace Todos;
 
 model Todo {
-  id: string;
+  id: int32;
   text: string;
   status: "todo" | "done";
 }

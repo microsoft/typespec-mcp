@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const Todo = z.object({
-  id: z.string(),
+  id: z.number().int().gte(-2147483648).lte(2147483647),
   text: z.string(),
   status: z.union([z.literal("todo"), z.literal("done")]),
 });

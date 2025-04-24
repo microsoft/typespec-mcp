@@ -59,7 +59,7 @@ server.setRequestHandler(
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
-        const rawResult = toolHandler.addTodo(parsed.data.text);
+        const rawResult = await toolHandler.addTodo(parsed.data.text);
         const maybeResult = addTodoReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
@@ -76,7 +76,7 @@ server.setRequestHandler(
       }
 
       case "listTodos": {
-        const rawResult = toolHandler.listTodos();
+        const rawResult = await toolHandler.listTodos();
         const maybeResult = listTodosReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});

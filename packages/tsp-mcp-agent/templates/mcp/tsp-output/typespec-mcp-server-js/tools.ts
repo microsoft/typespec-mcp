@@ -4,12 +4,12 @@ interface Tools {
   /**
    * Add a todo
    **/
-  addTodo(text: string): string
+  addTodo(text: string): string | Promise<string>
 
   /**
    * List all non completed todos
    **/
-  listTodos(): Array<Todo>
+  listTodos(): Array<Todo> | Promise<Array<Todo>>
 }
 
 export let toolHandler: Tools = undefined as any;
