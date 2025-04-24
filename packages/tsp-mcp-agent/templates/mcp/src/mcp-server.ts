@@ -4,10 +4,12 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { TodoStore } from "./store.js";
 import { Client } from "pg";
 
-const client = new Client();
+const client = new Client({
+  database: "postgres",
+});
 await client.connect();
 await client.query(
-  "CREATE TABLE IF NOT EXISTS todos (id SERIAL PRIMARY KEY, data JSONB NOT NULL);",
+  "CREATE TABLE IF NOT EXISTS todos (id SERIAL PRIMARY KEY, data JSONB NOT NULL);"
 );
 console.log("Todos", await client.query("SELECT * FROM todos;"));
 
