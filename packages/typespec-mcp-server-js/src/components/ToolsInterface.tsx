@@ -5,6 +5,8 @@ import { $ } from "@typespec/compiler/experimental/typekit";
 import {
   InterfaceDeclaration,
   InterfaceMember,
+  InterfaceMethod,
+  TypeExpression,
 } from "@typespec/emitter-framework/typescript";
 import { useMCPServerContext } from "../context/McpServer.js";
 import { useTsp } from "@typespec/emitter-framework";
@@ -24,12 +26,23 @@ export function ToolsInterface(props: ToolsInterfaceProps) {
         <For each={tools} doubleHardline>
           {(tool) => {
             const doc = getDoc($.program, tool.op);
+            const returnType = (
+              <>
+                <TypeExpression type={tool.implementationOp.returnType} /> |
+                Promise&lt;
+                <TypeExpression type={tool.implementationOp.returnType} />
+                &gt;
+              </>
+            );
             return (
               <List>
                 <Show when={!!doc}>
                   <JSDoc children={doc} />
                 </Show>
-                <InterfaceMember type={tool.implementationOp} />
+                <InterfaceMethod
+                  type={tool.implementationOp}
+                  returnType={returnType}
+                />
               </List>
             );
           }}

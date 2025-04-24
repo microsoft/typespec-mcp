@@ -3,7 +3,7 @@ import { server } from "../tsp-output/typespec-mcp-server-js/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
 setToolHandler({
-  addVector(v1, v2) {
+  async addVector(v1, v2) {
     return {
       x: v1.x + v2.x,
       y: v1.y + v2.y,

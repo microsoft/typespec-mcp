@@ -79,7 +79,10 @@ server.setRequestHandler(
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
-        const rawResult = toolHandler.addVector(parsed.data.v1, parsed.data.v2);
+        const rawResult = await toolHandler.addVector(
+          parsed.data.v1,
+          parsed.data.v2
+        );
         const maybeResult = addVectorReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
@@ -100,7 +103,10 @@ server.setRequestHandler(
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
-        const rawResult = toolHandler.subVector(parsed.data.v1, parsed.data.v2);
+        const rawResult = await toolHandler.subVector(
+          parsed.data.v1,
+          parsed.data.v2
+        );
         const maybeResult = subVectorReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
@@ -121,7 +127,7 @@ server.setRequestHandler(
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
-        const rawResult = toolHandler.crossProduct(
+        const rawResult = await toolHandler.crossProduct(
           parsed.data.v1,
           parsed.data.v2
         );
@@ -145,7 +151,7 @@ server.setRequestHandler(
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
-        const rawResult = toolHandler.dotProduct(
+        const rawResult = await toolHandler.dotProduct(
           parsed.data.v1,
           parsed.data.v2
         );
