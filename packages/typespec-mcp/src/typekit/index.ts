@@ -18,16 +18,16 @@ export interface McpKit {
     list(server?: McpServer): Operation[];
   };
   builtins: {
-    readonly TextResult: Model;
-    readonly LRO: Model;
-    readonly ImageResult: Model;
-    readonly AudioResult: Model;
-    readonly EmbeddedResource: Model;
-    readonly TextResource: Model;
-    readonly BinaryResource: Model;
-    readonly Resource: Union;
-    readonly FileData: Scalar;
-    readonly MCPError: Model;
+    get TextResult(): Model;
+    get LRO(): Model;
+    get ImageResult(): Model;
+    get AudioResult(): Model;
+    get EmbeddedResource(): Model;
+    get TextResource(): Model;
+    get BinaryResource(): Model;
+    get Resource(): Union;
+    get FileData(): Scalar;
+    get MCPError(): Model;
   };
   textResult: {
     is(type: Type): boolean;
@@ -74,7 +74,7 @@ defineKit<TypekitExtension>({
           return allToolOps.filter((op) =>
             isDeclaredInNamespace(op, server.container as Namespace, {
               recursive: true,
-            }),
+            })
           );
         }
       },
@@ -82,52 +82,52 @@ defineKit<TypekitExtension>({
     builtins: {
       get BinaryResource() {
         return ignoreDiagnostics(
-          (this as any).program.resolveTypeReference("MCP.BinaryResource"),
+          (this as any).program.resolveTypeReference("MCP.BinaryResource")
         )! as Model;
       },
       get TextResult() {
         return ignoreDiagnostics(
-          (this as any).program.resolveTypeReference("MCP.TextResult"),
+          (this as any).program.resolveTypeReference("MCP.TextResult")
         )! as Model;
       },
       get LRO() {
         return ignoreDiagnostics(
-          (this as any).program.resolveTypeReference("MCP.LRO"),
+          (this as any).program.resolveTypeReference("MCP.LRO")
         )! as Model;
       },
       get ImageResult() {
         return ignoreDiagnostics(
-          (this as any).program.resolveTypeReference("MCP.ImageResult"),
+          (this as any).program.resolveTypeReference("MCP.ImageResult")
         )! as Model;
       },
       get AudioResult() {
         return ignoreDiagnostics(
-          (this as any).program.resolveTypeReference("MCP.AudioResult"),
+          (this as any).program.resolveTypeReference("MCP.AudioResult")
         )! as Model;
       },
       get EmbeddedResource() {
         return ignoreDiagnostics(
-          (this as any).program.resolveTypeReference("MCP.EmbeddedResource"),
+          (this as any).program.resolveTypeReference("MCP.EmbeddedResource")
         )! as Model;
       },
       get TextResource() {
         return ignoreDiagnostics(
-          (this as any).program.resolveTypeReference("MCP.TextResource"),
+          (this as any).program.resolveTypeReference("MCP.TextResource")
         )! as Model;
       },
       get FileData() {
         return ignoreDiagnostics(
-          (this as any).program.resolveTypeReference("MCP.FileData"),
+          (this as any).program.resolveTypeReference("MCP.FileData")
         )! as Scalar;
       },
       get MCPError() {
         return ignoreDiagnostics(
-          (this as any).program.resolveTypeReference("MCP.MCPError"),
+          (this as any).program.resolveTypeReference("MCP.MCPError")
         )! as Model;
       },
       get Resource() {
         return ignoreDiagnostics(
-          (this as any).program.resolveTypeReference("MCP.Resource"),
+          (this as any).program.resolveTypeReference("MCP.Resource")
         )! as Union;
       },
     },
