@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "lib": ["es2023", "DOM"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "es2022",
+    "strict": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "declaration": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "declarationMap": true,
+    "outDir": "dist",
+    "forceConsistentCasingInFileNames": true,
+    "composite": true
+  },
+  "include": [
+    "tsp-output/**/*.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "testing/**/*.ts",
+    "test/**/*.ts",
+    "test/**/*.tsx"
+  ],
+  "exclude": ["node_modules", "dist"]
+}

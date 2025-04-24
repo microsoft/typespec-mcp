@@ -1,0 +1,35 @@
+{
+  "name": "tsp-mcp-agent",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "@modelcontextprotocol/inspector": "^0.9.0",
+    "@modelcontextprotocol/sdk": "^1.9.0",
+    "@typespec/compiler": "catalog:",
+    "execa": "^9.5.2",
+    "typespec-mcp": "workspace:*",
+    "typespec-mcp-server-js": "workspace:*",
+    "zod": "^3.24.2",
+    "zod-to-json-schema": "^3.24.5",
+    "zod-validation-error": "^3.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "@wong2/mcp-cli": "^1.6.0",
+    "prettier": "^3.5.3",
+    "typescript": "catalog:"
+  },
+  "scripts": {
+    "build": "pnpm build-tsp && pnpm build-ts",
+    "build-tsp": "tsp compile . --emit typespec-mcp-server-js",
+    "build-ts": "tsc -p .",
+    "mcp": "mcp-cli node dist/src/mcp-server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "inspect": "mcp-inspector node ./dist/src/mcp-server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}

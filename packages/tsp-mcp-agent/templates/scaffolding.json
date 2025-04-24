@@ -1,0 +1,39 @@
+{
+  "mcp": {
+    "title": "MCP Server Definition",
+    "description": "Create a project representing an MCP server API.",
+    "compilerVersion": "1.0.0-rc.0",
+    "libraries": [
+      {
+        "name": "typespec-mcp",
+        "version": "workspace:^"
+      }
+    ],
+    "emitters": {
+      "typespec-mcp-server-js": {
+        "version": "workspace:^",
+        "selected": true,
+        "label": "MCP server emitter",
+        "options": {}
+      }
+    },
+    "files": [
+      {
+        "path": "mcp/main.tsp",
+        "destination": "main.tsp"
+      },
+      {
+        "path": "mcp/package.json",
+        "destination": "package.json"
+      },
+      {
+        "path": "mcp/tsconfig.json",
+        "destination": "tsconfig.json"
+      },
+      {
+        "path": "mcp/src/mcp-server.ts",
+        "destination": "src/mcp-server.ts"
+      }
+    ]
+  }
+}
