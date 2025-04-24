@@ -20,8 +20,6 @@ await client.query("INSERT INTO todos (data) VALUES ($1), ($2), ($3)", [
   { text: "Learn TypeSpec MCP Agent", status: "todo" },
 ]);
 
-const result = await client.query("SELECT * FROM todos;");
-
 setToolHandler({
   addTodo: async (text) => {
     await client.query("INSERT INTO todos (data) VALUES ($1)", [
@@ -40,12 +38,6 @@ setToolHandler({
     }));
 
     return todos;
-    // return [
-    //   `
-    //   Currently you have ${todos.length} todos:
-    // `,
-    //   ...todos.map((x) => ` - ${x.text}`),
-    // ].join("\n");
   },
 });
 

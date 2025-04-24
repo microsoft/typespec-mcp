@@ -1,7 +1,7 @@
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { ListToolsRequestSchema, CallToolRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import { zodToJsonSchema } from "zod-to-json-schema";
-import { learnTypeSpecParameters, initParameters, compileParameters, learnTypeSpecReturnType, initReturnType, compileReturnType } from "./zod-types.js";
+import { learnTypeSpecParameters, initParameters, compileParameters, buildParameters, learnTypeSpecReturnType, initReturnType, compileReturnType, buildReturnType } from "./zod-types.js";
 import { fromZodError } from "zod-validation-error";
 import { toolHandler } from "./tools.js";
 
@@ -52,6 +52,16 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+        },
+        {
+          name: "build",
+          description: "Build typespec mcp project",
+          inputSchema: zodToJsonSchema(
+            buildParameters,
+            {
+              $refStrategy: "none",
+            }
+          ),
         }
       ],
     };
@@ -69,7 +79,7 @@ server.setRequestHandler(
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
-        const rawResult = toolHandler.learnTypeSpec(parsed.data.area);
+        const rawResult = await toolHandler.learnTypeSpec(parsed.data.area);
         const maybeResult = learnTypeSpecReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
@@ -113,6 +123,27 @@ server.setRequestHandler(
         }
         const rawResult = await toolHandler.compile(parsed.data.options);
         const maybeResult = compileReturnType.safeParse(rawResult);
+        if (!maybeResult.success) {
+          throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
+        };
+        const result = maybeResult.data;
+        return {
+          content: [
+            {
+              type: "text",
+              text: result,
+            }
+          ],
+        };
+      }
+
+      case "build": {
+        const parsed = buildParameters.safeParse(args);
+        if (!parsed.success) {
+          throw fromZodError(parsed.error, { prefix: "Request validation error" });
+        }
+        const rawResult = await toolHandler.build(parsed.data.dir);
+        const maybeResult = buildReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };

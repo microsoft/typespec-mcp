@@ -23,10 +23,10 @@ setToolHandler({
     if (workflow === undefined) {
       throw new Error(
         `Workflow ${workflowName} not found. Available templates: ${Object.keys(
-          workflows,
+          workflows
         )
           .map((x) => ` - ${x}`)
-          .join("\n")}`,
+          .join("\n")}`
       );
     }
 
@@ -40,7 +40,7 @@ setToolHandler({
         baseUri: workflow.baseDir,
         name,
         emitters: resolveEmitters(workflow, additionalEmitters),
-      }),
+      })
     );
     // Bug with pnpm doesn't allow `latest` in peerDependencies. will be resolved in next compiler version which produce dependencies in those cases.
     // await patchPkgJson(outDir);
@@ -66,25 +66,32 @@ setToolHandler({
           `Note: later diagnostics might be caused by a previous one.`,
           `Command result:`,
           result.stdout,
-        ].join("\n"),
+        ].join("\n")
       );
     }
     return ["Compilation successful", "Command result:", result.stdout].join(
-      "\n",
+      "\n"
+    );
+  },
+  async build(dir) {
+    const result = await execa("npm", ["run", "build"], {
+      cwd: dir,
+    });
+
+    if (result.exitCode !== 0) {
+      throw new Error(
+        ["Build failed", `Command result:`, result.stdout].join("\n")
+      );
+    }
+    return ["Compilation successful", "Command result:", result.stdout].join(
+      "\n"
     );
   },
 });
 
-async function patchPkgJson(outDir: string) {
-  const filename = join(outDir, "package.json");
-  const content = (await readFile(filename)).toString();
-  const pkgJson = JSON.parse(content);
-  delete pkgJson.peerDependencies;
-  await writeFile(filename, JSON.stringify(pkgJson, null, 2));
-}
 function resolveEmitters(
   workflow: WorkflowConfig,
-  userAdditionalEmitters: string[] | undefined,
+  userAdditionalEmitters: string[] | undefined
 ) {
   const additionalEmitters = new Set([
     ...Object.entries(workflow.template.emitters)

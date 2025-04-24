@@ -50,3 +50,9 @@ export const compileParameters = z.object({
 });
 
 export const compileReturnType = z.string();
+
+export const buildParameters = z.object({
+  dir: z.string(),
+});
+
+export const buildReturnType = z.string();

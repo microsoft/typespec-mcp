@@ -75,3 +75,8 @@ model CompileOptions {
  * @param options -  CompileOptions
  */
 @tool op compile(options: CompileOptions): string;
+
+/**
+ * Build typespec mcp project
+ */
+@tool op build(dir: string): string;
