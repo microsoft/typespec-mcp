@@ -11,7 +11,7 @@ await client.connect();
 
 // Drop table and create a new one with sample data
 await client.query(
-  "CREATE TABLE IF NOT EXISTS todos (id SERIAL PRIMARY KEY, data JSONB NOT NULL);"
+  "CREATE TABLE IF NOT EXISTS todos (id SERIAL PRIMARY KEY, data JSONB NOT NULL);",
 );
 
 setToolHandler({
@@ -23,7 +23,7 @@ setToolHandler({
   },
   listTodos: async () => {
     const result = await client.query<{ id: number; data: Omit<Todo, "id"> }>(
-      "SELECT * FROM todos WHERE data->>'status' = 'todo'"
+      "SELECT * FROM todos WHERE data->>'status' = 'todo'",
     );
 
     const todos = result.rows.map((row) => ({

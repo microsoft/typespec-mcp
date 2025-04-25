@@ -103,7 +103,7 @@ importers:
         specifier: 'catalog:'
         version: 5.8.3
 
-  packages/tsp-mcp-agent:
+  packages/mcp-server-typespec:
     dependencies:
       '@modelcontextprotocol/inspector':
         specifier: ^0.9.0
@@ -118,10 +118,10 @@ importers:
         specifier: ^9.5.2
         version: 9.5.2
       typespec-mcp:
-        specifier: workspace:*
+        specifier: workspace:~
         version: link:../typespec-mcp
       typespec-mcp-server-js:
-        specifier: workspace:*
+        specifier: workspace:~
         version: link:../typespec-mcp-server-js
       zod:
         specifier: ^3.24.2

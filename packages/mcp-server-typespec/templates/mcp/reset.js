@@ -6,7 +6,7 @@ const client = new Client({
 await client.connect();
 await client.query("DROP TABLE IF EXISTS todos;");
 await client.query(
-  "CREATE TABLE todos (id SERIAL PRIMARY KEY, data JSONB NOT NULL);"
+  "CREATE TABLE todos (id SERIAL PRIMARY KEY, data JSONB NOT NULL);",
 );
 await client.query("INSERT INTO todos (data) VALUES ($1), ($2), ($3)", [
   { text: "Learn TypeSpec", status: "todo" },

@@ -2,7 +2,7 @@ import { execFileSync } from "node:child_process";
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-const commitNumber = execFileSync(`git`, [`rev-list`, `--count`, `--all`])
+const commitNumber = execFileSync(`git`, [`rev-list`, "HEAD", `--count`])
   .toString()
   .trim();
 

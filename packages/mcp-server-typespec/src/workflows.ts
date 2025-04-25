@@ -1,7 +1,8 @@
 import { readFile } from "fs/promises";
-import { join } from "path";
+import { join, resolve } from "path";
 import type { Workflow } from "../tsp-output/typespec-mcp-server-js/ts-types.js";
 import { projectRoot } from "./utils.js";
+import { fileURLToPath } from "url";
 
 const mcpTemplates = await getMcpTemplates();
 const coreTemplates = await getTypeSpecCoreTemplates();
@@ -52,9 +53,10 @@ async function getTypeSpecCoreTemplates(): Promise<{
   readonly baseUri: string;
   readonly templates: Record<string, any>;
 }> {
-  return loadTemplates(
-    join(projectRoot, "node_modules", "@typespec", "compiler", "templates"),
-  );
+  const compilerIndex = fileURLToPath(
+    import.meta.resolve("@typespec/compiler"),
+  ); // <compiler-pkg>/dist/src/index.js
+  return loadTemplates(resolve(compilerIndex, "../../..", "templates"));
 }
 
 async function getMcpTemplates(): Promise<{
