@@ -3,7 +3,7 @@
     "TypeSpec MPC": {
       "command": "node",
       "args": [
-        "${workspaceFolder}/packages/tsp-mcp-agent/dist/src/mcp-server.js"
+        "${workspaceFolder}/packages/mcp-server-typespec/dist/src/mcp-server.js"
       ]
     }
   }
