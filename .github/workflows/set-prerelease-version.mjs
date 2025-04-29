@@ -6,7 +6,11 @@ const commitNumber = execFileSync(`git`, [`rev-list`, "HEAD", `--count`])
   .toString()
   .trim();
 
-const packages = ["packages/typespec-mcp", "packages/typespec-mcp-server-js"];
+const packages = [
+  "packages/typespec-mcp",
+  "packages/typespec-mcp-server-js",
+  "packages/mcp-server-typespec",
+];
 
 const root = resolve(import.meta.dirname, "../../");
 
