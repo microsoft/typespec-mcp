@@ -19,7 +19,7 @@ export interface TodoStore {
 export async function createTodoFileStore(): Promise<TodoStore> {
   const data: Data = await load();
 
-  if (data.todos.length === 0) {
+  if (Object.keys(data.todos).length === 0) {
     await setDemoData(data);
   }
   return {
