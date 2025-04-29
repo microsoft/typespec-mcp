@@ -19,6 +19,9 @@ export interface TodoStore {
 export async function createTodoFileStore(): Promise<TodoStore> {
   const data: Data = await load();
 
+  if (Object.keys(data.todos).length === 0) {
+    await setDemoData(data);
+  }
   return {
     list: async () => {
       const todos = Object.entries(data.todos).map(([id, todo]) => ({
@@ -58,4 +61,19 @@ async function save(data: Data) {
   } catch (error) {
     console.error("Error saving todos:", error);
   }
+}
+
+const DEMO_DATA = [
+  { text: "Learn TypeSpec", status: "todo" },
+  { text: "Learn Model Context Protocol", status: "todo" },
+  { text: "Learn TypeSpec MCP Agent", status: "todo" },
+] as const;
+
+/** Populate the store with some demo values. */
+async function setDemoData(data: Data) {
+  for (const todo of DEMO_DATA) {
+    const id = ++data.idCounter;
+    data.todos[id.toString()] = todo;
+  }
+  await save(data);
 }
