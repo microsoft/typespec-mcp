@@ -33,6 +33,10 @@
       {
         "path": "mcp/src/mcp-server.ts",
         "destination": "src/mcp-server.ts"
+      },
+      {
+        "path": "mcp/src/file-store.ts",
+        "destination": "src/file-store.ts"
       }
     ]
   }

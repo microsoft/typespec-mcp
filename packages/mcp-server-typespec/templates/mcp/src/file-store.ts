@@ -1,0 +1,61 @@
+import fs from "fs/promises";
+import path, { parse } from "path";
+import { Todo } from "../tsp-output/typespec-mcp-server-js/ts-types.js";
+
+export interface Data {
+  idCounter: number;
+  todos: Record<string, Omit<Todo, "id">>;
+}
+
+const TODO_FILE_PATH = path.resolve(import.meta.dirname, "todos.json");
+
+export interface TodoStore {
+  list(): Promise<Todo[]>;
+  add(todo: Omit<Todo, "id">): Promise<Todo>;
+  get(id: number): Promise<Omit<Todo, "id"> | undefined>;
+  delete(id: number): Promise<void>;
+}
+
+export async function createTodoFileStore(): Promise<TodoStore> {
+  const data: Data = await load();
+
+  return {
+    list: async () => {
+      const todos = Object.entries(data.todos).map(([id, todo]) => ({
+        id: parseInt(id, 10),
+        ...todo,
+      }));
+      return todos;
+    },
+    add: async (todo: Omit<Todo, "id">): Promise<Todo> => {
+      const id = ++data.idCounter;
+      data.todos[id.toString()] = todo;
+      await save(data);
+      return { id, ...todo };
+    },
+    get: async (id: number): Promise<Omit<Todo, "id"> | undefined> => {
+      return data.todos[id.toString()];
+    },
+    delete: async (id: number): Promise<void> => {
+      delete data.todos[id.toString()];
+      await save(data);
+    },
+  };
+}
+
+async function load(): Promise<Data> {
+  try {
+    const data = await fs.readFile(TODO_FILE_PATH, "utf-8");
+    return JSON.parse(data);
+  } catch (error) {
+    return { todos: {}, idCounter: 0 };
+  }
+}
+
+async function save(data: Data) {
+  try {
+    await fs.writeFile(TODO_FILE_PATH, JSON.stringify(data, null, 2));
+  } catch (error) {
+    console.error("Error saving todos:", error);
+  }
+}
