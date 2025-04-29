@@ -37,6 +37,10 @@
       {
         "path": "mcp/src/file-store.ts",
         "destination": "src/file-store.ts"
+      },
+      {
+        "path": "mcp/.vscode/mcp.json",
+        "destination": ".vscode/mcp.json"
       }
     ]
   }
