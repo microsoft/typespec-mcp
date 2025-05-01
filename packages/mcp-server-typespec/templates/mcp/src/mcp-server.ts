@@ -7,12 +7,15 @@ const store = await createTodoFileStore();
 
 setToolHandler({
   addTodo: async (text) => {
-    await store.add({ text, status: "todo" });
-    return `Added todo: ${text}`;
+    return await store.add({ text, status: "todo" });
   },
-  listTodos: async () => {
+  listTodos: async (filter?: "done" | "todo") => {
     const result = await store.list();
-    return result.filter((todo) => todo.status === "todo");
+    return filter ? result.filter((todo) => todo.status === filter) : result;
+  },
+  deleteTodo: async (id) => {
+    await store.delete(id);
+    return `Deleted todo with id: ${id}`;
   },
 });
 

@@ -1,7 +1,7 @@
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { ListToolsRequestSchema, CallToolRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import { zodToJsonSchema } from "zod-to-json-schema";
-import { addTodoParameters, listTodosParameters, addTodoReturnType, listTodosReturnType } from "./zod-types.js";
+import { addTodoParameters, listTodosParameters, deleteTodoParameters, addTodoReturnType, listTodosReturnType, deleteTodoReturnType } from "./zod-types.js";
 import { fromZodError } from "zod-validation-error";
 import { toolHandler } from "./tools.js";
 
@@ -25,7 +25,7 @@ server.setRequestHandler(
       tools: [
         {
           name: "addTodo",
-          description: "Add a todo",
+          description: "Add a new todo",
           inputSchema: zodToJsonSchema(
             addTodoParameters,
             {
@@ -35,9 +35,19 @@ server.setRequestHandler(
         },
         {
           name: "listTodos",
-          description: "List all non completed todos",
+          description: "List todos.\nPresent the result with todo status first and done last.",
           inputSchema: zodToJsonSchema(
             listTodosParameters,
+            {
+              $refStrategy: "none",
+            }
+          ),
+        },
+        {
+          name: "deleteTodo",
+          description: "Delete a todo",
+          inputSchema: zodToJsonSchema(
+            deleteTodoParameters,
             {
               $refStrategy: "none",
             }
@@ -69,14 +79,18 @@ server.setRequestHandler(
           content: [
             {
               type: "text",
-              text: result,
+              text: JSON.stringify(result, null, 2),
             }
           ],
         };
       }
 
       case "listTodos": {
-        const rawResult = await toolHandler.listTodos();
+        const parsed = listTodosParameters.safeParse(args);
+        if (!parsed.success) {
+          throw fromZodError(parsed.error, { prefix: "Request validation error" });
+        }
+        const rawResult = await toolHandler.listTodos(parsed.data.filter);
         const maybeResult = listTodosReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
@@ -89,6 +103,27 @@ server.setRequestHandler(
               text: JSON.stringify(item, null, 2),
             }
           }),
+        };
+      }
+
+      case "deleteTodo": {
+        const parsed = deleteTodoParameters.safeParse(args);
+        if (!parsed.success) {
+          throw fromZodError(parsed.error, { prefix: "Request validation error" });
+        }
+        const rawResult = await toolHandler.deleteTodo(parsed.data.id);
+        const maybeResult = deleteTodoReturnType.safeParse(rawResult);
+        if (!maybeResult.success) {
+          throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
+        };
+        const result = maybeResult.data;
+        return {
+          content: [
+            {
+              type: "text",
+              text: result,
+            }
+          ],
         };
       }
     };

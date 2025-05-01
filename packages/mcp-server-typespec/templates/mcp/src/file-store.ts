@@ -12,7 +12,8 @@ const TODO_FILE_PATH = path.resolve(import.meta.dirname, "todos.json");
 export interface TodoStore {
   list(): Promise<Todo[]>;
   add(todo: Omit<Todo, "id">): Promise<Todo>;
-  get(id: number): Promise<Omit<Todo, "id"> | undefined>;
+  get(id: number): Promise<Todo | undefined>;
+  update(newTodo: Todo): Promise<Todo | undefined>;
   delete(id: number): Promise<void>;
 }
 
@@ -36,8 +37,18 @@ export async function createTodoFileStore(): Promise<TodoStore> {
       await save(data);
       return { id, ...todo };
     },
-    get: async (id: number): Promise<Omit<Todo, "id"> | undefined> => {
-      return data.todos[id.toString()];
+    get: async (id: number): Promise<Todo | undefined> => {
+      const todo = data.todos[id.toString()];
+      return todo && { id, ...todo };
+    },
+    update: async (newTodo: Todo): Promise<Todo | undefined> => {
+      const { id, ...rest } = newTodo;
+      if (data.todos[id]) {
+        data.todos[id] = rest;
+        await save(data);
+        return newTodo;
+      }
+      return undefined;
     },
     delete: async (id: number): Promise<void> => {
       delete data.todos[id.toString()];
