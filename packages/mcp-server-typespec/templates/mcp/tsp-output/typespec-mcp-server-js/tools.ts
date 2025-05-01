@@ -2,14 +2,20 @@ import { Todo } from "./ts-types.js";
 
 interface Tools {
   /**
-   * Add a todo
+   * Add a new todo
    **/
-  addTodo(text: string): string | Promise<string>
+  addTodo(text: string): Todo | Promise<Todo>
 
   /**
-   * List all non completed todos
+   * List todos.
+   * Present the result with todo status first and done last.
    **/
-  listTodos(): Array<Todo> | Promise<Array<Todo>>
+  listTodos(filter?: "done" | "todo"): Array<Todo> | Promise<Array<Todo>>
+
+  /**
+   * Delete a todo
+   **/
+  deleteTodo(id: number): string | Promise<string>
 }
 
 export let toolHandler: Tools = undefined as any;
