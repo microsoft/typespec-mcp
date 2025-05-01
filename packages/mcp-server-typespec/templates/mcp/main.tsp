@@ -29,7 +29,7 @@ model Todo {
 
 /**
  * List todos.
- * Present the result with todo status first and done last.
+ * Group the result by status. Todo first and done last.
  * @param filter - filter by status. List all if not provided
  */
 @tool op listTodos(filter?: "done" | "todo"): Todo[];
