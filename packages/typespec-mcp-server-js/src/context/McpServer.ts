@@ -133,7 +133,7 @@ export function createMCPServerContext(program: Program): MCPServerContext {
     // MCP server, as declared in the TypeSpec.
     let declaredReturnType: Type;
     if (successes.length === 0) {
-      declaredReturnType = tk.program.checker.voidType;
+      declaredReturnType = tk.intrinsic.void;
     } else if (successes.length === 1) {
       declaredReturnType = successes[0];
     } else {
