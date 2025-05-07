@@ -1,14 +1,4 @@
-import {
-  Block,
-  Children,
-  code,
-  For,
-  List,
-  refkey,
-  Refkey,
-  Show,
-  StatementList,
-} from "@alloy-js/core";
+import { Block, Children, code, For, List, refkey, Refkey, Show, StatementList } from "@alloy-js/core";
 import {
   ArrayExpression,
   CaseClause,
@@ -18,12 +8,7 @@ import {
   ObjectProperty,
   VarDeclaration,
 } from "@alloy-js/typescript";
-import {
-  $withOptionalProperties,
-  isNullType,
-  Operation,
-  Type,
-} from "@typespec/compiler";
+import { $withOptionalProperties, isNullType, Operation, Type } from "@typespec/compiler";
 import {
   ArrayResultDescriptor,
   ResultDescriptor,
@@ -73,9 +58,7 @@ export function CallToolHandler(props: CallToolHandlerProps) {
             })}
           />
         </VarDeclaration>
-        <VarDeclaration name="maybeResult">
-          {props.tool.keys.zodReturnSchema}.safeParse(rawResult)
-        </VarDeclaration>
+        <VarDeclaration name="maybeResult">{props.tool.keys.zodReturnSchema}.safeParse(rawResult)</VarDeclaration>
         {code`
           if (!maybeResult.success) {
             throw ${zodValidationError.fromZodError}(maybeResult.error, { prefix: "Response validation error"});
@@ -88,12 +71,7 @@ export function CallToolHandler(props: CallToolHandlerProps) {
           return{" "}
           <ObjectExpression
             jsValue={{
-              content: () => (
-                <MarshalResult
-                  tool={props.tool}
-                  parsedResult={parseResultKey}
-                />
-              ),
+              content: () => <MarshalResult tool={props.tool} parsedResult={parseResultKey} />,
             }}
           />
         </>
@@ -117,16 +95,11 @@ export function MarshalResult(props: PackResultProps) {
   if (result.kind === "single") {
     return (
       <ArrayExpression>
-        <MarshalSingleResult
-          result={result}
-          parsedResult={props.parsedResult}
-        />
+        <MarshalSingleResult result={result} parsedResult={props.parsedResult} />
       </ArrayExpression>
     );
   } else if (result.kind === "array") {
-    return (
-      <MarshalArrayResult result={result} parsedResult={props.parsedResult} />
-    );
+    return <MarshalArrayResult result={result} parsedResult={props.parsedResult} />;
   }
 }
 
@@ -138,9 +111,7 @@ export interface MarshalSingleResultProps {
 export function MarshalSingleResult(props: MarshalSingleResultProps) {
   const { $ } = useTsp();
   if ($.union.is(props.result.resultType)) {
-    const variantTypes = Array.from(
-      props.result.resultType.variants.values(),
-    ).map((v) => v.type);
+    const variantTypes = Array.from(props.result.resultType.variants.values()).map((v) => v.type);
     if (variantTypes.some($.mcp.isKnownMcpResult)) {
       // special handling of top-level unions-of-known-results
       // which is to determine which variant was returned and serialize
@@ -162,9 +133,7 @@ export function MarshalSingleResult(props: MarshalSingleResultProps) {
               <>
                 {index < variantTypes.length - 1 && <>{check} ? </>}
                 <MaybeResultEnvelope resultType={variant}>
-                  <MaybeSerialize resultType={variant}>
-                    {props.parsedResult}
-                  </MaybeSerialize>
+                  <MaybeSerialize resultType={variant}>{props.parsedResult}</MaybeSerialize>
                 </MaybeResultEnvelope>
                 {index < variantTypes.length - 1 && <> : </>}
               </>
@@ -176,9 +145,7 @@ export function MarshalSingleResult(props: MarshalSingleResultProps) {
   }
   return (
     <MaybeResultEnvelope resultType={props.result.resultType}>
-      <MaybeSerialize resultType={props.result.resultType}>
-        {props.parsedResult}
-      </MaybeSerialize>
+      <MaybeSerialize resultType={props.result.resultType}>{props.parsedResult}</MaybeSerialize>
     </MaybeResultEnvelope>
   );
 }
@@ -194,9 +161,7 @@ function MaybeResultEnvelope(props: MaybeEnvelopeProps) {
   // added is a single audio or image result. Everything else will come in from
   // business logic as the naked type and needs to be packed into a results
   // envelope.
-  const needsEnvelope =
-    !$.mcp.audioResult.is(props.resultType) &&
-    !$.mcp.imageResult.is(props.resultType);
+  const needsEnvelope = !$.mcp.audioResult.is(props.resultType) && !$.mcp.imageResult.is(props.resultType);
 
   if (needsEnvelope) {
     return (
@@ -224,10 +189,7 @@ function MaybeSerialize(props: MaybeSerializeProps) {
   if ($.scalar.extendsString(resultType)) {
     // nothing to do for strings
     return <>{props.children}</>;
-  } else if (
-    $.mcp.audioResult.is(resultType) ||
-    $.mcp.imageResult.is(resultType)
-  ) {
+  } else if ($.mcp.audioResult.is(resultType) || $.mcp.imageResult.is(resultType)) {
     // todo: embedded resource
     return (
       <ObjectExpression>
@@ -235,11 +197,7 @@ function MaybeSerialize(props: MaybeSerializeProps) {
           <>type: {props.children}.type</>
           <>mimeType: {props.children}.mimeType</>
           <>
-            data:{" "}
-            <FunctionCallExpression
-              target={"Buffer.from"}
-              args={[<>{props.children}.data</>]}
-            />
+            data: <FunctionCallExpression target={"Buffer.from"} args={[<>{props.children}.data</>]} />
             .toString("base64")
           </>
         </CommaList>
@@ -249,21 +207,13 @@ function MaybeSerialize(props: MaybeSerializeProps) {
     // todo: embedded resource
     return (
       <>
-        <FunctionCallExpression
-          target={"Buffer.from"}
-          args={[props.children]}
-        />
+        <FunctionCallExpression target={"Buffer.from"} args={[props.children]} />
         .toString("base64")
       </>
     );
   } else {
     // serialize the rest as JSON
-    return (
-      <FunctionCallExpression
-        target={"JSON.stringify"}
-        args={[props.children, "null", "2"]}
-      />
-    );
+    return <FunctionCallExpression target={"JSON.stringify"} args={[props.children, "null", "2"]} />;
   }
 }
 
@@ -278,11 +228,7 @@ function MarshalArrayResult(props: MarshalArrayResultProps) {
     <>
       {props.parsedResult}.map((item) =&gt;{" "}
       <Block>
-        return{" "}
-        <MarshalSingleResult
-          parsedResult="item"
-          result={props.result.elementDescriptor}
-        />
+        return <MarshalSingleResult parsedResult="item" result={props.result.elementDescriptor} />
       </Block>
       )
     </>

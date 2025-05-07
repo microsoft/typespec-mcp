@@ -26,16 +26,12 @@ function useTemplate(
       template: config.templates[name],
     };
   } else {
-    throw new Error(
-      `Template ${name} not found. Available templates: ${Object.keys(
-        config.templates,
-      ).join(", ")}`,
-    );
+    throw new Error(`Template ${name} not found. Available templates: ${Object.keys(config.templates).join(", ")}`);
   }
 }
 
 export const workflows: Record<Workflow, WorkflowConfig> = {
-  mcp: useTemplate(mcpTemplates, "mcp"),
+  "mcp": useTemplate(mcpTemplates, "mcp"),
   "rest api": {
     ...useTemplate(coreTemplates, "rest"),
   },
@@ -53,9 +49,7 @@ async function getTypeSpecCoreTemplates(): Promise<{
   readonly baseUri: string;
   readonly templates: Record<string, any>;
 }> {
-  const compilerIndex = fileURLToPath(
-    import.meta.resolve("@typespec/compiler"),
-  ); // <compiler-pkg>/dist/src/index.js
+  const compilerIndex = fileURLToPath(import.meta.resolve("@typespec/compiler")); // <compiler-pkg>/dist/src/index.js
   return loadTemplates(resolve(compilerIndex, "../../..", "templates"));
 }
 
@@ -70,9 +64,7 @@ async function loadTemplates(templatesDir: string): Promise<{
   readonly baseUri: string;
   readonly templates: Record<string, any>;
 }> {
-  const file = (
-    await readFile(join(templatesDir, "scaffolding.json"))
-  ).toString();
+  const file = (await readFile(join(templatesDir, "scaffolding.json"))).toString();
   const content = JSON.parse(file);
   return {
     baseUri: templatesDir,

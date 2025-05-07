@@ -15,13 +15,7 @@ export function TsTypes(props: TsTypesProps) {
   const { program } = useTsp();
   return (
     <For each={allTypes} doubleHardline>
-      {(type) => (
-        <TypeDeclaration
-          export
-          type={type}
-          name={getPlausibleName(program, type)}
-        />
-      )}
+      {(type) => <TypeDeclaration export type={type} name={getPlausibleName(program, type)} />}
     </For>
   );
 }

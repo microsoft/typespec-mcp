@@ -2,9 +2,7 @@
   "servers": {
     "TypeSpec MPC": {
       "command": "node",
-      "args": [
-        "${workspaceFolder}/packages/mcp-server-typespec/dist/src/mcp-server.js"
-      ]
+      "args": ["${workspaceFolder}/packages/mcp-server-typespec/dist/src/mcp-server.js"]
     }
   }
 }

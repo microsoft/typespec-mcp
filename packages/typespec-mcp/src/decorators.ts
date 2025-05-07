@@ -1,11 +1,4 @@
-import {
-  Operation,
-  DecoratorContext,
-  Type,
-  Interface,
-  Namespace,
-  Program,
-} from "@typespec/compiler";
+import { Operation, DecoratorContext, Type, Interface, Namespace, Program } from "@typespec/compiler";
 import { stateKeys } from "./lib.js";
 
 export const namespace = "MCP";
@@ -14,11 +7,7 @@ export function $tool(context: DecoratorContext, target: Operation) {
   context.program.stateMap(stateKeys.tool).set(target, {});
 }
 
-export function $serializeAsText(
-  context: DecoratorContext,
-  target: Type,
-  dataType: Type,
-) {
+export function $serializeAsText(context: DecoratorContext, target: Type, dataType: Type) {
   context.program.stateMap(stateKeys.serializeAsText).set(target, {
     dataType,
   });
@@ -36,11 +25,7 @@ export interface McpServer extends MCPServerOptions {
   container: Namespace | Interface;
 }
 
-export function $mcpServer(
-  context: DecoratorContext,
-  target: Namespace | Interface,
-  options: MCPServerOptions = {},
-) {
+export function $mcpServer(context: DecoratorContext, target: Namespace | Interface, options: MCPServerOptions = {}) {
   const meta: McpServer = {
     ...options,
     container: target,
@@ -52,8 +37,6 @@ export function $mcpServer(
 export interface StateContext {
   program: Program;
 }
-export function mcpServerState(
-  context: StateContext,
-): Map<Namespace | Interface, McpServer> {
+export function mcpServerState(context: StateContext): Map<Namespace | Interface, McpServer> {
   return context.program.stateMap(stateKeys.mcpServer) as any;
 }

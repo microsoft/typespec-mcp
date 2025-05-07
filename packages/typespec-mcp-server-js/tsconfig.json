@@ -6,12 +6,6 @@
     "jsxImportSource": "@alloy-js/core",
     "outDir": "./dist"
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "testing/**/*.ts",
-    "test/**/*.ts",
-    "test/**/*.tsx"
-  ],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "testing/**/*.ts", "test/**/*.ts", "test/**/*.tsx"],
   "exclude": ["node_modules", "dist"]
 }

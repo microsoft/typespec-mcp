@@ -1,9 +1,5 @@
 import { Refkey } from "@alloy-js/core";
-import {
-  FunctionCallExpression,
-  ObjectExpression,
-  VarDeclaration,
-} from "@alloy-js/typescript";
+import { FunctionCallExpression, ObjectExpression, VarDeclaration } from "@alloy-js/typescript";
 import { mcpSdk } from "../externals/mcp-sdk.js";
 import { useMCPServerContext } from "../context/McpServer.js";
 
@@ -35,10 +31,7 @@ export function ServerDeclaration(props: ServerDeclarationProps) {
       new{" "}
       <FunctionCallExpression
         target={mcpSdk["./server/index.js"].Server}
-        args={[
-          <ObjectExpression jsValue={serverMetadata} />,
-          <ObjectExpression jsValue={capabilities} />,
-        ]}
+        args={[<ObjectExpression jsValue={serverMetadata} />, <ObjectExpression jsValue={capabilities} />]}
       />
     </VarDeclaration>
   );

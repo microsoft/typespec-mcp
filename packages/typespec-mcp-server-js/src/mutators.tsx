@@ -1,7 +1,4 @@
-import {
-  unsafe_Mutator,
-  unsafe_MutatorFlow,
-} from "@typespec/compiler/experimental";
+import { unsafe_Mutator, unsafe_MutatorFlow } from "@typespec/compiler/experimental";
 import { $ } from "@typespec/compiler/experimental/typekit";
 // Unsure if the filter/replace for non-enum types should be needed.
 // https://github.com/microsoft/typespec/issues/7003
@@ -22,9 +19,7 @@ export const EnumToUnion: unsafe_Mutator = {
       return $(program).union.create({
         variants: [...en.members.values()].map((enumMember) => {
           return $(program).unionVariant.create({
-            type: $(program).literal.create(
-              enumMember.value ?? enumMember.name,
-            ),
+            type: $(program).literal.create(enumMember.value ?? enumMember.name),
           });
         }),
       });

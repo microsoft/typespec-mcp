@@ -15,15 +15,10 @@ export interface ListToolsHandlerProps {}
  */
 export function ListToolsHandler(props: ListToolsHandlerProps) {
   const { tools } = useMCPServerContext();
-  const toolDescriptors = tools
-    .map((desc) => operationToToolDescriptor(desc))
-    .filter(Boolean);
+  const toolDescriptors = tools.map((desc) => operationToToolDescriptor(desc)).filter(Boolean);
 
   return (
-    <RequestHandler
-      name="listTools"
-      schema={mcpSdk["./types.js"].ListToolsRequestSchema}
-    >
+    <RequestHandler name="listTools" schema={mcpSdk["./types.js"].ListToolsRequestSchema}>
       {(request) => {
         return (
           <>
@@ -46,10 +41,7 @@ function operationToToolDescriptor(tool: ToolDescriptor) {
       <>
         <FunctionCallExpression
           target={zodToJsonSchema.zodToJsonSchema}
-          args={[
-            tool.keys.zodParametersSchema,
-            <ObjectExpression jsValue={{ $refStrategy: "none" }} />,
-          ]}
+          args={[tool.keys.zodParametersSchema, <ObjectExpression jsValue={{ $refStrategy: "none" }} />]}
         />
       </>
     ),

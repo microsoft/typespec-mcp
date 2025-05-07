@@ -17,13 +17,9 @@ export function splitOutErrors(
     return { successes: [type], errors: [] };
   }
 
-  const successes = [...type.variants.values()]
-    .map((v) => v.type)
-    .filter((t) => !isErrorModel(program, t));
+  const successes = [...type.variants.values()].map((v) => v.type).filter((t) => !isErrorModel(program, t));
 
-  const errors = [...type.variants.values()]
-    .map((v) => v.type)
-    .filter((t) => isErrorModel(program, t));
+  const errors = [...type.variants.values()].map((v) => v.type).filter((t) => isErrorModel(program, t));
 
   return { successes, errors };
 }

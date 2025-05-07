@@ -15,9 +15,7 @@ export function ZodTypes() {
         {(type) => {
           const rk = refkey(type, "zodSchema");
           const name = getPlausibleName(program, type);
-          return (
-            <ZodSchemaDeclaration export name={name} type={type} refkey={rk} />
-          );
+          return <ZodSchemaDeclaration export name={name} type={type} refkey={rk} />;
         }}
       </For>
       <For each={tools} doubleHardline>
@@ -31,32 +29,18 @@ export function ZodTypes() {
           const returnTypeName = tool.op.name + "ReturnType";
 
           const schemas = [
-            <ZodSchemaDeclaration
-              export
-              name={parametersName}
-              type={tool.op.parameters}
-              refkey={parametersRk}
-            />,
+            <ZodSchemaDeclaration export name={parametersName} type={tool.op.parameters} refkey={parametersRk} />,
           ];
           schemas.push(
             <VarDeclaration
               export
               name={returnTypeName}
               refkey={returnTypeRk}
-              initializer={
-                <ZodSchema nested type={tool.implementationOp.returnType} />
-              }
+              initializer={<ZodSchema nested type={tool.implementationOp.returnType} />}
             />,
           );
 
-          return (
-            <List
-              doubleHardline
-              semicolon
-              enderPunctuation
-              children={schemas}
-            />
-          );
+          return <List doubleHardline semicolon enderPunctuation children={schemas} />;
         }}
       </For>
     </List>

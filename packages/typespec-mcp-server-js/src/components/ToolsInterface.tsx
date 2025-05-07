@@ -28,8 +28,7 @@ export function ToolsInterface(props: ToolsInterfaceProps) {
             const doc = getDoc($.program, tool.op);
             const returnType = (
               <>
-                <TypeExpression type={tool.implementationOp.returnType} /> |
-                Promise&lt;
+                <TypeExpression type={tool.implementationOp.returnType} /> | Promise&lt;
                 <TypeExpression type={tool.implementationOp.returnType} />
                 &gt;
               </>
@@ -39,10 +38,7 @@ export function ToolsInterface(props: ToolsInterfaceProps) {
                 <Show when={!!doc}>
                   <JSDoc children={doc} />
                 </Show>
-                <InterfaceMethod
-                  type={tool.implementationOp}
-                  returnType={returnType}
-                />
+                <InterfaceMethod type={tool.implementationOp} returnType={returnType} />
               </List>
             );
           }}

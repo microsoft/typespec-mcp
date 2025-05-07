@@ -1,9 +1,6 @@
 import { Refkey, refkey } from "@alloy-js/core";
 import { Children } from "@alloy-js/core/jsx-runtime";
-import {
-  FunctionCallExpression,
-  FunctionDeclaration,
-} from "@alloy-js/typescript";
+import { FunctionCallExpression, FunctionDeclaration } from "@alloy-js/typescript";
 import { useMCPServerContext } from "../context/McpServer.js";
 
 export interface RequestHandlerProps {
@@ -38,11 +35,7 @@ export function RequestHandler(props: RequestHandlerProps) {
       target={<>{server}.setRequestHandler</>}
       args={[
         props.schema,
-        <FunctionDeclaration
-          async
-          name={props.name}
-          parameters={[{ name: "request", refkey: requestParam }]}
-        >
+        <FunctionDeclaration async name={props.name} parameters={[{ name: "request", refkey: requestParam }]}>
           {props.children(requestParam)}
         </FunctionDeclaration>,
       ]}

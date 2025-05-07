@@ -56,6 +56,9 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 22.14.0
+      '@typespec/prettier-plugin-typespec':
+        specifier: ^1.0.0
+        version: 1.0.0
       prettier:
         specifier: 'catalog:'
         version: 3.5.3
@@ -1256,6 +1259,9 @@ packages:
     peerDependenciesMeta:
       '@typespec/streams':
         optional: true
+
+  '@typespec/prettier-plugin-typespec@1.0.0':
+    resolution: {integrity: sha512-pnZRJ0hdjDUTfem49YncT9LwiUBf/XPYn/jSdifvjyspOUg0an6YmqqmG4dGOEvkwRJQQvDftT7HxxT+7f40YQ==}
 
   '@typespec/rest@0.68.0':
     resolution: {integrity: sha512-VJBEpC0MCFPPN6acc5o0fwQm4WMjMEl3aBHE+71XYkagsqb31rYSyfgfBMvHWaEMJV4dVk5T787/q6AWDzEE8g==}
@@ -3678,6 +3684,10 @@ snapshots:
   '@typespec/http@1.0.0-rc.0(@typespec/compiler@1.0.0-rc.2-dev.2(@types/node@22.14.0))':
     dependencies:
       '@typespec/compiler': 1.0.0-rc.2-dev.2(@types/node@22.14.0)
+
+  '@typespec/prettier-plugin-typespec@1.0.0':
+    dependencies:
+      prettier: 3.5.3
 
   '@typespec/rest@0.68.0(@typespec/compiler@1.0.0-rc.2-dev.2(@types/node@22.14.0))(@typespec/http@1.0.0-rc.0(@typespec/compiler@1.0.0-rc.2-dev.2(@types/node@22.14.0)))':
     dependencies:

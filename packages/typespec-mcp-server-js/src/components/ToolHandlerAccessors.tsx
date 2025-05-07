@@ -8,13 +8,7 @@ export function ToolHandlerAccessors() {
   } = useMCPServerContext();
   return (
     <List doubleHardline>
-      <VarDeclaration
-        export
-        let
-        name="toolHandler"
-        type={toolsInterface}
-        refkey={getToolHandler}
-      >
+      <VarDeclaration export let name="toolHandler" type={toolsInterface} refkey={getToolHandler}>
         undefined as any;
       </VarDeclaration>
       <FunctionDeclaration

@@ -11,10 +11,11 @@
     "format:check": "prettier . --check"
   },
   "devDependencies": {
-    "typescript": "catalog:",
-    "vitest": "catalog:",
     "@types/node": "catalog:",
-    "prettier": "catalog:"
+    "@typespec/prettier-plugin-typespec": "^1.0.0",
+    "prettier": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "keywords": [],
   "author": "",

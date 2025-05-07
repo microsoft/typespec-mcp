@@ -9,9 +9,7 @@ import { WorkflowConfig, workflows } from "./workflows.js";
 import { projectRoot } from "./utils.js";
 import { execa } from "execa";
 
-const instructions = (
-  await readFile(join(projectRoot, "assets", "instructions", "mcp.md"))
-).toString();
+const instructions = (await readFile(join(projectRoot, "assets", "instructions", "mcp.md"))).toString();
 
 setToolHandler({
   learnTypeSpec(area) {
@@ -22,17 +20,13 @@ setToolHandler({
     const workflow = workflowName && workflows[workflowName];
     if (workflow === undefined) {
       throw new Error(
-        `Workflow ${workflowName} not found. Available templates: ${Object.keys(
-          workflows,
-        )
+        `Workflow ${workflowName} not found. Available templates: ${Object.keys(workflows)
           .map((x) => ` - ${x}`)
           .join("\n")}`,
       );
     }
 
-    const { makeScaffoldingConfig, scaffoldNewProject } = await import(
-      "@typespec/compiler/internals"
-    );
+    const { makeScaffoldingConfig, scaffoldNewProject } = await import("@typespec/compiler/internals");
     await scaffoldNewProject(
       NodeHost,
       makeScaffoldingConfig(workflow.template, {
@@ -70,9 +64,7 @@ setToolHandler({
         ].join("\n"),
       );
     }
-    return ["Compilation successful", "Command result:", result.stdout].join(
-      "\n",
-    );
+    return ["Compilation successful", "Command result:", result.stdout].join("\n");
   },
   async build(dir) {
     const result = await execa("npm", ["run", "build"], {
@@ -80,20 +72,13 @@ setToolHandler({
     });
 
     if (result.exitCode !== 0) {
-      throw new Error(
-        ["Build failed", `Command result:`, result.stdout].join("\n"),
-      );
+      throw new Error(["Build failed", `Command result:`, result.stdout].join("\n"));
     }
-    return ["Compilation successful", "Command result:", result.stdout].join(
-      "\n",
-    );
+    return ["Compilation successful", "Command result:", result.stdout].join("\n");
   },
 });
 
-function resolveEmitters(
-  workflow: WorkflowConfig,
-  userAdditionalEmitters: string[] | undefined,
-) {
+function resolveEmitters(workflow: WorkflowConfig, userAdditionalEmitters: string[] | undefined) {
   const additionalEmitters = new Set([
     ...Object.entries(workflow.template.emitters)
       .filter(([_, v]: [string, any]) => v.selected)

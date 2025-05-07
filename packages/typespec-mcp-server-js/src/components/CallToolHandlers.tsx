@@ -1,11 +1,7 @@
 import { Operation } from "@typespec/compiler";
 import { RequestHandler } from "./RequestHandler.jsx";
 import { mcpSdk } from "../externals/mcp-sdk.js";
-import {
-  ObjectExpression,
-  SwitchStatement,
-  VarDeclaration,
-} from "@alloy-js/typescript";
+import { ObjectExpression, SwitchStatement, VarDeclaration } from "@alloy-js/typescript";
 import { For, refkey, StatementList } from "@alloy-js/core";
 import { CallToolHandler } from "./CallToolHandler.jsx";
 import { useMCPServerContext } from "../context/McpServer.js";
@@ -21,10 +17,7 @@ export function CallToolHandlers(props: CallToolHandlersProps) {
   const argsKey = refkey();
 
   return (
-    <RequestHandler
-      name="callTool"
-      schema={mcpSdk["./types.js"].CallToolRequestSchema}
-    >
+    <RequestHandler name="callTool" schema={mcpSdk["./types.js"].CallToolRequestSchema}>
       {(request) => {
         return (
           <StatementList>
@@ -40,8 +33,7 @@ export function CallToolHandlers(props: CallToolHandlersProps) {
               </For>
             </SwitchStatement>
             <>
-              return {"{"} content: [{"{"} type: "text", text: "Unknown tool"{" "}
-              {"}"}] {"}"}
+              return {"{"} content: [{"{"} type: "text", text: "Unknown tool" {"}"}] {"}"}
             </>
           </StatementList>
         );
