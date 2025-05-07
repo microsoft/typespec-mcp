@@ -1,5 +1,5 @@
 import { isErrorModel, Operation, Program, Type } from "@typespec/compiler";
-import { $ } from "@typespec/compiler/experimental/typekit";
+import { $ } from "@typespec/compiler/typekit";
 
 export function splitOutErrors(
   program: Program,

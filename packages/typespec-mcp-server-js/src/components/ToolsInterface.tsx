@@ -1,7 +1,7 @@
 import { For, List, Show } from "@alloy-js/core";
 import { JSDoc } from "@alloy-js/typescript";
 import { getDoc } from "@typespec/compiler";
-import { $ } from "@typespec/compiler/experimental/typekit";
+import { $ } from "@typespec/compiler/typekit";
 import {
   InterfaceDeclaration,
   InterfaceMember,

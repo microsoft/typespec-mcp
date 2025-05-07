@@ -16,7 +16,7 @@ import {
   ToolDescriptor,
   useMCPServerContext,
 } from "../context/McpServer.js";
-import { $ } from "@typespec/compiler/experimental/typekit";
+import { $ } from "@typespec/compiler/typekit";
 import { zodValidationError } from "../externals/zod-validation-error.js";
 import { useTsp } from "@typespec/emitter-framework";
 
