@@ -24,6 +24,12 @@ catalogs:
     '@babel/preset-typescript':
       specifier: ^7.27.0
       version: 7.27.1
+    '@modelcontextprotocol/inspector':
+      specifier: ^0.9.0
+      version: 0.9.0
+    '@modelcontextprotocol/sdk':
+      specifier: ^1.9.0
+      version: 1.11.0
     '@types/node':
       specifier: ^22.14.0
       version: 22.15.15
@@ -71,8 +77,11 @@ importers:
 
   packages/demo:
     dependencies:
+      '@modelcontextprotocol/inspector':
+        specifier: 'catalog:'
+        version: 0.9.0(@types/node@22.15.15)(typescript@5.8.3)
       '@modelcontextprotocol/sdk':
-        specifier: ^1.9.0
+        specifier: 'catalog:'
         version: 1.11.0
       '@typespec/compiler':
         specifier: 'catalog:'
