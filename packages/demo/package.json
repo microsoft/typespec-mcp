@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "description": "",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.9.0",
+    "@modelcontextprotocol/inspector": "catalog:",
+    "@modelcontextprotocol/sdk": "catalog:",
     "@typespec/compiler": "catalog:",
     "typespec-mcp": "workspace:*",
     "typespec-mcp-server-js": "workspace:*",
@@ -23,7 +24,8 @@
     "build-ts": "tsc -p .",
     "build": "pnpm build-tsp && pnpm build-ts",
     "mcp": "mcp-cli node dist/src/mcp-server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "inspect": "mcp-inspector node ./dist/src/mcp-server.js"
   },
   "keywords": [],
   "author": "",
