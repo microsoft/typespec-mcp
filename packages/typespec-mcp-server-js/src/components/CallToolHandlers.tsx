@@ -1,10 +1,9 @@
-import { Operation } from "@typespec/compiler";
-import { RequestHandler } from "./RequestHandler.jsx";
-import { mcpSdk } from "../externals/mcp-sdk.js";
-import { ObjectExpression, SwitchStatement, VarDeclaration } from "@alloy-js/typescript";
 import { For, refkey, StatementList } from "@alloy-js/core";
-import { CallToolHandler } from "./CallToolHandler.jsx";
+import { SwitchStatement, VarDeclaration } from "@alloy-js/typescript";
 import { useMCPServerContext } from "../context/McpServer.js";
+import { mcpSdk } from "../externals/mcp-sdk.js";
+import { CallToolHandler } from "./CallToolHandler.jsx";
+import { RequestHandler } from "./RequestHandler.jsx";
 
 export interface CallToolHandlersProps {}
 

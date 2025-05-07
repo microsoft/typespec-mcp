@@ -1,13 +1,13 @@
 (globalThis as any).enableCompilerInternalsExport = true;
-import { setToolHandler } from "../tsp-output/typespec-mcp-server-js/tools.js";
-import { server } from "../tsp-output/typespec-mcp-server-js/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { readFile, writeFile } from "fs/promises";
-import { basename, dirname, join } from "path";
 import { NodeHost } from "@typespec/compiler";
-import { WorkflowConfig, workflows } from "./workflows.js";
-import { projectRoot } from "./utils.js";
 import { execa } from "execa";
+import { readFile } from "fs/promises";
+import { basename, dirname, join } from "path";
+import { server } from "../tsp-output/typespec-mcp-server-js/index.js";
+import { setToolHandler } from "../tsp-output/typespec-mcp-server-js/tools.js";
+import { projectRoot } from "./utils.js";
+import { WorkflowConfig, workflows } from "./workflows.js";
 
 const instructions = (await readFile(join(projectRoot, "assets", "instructions", "mcp.md"))).toString();
 

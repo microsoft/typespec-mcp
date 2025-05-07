@@ -1,6 +1,6 @@
-import { setToolHandler } from "../tsp-output/typespec-mcp-server-js/tools.js";
-import { server } from "../tsp-output/typespec-mcp-server-js/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { server } from "../tsp-output/typespec-mcp-server-js/index.js";
+import { setToolHandler } from "../tsp-output/typespec-mcp-server-js/tools.js";
 import { createTodoFileStore } from "./file-store.js";
 
 const store = await createTodoFileStore();

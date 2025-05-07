@@ -1,15 +1,9 @@
 import { For, List, Show } from "@alloy-js/core";
 import { JSDoc } from "@alloy-js/typescript";
 import { getDoc } from "@typespec/compiler";
-import { $ } from "@typespec/compiler/typekit";
-import {
-  InterfaceDeclaration,
-  InterfaceMember,
-  InterfaceMethod,
-  TypeExpression,
-} from "@typespec/emitter-framework/typescript";
-import { useMCPServerContext } from "../context/McpServer.js";
 import { useTsp } from "@typespec/emitter-framework";
+import { InterfaceDeclaration, InterfaceMethod, TypeExpression } from "@typespec/emitter-framework/typescript";
+import { useMCPServerContext } from "../context/McpServer.js";
 
 export interface ToolsInterfaceProps {}
 

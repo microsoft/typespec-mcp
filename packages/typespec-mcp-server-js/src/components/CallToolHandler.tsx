@@ -8,17 +8,15 @@ import {
   ObjectProperty,
   VarDeclaration,
 } from "@alloy-js/typescript";
-import { $withOptionalProperties, isNullType, Operation, Type } from "@typespec/compiler";
+import { Type } from "@typespec/compiler";
+import { useTsp } from "@typespec/emitter-framework";
 import {
   ArrayResultDescriptor,
-  ResultDescriptor,
   SingleResultDescriptor,
   ToolDescriptor,
   useMCPServerContext,
 } from "../context/McpServer.js";
-import { $ } from "@typespec/compiler/typekit";
 import { zodValidationError } from "../externals/zod-validation-error.js";
-import { useTsp } from "@typespec/emitter-framework";
 
 export interface CallToolHandlerProps {
   tool: ToolDescriptor;

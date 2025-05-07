@@ -1,6 +1,5 @@
 import {
   ignoreDiagnostics,
-  Interface,
   isDeclaredInNamespace,
   Model,
   Namespace,
@@ -9,9 +8,9 @@ import {
   Type,
   Union,
 } from "@typespec/compiler";
-import { $, defineKit } from "@typespec/compiler/typekit";
+import { defineKit } from "@typespec/compiler/typekit";
+import { McpServer, mcpServerState } from "../decorators.js";
 import { stateKeys } from "../lib.js";
-import { mcpServerState, McpServer } from "../decorators.js";
 
 export interface McpKit {
   tools: {

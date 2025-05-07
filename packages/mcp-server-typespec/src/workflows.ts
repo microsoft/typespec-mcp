@@ -1,8 +1,8 @@
 import { readFile } from "fs/promises";
 import { join, resolve } from "path";
+import { fileURLToPath } from "url";
 import type { Workflow } from "../tsp-output/typespec-mcp-server-js/ts-types.js";
 import { projectRoot } from "./utils.js";
-import { fileURLToPath } from "url";
 
 const mcpTemplates = await getMcpTemplates();
 const coreTemplates = await getTypeSpecCoreTemplates();

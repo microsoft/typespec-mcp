@@ -1,10 +1,9 @@
 import { For, List, refkey } from "@alloy-js/core";
+import { VarDeclaration } from "@alloy-js/typescript";
+import { useTsp } from "@typespec/emitter-framework";
 import { ZodSchema, ZodSchemaDeclaration } from "typespec-zod";
 import { useMCPServerContext } from "../context/McpServer.js";
-import { $ } from "@typespec/compiler/typekit";
-import { VarDeclaration } from "@alloy-js/typescript";
 import { getPlausibleName } from "../utils.js";
-import { useTsp } from "@typespec/emitter-framework";
 
 export function ZodTypes() {
   const { tools, allTypes } = useMCPServerContext();

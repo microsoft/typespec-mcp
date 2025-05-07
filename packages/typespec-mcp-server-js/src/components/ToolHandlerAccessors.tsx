@@ -1,6 +1,6 @@
 import { List } from "@alloy-js/core";
-import { useMCPServerContext } from "../context/McpServer.js";
 import { FunctionDeclaration, VarDeclaration } from "@alloy-js/typescript";
+import { useMCPServerContext } from "../context/McpServer.js";
 
 export function ToolHandlerAccessors() {
   const {

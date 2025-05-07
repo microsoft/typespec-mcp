@@ -1,8 +1,8 @@
 import { For } from "@alloy-js/core";
-import { useMCPServerContext } from "../context/McpServer.js";
-import { TypeDeclaration } from "@typespec/emitter-framework/typescript";
-import { getPlausibleName } from "../utils.js";
 import { useTsp } from "@typespec/emitter-framework";
+import { TypeDeclaration } from "@typespec/emitter-framework/typescript";
+import { useMCPServerContext } from "../context/McpServer.js";
+import { getPlausibleName } from "../utils.js";
 
 export interface TsTypesProps {}
 

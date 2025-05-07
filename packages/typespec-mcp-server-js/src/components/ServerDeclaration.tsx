@@ -1,7 +1,6 @@
-import { Refkey } from "@alloy-js/core";
 import { FunctionCallExpression, ObjectExpression, VarDeclaration } from "@alloy-js/typescript";
-import { mcpSdk } from "../externals/mcp-sdk.js";
 import { useMCPServerContext } from "../context/McpServer.js";
+import { mcpSdk } from "../externals/mcp-sdk.js";
 
 export interface ServerDeclarationProps {}
 

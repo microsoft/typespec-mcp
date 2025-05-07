@@ -1,4 +1,4 @@
-import { Operation, DecoratorContext, Type, Interface, Namespace, Program } from "@typespec/compiler";
+import { DecoratorContext, Interface, Namespace, Operation, Program, Type } from "@typespec/compiler";
 import { stateKeys } from "./lib.js";
 
 export const namespace = "MCP";

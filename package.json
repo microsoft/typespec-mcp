@@ -14,6 +14,7 @@
     "@types/node": "catalog:",
     "@typespec/prettier-plugin-typespec": "^1.0.0",
     "prettier": "catalog:",
+    "prettier-plugin-organize-imports": "^4.1.0",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },

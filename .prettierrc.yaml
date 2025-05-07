@@ -4,5 +4,7 @@ quoteProps: "consistent"
 endOfLine: lf
 arrowParens: always
 plugins:
-  - "./node_modules/@typespec/prettier-plugin-typespec/dist/index.js"
+  - "@typespec/prettier-plugin-typespec"
+  - "prettier-plugin-organize-imports"
+
 overrides: [{ "files": "*.tsp", "options": { "parser": "typespec" } }]

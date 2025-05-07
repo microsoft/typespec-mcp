@@ -1,10 +1,10 @@
 import { ComponentContext, createContext, refkey, Refkey, useContext } from "@alloy-js/core";
 import { isNeverType, Model, navigateType, Operation, Program, Tuple, Type } from "@typespec/compiler";
+import { unsafe_mutateSubgraph } from "@typespec/compiler/experimental";
 import { $ } from "@typespec/compiler/typekit";
-import { splitOutErrors } from "../utils.js";
-import { unsafe_mutateSubgraph, unsafe_MutableType, unsafe_MutatorFlow } from "@typespec/compiler/experimental";
-import { EnumToUnion } from "../mutators.jsx";
 import { McpServer } from "typespec-mcp";
+import { EnumToUnion } from "../mutators.jsx";
+import { splitOutErrors } from "../utils.js";
 
 export interface MCPServerKeys {
   server: Refkey;

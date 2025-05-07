@@ -1,5 +1,5 @@
 import fs from "fs/promises";
-import path, { parse } from "path";
+import path from "path";
 import { Todo } from "../tsp-output/typespec-mcp-server-js/ts-types.js";
 
 export interface Data {
