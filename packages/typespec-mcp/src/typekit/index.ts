@@ -9,7 +9,7 @@ import {
   Type,
   Union,
 } from "@typespec/compiler";
-import { $, defineKit } from "@typespec/compiler/experimental/typekit";
+import { $, defineKit } from "@typespec/compiler/typekit";
 import { stateKeys } from "../lib.js";
 import { mcpServerState, McpServer } from "../decorators.js";
 
@@ -55,7 +55,7 @@ interface TypekitExtension {
   mcp: McpKit;
 }
 
-declare module "@typespec/compiler/experimental/typekit" {
+declare module "@typespec/compiler/typekit" {
   interface Typekit extends TypekitExtension {}
 }
 
