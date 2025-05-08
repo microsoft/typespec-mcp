@@ -1,3 +1,8 @@
+import { getDoc, Operation } from "@typespec/compiler";
+import { mcpSdk } from "../externals/mcp-sdk.js";
+import { RequestHandler } from "./RequestHandler.jsx";
+import { $ } from "@typespec/compiler/typekit";
+import { zodToJsonSchema } from "../externals/zodToJsonSchema.js";
 import { FunctionCallExpression, ObjectExpression } from "@alloy-js/typescript";
 import { getDoc } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";

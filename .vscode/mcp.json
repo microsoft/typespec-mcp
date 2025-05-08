@@ -2,7 +2,16 @@
   "servers": {
     "TypeSpec MPC": {
       "command": "node",
-      "args": ["${workspaceFolder}/packages/demo/dist/src/mcp-server.js"]
+      "args": [
+        "${workspaceFolder}/packages/mcp-server-typespec/dist/src/mcp-server.js"
+      ]
+    },
+    "Widget Service": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/packages/rest-demo/tsp-output/typespec-mcp-rest-server-js/dist/index.js"
+      ]
     }
   }
 }

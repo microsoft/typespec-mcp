@@ -4,8 +4,8 @@
   "description": "MCP server to help writing MCP servers with TypeSpec",
   "bin": "./cmd/cli.js",
   "dependencies": {
-    "@modelcontextprotocol/inspector": "^0.9.0",
-    "@modelcontextprotocol/sdk": "^1.9.0",
+    "@modelcontextprotocol/inspector": "catalog:",
+    "@modelcontextprotocol/sdk": "catalog:",
     "@typespec/compiler": "catalog:",
     "execa": "^9.5.2",
     "typespec-mcp": "workspace:~",

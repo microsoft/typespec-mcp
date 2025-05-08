@@ -20,7 +20,8 @@
     "@alloy-js/core": "catalog:",
     "@alloy-js/typescript": "catalog:",
     "@typespec/compiler": "catalog:",
-    "@typespec/emitter-framework": "catalog:"
+    "@typespec/emitter-framework": "catalog:",
+    "@typespec/rest": "catalog:"
   },
   "scripts": {
     "build": "alloy build",

@@ -3,7 +3,7 @@ import { $ } from "@typespec/compiler/typekit";
 
 export function splitOutErrors(
   program: Program,
-  op: Operation,
+  op: Operation
 ): {
   successes: Type[];
   errors: Type[];

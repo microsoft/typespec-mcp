@@ -9,7 +9,6 @@ import {
   Union,
 } from "@typespec/compiler";
 import { defineKit } from "@typespec/compiler/typekit";
-import { McpServer, mcpServerState } from "../decorators.js";
 import { stateKeys } from "../lib.js";
 
 export interface McpKit {
@@ -73,41 +72,61 @@ defineKit<TypekitExtension>({
           return allToolOps.filter((op) =>
             isDeclaredInNamespace(op, server.container as Namespace, {
               recursive: true,
-            }),
+            })
           );
         }
       },
     },
     builtins: {
       get BinaryResource(): Model {
-        return ignoreDiagnostics(this.program.resolveTypeReference("MCP.BinaryResource"))! as Model;
+        return ignoreDiagnostics(
+          this.program.resolveTypeReference("MCP.BinaryResource")
+        )! as Model;
       },
       get TextResult(): Model {
-        return ignoreDiagnostics(this.program.resolveTypeReference("MCP.TextResult"))! as Model;
+        return ignoreDiagnostics(
+          this.program.resolveTypeReference("MCP.TextResult")
+        )! as Model;
       },
       get LRO(): Model {
-        return ignoreDiagnostics(this.program.resolveTypeReference("MCP.LRO"))! as Model;
+        return ignoreDiagnostics(
+          this.program.resolveTypeReference("MCP.LRO")
+        )! as Model;
       },
       get ImageResult(): Model {
-        return ignoreDiagnostics(this.program.resolveTypeReference("MCP.ImageResult"))! as Model;
+        return ignoreDiagnostics(
+          this.program.resolveTypeReference("MCP.ImageResult")
+        )! as Model;
       },
       get AudioResult(): Model {
-        return ignoreDiagnostics(this.program.resolveTypeReference("MCP.AudioResult"))! as Model;
+        return ignoreDiagnostics(
+          this.program.resolveTypeReference("MCP.AudioResult")
+        )! as Model;
       },
       get EmbeddedResource(): Model {
-        return ignoreDiagnostics(this.program.resolveTypeReference("MCP.EmbeddedResource"))! as Model;
+        return ignoreDiagnostics(
+          this.program.resolveTypeReference("MCP.EmbeddedResource")
+        )! as Model;
       },
       get TextResource(): Model {
-        return ignoreDiagnostics(this.program.resolveTypeReference("MCP.TextResource"))! as Model;
+        return ignoreDiagnostics(
+          this.program.resolveTypeReference("MCP.TextResource")
+        )! as Model;
       },
       get FileData(): Scalar {
-        return ignoreDiagnostics(this.program.resolveTypeReference("MCP.FileData"))! as Scalar;
+        return ignoreDiagnostics(
+          this.program.resolveTypeReference("MCP.FileData")
+        )! as Scalar;
       },
       get MCPError(): Model {
-        return ignoreDiagnostics(this.program.resolveTypeReference("MCP.MCPError"))! as Model;
+        return ignoreDiagnostics(
+          this.program.resolveTypeReference("MCP.MCPError")
+        )! as Model;
       },
       get Resource(): Union {
-        return ignoreDiagnostics(this.program.resolveTypeReference("MCP.Resource"))! as Union;
+        return ignoreDiagnostics(
+          this.program.resolveTypeReference("MCP.Resource")
+        )! as Union;
       },
     },
 

@@ -1,4 +1,8 @@
 {
-  "references": [{ "path": "packages/typespec-mcp" }, { "path": "packages/typespec-mcp-server-js" }],
+  "references": [
+    { "path": "packages/typespec-mcp" },
+    { "path": "packages/typespec-mcp-rest-server-js" },
+    { "path": "packages/typespec-mcp-server-js" }
+  ],
   "files": []
 }

@@ -3,6 +3,8 @@ import { VarDeclaration } from "@alloy-js/typescript";
 import { useTsp } from "@typespec/emitter-framework";
 import { ZodSchema, ZodSchemaDeclaration } from "typespec-zod";
 import { useMCPServerContext } from "../context/McpServer.js";
+import { $ } from "@typespec/compiler/typekit";
+import { VarDeclaration } from "@alloy-js/typescript";
 import { getPlausibleName } from "../utils.js";
 
 export function ZodTypes() {
@@ -35,8 +37,10 @@ export function ZodTypes() {
               export
               name={returnTypeName}
               refkey={returnTypeRk}
-              initializer={<ZodSchema nested type={tool.implementationOp.returnType} />}
-            />,
+              initializer={
+                <ZodSchema nested type={tool.implementationOp.returnType} />
+              }
+            />
           );
 
           return <List doubleHardline semicolon enderPunctuation children={schemas} />;
