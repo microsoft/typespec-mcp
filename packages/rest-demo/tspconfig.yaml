@@ -1,0 +1,5 @@
+emit:
+  - typespec-mcp-rest-server-js
+options:
+  typespec-mcp-rest-server-js:
+    emitter-output-dir: "{output-dir}"

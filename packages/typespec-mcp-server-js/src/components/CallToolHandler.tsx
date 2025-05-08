@@ -26,6 +26,7 @@ export interface CallToolHandlerProps {
 export function CallToolHandler(props: CallToolHandlerProps) {
   const {
     keys: { getToolHandler },
+    validateResult,
   } = useMCPServerContext();
   const parseResultKey = refkey();
   return (
@@ -42,38 +43,67 @@ export function CallToolHandler(props: CallToolHandlerProps) {
           `}
         </List>
       </Show>
-      <StatementList>
-        <VarDeclaration name="rawResult">
-          await{" "}
-          <FunctionCallExpression
-            target={
+      {
+          validateResult ? (
+            <StatementList>
+              <VarDeclaration name="rawResult">
+                await{" "}
+                <FunctionCallExpression
+                  target={
+                    <>
+                      {getToolHandler}.{props.tool.op.name}
+                    </>
+                  }
+                  args={[...props.tool.parameters.properties.values()].map((p) => {
+                    return <>parsed.data.{p.name}</>;
+                  })}
+                />
+              </VarDeclaration>
+              <VarDeclaration name="maybeResult">{props.tool.keys.zodReturnSchema}.safeParse(rawResult)</VarDeclaration>
+              {code`
+                if (!maybeResult.success) {
+                  throw ${zodValidationError.fromZodError}(maybeResult.error, { prefix: "Response validation error"});
+                }
+              `}
+              <VarDeclaration name="result" refkey={parseResultKey}>
+                maybeResult.data
+              </VarDeclaration>
               <>
-                {getToolHandler}.{props.tool.op.name}
+                return{" "}
+                <ObjectExpression
+                  jsValue={{
+                    content: () => <MarshalResult tool={props.tool} parsedResult={parseResultKey} />,
+                  }}
+                />
               </>
-            }
-            args={[...props.tool.parameters.properties.values()].map((p) => {
-              return <>parsed.data.{p.name}</>;
-            })}
-          />
-        </VarDeclaration>
-        <VarDeclaration name="maybeResult">{props.tool.keys.zodReturnSchema}.safeParse(rawResult)</VarDeclaration>
-        {code`
-          if (!maybeResult.success) {
-            throw ${zodValidationError.fromZodError}(maybeResult.error, { prefix: "Response validation error"});
-          }
-        `}
-        <VarDeclaration name="result" refkey={parseResultKey}>
-          maybeResult.data
-        </VarDeclaration>
-        <>
-          return{" "}
-          <ObjectExpression
-            jsValue={{
-              content: () => <MarshalResult tool={props.tool} parsedResult={parseResultKey} />,
-            }}
-          />
-        </>
-      </StatementList>
+            </StatementList>
+          ) : 
+          (
+            <StatementList>
+              <VarDeclaration name="result" refkey={parseResultKey}>
+                await{" "}
+                <FunctionCallExpression
+                  target={
+                    <>
+                      {getToolHandler}.{props.tool.op.name}
+                    </>
+                  }
+                  args={[...props.tool.parameters.properties.values()].map((p) => {
+                    return <>parsed.data.{p.name}</>;
+                  })}
+                />
+              </VarDeclaration>
+              <>
+                return{" "}
+                <ObjectExpression
+                  jsValue={{
+                    content: () => <MarshalResult tool={props.tool} parsedResult={parseResultKey} />,
+                  }}
+                />
+              </>
+            </StatementList>
+          )
+        }
     </CaseClause>
   );
 }

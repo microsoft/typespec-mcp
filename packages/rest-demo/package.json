@@ -22,7 +22,7 @@
     "typescript": "catalog:"
   },
   "scripts": {
-    "build-tsp": "tsp compile . --emit typespec-mcp-rest-server-js --out-dir src",
+    "build-tsp": "tsp compile mcp.tsp",
     "build-ts": "tsc -p .",
     "mcp": "mcp-cli node dist/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"

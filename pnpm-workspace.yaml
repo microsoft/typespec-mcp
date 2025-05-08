@@ -2,17 +2,14 @@ packages:
   - "packages/*"
 
 catalog:
+  "@alloy-js/cli": ^0.15.0
   "@alloy-js/core": ^0.15.0
   "@alloy-js/typescript": ^0.15.0
-  "@alloy-js/babel-preset": ^0.2.1
   "@alloy-js/rollup-plugin": ^0.1.0
-  "@babel/cli": ^7.27.0
-  "@babel/core": ^7.26.10
-  "@babel/preset-typescript": ^7.27.0
   "@modelcontextprotocol/sdk": "^1.11.0"
   "@modelcontextprotocol/inspector": "^0.11.0"
   "@rollup/plugin-babel": ^6.0.4
-  "@types/node": ^22.14.0
+  "@types/node": ^22.15.0
   "@typespec/compiler": ^1.0.0
   "@typespec/emitter-framework": ^0.7.0
   "@typespec/http": ^1.0.0

@@ -1,19 +1,13 @@
-import { code, List, refkey } from "@alloy-js/core";
-import {
-  FunctionCallExpression,
-  FunctionDeclaration,
-  IfStatement,
-  VarDeclaration,
-} from "@alloy-js/typescript";
-import { mcpSdk } from "../externals/mcp-sdk.js";
-import { useMCPRestServerContext } from "../context/McpRestServer.js";
+import { code, refkey, StatementList } from "@alloy-js/core";
+import { FunctionDeclaration } from "@alloy-js/typescript";
 import { httpRuntimeTemplateLib } from "@typespec/http-client-js";
+import { mcpSdk } from "typespec-mcp-server-js";
 
 export interface UtilsProps {}
 
 export function Utils(props: UtilsProps) {
   return (
-    <List doubleHardline semicolon>
+    <StatementList>
       <FunctionDeclaration
         export
         name="handleApiCallError"
@@ -23,22 +17,10 @@ export function Utils(props: UtilsProps) {
       >
         {code`
         if (error instanceof ${httpRuntimeTemplateLib.RestError}) {
-            return {
-                content: [
-                    {
-                        type: "text",
-                        text: \`Error occurred: \${error.message}\`,
-                    },
-                ],
-            };
+            return error;
         }
         return {
-            content: [
-                {
-                type: "text",
-                text: "Unknown error occurred",
-                },
-            ],
+            result: "Unknown error occurred",
         };
         `}
       </FunctionDeclaration>
@@ -58,25 +40,13 @@ export function Utils(props: UtilsProps) {
         {code`
         if (!rawResponse) {
             return {
-                content: [
-                    {
-                        type: "text",
-                        text: "No response received",
-                    },
-                ],
+                result: "No response received",
             };
         }
 
-        return {
-            content: [
-                {
-                    type: "text",
-                    text: rawResponse.body ? JSON.stringify(rawResponse.body) : "Empty response body",
-                },
-            ],
-        };
+        return rawResponse.body;
         `}
       </FunctionDeclaration>
-    </List>
+    </StatementList>
   );
 }
