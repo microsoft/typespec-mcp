@@ -1,27 +1,7 @@
-import {
-  ComponentContext,
-  createContext,
-  refkey,
-  Refkey,
-  useContext,
-} from "@alloy-js/core";
-import {
-  isNeverType,
-  Model,
-  navigateType,
-  Operation,
-  Program,
-  Tuple,
-  Type,
-} from "@typespec/compiler";
+import { ComponentContext, createContext, refkey, Refkey, useContext } from "@alloy-js/core";
+import { isNeverType, Model, navigateType, Operation, Program, Tuple, Type } from "@typespec/compiler";
+import { unsafe_mutateSubgraph } from "@typespec/compiler/experimental";
 import { $ } from "@typespec/compiler/typekit";
-import { splitOutErrors } from "../utils.js";
-import {
-  unsafe_mutateSubgraph,
-  unsafe_MutableType,
-  unsafe_MutatorFlow,
-} from "@typespec/compiler/experimental";
-import { EnumToUnion } from "../mutators.jsx";
 import { McpServer } from "typespec-mcp";
 import { EnumToUnion } from "../mutators.jsx";
 import { splitOutErrors } from "../utils.js";
@@ -145,11 +125,7 @@ export function createMCPServerContext(program: Program): MCPServerContext {
   const toolDescriptors: ToolDescriptor[] = [];
 
   for (const rawToolOp of toolOps) {
-    const toolOpMutation = unsafe_mutateSubgraph(
-      tk.program,
-      [EnumToUnion],
-      rawToolOp
-    );
+    const toolOpMutation = unsafe_mutateSubgraph(tk.program, [EnumToUnion], rawToolOp);
     const toolOp = toolOpMutation.type as Operation;
     const { successes, errors } = splitOutErrors(program, toolOp);
 
@@ -169,10 +145,7 @@ export function createMCPServerContext(program: Program): MCPServerContext {
     }
 
     // Next we need to determine the types we expect from the implementation.
-    const resultDescriptor = resultDescriptorFromDeclaredType(
-      program,
-      declaredReturnType
-    );
+    const resultDescriptor = resultDescriptorFromDeclaredType(program, declaredReturnType);
 
     // finally we can make the signature we expect the business logic to
     // implement.
@@ -201,10 +174,7 @@ export function createMCPServerContext(program: Program): MCPServerContext {
 
   const allTypes = discoverTypesFrom(
     program,
-    toolDescriptors.flatMap((tool) => [
-      tool.op.parameters,
-      tool.implementationOp.returnType,
-    ])
+    toolDescriptors.flatMap((tool) => [tool.op.parameters, tool.implementationOp.returnType]),
   );
 
   return {
@@ -224,10 +194,7 @@ export function createMCPServerContext(program: Program): MCPServerContext {
   };
 }
 
-function resultDescriptorFromDeclaredType(
-  program: Program,
-  type: Type
-): ResultDescriptor {
+function resultDescriptorFromDeclaredType(program: Program, type: Type): ResultDescriptor {
   if ($(program).array.is(type)) {
     return resultDescriptorFromDeclaredArrayType(program, type);
     // } else if ($(program).tuple.is(type)) {
@@ -240,7 +207,7 @@ function resultDescriptorFromDeclaredType(
 function resultTypeFromDeclaredType(program: Program, type: Type): Type {
   if ($(program).union.is(type)) {
     const variantResultTypes = Array.from(type.variants.values()).map((v) =>
-      resultTypeFromDeclaredType(program, v.type)
+      resultTypeFromDeclaredType(program, v.type),
     );
 
     return $(program).union.create({
@@ -252,9 +219,7 @@ function resultTypeFromDeclaredType(program: Program, type: Type): Type {
 
   // todo: this should use $(program).type.isInstantiationOf or somesuch.
   if ($(program).mcp.textResult.is(type)) {
-    const serializedType = $(program).mcp.textResult.getSerializedType(
-      type as Model
-    );
+    const serializedType = $(program).mcp.textResult.getSerializedType(type as Model);
 
     if (serializedType && !isNeverType(serializedType)) {
       return serializedType;
@@ -270,25 +235,16 @@ function resultTypeFromDeclaredType(program: Program, type: Type): Type {
   }
 }
 
-function resultDescriptorFromDeclaredSingleType(
-  program: Program,
-  type: Type
-): SingleResultDescriptor {
+function resultDescriptorFromDeclaredSingleType(program: Program, type: Type): SingleResultDescriptor {
   return {
     kind: "single",
     resultType: resultTypeFromDeclaredType(program, type),
   };
 }
 
-function resultDescriptorFromDeclaredArrayType(
-  program: Program,
-  type: Type
-): ArrayResultDescriptor {
+function resultDescriptorFromDeclaredArrayType(program: Program, type: Type): ArrayResultDescriptor {
   const elementType = (type as Model).indexer!.value;
-  const elementDescriptor = resultDescriptorFromDeclaredSingleType(
-    program,
-    elementType
-  );
+  const elementDescriptor = resultDescriptorFromDeclaredSingleType(program, elementType);
 
   return {
     kind: "array",
@@ -309,7 +265,7 @@ function discoverTypesFrom(program: Program, types: Type[]) {
         union: collectType,
         scalar: collectType,
       },
-      { includeTemplateDeclaration: false }
+      { includeTemplateDeclaration: false },
     );
   }
 
@@ -415,9 +371,7 @@ export function createCycleSets(types: Type[]): Type[][] {
         ];
 
       case "Union":
-        return [...type.variants.values()].map((v) =>
-          v.kind === "UnionVariant" ? v.type : v
-        );
+        return [...type.variants.values()].map((v) => (v.kind === "UnionVariant" ? v.type : v));
       case "UnionVariant":
         return [type.type];
       case "Interface":

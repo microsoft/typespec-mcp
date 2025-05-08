@@ -24,5 +24,5 @@ catalog:
   concurrently: ^9.1.2
   prettier: ^3.5.3
   typescript: ^5.8.3
-  typespec-zod: ^1.0.0-preview.9
+  typespec-zod: ^1.0.0-preview.10
   vitest: ^3.1.1

@@ -16,7 +16,6 @@ import {
   ToolDescriptor,
   useMCPServerContext,
 } from "../context/McpServer.js";
-import { $ } from "@typespec/compiler/typekit";
 import { zodValidationError } from "../externals/zod-validation-error.js";
 
 export interface CallToolHandlerProps {
@@ -110,9 +109,7 @@ export interface MarshalSingleResultProps {
 export function MarshalSingleResult(props: MarshalSingleResultProps) {
   const { $ } = useTsp();
   if ($.union.is(props.result.resultType)) {
-    const variantTypes = Array.from(
-      props.result.resultType.variants.values()
-    ).map((v) => v.type);
+    const variantTypes = Array.from(props.result.resultType.variants.values()).map((v) => v.type);
     if (variantTypes.some($.mcp.isKnownMcpResult)) {
       // special handling of top-level unions-of-known-results
       // which is to determine which variant was returned and serialize
