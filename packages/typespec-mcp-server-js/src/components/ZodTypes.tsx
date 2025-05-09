@@ -27,7 +27,7 @@ export function ZodTypes() {
           const schemas = [
             <ZodSchemaDeclaration export name={parametersName} type={tool.op.parameters} refkey={parametersRk} />,
           ];
-          
+
           if (validateResult) {
             const returnTypeRk = tool.keys.zodReturnSchema;
             const returnTypeName = tool.op.name + "ReturnType";
@@ -41,7 +41,7 @@ export function ZodTypes() {
               />,
             );
           }
-          
+
           return <List doubleHardline semicolon enderPunctuation children={schemas} />;
         }}
       </For>
