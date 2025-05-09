@@ -89,11 +89,7 @@ op analyze(@path id: string): {
 namespace GeneratedHelpers {
   @doc(Description)
   @error
-  model DefaultResponse<
-    Description extends valueof string = "",
-    Body = void,
-    Headers extends {} = {}
-  > {
+  model DefaultResponse<Description extends valueof string = "", Body = void, Headers extends {} = {}> {
     @body body: Body;
     ...Headers;
   }

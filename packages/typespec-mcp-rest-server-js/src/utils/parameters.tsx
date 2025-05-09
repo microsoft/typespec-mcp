@@ -10,21 +10,14 @@ export function hasDefaultValue(property: HttpProperty): boolean {
   return getDefaultValue(property) !== undefined;
 }
 
+export function getDefaultValue(property: ModelProperty): string | number | boolean | undefined;
+export function getDefaultValue(property: HttpProperty): string | number | boolean | undefined;
 export function getDefaultValue(
-  property: ModelProperty
-): string | number | boolean | undefined;
-export function getDefaultValue(
-  property: HttpProperty
-): string | number | boolean | undefined;
-export function getDefaultValue(
-  httpOrModelProperty: HttpProperty | ModelProperty
+  httpOrModelProperty: HttpProperty | ModelProperty,
 ): string | number | boolean | undefined {
   let property;
 
-  if (
-    "kind" in httpOrModelProperty &&
-    httpOrModelProperty.kind === "ModelProperty"
-  ) {
+  if ("kind" in httpOrModelProperty && httpOrModelProperty.kind === "ModelProperty") {
     property = httpOrModelProperty;
   } else {
     property = httpOrModelProperty.property;
