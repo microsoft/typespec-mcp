@@ -85,6 +85,7 @@ export interface TupleResultDescriptor {
 export type ResultDescriptor = SingleResultDescriptor | ArrayResultDescriptor | TupleResultDescriptor;
 
 export interface ToolDescriptor {
+  rawOp: Operation;
   op: Operation;
   implementationOp: Operation;
   parameters: Model;
@@ -160,6 +161,7 @@ export function createMCPServerContext(program: Program, validateResult: boolean
     });
 
     toolDescriptors.push({
+      rawOp: rawToolOp,
       op: toolOp,
       implementationOp,
       errors,

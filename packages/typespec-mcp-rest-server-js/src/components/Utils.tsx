@@ -1,7 +1,6 @@
 import { code, refkey, StatementList } from "@alloy-js/core";
 import { FunctionDeclaration } from "@alloy-js/typescript";
 import { httpRuntimeTemplateLib } from "@typespec/http-client-js";
-import { mcpSdk } from "typespec-mcp-server-js";
 
 export interface UtilsProps {}
 
@@ -13,7 +12,6 @@ export function Utils(props: UtilsProps) {
         name="handleApiCallError"
         refkey={refkey("handleApiCallError")}
         parameters={[{ name: "error", type: "unknown" }]}
-        returnType={mcpSdk["./types.js"].CallToolResult}
       >
         {code`
         if (error instanceof ${httpRuntimeTemplateLib.RestError}) {
@@ -35,7 +33,6 @@ export function Utils(props: UtilsProps) {
             optional: true,
           },
         ]}
-        returnType={mcpSdk["./types.js"].CallToolResult}
       >
         {code`
         if (!rawResponse) {

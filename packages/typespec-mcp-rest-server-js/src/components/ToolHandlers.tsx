@@ -25,8 +25,7 @@ export function ToolHandlers(props: ToolHandlersProps) {
     keys: { getToolHandler },
   } = useMCPServerContext();
 
-  // http typekit issue: https://github.com/microsoft/typespec/issues/7130
-  // could only get the corresponding http operation from the client library, not from the http typekit.
+  // could only get the corresponding http operation from the client library, not from the http typekit since each time the http operation from http typekit will be a new one.
   if (server?.container.kind !== "Namespace") {
     throw new Error("MCP Server is not a namespace");
   }
@@ -51,16 +50,16 @@ export function ToolHandlers(props: ToolHandlersProps) {
       />
       <VarDeclaration export const name="toolHandler" refkey={getToolHandler}>
         <ObjectExpression>
-          <For each={tools} doubleHardline>
+          <For each={tools} comma doubleHardline>
             {(tool) => (
               <ObjectProperty name={tool.op.name}>
-                <FunctionDeclaration export async type={tool.implementationOp}>
+                <FunctionDeclaration async type={tool.rawOp} returnType={"any"}>
                   <StatementList>
-                    <VarDeclaration name="client" refkey={refkey(tool, "client")}>
+                    <VarDeclaration name="client" refkey={refkey(tool.rawOp, "client")}>
                       new{" "}
                       <InitializeToolClient
-                        op={tool.op}
-                        httpOp={operationHttpOperationMap.get(tool.op)!}
+                        op={tool.rawOp}
+                        httpOp={operationHttpOperationMap.get(tool.rawOp)!}
                       ></InitializeToolClient>
                     </VarDeclaration>
                     <VarDeclaration
@@ -72,7 +71,7 @@ export function ToolHandlers(props: ToolHandlersProps) {
                     </VarDeclaration>
                     <>{code`
                     try {
-                      ${(<CallToolClient op={tool.op} httpOp={operationHttpOperationMap.get(tool.op)!} />)}
+                      ${(<CallToolClient op={tool.rawOp} httpOp={operationHttpOperationMap.get(tool.rawOp)!} />)}
                     } catch(error) {
                       return ${refkey("handleApiCallError")}(error);
                     }

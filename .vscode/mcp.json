@@ -7,9 +7,7 @@
     "Widget Service": {
       "type": "stdio",
       "command": "node",
-      "args": [
-        "${workspaceFolder}/packages/rest-demo/tsp-output/typespec-mcp-rest-server-js/dist/index.js"
-      ]
+      "args": ["${workspaceFolder}/packages/rest-demo/dist/src/index.js"]
     }
   }
 }

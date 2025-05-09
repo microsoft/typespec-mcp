@@ -6,27 +6,25 @@ export const widget = z.object({
   color: z.union([z.literal("red"), z.literal("blue")]),
 });
 
-export const listParameters = {
+export const listParameters = z.object({});
 
-}
-
-export const createParameters = {
+export const createParameters = z.object({
   body: widget,
-}
+});
 
-export const removeParameters = {
+export const removeParameters = z.object({
   id: z.string(),
-}
+});
 
-export const readParameters = {
+export const readParameters = z.object({
   id: z.string(),
-}
+});
 
-export const updateParameters = {
+export const updateParameters = z.object({
   id: z.string(),
   body: widget,
-}
+});
 
-export const analyzeParameters = {
+export const analyzeParameters = z.object({
   id: z.string(),
-}
+});
