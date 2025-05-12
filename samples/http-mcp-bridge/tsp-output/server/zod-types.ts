@@ -175,3 +175,18 @@ export const getRepositoryParameters = z.object({
 });
 
 export const getRepositoryReturnType = FullRepository;
+
+export const testParameters = z.object({
+  foo: z.string(),
+  bar: z.string(),
+  options: z.object({
+    baz: z.string(),
+  }),
+  payload: z.object({
+    qux: z.string(),
+    name: z.string(),
+    other: z.string(),
+  }),
+});
+
+export const testReturnType = z.void();

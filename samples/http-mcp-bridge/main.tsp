@@ -276,3 +276,20 @@ model FullRepository {
 @tool
 @route("/repos/{owner}/{repo}")
 op getRepository(owner: string, repo: string): FullRepository;
+
+/**
+ * Get a list of GitHub repositories for a user.
+ * @param username - The username of the owner.
+ */
+@post @tool op test(
+  @header foo: string,
+  @header bar: string,
+  @bodyIgnore options: {
+    @header baz: string;
+  },
+  payload: {
+    @header qux: string;
+    name: string;
+    other: string;
+  },
+): void;

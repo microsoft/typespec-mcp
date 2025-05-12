@@ -8,16 +8,13 @@ import { useMCPServerContext } from "../context/McpServer.js";
 export interface ToolsInterfaceProps {}
 
 export function ToolsInterface(props: ToolsInterfaceProps) {
-  const {
-    tools,
-    keys: { toolsInterface },
-  } = useMCPServerContext();
+  const context = useMCPServerContext();
   const { $ } = useTsp();
 
   return (
     <List doubleHardline>
-      <InterfaceDeclaration name="Tools" refkey={toolsInterface}>
-        <For each={tools} doubleHardline>
+      <InterfaceDeclaration export name="Tools" refkey={context.keys.toolsInterface}>
+        <For each={context.tools} doubleHardline>
           {(tool) => {
             const doc = getDoc($.program, tool.op);
             const returnType = (
@@ -32,7 +29,11 @@ export function ToolsInterface(props: ToolsInterfaceProps) {
                 <Show when={!!doc}>
                   <JSDoc children={doc} />
                 </Show>
-                <InterfaceMethod type={tool.implementationOp} returnType={returnType} />
+                <InterfaceMethod
+                  type={tool.implementationOp}
+                  returnType={returnType}
+                  refkey={tool.keys.functionSignature}
+                />
               </List>
             );
           }}

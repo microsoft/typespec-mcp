@@ -93,6 +93,7 @@ export interface ToolDescriptor {
   returnType: Type;
   errors: Type[];
   keys: {
+    functionSignature: Refkey;
     zodReturnSchema: Refkey;
     zodParametersSchema: Refkey;
     tsReturnType: Refkey;
@@ -170,6 +171,7 @@ export function createMCPServerContext(
       returnType: resultDescriptor.resultType,
       result: resultDescriptor,
       keys: {
+        functionSignature: refkey(),
         zodReturnSchema: refkey(),
         zodParametersSchema: refkey(),
         tsReturnType: refkey(),

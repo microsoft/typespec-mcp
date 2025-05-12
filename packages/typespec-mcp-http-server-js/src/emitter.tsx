@@ -1,10 +1,12 @@
-import { code, List, Refkey, refkey } from "@alloy-js/core";
+import { code, For, List, type Refkey, refkey } from "@alloy-js/core";
 import * as ts from "@alloy-js/typescript";
-import { EmitContext } from "@typespec/compiler";
+import type { EmitContext } from "@typespec/compiler";
 import { useTsp, writeOutput } from "@typespec/emitter-framework";
-import { getServers } from "@typespec/http";
+import { getServers, type HttpOperation } from "@typespec/http";
 import { useMCPServerContext } from "typespec-mcp-server-js";
 import { McpServer } from "typespec-mcp-server-js/components";
+import type { ToolDescriptor } from "../../typespec-mcp-server-js/dist/src/context/McpServer.js";
+import { HttpOperationMapper } from "./components/http-operation-mapper.jsx";
 import { urlTemplate } from "./externals/url-template.js";
 
 export async function $onEmit(context: EmitContext) {
@@ -33,6 +35,9 @@ export function HttpTools(props: { refkey: Refkey }) {
   const servers = getServers($.program, server.container);
   const host = servers![0];
   const toolsUris: Record<string, string> = {};
+  const httpOps = tools.map((x) => {
+    return { httpOp: $.httpOperation.get(x.op), tool: x };
+  });
   for (const tool of tools) {
     const httpOp = $.httpOperation.get(tool.op);
     if (httpOp) {
@@ -63,6 +68,38 @@ export function HttpTools(props: { refkey: Refkey }) {
         return res.json();
       `}
       </ts.FunctionDeclaration>
+
+      <For each={httpOps}>
+        {(op) => {
+          return <ToolHttpDispatcher op={op.httpOp} tool={op.tool} />;
+        }}
+      </For>
     </List>
+  );
+}
+
+export function ToolHttpDispatcher(props: { op: HttpOperation; tool: ToolDescriptor }) {
+  const { $ } = useTsp();
+  const mcpContext = useMCPServerContext();
+  const argsRefkey = refkey();
+
+  return (
+    <ts.VarDeclaration
+      const
+      name={props.op.operation.name}
+      type={
+        <>
+          <>{mcpContext.keys.toolsInterface}</>
+          <>["{props.tool.op.name}"]</>
+        </>
+      }
+    >
+      <ts.ArrowFunction parameters={[{ name: "args", rest: true, refkey: argsRefkey }]} async>
+        <ts.VarDeclaration name="httpRequest">
+          <HttpOperationMapper argsRefkey={argsRefkey} op={props.op} />
+        </ts.VarDeclaration>
+        {";\nreturn {} as any;"}
+      </ts.ArrowFunction>
+    </ts.VarDeclaration>
   );
 }

@@ -3,7 +3,8 @@ import { fromZodError } from "zod-validation-error";
 import { parseTemplate } from "url-template";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
-import { getRepositoryParameters, getRepositoryReturnType } from "./zod-types.js";
+import type { Tools } from "./tools.js";
+import { getRepositoryParameters, getRepositoryReturnType, testParameters, testReturnType } from "./zod-types.js";
 
 export const server = new Server(
   {
@@ -28,6 +29,16 @@ server.setRequestHandler(
           description: "Get a GitHub repository by owner and repository name.",
           inputSchema: zodToJsonSchema(
             getRepositoryParameters,
+            {
+              $refStrategy: "none",
+            }
+          ),
+        },
+        {
+          name: "test",
+          description: "Get a list of GitHub repositories for a user.",
+          inputSchema: zodToJsonSchema(
+            testParameters,
             {
               $refStrategy: "none",
             }
@@ -64,6 +75,27 @@ server.setRequestHandler(
           ],
         };
       }
+
+      case "test": {
+        const parsed = testParameters.safeParse(args);
+        if (!parsed.success) {
+          throw fromZodError(parsed.error, { prefix: "Request validation error" });
+        }
+        const rawResult = await httpToolHandler("test", parsed.data);
+        const maybeResult = testReturnType.safeParse(rawResult);
+        if (!maybeResult.success) {
+          throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
+        };
+        const result = maybeResult.data;
+        return {
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify(result, null, 2),
+            }
+          ],
+        };
+      }
     };
     return { content: [{ type: "text", text: "Unknown tool" }] };
   }
@@ -71,6 +103,7 @@ server.setRequestHandler(
 
 const tools = {
   getRepository: "/repos/{owner}/{repo}",
+  test: "/",
 } as const;
 
 async function httpToolHandler(tool: keyof typeof tools, data: any) {
@@ -79,4 +112,28 @@ async function httpToolHandler(tool: keyof typeof tools, data: any) {
   const url = template.expand(data);
   const res = await fetch(url);
   return res.json();
+};
+
+const getRepository: Tools["getRepository"] = async (...args) => {
+  const httpRequest = {
+    pathParams: {
+      owner: args[].owner,
+      repo: args[].repo,
+    }
+  };
+  return {} as any;
+}
+const test: Tools["test"] = async (...args) => {
+  const httpRequest = {
+    headers: {
+      foo: args[].foo,
+      bar: args[].bar,
+    },
+    queryParams: {
+      options: args[].options,
+      payload: args[].payload,
+    },
+    body: args[].payload
+  };
+  return {} as any;
 }
