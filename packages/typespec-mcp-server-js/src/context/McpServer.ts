@@ -11,6 +11,7 @@ export interface MCPServerKeys {
   toolsInterface: Refkey;
   getToolHandler: Refkey;
   setToolHandler: Refkey;
+  toolDispatcher?: Refkey;
 }
 
 /**
@@ -100,6 +101,7 @@ export interface ToolDescriptor {
 
 export interface MCPServerContext {
   name: string;
+  server?: McpServer;
   version: string;
   capabilities: string[];
   tools: ToolDescriptor[];
@@ -118,7 +120,10 @@ export function useMCPServerContext(): MCPServerContext {
   return context;
 }
 
-export function createMCPServerContext(program: Program): MCPServerContext {
+export function createMCPServerContext(
+  program: Program,
+  { toolDispatcher }: { toolDispatcher?: Refkey } = {},
+): MCPServerContext {
   const tk = $(program);
   const server = tk.mcp.servers.list()[0] as McpServer | undefined;
   const toolOps = tk.mcp.tools.list(server);
@@ -181,6 +186,7 @@ export function createMCPServerContext(program: Program): MCPServerContext {
     name: server?.name ?? "MCP Server",
     version: server?.version ?? "1.0.0",
     instructions: server?.instructions,
+    server,
     // hard code for now
     capabilities: ["tools"],
     tools: toolDescriptors,
@@ -190,6 +196,7 @@ export function createMCPServerContext(program: Program): MCPServerContext {
       toolsInterface: refkey(),
       getToolHandler: refkey(),
       setToolHandler: refkey(),
+      toolDispatcher: toolDispatcher,
     },
   };
 }

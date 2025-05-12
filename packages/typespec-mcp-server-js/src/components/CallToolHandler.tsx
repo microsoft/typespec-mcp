@@ -25,7 +25,7 @@ export interface CallToolHandlerProps {
 
 export function CallToolHandler(props: CallToolHandlerProps) {
   const {
-    keys: { getToolHandler },
+    keys: { getToolHandler, toolDispatcher },
   } = useMCPServerContext();
   const parseResultKey = refkey();
   return (
@@ -45,16 +45,20 @@ export function CallToolHandler(props: CallToolHandlerProps) {
       <StatementList>
         <VarDeclaration name="rawResult">
           await{" "}
-          <FunctionCallExpression
-            target={
-              <>
-                {getToolHandler}.{props.tool.op.name}
-              </>
-            }
-            args={[...props.tool.parameters.properties.values()].map((p) => {
-              return <>parsed.data.{p.name}</>;
-            })}
-          />
+          {toolDispatcher ? (
+            <FunctionCallExpression target={toolDispatcher} args={[`"${props.tool.op.name}"`, "parsed.data"]} />
+          ) : (
+            <FunctionCallExpression
+              target={
+                <>
+                  {getToolHandler}.{props.tool.op.name}
+                </>
+              }
+              args={[...props.tool.parameters.properties.values()].map((p) => {
+                return <>parsed.data.{p.name}</>;
+              })}
+            />
+          )}
         </VarDeclaration>
         <VarDeclaration name="maybeResult">{props.tool.keys.zodReturnSchema}.safeParse(rawResult)</VarDeclaration>
         {code`
