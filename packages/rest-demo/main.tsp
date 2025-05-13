@@ -69,7 +69,7 @@ op read(@path id: string): Widget | GeneratedHelpers.DefaultResponse<
  */
 @tag("Widgets")
 @route("/widgets/{id}")
-@patch
+@patch(#{ implicitOptionality: true })
 op update(@path id: string, @body body: Widget): Widget | GeneratedHelpers.DefaultResponse<
   Description = "An unexpected error response.",
   Body = Error

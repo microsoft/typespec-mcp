@@ -34,7 +34,7 @@ import {
 import { Utils } from "./components/Utils.jsx";
 
 export async function $onEmit(context: EmitContext) {
-  const mcpServerContext: MCPServerContext = createMCPServerContext(context.program, false);
+  const mcpServerContext: MCPServerContext = createMCPServerContext(context.program, { skipValidateResult: true });
   const tsNamePolicy = createTSNamePolicy();
   const defaultTransformNamePolicy = createTransformNamePolicy();
 

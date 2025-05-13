@@ -7,9 +7,9 @@ import {
   VarDeclaration,
 } from "@alloy-js/typescript";
 import { Operation } from "@typespec/compiler";
-import { useTsp } from "@typespec/emitter-framework";
+import { useTransformNamePolicy, useTsp } from "@typespec/emitter-framework";
 import { FunctionDeclaration } from "@typespec/emitter-framework/typescript";
-import { HttpOperation } from "@typespec/http";
+import { HttpOperation, HttpProperty } from "@typespec/http";
 import { InternalClient, useClientLibrary } from "@typespec/http-client";
 import { httpRuntimeTemplateLib } from "@typespec/http-client-js";
 import { useMCPServerContext } from "typespec-mcp-server-js";
@@ -43,11 +43,11 @@ export function ToolHandlers(props: ToolHandlersProps) {
   return (
     <StatementList>
       <VarDeclaration
-        export
         name="endpoint"
         refkey={refkey("endpoint")}
         initializer={<>process.env.ENDPOINT ?? "http://localhost:5000"</>}
       />
+
       <VarDeclaration export const name="toolHandler" refkey={getToolHandler}>
         <ObjectExpression>
           <For each={tools} comma doubleHardline>
@@ -125,21 +125,33 @@ interface CallToolClientProps {
 
 function CallToolClient(props: CallToolClientProps) {
   const { op, httpOp } = props;
+  const transformNamer = useTransformNamePolicy();
 
-  const parameters = [];
-  const optionParameters: string[] = [];
+  const parametersChildren = [];
+  const optionParameters: HttpProperty[] = [];
   httpOp.parameters.properties.forEach((param) => {
     if (!param.property.optional && !hasDefaultValue(param) && param.path.length === 1) {
       // required parameters
-      parameters.push(param.property.name);
+      parametersChildren.push(param.property.name);
     } else {
-      optionParameters.push(param.property.name);
+      // optional parameters goes to option bag
+      optionParameters.push(param);
     }
   });
-  parameters.push(
+  parametersChildren.push(
     <ObjectExpression>
       <For comma softline enderPunctuation each={optionParameters}>
-        {(name) => <ObjectProperty name={name} value={name} />}
+        {(param) => {
+          if (param.path.length === 1) {
+            return (
+              <ObjectProperty name={transformNamer.getApplicationName(param.property)} value={param.property.name} />
+            );
+          } else {
+            return (
+              <ObjectProperty name={transformNamer.getApplicationName(param.property)} value={param.path.join(".")} />
+            );
+          }
+        }}
       </For>
       <ObjectProperty name="operationOptions" value={code`{ onResponse: (response) => (rawResponse = response) }`} />
     </ObjectExpression>,
@@ -151,7 +163,7 @@ function CallToolClient(props: CallToolClientProps) {
       <MemberExpression>
         <MemberExpression.Part refkey={refkey(op, "client")} />
         <MemberExpression.Part refkey={refkey(httpOp.operation)} />
-        <MemberExpression.Part args={parameters} />
+        <MemberExpression.Part args={parametersChildren} />
       </MemberExpression>
     </>
   );

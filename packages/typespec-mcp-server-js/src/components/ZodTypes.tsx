@@ -6,7 +6,7 @@ import { useMCPServerContext } from "../context/McpServer.js";
 import { getPlausibleName } from "../utils.js";
 
 export function ZodTypes() {
-  const { tools, allTypes, validateResult } = useMCPServerContext();
+  const { tools, allTypes, skipValidateResult } = useMCPServerContext();
   const { program } = useTsp();
   return (
     <List doubleHardline>
@@ -28,7 +28,7 @@ export function ZodTypes() {
             <ZodSchemaDeclaration export name={parametersName} type={tool.op.parameters} refkey={parametersRk} />,
           ];
 
-          if (validateResult) {
+          if (!skipValidateResult) {
             const returnTypeRk = tool.keys.zodReturnSchema;
             const returnTypeName = tool.op.name + "ReturnType";
 

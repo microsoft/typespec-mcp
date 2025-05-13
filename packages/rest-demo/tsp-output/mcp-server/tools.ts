@@ -3,7 +3,7 @@ import { handleApiCallError, handleRawResponse } from "./utils.js";
 import type { Widget } from "../service-client/models/models.js";
 import { WidgetServiceClient } from "../service-client/widgetServiceClient.js";
 
-export const endpoint = process.env.ENDPOINT ?? "http://localhost:5000";
+const endpoint = process.env.ENDPOINT ?? "http://localhost:5000";
 export const toolHandler = {
   list: async function list(): Promise<any> {
     const client = new WidgetServiceClient(

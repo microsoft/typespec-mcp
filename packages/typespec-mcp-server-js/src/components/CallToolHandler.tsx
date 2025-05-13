@@ -26,7 +26,7 @@ export interface CallToolHandlerProps {
 export function CallToolHandler(props: CallToolHandlerProps) {
   const {
     keys: { getToolHandler, toolDispatcher },
-    validateResult,
+    skipValidateResult,
   } = useMCPServerContext();
   const parseResultKey = refkey();
   return (
@@ -43,7 +43,7 @@ export function CallToolHandler(props: CallToolHandlerProps) {
           `}
         </List>
       </Show>
-      {validateResult ? (
+      {!skipValidateResult ? (
         <StatementList>
           <VarDeclaration name="rawResult">
             await{" "}
