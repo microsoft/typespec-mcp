@@ -25,7 +25,7 @@ export interface CallToolHandlerProps {
 
 export function CallToolHandler(props: CallToolHandlerProps) {
   const {
-    keys: { getToolHandler },
+    keys: { getToolHandler, toolDispatcher },
     validateResult,
   } = useMCPServerContext();
   const parseResultKey = refkey();
@@ -47,23 +47,27 @@ export function CallToolHandler(props: CallToolHandlerProps) {
         <StatementList>
           <VarDeclaration name="rawResult">
             await{" "}
-            <FunctionCallExpression
-              target={
-                <>
-                  {getToolHandler}.{props.tool.op.name}
-                </>
-              }
-              args={[...props.tool.parameters.properties.values()].map((p) => {
-                return <>parsed.data.{p.name}</>;
-              })}
-            />
+            {toolDispatcher ? (
+              <FunctionCallExpression target={toolDispatcher} args={[`"${props.tool.op.name}"`, "parsed.data"]} />
+            ) : (
+              <FunctionCallExpression
+                target={
+                  <>
+                    {getToolHandler}.{props.tool.op.name}
+                  </>
+                }
+                args={[...props.tool.parameters.properties.values()].map((p) => {
+                  return <>parsed.data.{p.name}</>;
+                })}
+              />
+            )}
           </VarDeclaration>
           <VarDeclaration name="maybeResult">{props.tool.keys.zodReturnSchema}.safeParse(rawResult)</VarDeclaration>
           {code`
-                if (!maybeResult.success) {
-                  throw ${zodValidationError.fromZodError}(maybeResult.error, { prefix: "Response validation error"});
-                }
-              `}
+            if (!maybeResult.success) {
+              throw ${zodValidationError.fromZodError}(maybeResult.error, { prefix: "Response validation error"});
+            }
+          `}
           <VarDeclaration name="result" refkey={parseResultKey}>
             maybeResult.data
           </VarDeclaration>

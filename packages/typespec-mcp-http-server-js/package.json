@@ -1,0 +1,42 @@
+{
+  "name": "typespec-mcp-http-server-js",
+  "version": "0.0.0-0",
+  "description": "",
+  "exports": {
+    ".": {
+      "import": "./dist/src/index.js",
+      "types": "./dist/src/index.d.ts"
+    },
+    "./testing": {
+      "import": "./dist/testing/index.js",
+      "types": "./dist/testing/index.d.ts"
+    }
+  },
+  "dependencies": {
+    "typespec-mcp": "workspace:*",
+    "typespec-mcp-server-js": "workspace:*",
+    "typespec-zod": "catalog:"
+  },
+  "peerDependencies": {
+    "@alloy-js/core": "catalog:",
+    "@alloy-js/typescript": "catalog:",
+    "@typespec/compiler": "catalog:",
+    "@typespec/http": "catalog:",
+    "@typespec/emitter-framework": "catalog:"
+  },
+  "scripts": {
+    "build": "alloy build",
+    "watch": "alloy build --watch",
+    "test": "vitest run",
+    "format": "prettier . --write"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@alloy-js/cli": "catalog:",
+    "@types/node": "catalog:",
+    "concurrently": "catalog:"
+  }
+}

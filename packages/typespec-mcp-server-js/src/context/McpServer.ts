@@ -11,6 +11,7 @@ export interface MCPServerKeys {
   toolsInterface: Refkey;
   getToolHandler: Refkey;
   setToolHandler: Refkey;
+  toolDispatcher?: Refkey;
 }
 
 /**
@@ -100,15 +101,15 @@ export interface ToolDescriptor {
 }
 
 export interface MCPServerContext {
-  server?: McpServer;
   name: string;
+  server?: McpServer;
   version: string;
   capabilities: string[];
   tools: ToolDescriptor[];
   keys: MCPServerKeys;
   allTypes: Type[];
   instructions?: string;
-  validateResult: boolean;
+  skipValidateResult?: boolean;
 }
 
 export const MCPServerContext: ComponentContext<MCPServerContext> = createContext();
@@ -121,7 +122,10 @@ export function useMCPServerContext(): MCPServerContext {
   return context;
 }
 
-export function createMCPServerContext(program: Program, validateResult: boolean = true): MCPServerContext {
+export function createMCPServerContext(
+  program: Program,
+  { toolDispatcher, skipValidateResult }: { toolDispatcher?: Refkey; skipValidateResult?: boolean } = {},
+): MCPServerContext {
   const tk = $(program);
   const server = tk.mcp.servers.list()[0] as McpServer | undefined;
   const toolOps = tk.mcp.tools.list(server);
@@ -179,15 +183,15 @@ export function createMCPServerContext(program: Program, validateResult: boolean
   const allTypes = discoverTypesFrom(
     program,
     toolDescriptors.flatMap((tool) =>
-      validateResult ? [tool.op.parameters, tool.implementationOp.returnType] : [tool.op.parameters],
+      skipValidateResult ? [tool.op.parameters] : [tool.op.parameters, tool.implementationOp.returnType],
     ),
   );
 
   return {
-    server,
     name: server?.name ?? "MCP Server",
     version: server?.version ?? "1.0.0",
     instructions: server?.instructions,
+    server,
     // hard code for now
     capabilities: ["tools"],
     tools: toolDescriptors,
@@ -197,8 +201,9 @@ export function createMCPServerContext(program: Program, validateResult: boolean
       toolsInterface: refkey(),
       getToolHandler: refkey(),
       setToolHandler: refkey(),
+      toolDispatcher: toolDispatcher,
     },
-    validateResult,
+    skipValidateResult,
   };
 }
 
