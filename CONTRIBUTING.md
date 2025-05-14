@@ -2,17 +2,17 @@
 
 There are many ways to contribute to the TypeSpec MCP project: reporting bugs, submitting pull requests, and creating suggestions.
 
->[!IMPORTANT]
-If you are contributing significant changes, or if the issue is already assigned to a specific milestone, please discuss with the assignee of the issue first before starting to work on the issue.
+> [!IMPORTANT]
+> If you are contributing significant changes, or if the issue is already assigned to a specific milestone, please discuss with the assignee of the issue first before starting to work on the issue.
 
 ## Prerequisites
 
 1. Install either the stable or Insiders release of VS Code.
-   * [Stable release](https://code.visualstudio.com/download)
-   * [Insiders release](https://code.visualstudio.com/insiders)
+   - [Stable release](https://code.visualstudio.com/download)
+   - [Insiders release](https://code.visualstudio.com/insiders)
 2. Install [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot) and [GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat) extensions.
-3. Install [Node.js](https://nodejs.org/en/download) 22 or later
-   * Ensure `node` and `npm` are in your path
+3. Install [Node.js](https://nodejs.org/en/download) 20 or later
+   - Ensure `node` and `npm` are in your path
 
 ## Development Process
 
