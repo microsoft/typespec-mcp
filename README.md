@@ -2,7 +2,7 @@
 
 [![Install with NPX in VS Code](https://img.shields.io/badge/VS_Code-Install_TypeSpec_MCP_Server-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=TypeSpec%20MCP%20Server&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22mcp-server-typespec%40latest%22%5D%7D) [![Install with NPX in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install_TypeSpec_MCP_Server-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=TypeSpec%20MCP%20Server&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22mcp-server-typespec%40latest%22%5D%7D&quality=insiders)
 
-The TypeSpec MCP Server implements the [MCP specification](https://modelcontextprotocol.io) to enable you to quickly build out your own MCP extensions powered by [TypeSpec](https://typespec.io/)
+The TypeSpec MCP Server implements the [MCP specification](https://modelcontextprotocol.io) to enable you to quickly build out your own MCP servers powered by [TypeSpec](https://typespec.io/).  We will also enable you to build REST APIs and other protocols supported by TypeSpec, though this is work in progress.
 
 > Please note that this project is in Public Preview and implementation may significantly change prior to our General Availability.
 
