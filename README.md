@@ -33,7 +33,7 @@ The TypeSpec MCP Server requires Node.js to install and run the server. If you d
 
 ### VS Code + GitHub Copilot
 
-The TypeSpec MCP Server provides assistance with authoring TypeSpec to generate MCP resource implementations. It can be used alone or with the [GitHub Copilot for Azure extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azure-github-copilot) in VS Code.
+The TypeSpec MCP Server provides assistance with authoring TypeSpec to generate MCP resource implementations. It can be used alone or with the [TypeSpec VS Code extension](https://typespec.io/docs/introduction/editor/vscode/) in VS Code.
 
 ### Prerequisites
 1. Install either the stable or Insiders release of VS Code:
