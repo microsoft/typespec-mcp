@@ -1,6 +1,5 @@
 # typespec-mcp
 
-
 ## Overview
 
 This package is a TypeSpec library that provides a `tool` decorator. Support for Prompts and Resources is still in active development.

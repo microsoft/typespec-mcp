@@ -1,6 +1,5 @@
 # typespec-mcp-server-js
 
-
 ## Overview
 
 This package is a TypeSpec emitter that generates a server implementation in JavaScript for an MCP tool.

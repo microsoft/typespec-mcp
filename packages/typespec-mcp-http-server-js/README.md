@@ -1,6 +1,5 @@
 # typespec-mcp-http-server-js
 
-
 ## Overview
 
 This package is a TypeSpec emitter that generates a server implementation in JavaScript for calling a remote REST API.
