@@ -8,6 +8,7 @@ import {
   Type,
   Union,
 } from "@typespec/compiler";
+import { unsafe_Realm } from "@typespec/compiler/experimental";
 import { defineKit } from "@typespec/compiler/typekit";
 import { McpServer, mcpServerState } from "../decorators.js";
 import { stateKeys } from "../lib.js";
@@ -63,7 +64,9 @@ defineKit<TypekitExtension>({
     tools: {
       list(server?: McpServer) {
         const toolState = this.program.stateMap(stateKeys.tool);
-        const allToolOps = Array.from(toolState.keys()) as Operation[];
+        const allToolOps = (Array.from(toolState.keys()) as Operation[]).filter(
+          (op) => !unsafe_Realm.realmForType.has(op),
+        );
 
         if (!server) {
           return allToolOps;

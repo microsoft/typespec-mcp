@@ -12,6 +12,7 @@ import { FunctionDeclaration } from "@typespec/emitter-framework/typescript";
 import { HttpOperation, HttpProperty } from "@typespec/http";
 import { InternalClient, useClientLibrary } from "@typespec/http-client";
 import { httpRuntimeTemplateLib } from "@typespec/http-client-js";
+import { McpServer } from "typespec-mcp";
 import { useMCPServerContext } from "typespec-mcp-server-js";
 import { hasDefaultValue } from "../utils/parameters.jsx";
 
@@ -20,18 +21,21 @@ export interface ToolHandlersProps {}
 export function ToolHandlers(props: ToolHandlersProps) {
   const { $ } = useTsp();
   const {
-    tools,
-    server,
     keys: { getToolHandler },
   } = useMCPServerContext();
 
-  // could only get the corresponding http operation from the client library, not from the http typekit since each time the http operation from http typekit will be a new one.
+  // check
+  const server = $.mcp.servers.list()[0] as McpServer | undefined;
   if (server?.container.kind !== "Namespace") {
     throw new Error("MCP Server is not a namespace");
   }
+
+  const tools = $.mcp.tools.list(server);
+
+  // cache the corresponding http operation from the client library
+  // could not use http typekit since each time the http operation from http typekit will be a new one
   const client = $.client.getClient(server.container);
   const operationHttpOperationMap = new Map<Operation, HttpOperation>();
-
   $.client
     .flat(client)
     .map((client: InternalClient) =>
@@ -52,14 +56,14 @@ export function ToolHandlers(props: ToolHandlersProps) {
         <ObjectExpression>
           <For each={tools} comma doubleHardline>
             {(tool) => (
-              <ObjectProperty name={tool.op.name}>
-                <FunctionDeclaration async type={tool.rawOp} returnType={"any"}>
+              <ObjectProperty name={tool.name}>
+                <FunctionDeclaration async type={tool} returnType={"any"}>
                   <StatementList>
-                    <VarDeclaration name="client" refkey={refkey(tool.rawOp, "client")}>
+                    <VarDeclaration name="client" refkey={refkey(tool, "client")}>
                       new{" "}
                       <InitializeToolClient
-                        op={tool.rawOp}
-                        httpOp={operationHttpOperationMap.get(tool.rawOp)!}
+                        op={tool}
+                        httpOp={operationHttpOperationMap.get(tool)!}
                       ></InitializeToolClient>
                     </VarDeclaration>
                     <VarDeclaration
@@ -71,7 +75,7 @@ export function ToolHandlers(props: ToolHandlersProps) {
                     </VarDeclaration>
                     <>{code`
                     try {
-                      ${(<CallToolClient op={tool.rawOp} httpOp={operationHttpOperationMap.get(tool.rawOp)!} />)}
+                      ${(<CallToolClient op={tool} httpOp={operationHttpOperationMap.get(tool)!} />)}
                     } catch(error) {
                       return ${refkey("handleApiCallError")}(error);
                     }
