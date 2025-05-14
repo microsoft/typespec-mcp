@@ -19,7 +19,7 @@ Currently this repo contains the following packages:
 
 ## Currently Supported Tools
 
-The Azure MCP Server provides tools for interacting with the following Azure services:
+The TypeSpec MCP Server provides the following tools:
 
 - `learnTypeSpec` - Initializes the model with information about how to understand and write TypeSpec.
 - `init` - Scaffolds out a new project in the current working directory with example tool implementation.
