@@ -24,12 +24,11 @@ export function ToolHandlers(props: ToolHandlersProps) {
     keys: { getToolHandler },
   } = useMCPServerContext();
 
-  // check
+  // get all tools
   const server = $.mcp.servers.list()[0] as McpServer | undefined;
   if (server?.container.kind !== "Namespace") {
     throw new Error("MCP Server is not a namespace");
   }
-
   const tools = $.mcp.tools.list(server);
 
   // cache the corresponding http operation from the client library
@@ -46,12 +45,6 @@ export function ToolHandlers(props: ToolHandlersProps) {
 
   return (
     <StatementList>
-      <VarDeclaration
-        name="endpoint"
-        refkey={refkey("endpoint")}
-        initializer={<>process.env.ENDPOINT ?? "http://localhost:5000"</>}
-      />
-
       <VarDeclaration export const name="toolHandler" refkey={getToolHandler}>
         <ObjectExpression>
           <For each={tools} comma doubleHardline>
@@ -108,11 +101,15 @@ function InitializeToolClient(props: InitailizeToolClientProps) {
       `No client library found for operation ${op.name}. Please ensure the operation is properly defined.`,
     );
   }
+
   const clientConstructor = $.client.getConstructor(client);
   const params: Children[] = [];
+
   clientConstructor.parameters.properties.forEach((param) => {
+    // using name is somehow a hacky way, but we could not get extra info from http client typekit
     if (param.name.endsWith("endpoint")) {
-      params.push(refkey("endpoint"));
+      // the service does not specify the endpoint, so we need to use the one from the environment variable
+      params.push(code`process.env.ENDPOINT`);
     } else if (param.name === "credential") {
       // TODO: handle auth
     }
