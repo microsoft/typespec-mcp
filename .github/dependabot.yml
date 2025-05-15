@@ -11,6 +11,8 @@ updates:
       typespec:
         patterns:
           - "@typespec/*"
+          - "typespec-zod"
     allow:
       - dependency-name: "@alloy-js/*"
       - dependency-name: "@typespec/*"
+      - dependency-name: "typespec-zod"
