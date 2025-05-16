@@ -33,9 +33,9 @@ extends:
                 displayName: Install dependencies
 
               - script: node .github/workflows/set-prerelease-version.mjs
-                name: Set prereleases versions
+                displayName: Set prereleases versions
 
               - script: pnpm publish  -r --no-git-checks --access public
-                name: Publish
+                displayName: Publish
                 env:
                   NPM_AUTH_TOKEN: $(azure-sdk-npm-token)
