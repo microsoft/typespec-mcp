@@ -1,0 +1,41 @@
+# Continuous Integration
+
+trigger:
+  branches:
+    include:
+      - main
+      - release/*
+
+pr: none
+
+extends:
+  template: /eng/pipelines/templates/1es-redirect.yml
+  parameters:
+    stages:
+      - stage: CI
+        pool:
+          name: $(LINUXPOOL)
+          image: $(LINUXVMIMAGE)
+          os: linux
+        jobs:
+          - job: publish
+            displayName: Npm publish
+            steps:
+              - checkout: self
+                submodules: true
+
+              - task: UseNode@1
+                displayName: Setup node
+                inputs:
+                  version: "22.x"
+
+              - script: pnpm install
+                displayName: Install dependencies
+
+              - script: node .github/workflows/set-prerelease-version.mjs
+                name: Set prereleases versions
+
+              - script: pnpm publish  -r --no-git-checks --access public
+                name: Publish
+                env:
+                  NPM_AUTH_TOKEN: $(azure-sdk-npm-token)
