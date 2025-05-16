@@ -3,6 +3,11 @@
     "TypeSpec MPC": {
       "command": "node",
       "args": ["${workspaceFolder}/samples/http-mcp-bridge/dist/src/mcp-server.js"]
+    },
+    "Widget Service": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${workspaceFolder}/packages/rest-demo/dist/src/index.js"]
     }
   }
 }

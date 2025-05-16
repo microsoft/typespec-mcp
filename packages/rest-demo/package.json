@@ -1,19 +1,21 @@
 {
-  "name": "demo",
+  "name": "rest-demo",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "",
   "dependencies": {
     "@modelcontextprotocol/sdk": "catalog:",
     "@typespec/compiler": "catalog:",
     "@typespec/http": "catalog:",
+    "@typespec/openapi": "catalog:",
+    "@typespec/openapi3": "catalog:",
+    "@typespec/ts-http-runtime": "0.2.1",
     "typespec-mcp": "workspace:*",
-    "typespec-mcp-server-js": "workspace:*",
-    "typespec-mcp-http-server-js": "workspace:*",
-    "url-template": "^3.1.1",
+    "typespec-mcp-rest-server-js": "workspace:*",
     "zod": "^3.24.2",
     "zod-to-json-schema": "^3.24.5",
-    "zod-validation-error": "^3.4.0"
+    "zod-validation-error": "^3.4.0",
+    "uri-template": "^2.0.0"
   },
   "devDependencies": {
     "@types/node": "catalog:",
@@ -22,12 +24,10 @@
     "typescript": "catalog:"
   },
   "scripts": {
-    "build-tsp": "tsp compile .",
+    "build-tsp": "tsp compile mcp.tsp",
     "build-ts": "tsc -p .",
-    "build": "pnpm build-tsp && pnpm build-ts",
-    "mcp": "mcp-cli node dist/src/mcp-server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "inspect": "mcp-inspector node ./dist/src/mcp-server.js"
+    "mcp": "mcp-cli node dist/src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",

@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "description": "",
   "dependencies": {
-    "@modelcontextprotocol/inspector": "0.9.0",
-    "@modelcontextprotocol/sdk": "1.9.0",
+    "@modelcontextprotocol/inspector": "catalog:",
+    "@modelcontextprotocol/sdk": "catalog:",
     "@typespec/compiler": "1.0.0",
     "typespec-mcp": "0.0.0-37",
     "typespec-zod": "1.0.0-preview.10",

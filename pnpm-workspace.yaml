@@ -7,13 +7,18 @@ catalog:
   "@alloy-js/core": ^0.15.0
   "@alloy-js/typescript": ^0.15.0
   "@alloy-js/rollup-plugin": ^0.1.0
+  "@modelcontextprotocol/sdk": "^1.11.0"
+  "@modelcontextprotocol/inspector": "^0.11.0"
   "@rollup/plugin-babel": ^6.0.4
-  "@types/node": ^22.14.0
+  "@types/node": ^22.15.0
   "@typespec/compiler": ^1.0.0
   "@typespec/emitter-framework": ^0.7.0
-  "@typespec/http": ^1.0.0
-  "@modelcontextprotocol/inspector": ^0.9.0
-  "@modelcontextprotocol/sdk": ^1.9.0
+  "@typespec/http": ^1.0.1
+  "@typespec/http-client": 0.6.0
+  "@typespec/http-client-js": https://artprodcus3.artifacts.visualstudio.com/A0fb41ef4-5012-48a9-bf39-4ee3de03ee35/29ec6040-b234-4e31-b139-33dc4287b756/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL2F6dXJlLXNkay9wcm9qZWN0SWQvMjllYzYwNDAtYjIzNC00ZTMxLWIxMzktMzNkYzQyODdiNzU2L2J1aWxkSWQvNDgzNjk5Ny9hcnRpZmFjdE5hbWUvcGFja2FnZXM1/content?format=file&subPath=%2Ftypespec-http-client-js-0.6.0-pr-7039.20250506.109.tgz
+  "@typespec/openapi": ^1.0.0
+  "@typespec/openapi3": ^1.0.0
+  "@typespec/rest": ^0.70.0
   concurrently: ^9.1.2
   prettier: ^3.5.3
   typescript: ^5.8.3

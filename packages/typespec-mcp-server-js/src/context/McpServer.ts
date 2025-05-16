@@ -108,6 +108,7 @@ export interface MCPServerContext {
   keys: MCPServerKeys;
   allTypes: Type[];
   instructions?: string;
+  skipValidateResult?: boolean;
 }
 
 export const MCPServerContext: ComponentContext<MCPServerContext> = createContext();
@@ -122,7 +123,7 @@ export function useMCPServerContext(): MCPServerContext {
 
 export function createMCPServerContext(
   program: Program,
-  { toolDispatcher }: { toolDispatcher?: Refkey } = {},
+  { toolDispatcher, skipValidateResult }: { toolDispatcher?: Refkey; skipValidateResult?: boolean } = {},
 ): MCPServerContext {
   const tk = $(program);
   const server = tk.mcp.servers.list()[0] as McpServer | undefined;
@@ -179,7 +180,9 @@ export function createMCPServerContext(
 
   const allTypes = discoverTypesFrom(
     program,
-    toolDescriptors.flatMap((tool) => [tool.op.parameters, tool.implementationOp.returnType]),
+    toolDescriptors.flatMap((tool) =>
+      skipValidateResult ? [tool.op.parameters] : [tool.op.parameters, tool.implementationOp.returnType],
+    ),
   );
 
   return {
@@ -198,6 +201,7 @@ export function createMCPServerContext(
       setToolHandler: refkey(),
       toolDispatcher: toolDispatcher,
     },
+    skipValidateResult,
   };
 }
 
