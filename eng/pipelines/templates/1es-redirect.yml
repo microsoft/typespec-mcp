@@ -51,7 +51,7 @@ extends:
                 ${{ pair.key }}: ${{ pair.value }}
 
             variables:
-              - template: /eng/common/pipelines/templates/variables/image.yml@self
+              - template: /eng/pipelines/templates/variables/image.yml@self
               - ${{ each variable in parameters.variables }}:
                   - ${{ if variable.key }}:
                       # turn objects into name/value lists
