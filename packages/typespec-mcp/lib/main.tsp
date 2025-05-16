@@ -1,4 +1,5 @@
-import "../dist/src/decorators.js";
+import "../dist/src/tsp-index.js";
+
 namespace MCP;
 
 /**
@@ -6,18 +7,16 @@ namespace MCP;
  */
 extern dec tool(target: Reflection.Operation);
 
+model McpServerOptions {
+  name?: string;
+  version?: string;
+  instructions?: string;
+}
 /**
  * Declare a namespace or interface as an MCP Server and provide server
  * metadata.
  */
-extern dec mcpServer(
-  target: Reflection.Namespace | Reflection.Operation,
-  options?: valueof {
-    name?: string,
-    version?: string,
-    instructions?: string,
-  }
-);
+extern dec mcpServer(target: Reflection.Namespace | Reflection.Interface, options?: valueof McpServerOptions);
 
 namespace Private {
   extern dec serializeAsText(target: Reflection.Model, type: unknown);
