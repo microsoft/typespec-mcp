@@ -38,7 +38,11 @@ extends:
               - script: node .github/workflows/set-prerelease-version.mjs
                 displayName: Set prereleases versions
 
-              - script: pnpm publish  -r --no-git-checks --access public
-                displayName: Publish
+              - pwsh: |
+                  echo "Updating config"
+                  pnpm config set '//registry.npmjs.org/:_authToken' '${NPM_AUTH_TOKEN}'
+                  echo "Publishing"
+                  pnpm -r publish --access public --no-git-checks
+                name: Publish
                 env:
                   NPM_AUTH_TOKEN: $(azure-sdk-npm-token)
