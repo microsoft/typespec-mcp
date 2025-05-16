@@ -29,6 +29,9 @@ extends:
                 inputs:
                   version: "22.x"
 
+              - script: npm install -g pnpm
+                displayName: Install pnpm
+
               - script: pnpm install
                 displayName: Install dependencies
 
