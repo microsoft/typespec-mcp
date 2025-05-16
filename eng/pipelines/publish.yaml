@@ -22,7 +22,7 @@ extends:
             displayName: Npm publish
             steps:
               - checkout: self
-                submodules: true
+                fetchDepth: 0 # Need that to ge the number of commits for the versioning
 
               - task: UseNode@1
                 displayName: Setup node
