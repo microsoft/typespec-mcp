@@ -34,7 +34,8 @@ export function HttpOperationMapper(props: HttpOperationMapperProps) {
     if (!httpProp) {
       throw new Error(`Expected to find http property for ${parameter.name}`);
     }
-    const accessor = <HttpPropertyAccessor refkey={props.argsRefkey} path={[index, ...httpProp.path]} />;
+    const indexCp = index;
+    const accessor = <HttpPropertyAccessor refkey={props.argsRefkey} path={[indexCp, ...httpProp.path.slice(1)]} />;
     switch (httpProp.kind) {
       case "header":
         headers.set(httpProp.options.name, accessor);
@@ -80,7 +81,9 @@ export function HttpOperationMapper(props: HttpOperationMapperProps) {
           </ObjectProperty>
         )}
         {(body || bodyParams.size > 0) && (
-          <ObjectProperty name="body">{body ?? <ObjectExpression jsValue={bodyParams} />}</ObjectProperty>
+          <ObjectProperty name="body">
+            {<ObjectExpression jsValue={{ value: body ?? bodyParams, contentType: "application/json" }} />}
+          </ObjectProperty>
         )}
       </List>
     </ObjectExpression>
@@ -92,7 +95,7 @@ function HttpPropertyAccessor(props: { refkey: Refkey; path: (string | number)[]
     <MemberExpression>
       <MemberExpression.Part refkey={props.refkey} />
       {props.path.map((x) => (
-        <MemberExpression.Part id={x as any} />
+        <MemberExpression.Part quoteId={true}>{x}</MemberExpression.Part>
       ))}
     </MemberExpression>
   );

@@ -228,8 +228,8 @@ export const getRepositoryParameters = z.object({
   repo: z.string().describe("The name of the repository."),
 });
 
-<<<<<<< HEAD
-export const getRepositoryReturnType = FullRepository;
+export const getRepositoryReturnType = FullRepository
+  .describe("Full representation of a GitHub repository. This model includes all the details of a repository, such as its owner, visibility, license, and various URLs for accessing its resources.");
 
 export const testParameters = z.object({
   foo: z.string(),
@@ -245,7 +245,3 @@ export const testParameters = z.object({
 });
 
 export const testReturnType = z.void();
-=======
-export const getRepositoryReturnType = FullRepository
-  .describe("Full representation of a GitHub repository. This model includes all the details of a repository, such as its owner, visibility, license, and various URLs for accessing its resources.");
->>>>>>> fc8d5e0591154cf3886a42cc59a60b26bac74c0e

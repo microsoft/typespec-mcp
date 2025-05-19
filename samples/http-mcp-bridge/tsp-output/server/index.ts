@@ -115,25 +115,47 @@ async function httpToolHandler(tool: keyof typeof tools, data: any) {
 };
 
 const getRepository: Tools["getRepository"] = async (...args) => {
-  const httpRequest = {
+  const urlTemplate = parseTemplate("https://api.github.com/repos/{owner}/{repo}");;
+  const httpRequest: HttpRequest = {
     pathParams: {
-      owner: args[].owner,
-      repo: args[].repo,
+      owner: args["0"],
+      repo: args["1"],
     }
   };
-  return {} as any;
+  const url = urlTemplate.expand({...httpRequest.pathParams, ...httpRequest.queryParams});;
+  const response = await fetch(url, {
+    headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
+    body: httpRequest.body?.value,
+  });;
+  return await response.json();
 }
 const test: Tools["test"] = async (...args) => {
-  const httpRequest = {
+  const urlTemplate = parseTemplate("https://api.github.com/");;
+  const httpRequest: HttpRequest = {
     headers: {
-      foo: args[].foo,
-      bar: args[].bar,
+      foo: args["0"],
+      bar: args["1"],
     },
     queryParams: {
-      options: args[].options,
-      payload: args[].payload,
+      options: args["2"],
+      payload: args["3"],
     },
-    body: args[].payload
+    body: {
+      value: args["3"],
+      contentType: "application/json",
+    }
   };
-  return {} as any;
+  const url = urlTemplate.expand({...httpRequest.pathParams, ...httpRequest.queryParams});;
+  const response = await fetch(url, {
+    headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
+    body: httpRequest.body?.value,
+  });;
+  return await response.json();
+};
+
+interface HttpRequest {
+  headers?: Record<string, any>;
+  pathParams?: Record<string, any>;
+  queryParams?: Record<string, any>;
+  body?: {value: any, contentType: string}
 }

@@ -74,6 +74,8 @@ export function HttpTools(props: { refkey: Refkey }) {
           return <ToolHttpDispatcher op={op.httpOp} tool={op.tool} />;
         }}
       </For>
+
+      <HttpRequestType />
     </List>
   );
 }
@@ -81,7 +83,14 @@ export function HttpTools(props: { refkey: Refkey }) {
 export function ToolHttpDispatcher(props: { op: HttpOperation; tool: ToolDescriptor }) {
   const { $ } = useTsp();
   const mcpContext = useMCPServerContext();
+  const server = mcpContext.server;
   const argsRefkey = refkey();
+
+  if (server === undefined || server.container === undefined || server.container.kind !== "Namespace") {
+    throw new Error("Expected to be an http server too");
+  }
+  const servers = getServers($.program, server.container);
+  const host = servers![0];
 
   return (
     <ts.VarDeclaration
@@ -95,11 +104,46 @@ export function ToolHttpDispatcher(props: { op: HttpOperation; tool: ToolDescrip
       }
     >
       <ts.ArrowFunction parameters={[{ name: "args", rest: true, refkey: argsRefkey }]} async>
-        <ts.VarDeclaration name="httpRequest">
-          <HttpOperationMapper argsRefkey={argsRefkey} op={props.op} />
-        </ts.VarDeclaration>
-        {";\nreturn {} as any;"}
+        <List semicolon>
+          <ts.VarDeclaration const name="urlTemplate">
+            {urlTemplate.parseTemplate}("{host.url}
+            {props.op.uriTemplate}");
+          </ts.VarDeclaration>
+          <ts.VarDeclaration const name="httpRequest" type={refkey("HttpRequest")}>
+            <HttpOperationMapper argsRefkey={argsRefkey} op={props.op} />
+          </ts.VarDeclaration>
+
+          <ts.VarDeclaration const name="url">
+            {code`
+            urlTemplate.expand({...httpRequest.pathParams, ...httpRequest.queryParams});
+            `}
+          </ts.VarDeclaration>
+          <ts.VarDeclaration const name="response">
+            {code`
+              await fetch(url, {
+                headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
+                body: httpRequest.body?.value,
+              });
+            `}
+          </ts.VarDeclaration>
+          {code`
+            return await response.json();
+          `}
+        </List>
       </ts.ArrowFunction>
     </ts.VarDeclaration>
+  );
+}
+
+function HttpRequestType(props: {}) {
+  return (
+    <ts.InterfaceDeclaration name="HttpRequest" refkey={refkey("HttpRequest")}>
+      <List semicolon>
+        <ts.InterfaceMember name="headers" optional type="Record<string, any>" />
+        <ts.InterfaceMember name="pathParams" optional type="Record<string, any>" />
+        <ts.InterfaceMember name="queryParams" optional type="Record<string, any>" />
+        <ts.InterfaceMember name="body" optional type="{value: any, contentType: string}" />
+      </List>
+    </ts.InterfaceDeclaration>
   );
 }
