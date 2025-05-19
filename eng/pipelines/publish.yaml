@@ -35,6 +35,9 @@ extends:
               - script: pnpm install
                 displayName: Install dependencies
 
+              - script: pnpm build
+                displayName: Build
+
               - script: node .github/workflows/set-prerelease-version.mjs
                 displayName: Set prereleases versions
 
