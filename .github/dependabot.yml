@@ -1,0 +1,18 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    groups:
+      alloy:
+        patterns:
+          - "@alloy-js/*"
+      typespec:
+        patterns:
+          - "@typespec/*"
+          - "typespec-zod"
+    allow:
+      - dependency-name: "@alloy-js/*"
+      - dependency-name: "@typespec/*"
+      - dependency-name: "typespec-zod"

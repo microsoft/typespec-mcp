@@ -6,9 +6,9 @@ catalog:
   "@alloy-js/cli": ^0.15.0
   "@alloy-js/core": ^0.15.0
   "@alloy-js/typescript": ^0.15.0
-  "@alloy-js/rollup-plugin": ^0.1.0
-  "@modelcontextprotocol/sdk": "^1.11.0"
+  "@alloy-js/rollup-plugin": ^0.1.0.
   "@modelcontextprotocol/inspector": "^0.11.0"
+  "@modelcontextprotocol/sdk": "^1.11.0"
   "@rollup/plugin-babel": ^6.0.4
   "@types/node": ^22.15.0
   "@typespec/compiler": ^1.0.0
@@ -19,6 +19,7 @@ catalog:
   "@typespec/openapi": ^1.0.0
   "@typespec/openapi3": ^1.0.0
   "@typespec/rest": ^0.70.0
+  "@typespec/tspd": "^0.70.0"
   concurrently: ^9.1.2
   prettier: ^3.5.3
   typescript: ^5.8.3

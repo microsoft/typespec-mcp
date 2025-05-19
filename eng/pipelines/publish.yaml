@@ -1,0 +1,48 @@
+# Continuous Integration
+
+trigger:
+  branches:
+    include:
+      - main
+      - release/*
+
+pr: none
+
+extends:
+  template: /eng/pipelines/templates/1es-redirect.yml
+  parameters:
+    stages:
+      - stage: CI
+        pool:
+          name: $(LINUXPOOL)
+          image: $(LINUXVMIMAGE)
+          os: linux
+        jobs:
+          - job: publish
+            displayName: Npm publish
+            steps:
+              - checkout: self
+                fetchDepth: 0 # Need that to ge the number of commits for the versioning
+
+              - task: UseNode@1
+                displayName: Setup node
+                inputs:
+                  version: "22.x"
+
+              - script: npm install -g pnpm
+                displayName: Install pnpm
+
+              - script: pnpm install
+                displayName: Install dependencies
+
+              - script: node .github/workflows/set-prerelease-version.mjs
+                displayName: Set prereleases versions
+
+              - pwsh: |
+                  echo "Updating config"
+                  pnpm config set '//registry.npmjs.org/:_authToken' '${NPM_AUTH_TOKEN}'
+                  echo "Publishing"
+                  pnpm -r publish --access public --no-git-checks
+                name: Publish
+                env:
+                  NPM_AUTH_TOKEN: $(azure-sdk-npm-token)
