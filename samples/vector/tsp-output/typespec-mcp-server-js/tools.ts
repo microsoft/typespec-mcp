@@ -1,6 +1,6 @@
 import type { Vec3 } from "./ts-types.js";
 
-interface Tools {
+export interface Tools {
   /**
    * Adds two vectors together. Use this when you want to combine two vectors to
    * get a resultant vector. For example, adding a movement vector to a position
