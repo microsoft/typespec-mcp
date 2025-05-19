@@ -93,10 +93,10 @@ importers:
         specifier: ^9.5.2
         version: 9.5.2
       typespec-mcp:
-        specifier: workspace:~
+        specifier: workspace:*
         version: link:../typespec-mcp
       typespec-mcp-server-js:
-        specifier: workspace:~
+        specifier: workspace:*
         version: link:../typespec-mcp-server-js
       zod:
         specifier: ^3.24.2
