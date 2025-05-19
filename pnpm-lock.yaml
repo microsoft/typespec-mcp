@@ -7,23 +7,23 @@ settings:
 catalogs:
   default:
     '@alloy-js/cli':
-      specifier: ^0.15.0
-      version: 0.15.0
+      specifier: ~0.16.0
+      version: 0.16.0
     '@alloy-js/core':
-      specifier: ^0.15.0
-      version: 0.15.0
+      specifier: ~0.16.0
+      version: 0.16.0
     '@alloy-js/rollup-plugin':
       specifier: ^0.1.0
       version: 0.1.0
     '@alloy-js/typescript':
-      specifier: ^0.15.0
-      version: 0.15.0
+      specifier: ~0.16.0
+      version: 0.16.0
     '@modelcontextprotocol/inspector':
-      specifier: ^0.9.0
-      version: 0.9.0
+      specifier: ^0.12.0
+      version: 0.12.0
     '@modelcontextprotocol/sdk':
-      specifier: ^1.9.0
-      version: 1.11.0
+      specifier: ^1.11.4
+      version: 1.11.4
     '@types/node':
       specifier: ^22.14.0
       version: 22.15.15
@@ -36,6 +36,9 @@ catalogs:
     '@typespec/http':
       specifier: ^1.0.0
       version: 1.0.1
+    '@typespec/tspd':
+      specifier: ^0.70.0
+      version: 0.70.0
     concurrently:
       specifier: ^9.1.2
       version: 9.1.2
@@ -46,8 +49,8 @@ catalogs:
       specifier: ^5.8.3
       version: 5.8.3
     typespec-zod:
-      specifier: ^1.0.0-preview.10
-      version: 1.0.0-preview.10
+      specifier: ^0.0.0-51
+      version: 0.0.0-51
     vitest:
       specifier: ^3.1.1
       version: 3.1.3
@@ -90,10 +93,10 @@ importers:
         specifier: ^9.5.2
         version: 9.5.2
       typespec-mcp:
-        specifier: workspace:~
+        specifier: workspace:*
         version: link:../typespec-mcp
       typespec-mcp-server-js:
-        specifier: workspace:~
+        specifier: workspace:*
         version: link:../typespec-mcp-server-js
       zod:
         specifier: ^3.24.2
@@ -127,6 +130,9 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 22.15.15
+      '@typespec/tspd':
+        specifier: 'catalog:'
+        version: 0.70.0(@types/node@22.15.15)(typescript@5.8.3)
       prettier:
         specifier: 'catalog:'
         version: 3.5.3
@@ -135,16 +141,16 @@ importers:
     dependencies:
       '@alloy-js/core':
         specifier: 'catalog:'
-        version: 0.15.0
+        version: 0.16.0
       '@alloy-js/typescript':
         specifier: 'catalog:'
-        version: 0.15.0
+        version: 0.16.0
       '@typespec/compiler':
         specifier: 'catalog:'
         version: 1.0.0(@types/node@22.15.15)
       '@typespec/emitter-framework':
         specifier: 'catalog:'
-        version: 0.7.0(@alloy-js/core@0.15.0)(@alloy-js/typescript@0.15.0)(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))(@typespec/rest@0.70.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15))))
+        version: 0.7.0(@alloy-js/core@0.16.0)(@alloy-js/typescript@0.16.0)(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))(@typespec/rest@0.70.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15))))
       '@typespec/http':
         specifier: 'catalog:'
         version: 1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15))
@@ -156,11 +162,11 @@ importers:
         version: link:../typespec-mcp-server-js
       typespec-zod:
         specifier: 'catalog:'
-        version: 1.0.0-preview.10(@alloy-js/core@0.15.0)(@alloy-js/typescript@0.15.0)(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/emitter-framework@0.7.0(@alloy-js/core@0.15.0)(@alloy-js/typescript@0.15.0)(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))(@typespec/rest@0.70.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))))
+        version: 0.0.0-51(@alloy-js/core@0.16.0)(@alloy-js/typescript@0.16.0)(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/emitter-framework@0.7.0(@alloy-js/core@0.16.0)(@alloy-js/typescript@0.16.0)(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))(@typespec/rest@0.70.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))))
     devDependencies:
       '@alloy-js/cli':
         specifier: 'catalog:'
-        version: 0.15.0
+        version: 0.16.0
       '@types/node':
         specifier: 'catalog:'
         version: 22.15.15
@@ -172,26 +178,26 @@ importers:
     dependencies:
       '@alloy-js/core':
         specifier: 'catalog:'
-        version: 0.15.0
+        version: 0.16.0
       '@alloy-js/typescript':
         specifier: 'catalog:'
-        version: 0.15.0
+        version: 0.16.0
       '@typespec/compiler':
         specifier: 'catalog:'
         version: 1.0.0(@types/node@22.15.15)
       '@typespec/emitter-framework':
         specifier: 'catalog:'
-        version: 0.7.0(@alloy-js/core@0.15.0)(@alloy-js/typescript@0.15.0)(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))(@typespec/rest@0.70.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15))))
+        version: 0.7.0(@alloy-js/core@0.16.0)(@alloy-js/typescript@0.16.0)(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))(@typespec/rest@0.70.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15))))
       typespec-mcp:
         specifier: workspace:*
         version: link:../typespec-mcp
       typespec-zod:
         specifier: 'catalog:'
-        version: 1.0.0-preview.10(@alloy-js/core@0.15.0)(@alloy-js/typescript@0.15.0)(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/emitter-framework@0.7.0(@alloy-js/core@0.15.0)(@alloy-js/typescript@0.15.0)(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))(@typespec/rest@0.70.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))))
+        version: 0.0.0-51(@alloy-js/core@0.16.0)(@alloy-js/typescript@0.16.0)(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/emitter-framework@0.7.0(@alloy-js/core@0.16.0)(@alloy-js/typescript@0.16.0)(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))(@typespec/rest@0.70.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))))
     devDependencies:
       '@alloy-js/cli':
         specifier: 'catalog:'
-        version: 0.15.0
+        version: 0.16.0
       '@alloy-js/rollup-plugin':
         specifier: 'catalog:'
         version: 0.1.0(@babel/core@7.27.1)(rollup@4.40.2)
@@ -206,10 +212,10 @@ importers:
     dependencies:
       '@modelcontextprotocol/inspector':
         specifier: 'catalog:'
-        version: 0.9.0(@types/node@22.15.15)(typescript@5.8.3)
+        version: 0.12.0(@types/node@22.15.15)(typescript@5.8.3)
       '@modelcontextprotocol/sdk':
         specifier: 'catalog:'
-        version: 1.11.0
+        version: 1.11.4
       '@typespec/compiler':
         specifier: 'catalog:'
         version: 1.0.0(@types/node@22.15.15)
@@ -255,10 +261,10 @@ importers:
     dependencies:
       '@modelcontextprotocol/inspector':
         specifier: 'catalog:'
-        version: 0.9.0(@types/node@22.15.15)(typescript@5.8.3)
+        version: 0.12.0(@types/node@22.15.15)(typescript@5.8.3)
       '@modelcontextprotocol/sdk':
         specifier: 'catalog:'
-        version: 1.11.0
+        version: 1.11.4
       '@typespec/compiler':
         specifier: 'catalog:'
         version: 1.0.0(@types/node@22.15.15)
@@ -306,13 +312,16 @@ packages:
   '@alloy-js/babel-preset@0.2.1':
     resolution: {integrity: sha512-vz9kvQwx5qBzHIw4ryqUaQqpgNOMBmkdDcV3e2zZfMq8Pp16ePFtvviHh6RwyLcvXQQClex3ZZy8ON9TifMnxw==}
 
-  '@alloy-js/cli@0.15.0':
-    resolution: {integrity: sha512-VI113tvoXL8ceSWloOr7ZbvMtQrGFLYe6bRUWsFkwpXuzRIK+JvyQJ5gspHKpuUBl0FDMTcYljvLEDKba9ueQA==}
+  '@alloy-js/cli@0.16.0':
+    resolution: {integrity: sha512-a6BXlN84n37T02mdRlZ9QagTMuheVYEJH1LYX4lD+V8hzP0/4Kq544ucWhJj9cAJhh7wSCmyqBbmBFmP1XEyvw==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
   '@alloy-js/core@0.15.0':
     resolution: {integrity: sha512-GfQZqaUqGBGFeFJbA9H7Iu+IJQiEQ2B3Hjh5C1N2YclEg5vtjSAb/pdqJ5x2BTqOq2iUCpFOJ44pJy5mhS116Q==}
+
+  '@alloy-js/core@0.16.0':
+    resolution: {integrity: sha512-A6jtbUP2JANFH4qNgKnybjzuDgLmqXnH/5/PAyhc5FALW/sjQKIxsikpcMhJSrkR2xMs87Rbw2VlS0FDDgKSDg==}
 
   '@alloy-js/rollup-plugin@0.1.0':
     resolution: {integrity: sha512-MXR8mBdSh/pxMP8kIXAcMYKsm5yOWZ+igxcaRX1vBXFiHU4eK7gE/5q6Fk8Vdydh+MItWtgekwIhUWvcszdNFQ==}
@@ -320,6 +329,9 @@ packages:
 
   '@alloy-js/typescript@0.15.0':
     resolution: {integrity: sha512-dALRXFY6h3i3i4Xv6ym+ejmgerxP6HcCECAhTC7CZJ4zNY9fHDhjqfxScsEaFrbalpib4JMX8wceO47l4CIFTw==}
+
+  '@alloy-js/typescript@0.16.0':
+    resolution: {integrity: sha512-ytBT0TFxD16Sb/iT9ORKIyn4+uVblzY/50h6TLyy3os/b9BWxX1kgF82kmK9YPlvOkgewx/lFf5mQ/VLufanvw==}
 
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
@@ -635,6 +647,9 @@ packages:
   '@floating-ui/utils@0.2.9':
     resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
 
+  '@gerrit0/mini-shiki@3.4.2':
+    resolution: {integrity: sha512-3jXo5bNjvvimvdbIhKGfFxSnKCX+MA8wzHv55ptzk/cx8wOzT+BRcYgj8aFN3yTiTs+zvQQiaZFr7Jce1ZG3fw==}
+
   '@inquirer/checkbox@4.1.5':
     resolution: {integrity: sha512-swPczVU+at65xa5uPfNP9u3qx/alNwiaykiI/ExpsmMSQW55trmZcwhYWzw/7fj+n6Q8z1eENvR7vFfq9oPSAQ==}
     engines: {node: '>=18'}
@@ -784,12 +799,28 @@ packages:
   '@json-schema-tools/traverse@1.10.4':
     resolution: {integrity: sha512-9e42zjhLIxzBONroNC4SGsTqdB877tzwH2S6lqgTav9K24kWJR9vNieeMVSuyqnY8FlclH21D8wsm/tuD9WA9Q==}
 
+  '@modelcontextprotocol/inspector-cli@0.12.0':
+    resolution: {integrity: sha512-0sMKYqn2Dp3RwJPz/Ukz4FhRN8JNNTniCyOuzuCnb2r5ogLvi6eBaU0CQa2SnE33fFH9HFSOLSI3nHg7SzRJcQ==}
+    hasBin: true
+
+  '@modelcontextprotocol/inspector-client@0.12.0':
+    resolution: {integrity: sha512-JJ6R6aXTNlhw1JxbURjP7vfS6EvR4d55qT2BAyyvIXO2Q54EhTsClusY99cEymegYuIbhQBd/jHNwgerdpLKow==}
+    hasBin: true
+
   '@modelcontextprotocol/inspector-client@0.9.0':
     resolution: {integrity: sha512-D5zLY0mVfewwCtRU3JdBKqopB1GG+1uDEeSVK6N8EeY/9ZU6OUkSER12J4vt/dXX00ZAAgoDqx/US7mDXa19zw==}
     hasBin: true
 
+  '@modelcontextprotocol/inspector-server@0.12.0':
+    resolution: {integrity: sha512-DEnfWwZFGJgXH5DoBaKPK92xfPtUtdM/dpWPuoMVXPln0KwCoIQnMP9aDo0tiWoNP+b6AjxHLTDn4zATtWx0WA==}
+    hasBin: true
+
   '@modelcontextprotocol/inspector-server@0.9.0':
     resolution: {integrity: sha512-GJPE3K78FLBbBpL/TXKxSflbW0eDiy6uJ4/QcB14YpHctm672ThMwen5EDl/mZU8MXCk7vGhVPmjiys1Uoit2Q==}
+    hasBin: true
+
+  '@modelcontextprotocol/inspector@0.12.0':
+    resolution: {integrity: sha512-OsoN8ZKdDL/HLC7UHz5RnDlQWwfdofCCm+tvXZepGfZ7QoqmQsnpkiy27hkNTSUJfxpHueOId89Xg5NuUOd6wA==}
     hasBin: true
 
   '@modelcontextprotocol/inspector@0.9.0':
@@ -798,6 +829,10 @@ packages:
 
   '@modelcontextprotocol/sdk@1.11.0':
     resolution: {integrity: sha512-k/1pb70eD638anoi0e8wUGAlbMJXyvdV4p62Ko+EZ7eBe1xMx8Uhak1R5DgfoofsK5IBBnRwsYGTaLZl+6/+RQ==}
+    engines: {node: '>=18'}
+
+  '@modelcontextprotocol/sdk@1.11.4':
+    resolution: {integrity: sha512-OTbhe5slIjiOtLxXhKalkKGhIQrwvhgCDs/C2r8kcBTy5HR/g43aDQU0l7r8O0VGbJPTNJvDc7ZdQMdQDJXmbw==}
     engines: {node: '>=18'}
 
   '@nodelib/fs.scandir@2.1.5':
@@ -1311,6 +1346,21 @@ packages:
   '@sec-ant/readable-stream@0.4.1':
     resolution: {integrity: sha512-831qok9r2t8AlxLko40y2ebgSDhenenCatLVeW/uBtnHPyhHOvG0C7TvfgecV+wHzIm5KUICgzmVpWS+IMEAeg==}
 
+  '@shikijs/engine-oniguruma@3.4.2':
+    resolution: {integrity: sha512-zcZKMnNndgRa3ORja6Iemsr3DrLtkX3cAF7lTJkdMB6v9alhlBsX9uNiCpqofNrXOvpA3h6lHcLJxgCIhVOU5Q==}
+
+  '@shikijs/langs@3.4.2':
+    resolution: {integrity: sha512-H6azIAM+OXD98yztIfs/KH5H4PU39t+SREhmM8LaNXyUrqj2mx+zVkr8MWYqjceSjDw9I1jawm1WdFqU806rMA==}
+
+  '@shikijs/themes@3.4.2':
+    resolution: {integrity: sha512-qAEuAQh+brd8Jyej2UDDf+b4V2g1Rm8aBIdvt32XhDPrHvDkEnpb7Kzc9hSuHUxz0Iuflmq7elaDuQAP9bHIhg==}
+
+  '@shikijs/types@3.4.2':
+    resolution: {integrity: sha512-zHC1l7L+eQlDXLnxvM9R91Efh2V4+rN3oMVS2swCBssbj2U/FBwybD1eeLaq8yl/iwT+zih8iUbTBCgGZOYlVg==}
+
+  '@shikijs/vscode-textmate@10.0.2':
+    resolution: {integrity: sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg==}
+
   '@sindresorhus/merge-streams@2.3.0':
     resolution: {integrity: sha512-LtoMMhxAlorcGhmFYI+LhPgbPZCkgP6ra1YL604EeF6U98pLlQ3iWIGMdWSC+vWmPBWBNgmDBAhnAobLROJmwg==}
     engines: {node: '>=18'}
@@ -1334,8 +1384,14 @@ packages:
   '@types/estree@1.0.7':
     resolution: {integrity: sha512-w28IoSUCJpidD/TGviZwwMJckNESJZXFu7NBZ5YJ4mEUnNraUn9Pm8HSZm/jDF1pDWYKspWE7oVphigUPRakIQ==}
 
+  '@types/hast@3.0.4':
+    resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
+
   '@types/node@22.15.15':
     resolution: {integrity: sha512-R5muMcZob3/Jjchn5LcO8jdKwSCbzqmPB6ruBxMcf9kbxtniZHP327s6C37iOfuw8mbKK3cAQa7sEl7afLrQ8A==}
+
+  '@types/unist@3.0.3':
+    resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
 
   '@typespec/compiler@1.0.0':
     resolution: {integrity: sha512-QFy0otaB4xkN4kQmYyT17yu3OVhN0gti9+EKnZqs5JFylw2Xecx22BPwUE1Byj42pZYg5d9WlO+WwmY5ALtRDg==}
@@ -1370,6 +1426,11 @@ packages:
     peerDependencies:
       '@typespec/compiler': ^1.0.0
       '@typespec/http': ^1.0.0
+
+  '@typespec/tspd@0.70.0':
+    resolution: {integrity: sha512-kZXgoCljTK0gLmoKIeVgdrLdZ6DEN5RPMKsezOW/K1CTU/q7LvVvvQduhzv1tEnY1axkGCVolN41wRfgrrbvjw==}
+    engines: {node: '>=20.0.0'}
+    hasBin: true
 
   '@vitest/expect@3.1.3':
     resolution: {integrity: sha512-7FTQQuuLKmN1Ig/h+h/GO+44Q1IlglPlR2es4ab7Yvfx+Uk5xsv+Ykk+MEt/M2Yn/xGmzaLKxGw2lgy2bwuYqg==}
@@ -1453,6 +1514,9 @@ packages:
   arg@4.1.3:
     resolution: {integrity: sha512-58S9QDqG0Xx27YwPSt9fJxivjYl432YCwfDMfZ+71RAqUrZef7LrKQZ3LHLOwCS4FLNBplP533Zx895SeOCHvA==}
 
+  argparse@2.0.1:
+    resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
+
   aria-hidden@1.2.4:
     resolution: {integrity: sha512-y+CcFFwelSXpLZk/7fMB2mUbGtX9lKycf1MWJ7CaTIERyitVlyQx6C+sxcROU2BAJ24OiZyK+8wj2i8AlBoS3A==}
     engines: {node: '>=10'}
@@ -1480,6 +1544,9 @@ packages:
 
   brace-expansion@1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
+
+  brace-expansion@2.0.1:
+    resolution: {integrity: sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==}
 
   braces@3.0.3:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
@@ -1570,6 +1637,10 @@ packages:
 
   color-name@1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
+
+  commander@13.1.0:
+    resolution: {integrity: sha512-/rFeCpNJQbhSZjGVwO9RFV3xPqbnERS8MmIQzCtD/zl6gpJuV/bMLuN92oG3F7d8oDEHHRrujSXNUr8fpjntKw==}
+    engines: {node: '>=18'}
 
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
@@ -1704,6 +1775,10 @@ packages:
   encodeurl@2.0.0:
     resolution: {integrity: sha512-Q0n9HRi4m6JuGIV1eFlmvJB7ZEVxu93IrMyiMsGC0lrMJMWzRgx6WGquyfQgZVb31vhGgXnfmPNNXmxnOkRBrg==}
     engines: {node: '>= 0.8'}
+
+  entities@4.5.0:
+    resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
+    engines: {node: '>=0.12'}
 
   env-paths@3.0.0:
     resolution: {integrity: sha512-dtJUTepzMW3Lm/NPxRf3wP4642UWhjL2sQxc+ym2YMj1m/H2zDNQOlezafzkHwn6sMstjHTwG6iQQsctDW/b1A==}
@@ -1994,6 +2069,9 @@ packages:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
     engines: {node: '>=6'}
 
+  linkify-it@5.0.0:
+    resolution: {integrity: sha512-5aHCbzQRADcdP+ATqnDuhhJ/MRIqDkZX5pyjFHRRysS8vZ5AbqGEoFIb6pYHPZ+L/OC2Lc+xT8uHVVR5CAK/wQ==}
+
   lodash-es@4.17.21:
     resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
 
@@ -2015,15 +2093,25 @@ packages:
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc
 
+  lunr@2.3.9:
+    resolution: {integrity: sha512-zTU3DaZaF3Rt9rhN3uBMGQD3dD2/vFQqnvZCDv4dl5iOzq2IZQqTxu90r4E5J+nP70J3ilqVCrbho2eWaeW8Ow==}
+
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
 
   make-error@1.3.6:
     resolution: {integrity: sha512-s8UhlNe7vPKomQhC1qFelMokr/Sc3AgNbso3n74mVPA5LTZwkB9NlXf4XPamLxJE8h0gh73rM94xvwRT2CVInw==}
 
+  markdown-it@14.1.0:
+    resolution: {integrity: sha512-a54IwgWPaeBCAAsv13YgmALOF1elABB08FxO9i+r4VFk5Vl4pKokRPeX8u5TCgSsPi6ec1otfLjdOpVcgbpshg==}
+    hasBin: true
+
   math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
     engines: {node: '>= 0.4'}
+
+  mdurl@2.0.0:
+    resolution: {integrity: sha512-Lf+9+2r+Tdp5wXDXC4PcIBjTDtq4UKjCPMQhKIuzpJNW0b96kVqSwW0bT7FhRSfmAiFYgP+SCRvdrDozfh0U5w==}
 
   media-typer@0.3.0:
     resolution: {integrity: sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==}
@@ -2091,6 +2179,10 @@ packages:
 
   minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
+
+  minimatch@9.0.5:
+    resolution: {integrity: sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==}
+    engines: {node: '>=16 || 14 >=14.17'}
 
   minipass@7.1.2:
     resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
@@ -2255,6 +2347,10 @@ packages:
   proxy-addr@2.0.7:
     resolution: {integrity: sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==}
     engines: {node: '>= 0.10'}
+
+  punycode.js@2.3.1:
+    resolution: {integrity: sha512-uxFIHU0YlHYhDQtV4R9J6a52SLx28BCjT+4ieh7IGbgwVJWO+km431c4yRlREUAsAmt/uMjQUyQHNEPf0M39CA==}
+    engines: {node: '>=6'}
 
   qs@6.13.0:
     resolution: {integrity: sha512-+38qI9SOr8tfZ4QmJNplMUxqjbe7LKvvZgWdExBOmd+egZTtjLB67Gu0HRX3u/XOq7UU2Nx6nsjvS16Z9uwfpg==}
@@ -2570,18 +2666,34 @@ packages:
     resolution: {integrity: sha512-OZs6gsjF4vMp32qrCbiVSkrFmXtG/AZhY3t0iAMrMBiAZyV9oALtXO8hsrHbMXF9x6L3grlFuwW2oAz7cav+Gw==}
     engines: {node: '>= 0.6'}
 
+  typedoc-plugin-markdown@4.6.3:
+    resolution: {integrity: sha512-86oODyM2zajXwLs4Wok2mwVEfCwCnp756QyhLGX2IfsdRYr1DXLCgJgnLndaMUjJD7FBhnLk2okbNE9PdLxYRw==}
+    engines: {node: '>= 18'}
+    peerDependencies:
+      typedoc: 0.28.x
+
+  typedoc@0.28.4:
+    resolution: {integrity: sha512-xKvKpIywE1rnqqLgjkoq0F3wOqYaKO9nV6YkkSat6IxOWacUCc/7Es0hR3OPmkIqkPoEn7U3x+sYdG72rstZQA==}
+    engines: {node: '>= 18', pnpm: '>= 10'}
+    hasBin: true
+    peerDependencies:
+      typescript: 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x || 5.5.x || 5.6.x || 5.7.x || 5.8.x
+
   typescript@5.8.3:
     resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
     engines: {node: '>=14.17'}
     hasBin: true
 
-  typespec-zod@1.0.0-preview.10:
-    resolution: {integrity: sha512-xky0lWv8bOic+KRnsrBTTH6gmvJrVGKo7G9+PSd5xHGvn3PS1PJ7MvqZeMSTVOWC5SVYe5AfvFUw59o5NUMEiA==}
+  typespec-zod@0.0.0-51:
+    resolution: {integrity: sha512-CwQRqL8LsD0q8Z3xtnDDCn0BhpkD/Hk3PSFM9YXuXGqh24oicl7pKK6VcfmTTtxgcg6jvDO4gfnmiD/MDzAUcQ==}
     peerDependencies:
-      '@alloy-js/core': ^0.15.0
-      '@alloy-js/typescript': ^0.15.0
+      '@alloy-js/core': ^0.16.0
+      '@alloy-js/typescript': ^0.16.0
       '@typespec/compiler': ^1.0.0
-      '@typespec/emitter-framework': ^0.7.0
+      '@typespec/emitter-framework': ^0.7.1
+
+  uc.micro@2.1.0:
+    resolution: {integrity: sha512-ARDJmphmdvUk6Glw7y9DQ2bFkKBHwQHLi2lsaH6PPmz/Ka9sFOBsBluozhDltWmnv9u/cF6Rt87znRTPV+yp/A==}
 
   uint8array-extras@1.4.0:
     resolution: {integrity: sha512-ZPtzy0hu4cZjv3z5NW9gfKnNLjoz4y6uv4HlelAjDK7sY/xOkKZv9xK/WQpcsBB3jEybChz9DPC2U/+cusjJVQ==}
@@ -2851,7 +2963,7 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@alloy-js/cli@0.15.0':
+  '@alloy-js/cli@0.16.0':
     dependencies:
       '@alloy-js/babel-preset': 0.2.1(@babel/core@7.27.1)
       '@babel/core': 7.27.1
@@ -2862,6 +2974,14 @@ snapshots:
       - supports-color
 
   '@alloy-js/core@0.15.0':
+    dependencies:
+      '@vue/reactivity': 3.5.13
+      cli-table3: 0.6.5
+      pathe: 2.0.3
+      picocolors: 1.1.1
+      prettier: 3.5.3
+
+  '@alloy-js/core@0.16.0':
     dependencies:
       '@vue/reactivity': 3.5.13
       cli-table3: 0.6.5
@@ -2883,6 +3003,12 @@ snapshots:
   '@alloy-js/typescript@0.15.0':
     dependencies:
       '@alloy-js/core': 0.15.0
+      change-case: 5.4.4
+      pathe: 2.0.3
+
+  '@alloy-js/typescript@0.16.0':
+    dependencies:
+      '@alloy-js/core': 0.16.0
       change-case: 5.4.4
       pathe: 2.0.3
 
@@ -3191,6 +3317,14 @@ snapshots:
 
   '@floating-ui/utils@0.2.9': {}
 
+  '@gerrit0/mini-shiki@3.4.2':
+    dependencies:
+      '@shikijs/engine-oniguruma': 3.4.2
+      '@shikijs/langs': 3.4.2
+      '@shikijs/themes': 3.4.2
+      '@shikijs/types': 3.4.2
+      '@shikijs/vscode-textmate': 10.0.2
+
   '@inquirer/checkbox@4.1.5(@types/node@22.15.15)':
     dependencies:
       '@inquirer/core': 10.1.10(@types/node@22.15.15)
@@ -3335,6 +3469,46 @@ snapshots:
 
   '@json-schema-tools/traverse@1.10.4': {}
 
+  '@modelcontextprotocol/inspector-cli@0.12.0':
+    dependencies:
+      '@modelcontextprotocol/sdk': 1.11.4
+      commander: 13.1.0
+      spawn-rx: 5.1.2
+    transitivePeerDependencies:
+      - supports-color
+
+  '@modelcontextprotocol/inspector-client@0.12.0':
+    dependencies:
+      '@modelcontextprotocol/sdk': 1.11.4
+      '@radix-ui/react-checkbox': 1.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@radix-ui/react-dialog': 1.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@radix-ui/react-icons': 1.3.2(react@18.3.1)
+      '@radix-ui/react-label': 2.1.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@radix-ui/react-popover': 1.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@radix-ui/react-select': 2.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@radix-ui/react-slot': 1.2.2(react@18.3.1)
+      '@radix-ui/react-tabs': 1.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@radix-ui/react-toast': 1.2.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@radix-ui/react-tooltip': 1.2.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      class-variance-authority: 0.7.1
+      clsx: 2.1.1
+      cmdk: 1.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      lucide-react: 0.447.0(react@18.3.1)
+      pkce-challenge: 4.1.0
+      prismjs: 1.30.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-simple-code-editor: 0.14.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      serve-handler: 6.1.6
+      tailwind-merge: 2.6.0
+      tailwindcss-animate: 1.0.7
+      zod: 3.24.4
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - supports-color
+      - tailwindcss
+
   '@modelcontextprotocol/inspector-client@0.9.0':
     dependencies:
       '@modelcontextprotocol/sdk': 1.11.0
@@ -3367,6 +3541,18 @@ snapshots:
       - supports-color
       - tailwindcss
 
+  '@modelcontextprotocol/inspector-server@0.12.0':
+    dependencies:
+      '@modelcontextprotocol/sdk': 1.11.4
+      cors: 2.8.5
+      express: 5.1.0
+      ws: 8.18.2
+      zod: 3.24.4
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+
   '@modelcontextprotocol/inspector-server@0.9.0':
     dependencies:
       '@modelcontextprotocol/sdk': 1.11.0
@@ -3377,6 +3563,29 @@ snapshots:
     transitivePeerDependencies:
       - bufferutil
       - supports-color
+      - utf-8-validate
+
+  '@modelcontextprotocol/inspector@0.12.0(@types/node@22.15.15)(typescript@5.8.3)':
+    dependencies:
+      '@modelcontextprotocol/inspector-cli': 0.12.0
+      '@modelcontextprotocol/inspector-client': 0.12.0
+      '@modelcontextprotocol/inspector-server': 0.12.0
+      '@modelcontextprotocol/sdk': 1.11.4
+      concurrently: 9.1.2
+      shell-quote: 1.8.2
+      spawn-rx: 5.1.2
+      ts-node: 10.9.2(@types/node@22.15.15)(typescript@5.8.3)
+      zod: 3.24.4
+    transitivePeerDependencies:
+      - '@swc/core'
+      - '@swc/wasm'
+      - '@types/node'
+      - '@types/react'
+      - '@types/react-dom'
+      - bufferutil
+      - supports-color
+      - tailwindcss
+      - typescript
       - utf-8-validate
 
   '@modelcontextprotocol/inspector@0.9.0(@types/node@22.15.15)(typescript@5.8.3)':
@@ -3401,6 +3610,22 @@ snapshots:
 
   '@modelcontextprotocol/sdk@1.11.0':
     dependencies:
+      content-type: 1.0.5
+      cors: 2.8.5
+      cross-spawn: 7.0.6
+      eventsource: 3.0.6
+      express: 5.1.0
+      express-rate-limit: 7.5.0(express@5.1.0)
+      pkce-challenge: 5.0.0
+      raw-body: 3.0.0
+      zod: 3.24.4
+      zod-to-json-schema: 3.24.5(zod@3.24.4)
+    transitivePeerDependencies:
+      - supports-color
+
+  '@modelcontextprotocol/sdk@1.11.4':
+    dependencies:
+      ajv: 8.17.1
       content-type: 1.0.5
       cors: 2.8.5
       cross-spawn: 7.0.6
@@ -3799,6 +4024,26 @@ snapshots:
 
   '@sec-ant/readable-stream@0.4.1': {}
 
+  '@shikijs/engine-oniguruma@3.4.2':
+    dependencies:
+      '@shikijs/types': 3.4.2
+      '@shikijs/vscode-textmate': 10.0.2
+
+  '@shikijs/langs@3.4.2':
+    dependencies:
+      '@shikijs/types': 3.4.2
+
+  '@shikijs/themes@3.4.2':
+    dependencies:
+      '@shikijs/types': 3.4.2
+
+  '@shikijs/types@3.4.2':
+    dependencies:
+      '@shikijs/vscode-textmate': 10.0.2
+      '@types/hast': 3.0.4
+
+  '@shikijs/vscode-textmate@10.0.2': {}
+
   '@sindresorhus/merge-streams@2.3.0': {}
 
   '@sindresorhus/merge-streams@4.0.0': {}
@@ -3813,9 +4058,15 @@ snapshots:
 
   '@types/estree@1.0.7': {}
 
+  '@types/hast@3.0.4':
+    dependencies:
+      '@types/unist': 3.0.3
+
   '@types/node@22.15.15':
     dependencies:
       undici-types: 6.21.0
+
+  '@types/unist@3.0.3': {}
 
   '@typespec/compiler@1.0.0(@types/node@22.15.15)':
     dependencies:
@@ -3839,10 +4090,10 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@typespec/emitter-framework@0.7.0(@alloy-js/core@0.15.0)(@alloy-js/typescript@0.15.0)(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))(@typespec/rest@0.70.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15))))':
+  '@typespec/emitter-framework@0.7.0(@alloy-js/core@0.16.0)(@alloy-js/typescript@0.16.0)(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))(@typespec/rest@0.70.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15))))':
     dependencies:
-      '@alloy-js/core': 0.15.0
-      '@alloy-js/typescript': 0.15.0
+      '@alloy-js/core': 0.16.0
+      '@alloy-js/typescript': 0.16.0
       '@typespec/compiler': 1.0.0(@types/node@22.15.15)
       '@typespec/http': 1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15))
       '@typespec/rest': 0.70.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))
@@ -3859,6 +4110,21 @@ snapshots:
     dependencies:
       '@typespec/compiler': 1.0.0(@types/node@22.15.15)
       '@typespec/http': 1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15))
+
+  '@typespec/tspd@0.70.0(@types/node@22.15.15)(typescript@5.8.3)':
+    dependencies:
+      '@alloy-js/core': 0.15.0
+      '@alloy-js/typescript': 0.15.0
+      '@typespec/compiler': 1.0.0(@types/node@22.15.15)
+      picocolors: 1.1.1
+      prettier: 3.5.3
+      typedoc: 0.28.4(typescript@5.8.3)
+      typedoc-plugin-markdown: 4.6.3(typedoc@0.28.4(typescript@5.8.3))
+      yaml: 2.7.1
+      yargs: 17.7.2
+    transitivePeerDependencies:
+      - '@types/node'
+      - typescript
 
   '@vitest/expect@3.1.3':
     dependencies:
@@ -3962,6 +4228,8 @@ snapshots:
 
   arg@4.1.3: {}
 
+  argparse@2.0.1: {}
+
   aria-hidden@1.2.4:
     dependencies:
       tslib: 2.8.1
@@ -4012,6 +4280,10 @@ snapshots:
     dependencies:
       balanced-match: 1.0.2
       concat-map: 0.0.1
+
+  brace-expansion@2.0.1:
+    dependencies:
+      balanced-match: 1.0.2
 
   braces@3.0.3:
     dependencies:
@@ -4104,6 +4376,8 @@ snapshots:
       color-name: 1.1.4
 
   color-name@1.1.4: {}
+
+  commander@13.1.0: {}
 
   concat-map@0.0.1: {}
 
@@ -4214,6 +4488,8 @@ snapshots:
   encodeurl@1.0.2: {}
 
   encodeurl@2.0.0: {}
+
+  entities@4.5.0: {}
 
   env-paths@3.0.0: {}
 
@@ -4554,6 +4830,10 @@ snapshots:
 
   kleur@3.0.3: {}
 
+  linkify-it@5.0.0:
+    dependencies:
+      uc.micro: 2.1.0
+
   lodash-es@4.17.21: {}
 
   lodash@4.17.21: {}
@@ -4572,13 +4852,26 @@ snapshots:
     dependencies:
       react: 18.3.1
 
+  lunr@2.3.9: {}
+
   magic-string@0.30.17:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
 
   make-error@1.3.6: {}
 
+  markdown-it@14.1.0:
+    dependencies:
+      argparse: 2.0.1
+      entities: 4.5.0
+      linkify-it: 5.0.0
+      mdurl: 2.0.0
+      punycode.js: 2.3.1
+      uc.micro: 2.1.0
+
   math-intrinsics@1.1.0: {}
+
+  mdurl@2.0.0: {}
 
   media-typer@0.3.0: {}
 
@@ -4624,6 +4917,10 @@ snapshots:
   minimatch@3.1.2:
     dependencies:
       brace-expansion: 1.1.11
+
+  minimatch@9.0.5:
+    dependencies:
+      brace-expansion: 2.0.1
 
   minipass@7.1.2: {}
 
@@ -4735,6 +5032,8 @@ snapshots:
     dependencies:
       forwarded: 0.2.0
       ipaddr.js: 1.9.1
+
+  punycode.js@2.3.1: {}
 
   qs@6.13.0:
     dependencies:
@@ -5090,14 +5389,29 @@ snapshots:
       media-typer: 1.1.0
       mime-types: 3.0.1
 
+  typedoc-plugin-markdown@4.6.3(typedoc@0.28.4(typescript@5.8.3)):
+    dependencies:
+      typedoc: 0.28.4(typescript@5.8.3)
+
+  typedoc@0.28.4(typescript@5.8.3):
+    dependencies:
+      '@gerrit0/mini-shiki': 3.4.2
+      lunr: 2.3.9
+      markdown-it: 14.1.0
+      minimatch: 9.0.5
+      typescript: 5.8.3
+      yaml: 2.7.1
+
   typescript@5.8.3: {}
 
-  typespec-zod@1.0.0-preview.10(@alloy-js/core@0.15.0)(@alloy-js/typescript@0.15.0)(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/emitter-framework@0.7.0(@alloy-js/core@0.15.0)(@alloy-js/typescript@0.15.0)(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))(@typespec/rest@0.70.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15))))):
+  typespec-zod@0.0.0-51(@alloy-js/core@0.16.0)(@alloy-js/typescript@0.16.0)(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/emitter-framework@0.7.0(@alloy-js/core@0.16.0)(@alloy-js/typescript@0.16.0)(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))(@typespec/rest@0.70.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15))))):
     dependencies:
-      '@alloy-js/core': 0.15.0
-      '@alloy-js/typescript': 0.15.0
+      '@alloy-js/core': 0.16.0
+      '@alloy-js/typescript': 0.16.0
       '@typespec/compiler': 1.0.0(@types/node@22.15.15)
-      '@typespec/emitter-framework': 0.7.0(@alloy-js/core@0.15.0)(@alloy-js/typescript@0.15.0)(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))(@typespec/rest@0.70.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15))))
+      '@typespec/emitter-framework': 0.7.0(@alloy-js/core@0.16.0)(@alloy-js/typescript@0.16.0)(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))(@typespec/rest@0.70.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15))))
+
+  uc.micro@2.1.0: {}
 
   uint8array-extras@1.4.0: {}
 

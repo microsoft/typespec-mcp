@@ -1,42 +1,37 @@
-import { DecoratorContext, Interface, Namespace, Operation, Program, Type } from "@typespec/compiler";
+import { DecoratorContext, Interface, Namespace, Operation, Type } from "@typespec/compiler";
+import { useStateMap, useStateSet } from "@typespec/compiler/utils";
+import { McpServerDecorator, McpServerOptions } from "../generated-defs/MCP.js";
 import { stateKeys } from "./lib.js";
 
-export const namespace = "MCP";
+export const [isTool, markTool] = useStateSet<Operation>(stateKeys.tool);
 
 export function $tool(context: DecoratorContext, target: Operation) {
-  context.program.stateMap(stateKeys.tool).set(target, {});
+  markTool(context.program, target);
 }
 
+export const [getSerializeAsText, setSerializeAsText] = useStateMap<Type, { dataType: Type }>(
+  stateKeys.serializeAsText,
+);
+
 export function $serializeAsText(context: DecoratorContext, target: Type, dataType: Type) {
-  context.program.stateMap(stateKeys.serializeAsText).set(target, {
+  setSerializeAsText(context.program, target, {
     dataType,
   });
 }
 
-$serializeAsText.namespace = "Private";
-
-export interface MCPServerOptions {
-  name?: string;
-  version?: string;
-  instructions?: string;
-}
-
-export interface McpServer extends MCPServerOptions {
+export interface McpServer extends McpServerOptions {
   container: Namespace | Interface;
 }
 
-export function $mcpServer(context: DecoratorContext, target: Namespace | Interface, options: MCPServerOptions = {}) {
-  const meta: McpServer = {
+export const [getMcpServer, setMcpServer] = useStateMap<Namespace | Interface, McpServer>(stateKeys.mcpServer);
+
+export const $mcpServer: McpServerDecorator = (
+  context: DecoratorContext,
+  target: Namespace | Interface,
+  options: McpServerOptions = {},
+) => {
+  setMcpServer(context.program, target, {
     ...options,
     container: target,
-  };
-
-  mcpServerState(context).set(target, meta);
-}
-
-export interface StateContext {
-  program: Program;
-}
-export function mcpServerState(context: StateContext): Map<Namespace | Interface, McpServer> {
-  return context.program.stateMap(stateKeys.mcpServer) as any;
-}
+  });
+};
