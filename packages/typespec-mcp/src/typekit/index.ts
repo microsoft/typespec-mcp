@@ -1,15 +1,6 @@
-import {
-  ignoreDiagnostics,
-  isDeclaredInNamespace,
-  Model,
-  Namespace,
-  Operation,
-  Scalar,
-  Type,
-  Union,
-} from "@typespec/compiler";
+import { ignoreDiagnostics, Interface, Model, Namespace, Operation, Scalar, Type, Union } from "@typespec/compiler";
 import { defineKit } from "@typespec/compiler/typekit";
-import { McpServer, mcpServerState } from "../decorators.js";
+import { getMcpServer, isTool, McpServer } from "../decorators.js";
 import { stateKeys } from "../lib.js";
 
 export interface McpKit {
@@ -58,24 +49,43 @@ declare module "@typespec/compiler/typekit" {
   interface Typekit extends TypekitExtension {}
 }
 
+function listUnder(container: Namespace | Interface) {
+  const ops: Operation[] = [];
+
+  function visitNamespace(ns: Namespace) {
+    for (const member of ns.operations.values()) {
+      ops.push(member);
+    }
+    for (const member of ns.interfaces.values()) {
+      visitInterface(member);
+    }
+    for (const member of ns.namespaces.values()) {
+      visitNamespace(member);
+    }
+  }
+
+  function visitInterface(iface: Interface) {
+    for (const op of iface.operations.values()) {
+      ops.push(op);
+    }
+    // If interfaces can contain nested interfaces or namespaces, add similar logic here
+  }
+
+  if (container.kind === "Namespace") {
+    visitNamespace(container);
+  } else if (container.kind === "Interface") {
+    visitInterface(container);
+  }
+
+  return ops;
+}
+
 defineKit<TypekitExtension>({
   mcp: {
     tools: {
       list(server?: McpServer) {
-        const toolState = this.program.stateMap(stateKeys.tool);
-        const allToolOps = Array.from(toolState.keys()) as Operation[];
-
-        if (!server) {
-          return allToolOps;
-        } else if (server.container.kind === "Interface") {
-          return allToolOps.filter((op) => op.interface === server.container);
-        } else {
-          return allToolOps.filter((op) =>
-            isDeclaredInNamespace(op, server.container as Namespace, {
-              recursive: true,
-            }),
-          );
-        }
+        const root = server?.container ?? this.program.getGlobalNamespaceType();
+        return listUnder(root).filter((x) => isTool(this.program, x));
       },
     },
     builtins: {
@@ -140,7 +150,9 @@ defineKit<TypekitExtension>({
 
     servers: {
       list() {
-        return Array.from(mcpServerState(this).values());
+        return Array.from(this.program.getGlobalNamespaceType().namespaces.values())
+          .map((x) => getMcpServer(this.program, x))
+          .filter((x) => x !== undefined);
       },
     },
 

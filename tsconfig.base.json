@@ -12,6 +12,7 @@
     "inlineSources": true,
     "declarationMap": true,
     "outDir": "dist",
+    "stripInternal": true,
     "forceConsistentCasingInFileNames": true,
     "composite": true
   }
