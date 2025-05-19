@@ -86,3 +86,62 @@ export interface FullRepository {
     url_2?: string | null;
   };
 }
+
+export interface GistFile {
+  filename: string
+  type: string
+  language: string
+  raw_url: string
+  size: number
+  encoding?: string;
+}
+
+export interface Gist {
+  id: string
+  node_id: string
+  url: string
+  forks_url: string
+  commits_url: string
+  git_pull_url: string
+  git_push_url: string
+  html_url: string
+  comments_url: string
+  public: boolean
+  description: string | null
+  comments: number
+  user: Owner | null
+  files: Record<string, GistFile>
+  created_at: string
+  updated_at: string
+  owner?: Owner
+  comments_enabled?: boolean
+  truncated?: boolean
+  forks?: Array<unknown>
+  history?: Array<unknown>;
+}
+
+export interface GistArray extends Array<Gist> {
+
+}
+
+export interface CreateGist {
+  description: string
+  public: boolean
+  files: Record<string, GistFile>;
+}
+
+export interface GistArray_2 extends Array<Gist> {
+
+}
+
+export interface GistArray_3 extends Array<Gist> {
+
+}
+
+export interface UnknownArray extends Array<unknown> {
+
+}
+
+export interface UnknownArray_2 extends Array<unknown> {
+
+}

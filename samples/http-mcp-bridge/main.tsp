@@ -1,5 +1,7 @@
 import "typespec-mcp";
 import "@typespec/http";
+import "./gist.tsp";
+import "./user.tsp";
 
 using MCP;
 using Http;
@@ -11,25 +13,7 @@ using Http;
 })
 @service
 @server("https://api.github.com")
-namespace VectorMCP;
-
-/** Github user */
-model Owner {
-  /** The username of the owner */
-  login: string;
-
-  /** Unique identifier of the owner */
-  id: int32;
-
-  /** Node ID of the owner */
-  node_id: string;
-
-  /** Avatar URL of the owner */
-  avatar_url: string;
-
-  /** HTML URL of the owner's profile */
-  html_url: string;
-}
+namespace Github;
 
 /**
  * Full representation of a GitHub repository.
