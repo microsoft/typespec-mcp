@@ -1,6 +1,6 @@
 {
   "name": "typespec-mcp-rest-server-js",
-  "version": "0.1.0",
+  "version": "0.0.0-0",
   "description": "",
   "exports": {
     ".": {
@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@typespec/http-client": "catalog:",
-    "@typespec/http-client-js": "catalog:",
+    "http-client-js-for-mcp": "catalog:",
     "typespec-mcp": "workspace:*",
     "typespec-mcp-server-js": "workspace:*",
     "typespec-zod": "catalog:"

@@ -5,6 +5,7 @@ import { Output, TransformNamePolicyContext, writeOutput } from "@typespec/emitt
 import { zod } from "typespec-zod";
 import { ToolHandlers } from "./components/ToolHandlers.jsx";
 
+import { ClientLibrary } from "@typespec/http-client/components";
 import {
   Client,
   createTransformNamePolicy,
@@ -18,8 +19,7 @@ import {
   PagingHelpers,
   RestError,
   uriTemplateLib,
-} from "@typespec/http-client-js/experimental";
-import { ClientLibrary } from "@typespec/http-client/components";
+} from "http-client-js-for-mcp/experimental";
 import {
   CallToolHandlers,
   createMCPServerContext,
