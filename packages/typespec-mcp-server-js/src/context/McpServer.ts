@@ -98,6 +98,8 @@ export type ResultDescriptor = SingleResultDescriptor | ArrayResultDescriptor | 
 
 export interface ToolDescriptor {
   op: Operation;
+  /** Tool full name as exposed by the server (snake_case style) */
+  name: string;
   implementationOp: Operation;
   parameters: Model;
   result: ResultDescriptor;
@@ -165,10 +167,11 @@ export function createMCPServerContext(
     // Next we need to determine the types we expect from the implementation.
     const resultDescriptor = resultDescriptorFromDeclaredType(program, declaredReturnType);
 
+    const toolName = getToolName(toolOp, server?.container ?? program.getGlobalNamespaceType());
     // finally we can make the signature we expect the business logic to
     // implement.
     const implementationOp = tk.operation.create({
-      name: naming.getName(getToolName(toolOp, server?.container ?? program.getGlobalNamespaceType()), "tool"),
+      name: naming.getName(toolName, "interface-member"),
       parameters: Array.from(toolOp.parameters.properties.values()).map((p) => {
         return tk.type.clone(p);
       }),
@@ -177,6 +180,7 @@ export function createMCPServerContext(
 
     toolDescriptors.push({
       op: toolOp,
+      name: naming.getName(toolName, "tool"),
       implementationOp,
       errors,
       parameters: toolOp.parameters,
