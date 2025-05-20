@@ -10,12 +10,8 @@ import {
 } from "@alloy-js/typescript";
 import { Type } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";
-import {
-  ArrayResultDescriptor,
-  SingleResultDescriptor,
-  ToolDescriptor,
-  useMCPServerContext,
-} from "../context/McpServer.js";
+import { useMCPServerContext } from "../context/McpServer.js";
+import { ArrayResultDescriptor, SingleResultDescriptor, ToolDescriptor } from "../context/utils/tool-descriptor.js";
 import { zodValidationError } from "../externals/zod-validation-error.js";
 
 export interface CallToolHandlerProps {
