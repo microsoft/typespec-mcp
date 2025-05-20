@@ -16,6 +16,7 @@
     }
   },
   "dependencies": {
+    "change-case": "catalog:",
     "typespec-mcp": "workspace:*",
     "typespec-zod": "catalog:"
   },

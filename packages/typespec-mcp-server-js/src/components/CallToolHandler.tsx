@@ -51,7 +51,7 @@ export function CallToolHandler(props: CallToolHandlerProps) {
             <FunctionCallExpression
               target={
                 <>
-                  {getToolHandler}.{props.tool.op.name}
+                  {getToolHandler}.{props.tool.implementationOp.name}
                 </>
               }
               args={[...props.tool.parameters.properties.values()].map((p) => {

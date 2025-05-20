@@ -79,7 +79,7 @@ server.setRequestHandler(
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
-        const rawResult = await toolHandler.addVector(
+        const rawResult = await toolHandler.math_add_vector(
           parsed.data.v1,
           parsed.data.v2
         );
@@ -103,7 +103,7 @@ server.setRequestHandler(
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
-        const rawResult = await toolHandler.subVector(
+        const rawResult = await toolHandler.math_sub_vector(
           parsed.data.v1,
           parsed.data.v2
         );
@@ -127,7 +127,7 @@ server.setRequestHandler(
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
-        const rawResult = await toolHandler.crossProduct(
+        const rawResult = await toolHandler.math_cross_product(
           parsed.data.v1,
           parsed.data.v2
         );
@@ -151,7 +151,7 @@ server.setRequestHandler(
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
-        const rawResult = await toolHandler.dotProduct(
+        const rawResult = await toolHandler.math_dot_product(
           parsed.data.v1,
           parsed.data.v2
         );

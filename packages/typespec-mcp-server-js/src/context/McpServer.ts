@@ -1,10 +1,21 @@
-import { ComponentContext, createContext, refkey, Refkey, useContext } from "@alloy-js/core";
-import { isNeverType, Model, navigateType, Operation, Program, Tuple, Type } from "@typespec/compiler";
+import { ComponentContext, createContext, NamePolicy, refkey, Refkey, useContext } from "@alloy-js/core";
+import {
+  Interface,
+  isNeverType,
+  Model,
+  Namespace,
+  navigateType,
+  Operation,
+  Program,
+  Tuple,
+  Type,
+} from "@typespec/compiler";
 import { unsafe_mutateSubgraph } from "@typespec/compiler/experimental";
 import { $ } from "@typespec/compiler/typekit";
 import { McpServer } from "typespec-mcp";
 import { EnumToUnion } from "../mutators.jsx";
 import { splitOutErrors } from "../utils.js";
+import { createMcpNamingPolicy, McpElements } from "./name-policy.js";
 
 export interface MCPServerKeys {
   server: Refkey;
@@ -108,6 +119,7 @@ export interface MCPServerContext {
   keys: MCPServerKeys;
   allTypes: Type[];
   instructions?: string;
+  namePolicy: NamePolicy<McpElements>;
 }
 
 export const MCPServerContext: ComponentContext<MCPServerContext> = createContext();
@@ -124,6 +136,7 @@ export function createMCPServerContext(
   program: Program,
   { toolDispatcher }: { toolDispatcher?: Refkey } = {},
 ): MCPServerContext {
+  const naming = createMcpNamingPolicy();
   const tk = $(program);
   const server = tk.mcp.servers.list()[0] as McpServer | undefined;
   const toolOps = tk.mcp.tools.list(server);
@@ -155,7 +168,7 @@ export function createMCPServerContext(
     // finally we can make the signature we expect the business logic to
     // implement.
     const implementationOp = tk.operation.create({
-      name: toolOp.name,
+      name: naming.getName(getToolName(toolOp, server?.container ?? program.getGlobalNamespaceType()), "tool"),
       parameters: Array.from(toolOp.parameters.properties.values()).map((p) => {
         return tk.type.clone(p);
       }),
@@ -183,6 +196,7 @@ export function createMCPServerContext(
   );
 
   return {
+    namePolicy: naming,
     name: server?.name ?? "MCP Server",
     version: server?.version ?? "1.0.0",
     instructions: server?.instructions,
@@ -240,6 +254,25 @@ function resultTypeFromDeclaredType(program: Program, type: Type): Type {
   } else {
     return type;
   }
+}
+
+function getToolName(toolOp: Operation, base: Namespace | Interface): string {
+  const segments = [toolOp.name];
+  let current: Operation | Interface | Namespace = toolOp;
+  if (toolOp.interface) {
+    if (toolOp.interface === base) {
+      return segments.join("_");
+    }
+    segments.unshift(toolOp.interface.name);
+    current = toolOp.interface;
+  }
+
+  while (current.namespace && current.namespace !== base) {
+    segments.unshift(current.namespace.name);
+    current = current.namespace;
+  }
+
+  return segments.join("_");
 }
 
 function resultDescriptorFromDeclaredSingleType(program: Program, type: Type): SingleResultDescriptor {

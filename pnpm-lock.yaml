@@ -39,6 +39,9 @@ catalogs:
     '@typespec/tspd':
       specifier: ^0.70.0
       version: 0.70.0
+    change-case:
+      specifier: ^5.4.4
+      version: 5.4.4
     concurrently:
       specifier: ^9.1.2
       version: 9.1.2
@@ -188,6 +191,9 @@ importers:
       '@typespec/emitter-framework':
         specifier: 'catalog:'
         version: 0.7.0(@alloy-js/core@0.16.0)(@alloy-js/typescript@0.16.0)(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))(@typespec/rest@0.70.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15))))
+      change-case:
+        specifier: 'catalog:'
+        version: 5.4.4
       typespec-mcp:
         specifier: workspace:*
         version: link:../typespec-mcp
