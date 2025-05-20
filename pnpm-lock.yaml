@@ -170,12 +170,18 @@ importers:
       '@alloy-js/cli':
         specifier: 'catalog:'
         version: 0.16.0
+      '@alloy-js/rollup-plugin':
+        specifier: 'catalog:'
+        version: 0.1.0(@babel/core@7.27.1)(rollup@4.40.2)
       '@types/node':
         specifier: 'catalog:'
         version: 22.15.15
       concurrently:
         specifier: 'catalog:'
         version: 9.1.2
+      vitest:
+        specifier: 'catalog:'
+        version: 3.1.3(@types/node@22.15.15)(yaml@2.7.1)
 
   packages/typespec-mcp-server-js:
     dependencies:
@@ -213,6 +219,9 @@ importers:
       concurrently:
         specifier: 'catalog:'
         version: 9.1.2
+      vitest:
+        specifier: 'catalog:'
+        version: 3.1.3(@types/node@22.15.15)(yaml@2.7.1)
 
   samples/http-mcp-bridge:
     dependencies:
