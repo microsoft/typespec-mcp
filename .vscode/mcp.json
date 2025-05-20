@@ -7,7 +7,10 @@
     "News Service": {
       "type": "stdio",
       "command": "node",
-      "args": ["${workspaceFolder}/packages/sample/news/dist/src/index.js"]
+      "args": ["${workspaceFolder}/samples/news/dist/src/index.js"],
+      "env": {
+        "APIKEY": ""
+      }
     }
   }
 }

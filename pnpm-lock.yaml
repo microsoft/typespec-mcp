@@ -7,23 +7,23 @@ settings:
 catalogs:
   default:
     '@alloy-js/cli':
-      specifier: ^0.16.0
+      specifier: ~0.16.0
       version: 0.16.0
     '@alloy-js/core':
-      specifier: ^0.16.0
+      specifier: ~0.16.0
       version: 0.16.0
     '@alloy-js/rollup-plugin':
       specifier: ^0.1.0
       version: 0.1.0
     '@alloy-js/typescript':
-      specifier: ^0.16.0
+      specifier: ~0.16.0
       version: 0.16.0
     '@modelcontextprotocol/inspector':
-      specifier: ^0.11.0
-      version: 0.11.0
+      specifier: ^0.12.0
+      version: 0.12.0
     '@modelcontextprotocol/sdk':
-      specifier: ^1.11.0
-      version: 1.11.0
+      specifier: ^1.11.4
+      version: 1.11.4
     '@types/node':
       specifier: ^22.15.0
       version: 22.15.15
@@ -65,7 +65,7 @@ catalogs:
       version: 5.8.3
     typespec-zod:
       specifier: ^0.0.0-51
-      version: 0.0.0-51
+      version: 1.0.0-preview.10
     vitest:
       specifier: ^3.1.1
       version: 3.1.3
@@ -97,10 +97,10 @@ importers:
     dependencies:
       '@modelcontextprotocol/inspector':
         specifier: 'catalog:'
-        version: 0.11.0(@types/node@22.15.15)(typescript@5.8.3)
+        version: 0.12.0(@types/node@22.15.15)(typescript@5.8.3)
       '@modelcontextprotocol/sdk':
         specifier: 'catalog:'
-        version: 1.11.0
+        version: 1.11.4
       '@typespec/compiler':
         specifier: 'catalog:'
         version: 1.0.0(@types/node@22.15.15)
@@ -113,58 +113,6 @@ importers:
       typespec-mcp-server-js:
         specifier: workspace:*
         version: link:../typespec-mcp-server-js
-      zod:
-        specifier: ^3.24.2
-        version: 3.24.4
-      zod-to-json-schema:
-        specifier: ^3.24.5
-        version: 3.24.5(zod@3.24.4)
-      zod-validation-error:
-        specifier: ^3.4.0
-        version: 3.4.1(zod@3.24.4)
-    devDependencies:
-      '@types/node':
-        specifier: 'catalog:'
-        version: 22.15.15
-      '@wong2/mcp-cli':
-        specifier: ^1.6.0
-        version: 1.10.0
-      prettier:
-        specifier: ^3.5.3
-        version: 3.5.3
-      typescript:
-        specifier: 'catalog:'
-        version: 5.8.3
-
-  packages/rest-demo:
-    dependencies:
-      '@modelcontextprotocol/sdk':
-        specifier: 'catalog:'
-        version: 1.11.0
-      '@typespec/compiler':
-        specifier: 'catalog:'
-        version: 1.0.0(@types/node@22.15.15)
-      '@typespec/http':
-        specifier: 'catalog:'
-        version: 1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15))
-      '@typespec/openapi':
-        specifier: 'catalog:'
-        version: 1.0.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))
-      '@typespec/openapi3':
-        specifier: 'catalog:'
-        version: 1.0.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))(@typespec/openapi@1.0.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15))))
-      '@typespec/ts-http-runtime':
-        specifier: 0.2.1
-        version: 0.2.1
-      typespec-mcp:
-        specifier: workspace:*
-        version: link:../typespec-mcp
-      typespec-mcp-rest-server-js:
-        specifier: workspace:*
-        version: link:../typespec-mcp-rest-server-js
-      uri-template:
-        specifier: ^2.0.0
-        version: 2.0.0
       zod:
         specifier: ^3.24.2
         version: 3.24.4
@@ -367,11 +315,63 @@ importers:
         specifier: 'catalog:'
         version: 5.8.3
 
+  samples/news:
+    dependencies:
+      '@modelcontextprotocol/sdk':
+        specifier: 'catalog:'
+        version: 1.11.4
+      '@typespec/compiler':
+        specifier: 'catalog:'
+        version: 1.0.0(@types/node@22.15.15)
+      '@typespec/http':
+        specifier: 'catalog:'
+        version: 1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15))
+      '@typespec/openapi':
+        specifier: 'catalog:'
+        version: 1.0.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))
+      '@typespec/openapi3':
+        specifier: 'catalog:'
+        version: 1.0.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15)))(@typespec/openapi@1.0.0(@typespec/compiler@1.0.0(@types/node@22.15.15))(@typespec/http@1.0.1(@typespec/compiler@1.0.0(@types/node@22.15.15))))
+      '@typespec/ts-http-runtime':
+        specifier: 0.2.1
+        version: 0.2.1
+      typespec-mcp:
+        specifier: workspace:*
+        version: link:../../packages/typespec-mcp
+      typespec-mcp-rest-server-js:
+        specifier: workspace:*
+        version: link:../../packages/typespec-mcp-rest-server-js
+      uri-template:
+        specifier: ^2.0.0
+        version: 2.0.0
+      zod:
+        specifier: ^3.24.2
+        version: 3.24.4
+      zod-to-json-schema:
+        specifier: ^3.24.5
+        version: 3.24.5(zod@3.24.4)
+      zod-validation-error:
+        specifier: ^3.4.0
+        version: 3.4.1(zod@3.24.4)
+    devDependencies:
+      '@types/node':
+        specifier: 'catalog:'
+        version: 22.15.15
+      '@wong2/mcp-cli':
+        specifier: ^1.6.0
+        version: 1.10.0
+      prettier:
+        specifier: ^3.5.3
+        version: 3.5.3
+      typescript:
+        specifier: 'catalog:'
+        version: 5.8.3
+
   samples/vector:
     dependencies:
       '@modelcontextprotocol/inspector':
         specifier: 'catalog:'
-        version: 0.11.0(@types/node@22.15.15)(typescript@5.8.3)
+        version: 0.12.0(@types/node@22.15.15)(typescript@5.8.3)
       '@modelcontextprotocol/sdk':
         specifier: 'catalog:'
         version: 1.11.4
@@ -928,25 +928,21 @@ packages:
   '@json-schema-tools/traverse@1.10.4':
     resolution: {integrity: sha512-9e42zjhLIxzBONroNC4SGsTqdB877tzwH2S6lqgTav9K24kWJR9vNieeMVSuyqnY8FlclH21D8wsm/tuD9WA9Q==}
 
-  '@modelcontextprotocol/inspector-cli@0.11.0':
-    resolution: {integrity: sha512-ptf7JyotRHFjNTdCPPqiErNaV/hx4BylyyP4p+EUpHm5PR0V3VZyTWP4/X2zegd6vbq3x5VQq9iyNacA9Cd4xg==}
+  '@modelcontextprotocol/inspector-cli@0.12.0':
+    resolution: {integrity: sha512-0sMKYqn2Dp3RwJPz/Ukz4FhRN8JNNTniCyOuzuCnb2r5ogLvi6eBaU0CQa2SnE33fFH9HFSOLSI3nHg7SzRJcQ==}
     hasBin: true
 
-  '@modelcontextprotocol/inspector-client@0.11.0':
-    resolution: {integrity: sha512-vBMslBlHmN846rmUx+TugcRqQ2R6wIDjJDx7XIWNE9ZAl16s4qJL7TE3r4ws5lqQYe8mIPQWbz+SwM7X1htxCQ==}
+  '@modelcontextprotocol/inspector-client@0.12.0':
+    resolution: {integrity: sha512-JJ6R6aXTNlhw1JxbURjP7vfS6EvR4d55qT2BAyyvIXO2Q54EhTsClusY99cEymegYuIbhQBd/jHNwgerdpLKow==}
     hasBin: true
 
-  '@modelcontextprotocol/inspector-server@0.11.0':
-    resolution: {integrity: sha512-r+XdRxlL+ymeOLWFu/NsNNqPXz5sLGCMBrTUA/ihoYXOErL1/NFHqpmzUZ7xAvqAAw5ipm0kmXu6mMtMgaRiGw==}
+  '@modelcontextprotocol/inspector-server@0.12.0':
+    resolution: {integrity: sha512-DEnfWwZFGJgXH5DoBaKPK92xfPtUtdM/dpWPuoMVXPln0KwCoIQnMP9aDo0tiWoNP+b6AjxHLTDn4zATtWx0WA==}
     hasBin: true
 
-  '@modelcontextprotocol/inspector@0.11.0':
-    resolution: {integrity: sha512-84du4k3WIQUh9WwIkqN9LQZ90QXii2pJQeoTlT21ctgmEHckf/7n1AP3bNG393Y36i3Nunhcxahz6Cre4jXZKQ==}
+  '@modelcontextprotocol/inspector@0.12.0':
+    resolution: {integrity: sha512-OsoN8ZKdDL/HLC7UHz5RnDlQWwfdofCCm+tvXZepGfZ7QoqmQsnpkiy27hkNTSUJfxpHueOId89Xg5NuUOd6wA==}
     hasBin: true
-
-  '@modelcontextprotocol/sdk@1.11.0':
-    resolution: {integrity: sha512-k/1pb70eD638anoi0e8wUGAlbMJXyvdV4p62Ko+EZ7eBe1xMx8Uhak1R5DgfoofsK5IBBnRwsYGTaLZl+6/+RQ==}
-    engines: {node: '>=18'}
 
   '@modelcontextprotocol/sdk@1.11.4':
     resolution: {integrity: sha512-OTbhe5slIjiOtLxXhKalkKGhIQrwvhgCDs/C2r8kcBTy5HR/g43aDQU0l7r8O0VGbJPTNJvDc7ZdQMdQDJXmbw==}
@@ -1820,7 +1816,7 @@ packages:
     engines: {node: '>=18'}
 
   concat-map@0.0.1:
-    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
+    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
 
   concurrently@9.1.2:
     resolution: {integrity: sha512-H9MWcoPsYddwbOGM6difjVwVZHl63nwMEwDJG/L7VGtuaJhb12h2caPG2tVPWs7emuYix252iGfqOyrz1GczTQ==}
@@ -2786,13 +2782,13 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  typespec-zod@0.0.0-51:
-    resolution: {integrity: sha512-CwQRqL8LsD0q8Z3xtnDDCn0BhpkD/Hk3PSFM9YXuXGqh24oicl7pKK6VcfmTTtxgcg6jvDO4gfnmiD/MDzAUcQ==}
+  typespec-zod@1.0.0-preview.10:
+    resolution: {integrity: sha512-xky0lWv8bOic+KRnsrBTTH6gmvJrVGKo7G9+PSd5xHGvn3PS1PJ7MvqZeMSTVOWC5SVYe5AfvFUw59o5NUMEiA==}
     peerDependencies:
-      '@alloy-js/core': ^0.16.0
-      '@alloy-js/typescript': ^0.16.0
+      '@alloy-js/core': ^0.15.0
+      '@alloy-js/typescript': ^0.15.0
       '@typespec/compiler': ^1.0.0
-      '@typespec/emitter-framework': ^0.7.1
+      '@typespec/emitter-framework': ^0.7.0
 
   uc.micro@2.1.0:
     resolution: {integrity: sha512-ARDJmphmdvUk6Glw7y9DQ2bFkKBHwQHLi2lsaH6PPmz/Ka9sFOBsBluozhDltWmnv9u/cF6Rt87znRTPV+yp/A==}
@@ -3593,17 +3589,17 @@ snapshots:
 
   '@json-schema-tools/traverse@1.10.4': {}
 
-  '@modelcontextprotocol/inspector-cli@0.11.0':
+  '@modelcontextprotocol/inspector-cli@0.12.0':
     dependencies:
-      '@modelcontextprotocol/sdk': 1.11.0
+      '@modelcontextprotocol/sdk': 1.11.4
       commander: 13.1.0
       spawn-rx: 5.1.2
     transitivePeerDependencies:
       - supports-color
 
-  '@modelcontextprotocol/inspector-client@0.11.0':
+  '@modelcontextprotocol/inspector-client@0.12.0':
     dependencies:
-      '@modelcontextprotocol/sdk': 1.11.0
+      '@modelcontextprotocol/sdk': 1.11.4
       '@radix-ui/react-checkbox': 1.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-dialog': 1.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-icons': 1.3.2(react@18.3.1)
@@ -3633,9 +3629,9 @@ snapshots:
       - supports-color
       - tailwindcss
 
-  '@modelcontextprotocol/inspector-server@0.11.0':
+  '@modelcontextprotocol/inspector-server@0.12.0':
     dependencies:
-      '@modelcontextprotocol/sdk': 1.11.0
+      '@modelcontextprotocol/sdk': 1.11.4
       cors: 2.8.5
       express: 5.1.0
       ws: 8.18.2
@@ -3645,12 +3641,12 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@modelcontextprotocol/inspector@0.11.0(@types/node@22.15.15)(typescript@5.8.3)':
+  '@modelcontextprotocol/inspector@0.12.0(@types/node@22.15.15)(typescript@5.8.3)':
     dependencies:
-      '@modelcontextprotocol/inspector-cli': 0.11.0
-      '@modelcontextprotocol/inspector-client': 0.11.0
-      '@modelcontextprotocol/inspector-server': 0.11.0
-      '@modelcontextprotocol/sdk': 1.11.0
+      '@modelcontextprotocol/inspector-cli': 0.12.0
+      '@modelcontextprotocol/inspector-client': 0.12.0
+      '@modelcontextprotocol/inspector-server': 0.12.0
+      '@modelcontextprotocol/sdk': 1.11.4
       concurrently: 9.1.2
       shell-quote: 1.8.2
       spawn-rx: 5.1.2
@@ -3667,21 +3663,6 @@ snapshots:
       - tailwindcss
       - typescript
       - utf-8-validate
-
-  '@modelcontextprotocol/sdk@1.11.0':
-    dependencies:
-      content-type: 1.0.5
-      cors: 2.8.5
-      cross-spawn: 7.0.6
-      eventsource: 3.0.6
-      express: 5.1.0
-      express-rate-limit: 7.5.0(express@5.1.0)
-      pkce-challenge: 5.0.0
-      raw-body: 3.0.0
-      zod: 3.24.4
-      zod-to-json-schema: 3.24.5(zod@3.24.4)
-    transitivePeerDependencies:
-      - supports-color
 
   '@modelcontextprotocol/sdk@1.11.4':
     dependencies:
@@ -4283,7 +4264,7 @@ snapshots:
   '@wong2/mcp-cli@1.10.0':
     dependencies:
       '@json-schema-tools/traverse': 1.10.4
-      '@modelcontextprotocol/sdk': 1.11.0
+      '@modelcontextprotocol/sdk': 1.11.4
       conf: 13.1.0
       eventsource: 3.0.6
       express: 5.1.0
