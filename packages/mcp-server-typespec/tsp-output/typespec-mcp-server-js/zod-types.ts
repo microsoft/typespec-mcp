@@ -18,13 +18,18 @@ export const KnownEmitters = z.union([
 ]);
 
 export const InitOptions = z.object({
-  outDir: z.string()
-    .describe("Absolute path to the output directory where the project should be created."),
-  name: z.string()
+  outDir: z
+    .string()
+
+      .describe("Absolute path to the output directory where the project should be created."),
+  name: z
+    .string()
     .optional()
-    .describe("Name of the project. Default to the outDir name if not specified."),
+
+      .describe("Name of the project. Default to the outDir name if not specified."),
   workflow: Workflow.optional().describe("Workflow needed."),
-  additionalEmitters: z.array(z.union([KnownEmitters, z.string()]))
+  additionalEmitters: z
+    .array(z.union([KnownEmitters, z.string()]))
     .optional()
     .describe("Additional emitters to enable"),
 });

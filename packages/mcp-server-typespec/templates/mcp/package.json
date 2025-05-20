@@ -7,9 +7,9 @@
     "@modelcontextprotocol/inspector": "catalog:",
     "@modelcontextprotocol/sdk": "catalog:",
     "@typespec/compiler": "1.0.0",
-    "typespec-mcp": "0.0.0-37",
-    "typespec-zod": "1.0.0-preview.10",
-    "typespec-mcp-server-js": "0.0.0-37",
+    "typespec-mcp": "0.0.0-61",
+    "typespec-zod": "0.0.0-51",
+    "typespec-mcp-server-js": "0.0.0-61",
     "zod": "3.24.2",
     "zod-to-json-schema": "3.24.5",
     "zod-validation-error": "3.4.0"

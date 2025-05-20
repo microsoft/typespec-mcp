@@ -18,7 +18,7 @@ import {
   PagingHelpers,
   RestError,
   uriTemplateLib,
-} from "@typespec/http-client-js";
+} from "@typespec/http-client-js/experimental";
 import { ClientLibrary } from "@typespec/http-client/components";
 import {
   CallToolHandlers,

@@ -1,4 +1,4 @@
-import { Children, code, For, refkey, StatementList } from "@alloy-js/core";
+import { Children, code, For, Match, refkey, StatementList, Switch } from "@alloy-js/core";
 import {
   FunctionCallExpression,
   MemberExpression,
@@ -11,7 +11,7 @@ import { useTransformNamePolicy, useTsp } from "@typespec/emitter-framework";
 import { FunctionDeclaration } from "@typespec/emitter-framework/typescript";
 import { HttpOperation, HttpProperty } from "@typespec/http";
 import { InternalClient, useClientLibrary } from "@typespec/http-client";
-import { httpRuntimeTemplateLib } from "@typespec/http-client-js";
+import { httpRuntimeTemplateLib } from "@typespec/http-client-js/experimental";
 import { McpServer } from "typespec-mcp";
 import { useMCPServerContext } from "typespec-mcp-server-js";
 import { hasDefaultValue } from "../utils/parameters.jsx";
@@ -52,6 +52,7 @@ export function ToolHandlers(props: ToolHandlersProps) {
               <ObjectProperty name={tool.name}>
                 <FunctionDeclaration async type={tool} returnType={"any"}>
                   <StatementList>
+                    <CredentialVariable op={tool} httpOp={operationHttpOperationMap.get(tool)!} />
                     <VarDeclaration name="client" refkey={refkey(tool, "client")}>
                       new{" "}
                       <InitializeToolClient
@@ -107,13 +108,15 @@ function InitializeToolClient(props: InitailizeToolClientProps) {
 
   clientConstructor.parameters.properties.forEach((param) => {
     // using name is somehow a hacky way, but we could not get extra info from http client typekit
-    if (param.name.endsWith("endpoint")) {
+    if (param.name.endsWith("endpoint") && !param.optional && param.defaultValue === undefined) {
       // the service does not specify the endpoint, so we need to use the one from the environment variable
-      params.push(code`process.env.ENDPOINT`);
+      params.push(code`process.env.ENDPOINT ?? "UNKNOWN"`);
     } else if (param.name === "credential") {
-      // TODO: handle auth
+      // the credential is already defined in the parent scope
+      params.push(refkey(client, "credential"));
     }
   });
+  // TODO: remove for https endpoint
   params.push(code`{ allowInsecureConnection: true }`);
 
   return <FunctionCallExpression target={refkey(client.type, "client-class")} args={params} />;
@@ -168,4 +171,60 @@ function CallToolClient(props: CallToolClientProps) {
       </MemberExpression>
     </>
   );
+}
+
+interface CredentialVariableProps {
+  op: Operation;
+  httpOp: HttpOperation;
+}
+
+function CredentialVariable(props: CredentialVariableProps) {
+  const { op, httpOp } = props;
+  const clientLibrary = useClientLibrary();
+  const { $ } = useTsp();
+
+  const client = clientLibrary.getClientForOperation(httpOp);
+  if (!client) {
+    throw new Error(
+      `No client library found for operation ${op.name}. Please ensure the operation is properly defined.`,
+    );
+  }
+
+  const clientConstructor = $.client.getConstructor(client);
+  let result = <></>;
+  clientConstructor.parameters.properties.forEach((param) => {
+    const authSchemes = $.modelProperty.getCredentialAuth(param)?.filter((s) => s.type !== "noAuth");
+    if (authSchemes && authSchemes.length > 0) {
+      // fallback to the first auth scheme
+      const authScheme = authSchemes[0];
+      // TODO: http bearer oauth, oauth2 and openIdConnect
+      result = (
+        <VarDeclaration name="credential" refkey={refkey(client, "credential")}>
+          <Switch>
+            <Match when={authScheme.type === "apiKey"}>
+              <ObjectExpression>
+                <ObjectProperty name="key" value={code`process.env.APIKEY ?? "UNKNOWN"`} />
+              </ObjectExpression>
+            </Match>
+            <Match when={authScheme.type === "http" && authScheme.scheme === "Basic"}>
+              <ObjectExpression>
+                <ObjectProperty name="username" value={code`process.env.USERNAME ?? "UNKNOWN"`} />
+                <ObjectProperty name="password" value={code`process.env.PASSWORD ?? "UNKNOWN"`} />
+              </ObjectExpression>
+            </Match>
+            <Match when={authScheme.type === "http" && authScheme.scheme === "Bearer"}>
+              <></>
+            </Match>
+            <Match when={authScheme.type === "oauth2"}>
+              <></>
+            </Match>
+            <Match when={authScheme.type === "openIdConnect"}>
+              <></>
+            </Match>
+          </Switch>
+        </VarDeclaration>
+      );
+    }
+  });
+  return result;
 }

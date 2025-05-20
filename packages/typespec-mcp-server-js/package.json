@@ -37,7 +37,6 @@
   "type": "module",
   "devDependencies": {
     "@alloy-js/cli": "catalog:",
-    "@alloy-js/rollup-plugin": "catalog:",
     "@types/node": "catalog:",
     "concurrently": "catalog:"
   }
