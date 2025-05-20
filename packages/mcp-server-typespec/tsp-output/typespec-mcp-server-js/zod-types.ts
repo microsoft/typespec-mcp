@@ -1,7 +1,10 @@
 import { z } from "zod";
 
+export const LearnArea = z.union([z.literal("mcp"), z.literal("mcp on http")]);
+
 export const Workflow = z.union([
   z.literal("mcp"),
+  z.literal("mcp on http"),
   z.literal("rest api"),
   z.literal("rest api with js server"),
   z.literal("rest api with csharp server")
@@ -39,7 +42,7 @@ export const CompileOptions = z.object({
 });
 
 export const learnTypeSpecParameters = z.object({
-  area: z.literal("mcp").optional(),
+  area: LearnArea.optional(),
 });
 
 export const learnTypeSpecReturnType = z.string();

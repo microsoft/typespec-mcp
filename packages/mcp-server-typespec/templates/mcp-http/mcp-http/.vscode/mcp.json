@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "Local TypeSpec MCP Server": {
+      "command": "node",
+      "args": ["${workspaceFolder}/dist/src/index.js"]
+    }
+  }
+}
