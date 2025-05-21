@@ -10,7 +10,7 @@
       }
     ],
     "emitters": {
-      "typespec-mcp-server-rest-js": {
+      "typespec-mcp-rest-server-js": {
         "version": "workspace:^",
         "selected": true,
         "label": "MCP server on Http emitter",

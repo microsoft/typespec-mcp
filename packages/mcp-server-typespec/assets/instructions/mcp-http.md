@@ -8,11 +8,11 @@ Init a TypeSpec project with "mcp on http" workflow.
 
 Step 2:
 
-If use provide an existed TypeSpec spec, you need to put it into the `main.tsp` file.
+- If use provide an existed TypeSpec spec, you need to put it into the `main.tsp` file.
 
-If user provide an existed OpenAPI spec, you need to convert it to TypeSpec into the `main.tsp` file. Before convert, you need to fetch the content of https://typespec.io/docs/getting-started/typespec-for-openapi-dev/, and learn how to convert the OpenAPI spec into TypeSpec. Try to put all the operation under the root namespace instead of group operations by interface.
+- If user provide an existed OpenAPI spec, you need to convert it to TypeSpec into the `main.tsp` file. Before convert, you need to fetch the content of https://typespec.io/docs/getting-started/typespec-for-openapi-dev/, and learn how to convert the OpenAPI spec into TypeSpec. Try to put all the operation under the root namespace instead of group operations by interface.
 
-If user just describe the service's detail, you need to write the service according to TypeSpec syntax into `main.tsp` file. Before write, you need to fetch the content of https://typespec.io/docs/getting-started/getting-started-rest/01-setup-basic-syntax/, and learn how to express Http service with TypeSpec.
+- If user just describe the service's detail, you need to write the service according to TypeSpec syntax into `main.tsp` file. Before write, you need to fetch the content of https://typespec.io/docs/getting-started/getting-started-rest/01-setup-basic-syntax/, and learn how to express Http service with TypeSpec.
 
 Step 3:
 
@@ -38,9 +38,9 @@ Example:
 In the project directory run
 
 ```bash
-tsp compile mcp.tsp
+npm run build
 ```
 
 ### Update MCP config
 
-Check the MCP server code compiled under `tsp-output/mcp-server/tools.ts` to see if there is any environment variable is needed. If so, add it to the config under `.github/mcp.json`.
+Check the MCP server code compiled under `tsp-output/typespec-mcp-rest-server-js/mcp-server/tools.ts` of the project root to see if there is any environment variable is needed. If so, add it to the config under `.vscode/mcp.json` with asking user to provide the env value.
