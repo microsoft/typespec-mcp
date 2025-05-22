@@ -24,7 +24,7 @@
   },
   "scripts": {
     "build": "npm run build-tsp && npm run build-ts",
-    "build-tsp": "tsp compile mcp.tsp --emit typespec-mcp-rest-server-js",
+    "build-tsp": "tsp compile main.tsp --emit typespec-mcp-rest-server-js",
     "build-ts": "tsc -p .",
     "mcp": "mcp-cli node dist/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"

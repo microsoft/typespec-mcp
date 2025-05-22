@@ -19,14 +19,6 @@
     },
     "files": [
       {
-        "path": "mcp-http/main.tsp",
-        "destination": "main.tsp"
-      },
-      {
-        "path": "mcp-http/mcp.tsp",
-        "destination": "mcp.tsp"
-      },
-      {
         "path": "mcp-http/package.json",
         "destination": "package.json"
       },
