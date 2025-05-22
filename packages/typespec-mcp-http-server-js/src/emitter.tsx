@@ -5,7 +5,7 @@ import { useTsp, writeOutput } from "@typespec/emitter-framework";
 import { getServers, type HttpOperation } from "@typespec/http";
 import { useMCPServerContext } from "typespec-mcp-server-js";
 import { McpServer } from "typespec-mcp-server-js/components";
-import type { ToolDescriptor } from "../../typespec-mcp-server-js/dist/src/context/McpServer.js";
+import type { ToolDescriptor } from "../../typespec-mcp-server-js/dist/src/context/utils/tool-descriptor.js";
 import { HttpOperationMapper } from "./components/http-operation-mapper.jsx";
 import { urlTemplate } from "./externals/url-template.js";
 
@@ -41,7 +41,7 @@ export function HttpTools(props: { refkey: Refkey }) {
   for (const tool of tools) {
     const httpOp = $.httpOperation.get(tool.op);
     if (httpOp) {
-      toolsUris[tool.op.name] = httpOp.uriTemplate;
+      toolsUris[tool.name] = httpOp.uriTemplate;
     }
   }
 
