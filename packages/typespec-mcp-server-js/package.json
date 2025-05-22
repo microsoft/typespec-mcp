@@ -16,6 +16,7 @@
     }
   },
   "dependencies": {
+    "change-case": "catalog:",
     "typespec-mcp": "workspace:*",
     "typespec-zod": "catalog:"
   },
@@ -39,6 +40,7 @@
     "@alloy-js/cli": "catalog:",
     "@alloy-js/rollup-plugin": "catalog:",
     "@types/node": "catalog:",
+    "vitest": "catalog:",
     "concurrently": "catalog:"
   }
 }

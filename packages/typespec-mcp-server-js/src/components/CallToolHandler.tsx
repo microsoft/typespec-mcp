@@ -10,12 +10,8 @@ import {
 } from "@alloy-js/typescript";
 import { Type } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";
-import {
-  ArrayResultDescriptor,
-  SingleResultDescriptor,
-  ToolDescriptor,
-  useMCPServerContext,
-} from "../context/McpServer.js";
+import { useMCPServerContext } from "../context/McpServer.js";
+import { ArrayResultDescriptor, SingleResultDescriptor, ToolDescriptor } from "../context/utils/tool-descriptor.js";
 import { zodValidationError } from "../externals/zod-validation-error.js";
 
 export interface CallToolHandlerProps {
@@ -29,7 +25,7 @@ export function CallToolHandler(props: CallToolHandlerProps) {
   } = useMCPServerContext();
   const parseResultKey = refkey();
   return (
-    <CaseClause expression={`"${props.tool.op.name}"`} block>
+    <CaseClause expression={`"${props.tool.name}"`} block>
       <Show when={props.tool.op.parameters.properties.size > 0}>
         <List ender>
           <VarDeclaration name="parsed">
@@ -46,12 +42,12 @@ export function CallToolHandler(props: CallToolHandlerProps) {
         <VarDeclaration name="rawResult">
           await{" "}
           {toolDispatcher ? (
-            <FunctionCallExpression target={toolDispatcher} args={[`"${props.tool.op.name}"`, "parsed.data"]} />
+            <FunctionCallExpression target={toolDispatcher} args={[`"${props.tool.name}"`, "parsed.data"]} />
           ) : (
             <FunctionCallExpression
               target={
                 <>
-                  {getToolHandler}.{props.tool.op.name}
+                  {getToolHandler}.{props.tool.implementationOp.name}
                 </>
               }
               args={[...props.tool.parameters.properties.values()].map((p) => {
