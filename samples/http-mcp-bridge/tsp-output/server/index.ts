@@ -10,7 +10,7 @@ export const server = new Server(
   {
     name: "VectorMCP",
     version: "1.0.0",
-    instructions: "Use this MCP server to perform vector operations in 3D space.",
+    instructions: "Use this MCP to access GitHub API. \n\n- DO NOT pass optional parameters if they are empty. DO NOT PASS an empty string",
   },
   {
     capabilities: {
@@ -538,7 +538,7 @@ const tools = {
 } as const;
 
 async function httpToolHandler(tool: keyof typeof tools, data: any) {
-  dispatcher[tool](data)
+  return dispatcher[tool](data)
 };
 
 const dispatcher = {
@@ -560,6 +560,9 @@ const dispatcher = {
       headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
       body: httpRequest.body?.value,
     });;
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    }
     return await response.json();
   },
   test: async (
@@ -596,6 +599,9 @@ const dispatcher = {
       headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
       body: httpRequest.body?.value,
     });;
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    }
     return await response.json();
   },
   gists_list: async (
@@ -614,6 +620,9 @@ const dispatcher = {
       headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
       body: httpRequest.body?.value,
     });;
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    }
     return await response.json();
   },
   gists_create: async (
@@ -633,6 +642,9 @@ const dispatcher = {
       headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
       body: httpRequest.body?.value,
     });;
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    }
     return await response.json();
   },
   gists_list_public: async (
@@ -651,6 +663,9 @@ const dispatcher = {
       headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
       body: httpRequest.body?.value,
     });;
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    }
     return await response.json();
   },
   gists_list_starred: async (
@@ -669,6 +684,9 @@ const dispatcher = {
       headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
       body: httpRequest.body?.value,
     });;
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    }
     return await response.json();
   },
   gists_get: async (
@@ -687,6 +705,9 @@ const dispatcher = {
       headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
       body: httpRequest.body?.value,
     });;
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    }
     return await response.json();
   },
   gists_update: async (
@@ -710,6 +731,9 @@ const dispatcher = {
       headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
       body: httpRequest.body?.value,
     });;
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    }
     return await response.json();
   },
   gists_delete: async (
@@ -728,6 +752,9 @@ const dispatcher = {
       headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
       body: httpRequest.body?.value,
     });;
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    }
     return await response.json();
   },
   gists_list_commits: async (
@@ -746,6 +773,9 @@ const dispatcher = {
       headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
       body: httpRequest.body?.value,
     });;
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    }
     return await response.json();
   },
   gists_list_forks: async (
@@ -764,6 +794,9 @@ const dispatcher = {
       headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
       body: httpRequest.body?.value,
     });;
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    }
     return await response.json();
   },
   gists_fork: async (
@@ -782,6 +815,9 @@ const dispatcher = {
       headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
       body: httpRequest.body?.value,
     });;
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    }
     return await response.json();
   },
   gists_star: async (
@@ -800,6 +836,9 @@ const dispatcher = {
       headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
       body: httpRequest.body?.value,
     });;
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    }
     return await response.json();
   },
   gists_unstar: async (
@@ -818,6 +857,9 @@ const dispatcher = {
       headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
       body: httpRequest.body?.value,
     });;
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    }
     return await response.json();
   },
   gists_is_starred: async (
@@ -836,6 +878,9 @@ const dispatcher = {
       headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
       body: httpRequest.body?.value,
     });;
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    }
     return await response.json();
   },
 };

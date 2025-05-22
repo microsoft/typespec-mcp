@@ -67,6 +67,9 @@ export function HttpToolHandler(props: { op: HttpOperation; tool: ToolDescriptor
             `}
         </ts.VarDeclaration>
         {code`
+            if (!response.ok) {
+              throw new Error(\`HTTP error: \${response.status} \${response.statusText}\\n\\n\${response.text()}\`);
+            }
             return await response.json();
           `}
       </List>

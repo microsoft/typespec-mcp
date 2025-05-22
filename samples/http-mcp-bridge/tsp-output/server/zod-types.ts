@@ -224,7 +224,7 @@ export const FullRepository = z
 export const GistFile = z.object({
   filename: z.string(),
   type: z.string(),
-  language: z.string(),
+  language: z.union([z.string(), z.null()]),
   raw_url: z.string(),
   size: z.number().int().gte(-2147483648).lte(2147483647),
   encoding: z.string().optional(),
@@ -310,7 +310,11 @@ export const testParameters = z.object({
 export const testReturnType = z.void();
 
 export const gists_listParameters = z.object({
-  since: z.coerce.date().optional(),
+  since: z.coerce
+    .date()
+    .optional()
+
+      .describe("The time to start listing gists from. Optional. DO NOT PASS an empty string."),
 });
 
 export const gists_listReturnType = GistArray;

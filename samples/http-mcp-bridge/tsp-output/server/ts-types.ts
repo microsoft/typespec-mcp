@@ -90,7 +90,7 @@ export interface FullRepository {
 export interface GistFile {
   filename: string
   type: string
-  language: string
+  language: string | null
   raw_url: string
   size: number
   encoding?: string;

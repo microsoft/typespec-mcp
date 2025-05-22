@@ -6,7 +6,7 @@ namespace Github;
 model GistFile {
   filename: string;
   type: string;
-  language: string;
+  language: string | null;
   raw_url: string;
   size: int32;
   encoding?: string;
@@ -123,7 +123,10 @@ model CreateGist {
 
 @route("/gists")
 interface Gists {
-  /** List gists for the authenticated user */
+  /**
+   * List gists for the authenticated user
+   * @param since - The time to start listing gists from. Optional. DO NOT PASS an empty string.
+   */
   @tool list(@query since?: utcDateTime): Gist[];
   /** Create a gist */
   @tool @post create(@body gist: CreateGist): Gist;

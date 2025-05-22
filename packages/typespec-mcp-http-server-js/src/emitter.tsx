@@ -54,7 +54,7 @@ export function HttpTools(props: { refkey: Refkey }) {
         ]}
         refkey={props.refkey}
       >
-        {dispatcherRefKey}
+        return {dispatcherRefKey}
         [tool](data)
       </ts.FunctionDeclaration>
       <ts.VarDeclaration refkey={dispatcherRefKey} const name="dispatcher">

@@ -6,11 +6,7 @@ import "./user.tsp";
 using MCP;
 using Http;
 
-@mcpServer(#{
-  name: "VectorMCP",
-  version: "1.0.0",
-  instructions: "Use this MCP server to perform vector operations in 3D space.",
-})
+@mcpServer(#{ name: "VectorMCP", version: "1.0.0", instructions: "Use this MCP to access GitHub API." })
 @service
 @server("https://api.github.com")
 namespace Github;
