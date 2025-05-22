@@ -1,6 +1,5 @@
 import { $ } from "@typespec/compiler/typekit";
-import { describe } from "node:test";
-import { expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { createTestRunner } from "../../../test/test-host.js";
 import { createMcpNamingPolicy } from "../name-policy.js";
 import { resolveToolDescriptors } from "./tool-descriptor.js";
