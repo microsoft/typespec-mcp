@@ -34,7 +34,9 @@ npm run build
 
 ### Update MCP config
 
-Check the MCP server code compiled under `tsp-output/typespec-mcp-rest-server-js/mcp-server/tools.ts` after each build. If there is any environment variable declared in the code and not existed in config, update the config under `.vscode/mcp.json` with adding or editing the `env` part and ask user to provide the env value.
+After each build, update the mcp config under `.vscode/mcp.json` if needed:
+
+- Check the MCP server code compiled under `tsp-output/typespec-mcp-rest-server-js/mcp-server/tools.ts`. If there is any environment variable declared in the code and not existed in config's `env` part, update the config. You should only change the `env` part, but DO NOT change the `typy`, `command` or `args`.
 
 Example:
 
@@ -46,7 +48,7 @@ Example:
       "command": "node",
       "args": ["${workspaceFolder}/dist/src/index.js"],
       "env": {
-        "APIKEY": "FAKE_KEY"
+        "ENV_KEY": "UPDATE_THE_VALUE"
       }
     }
   }
