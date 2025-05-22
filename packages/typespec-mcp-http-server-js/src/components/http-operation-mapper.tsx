@@ -9,6 +9,9 @@ export interface HttpOperationMapperProps {
 
   /** Refkey of the args array */
   argsRefkey: Refkey;
+
+  /** Are the args passed as an array of positional arg or an option bag  */
+  argsStyle?: "positional" | "named";
 }
 
 /**
@@ -34,7 +37,7 @@ export function HttpOperationMapper(props: HttpOperationMapperProps) {
     if (!httpProp) {
       throw new Error(`Expected to find http property for ${parameter.name}`);
     }
-    const indexCp = index;
+    const indexCp = props.argsStyle === "named" ? parameter.name : index;
     const accessor = <HttpPropertyAccessor refkey={props.argsRefkey} path={[indexCp, ...httpProp.path.slice(1)]} />;
     switch (httpProp.kind) {
       case "header":

@@ -28,67 +28,67 @@ export interface Tools {
   /**
    * List gists for the authenticated user
    */
-  list(since?: Date): Array<Gist> | Promise<Array<Gist>>
+  gistsList(since?: Date): Array<Gist> | Promise<Array<Gist>>
 
   /**
    * Create a gist
    */
-  create(gist: CreateGist): Gist | Promise<Gist>
+  gistsCreate(gist: CreateGist): Gist | Promise<Gist>
 
   /**
    * List public gists
    */
-  listPublic(since?: Date): Array<Gist> | Promise<Array<Gist>>
+  gistsListPublic(since?: Date): Array<Gist> | Promise<Array<Gist>>
 
   /**
    * List starred gists
    */
-  listStarred(since?: Date): Array<Gist> | Promise<Array<Gist>>
+  gistsListStarred(since?: Date): Array<Gist> | Promise<Array<Gist>>
 
   /**
    * Get a gist
    */
-  get(id: string): Gist | Promise<Gist>
+  gistsGet(id: string): Gist | Promise<Gist>
 
   /**
    * Update a gist
    */
-  update(id: string, gist: CreateGist): Gist | Promise<Gist>
+  gistsUpdate(id: string, gist: CreateGist): Gist | Promise<Gist>
 
   /**
    * Delete a gist
    */
-  delete(id: string): void | Promise<void>
+  gistsDelete(id: string): void | Promise<void>
 
   /**
    * List gist commits
    */
-  listCommits(id: string): Array<unknown> | Promise<Array<unknown>>
+  gistsListCommits(id: string): Array<unknown> | Promise<Array<unknown>>
 
   /**
    * List gist forks
    */
-  listForks(id: string): Array<unknown> | Promise<Array<unknown>>
+  gistsListForks(id: string): Array<unknown> | Promise<Array<unknown>>
 
   /**
    * Fork a gist
    */
-  fork(id: string): Gist | Promise<Gist>
+  gistsFork(id: string): Gist | Promise<Gist>
 
   /**
    * Star a gist
    */
-  star(id: string): void | Promise<void>
+  gistsStar(id: string): void | Promise<void>
 
   /**
    * Unstar a gist
    */
-  unstar(id: string): void | Promise<void>
+  gistsUnstar(id: string): void | Promise<void>
 
   /**
    * Check if a gist is starred
    */
-  isStarred(id: string): boolean | Promise<boolean>
+  gistsIsStarred(id: string): boolean | Promise<boolean>
 }
 
 export let toolHandler: Tools = undefined as any;
