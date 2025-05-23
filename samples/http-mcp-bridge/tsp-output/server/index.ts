@@ -4,7 +4,7 @@ import { parseTemplate } from "url-template";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import type { CreateGist } from "./ts-types.js";
-import { get_repositoryParameters, get_repositoryReturnType, gists_createParameters, gists_createReturnType, gists_deleteParameters, gists_deleteReturnType, gists_forkParameters, gists_forkReturnType, gists_getParameters, gists_getReturnType, gists_is_starredParameters, gists_is_starredReturnType, gists_list_commitsParameters, gists_list_commitsReturnType, gists_list_forksParameters, gists_list_forksReturnType, gists_list_publicParameters, gists_list_publicReturnType, gists_list_starredParameters, gists_list_starredReturnType, gists_listParameters, gists_listReturnType, gists_starParameters, gists_starReturnType, gists_unstarParameters, gists_unstarReturnType, gists_updateParameters, gists_updateReturnType, testParameters, testReturnType } from "./zod-types.js";
+import { getRepositoryParameters, getRepositoryReturnType, gistsCreateParameters, gistsCreateReturnType, gistsDeleteParameters, gistsDeleteReturnType, gistsForkParameters, gistsForkReturnType, gistsGetParameters, gistsGetReturnType, gistsIsStarredParameters, gistsIsStarredReturnType, gistsListCommitsParameters, gistsListCommitsReturnType, gistsListForksParameters, gistsListForksReturnType, gistsListParameters, gistsListPublicParameters, gistsListPublicReturnType, gistsListReturnType, gistsListStarredParameters, gistsListStarredReturnType, gistsStarParameters, gistsStarReturnType, gistsUnstarParameters, gistsUnstarReturnType, gistsUpdateParameters, gistsUpdateReturnType, testParameters, testReturnType } from "./zod-types.js";
 
 export const server = new Server(
   {
@@ -28,7 +28,7 @@ server.setRequestHandler(
           name: "get_repository",
           description: "Get a GitHub repository by owner and repository name.",
           inputSchema: zodToJsonSchema(
-            get_repositoryParameters,
+            getRepositoryParameters,
             {
               $refStrategy: "none",
             }
@@ -48,7 +48,7 @@ server.setRequestHandler(
           name: "gists_list",
           description: "List gists for the authenticated user",
           inputSchema: zodToJsonSchema(
-            gists_listParameters,
+            gistsListParameters,
             {
               $refStrategy: "none",
             }
@@ -58,7 +58,7 @@ server.setRequestHandler(
           name: "gists_create",
           description: "Create a gist",
           inputSchema: zodToJsonSchema(
-            gists_createParameters,
+            gistsCreateParameters,
             {
               $refStrategy: "none",
             }
@@ -68,7 +68,7 @@ server.setRequestHandler(
           name: "gists_list_public",
           description: "List public gists",
           inputSchema: zodToJsonSchema(
-            gists_list_publicParameters,
+            gistsListPublicParameters,
             {
               $refStrategy: "none",
             }
@@ -78,7 +78,7 @@ server.setRequestHandler(
           name: "gists_list_starred",
           description: "List starred gists",
           inputSchema: zodToJsonSchema(
-            gists_list_starredParameters,
+            gistsListStarredParameters,
             {
               $refStrategy: "none",
             }
@@ -88,7 +88,7 @@ server.setRequestHandler(
           name: "gists_get",
           description: "Get a gist",
           inputSchema: zodToJsonSchema(
-            gists_getParameters,
+            gistsGetParameters,
             {
               $refStrategy: "none",
             }
@@ -98,7 +98,7 @@ server.setRequestHandler(
           name: "gists_update",
           description: "Update a gist",
           inputSchema: zodToJsonSchema(
-            gists_updateParameters,
+            gistsUpdateParameters,
             {
               $refStrategy: "none",
             }
@@ -108,7 +108,7 @@ server.setRequestHandler(
           name: "gists_delete",
           description: "Delete a gist",
           inputSchema: zodToJsonSchema(
-            gists_deleteParameters,
+            gistsDeleteParameters,
             {
               $refStrategy: "none",
             }
@@ -118,7 +118,7 @@ server.setRequestHandler(
           name: "gists_list_commits",
           description: "List gist commits",
           inputSchema: zodToJsonSchema(
-            gists_list_commitsParameters,
+            gistsListCommitsParameters,
             {
               $refStrategy: "none",
             }
@@ -128,7 +128,7 @@ server.setRequestHandler(
           name: "gists_list_forks",
           description: "List gist forks",
           inputSchema: zodToJsonSchema(
-            gists_list_forksParameters,
+            gistsListForksParameters,
             {
               $refStrategy: "none",
             }
@@ -138,7 +138,7 @@ server.setRequestHandler(
           name: "gists_fork",
           description: "Fork a gist",
           inputSchema: zodToJsonSchema(
-            gists_forkParameters,
+            gistsForkParameters,
             {
               $refStrategy: "none",
             }
@@ -148,7 +148,7 @@ server.setRequestHandler(
           name: "gists_star",
           description: "Star a gist",
           inputSchema: zodToJsonSchema(
-            gists_starParameters,
+            gistsStarParameters,
             {
               $refStrategy: "none",
             }
@@ -158,7 +158,7 @@ server.setRequestHandler(
           name: "gists_unstar",
           description: "Unstar a gist",
           inputSchema: zodToJsonSchema(
-            gists_unstarParameters,
+            gistsUnstarParameters,
             {
               $refStrategy: "none",
             }
@@ -168,7 +168,7 @@ server.setRequestHandler(
           name: "gists_is_starred",
           description: "Check if a gist is starred",
           inputSchema: zodToJsonSchema(
-            gists_is_starredParameters,
+            gistsIsStarredParameters,
             {
               $refStrategy: "none",
             }
@@ -186,12 +186,12 @@ server.setRequestHandler(
     const args = request.params.arguments;
     switch (name) {
       case "get_repository": {
-        const parsed = get_repositoryParameters.safeParse(args);
+        const parsed = getRepositoryParameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
         const rawResult = await httpToolHandler("get_repository", parsed.data);
-        const maybeResult = get_repositoryReturnType.safeParse(rawResult);
+        const maybeResult = getRepositoryReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
@@ -228,12 +228,12 @@ server.setRequestHandler(
       }
 
       case "gists_list": {
-        const parsed = gists_listParameters.safeParse(args);
+        const parsed = gistsListParameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
         const rawResult = await httpToolHandler("gists_list", parsed.data);
-        const maybeResult = gists_listReturnType.safeParse(rawResult);
+        const maybeResult = gistsListReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
@@ -249,12 +249,12 @@ server.setRequestHandler(
       }
 
       case "gists_create": {
-        const parsed = gists_createParameters.safeParse(args);
+        const parsed = gistsCreateParameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
         const rawResult = await httpToolHandler("gists_create", parsed.data);
-        const maybeResult = gists_createReturnType.safeParse(rawResult);
+        const maybeResult = gistsCreateReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
@@ -270,7 +270,7 @@ server.setRequestHandler(
       }
 
       case "gists_list_public": {
-        const parsed = gists_list_publicParameters.safeParse(args);
+        const parsed = gistsListPublicParameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
@@ -278,7 +278,7 @@ server.setRequestHandler(
           "gists_list_public",
           parsed.data
         );
-        const maybeResult = gists_list_publicReturnType.safeParse(rawResult);
+        const maybeResult = gistsListPublicReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
@@ -294,7 +294,7 @@ server.setRequestHandler(
       }
 
       case "gists_list_starred": {
-        const parsed = gists_list_starredParameters.safeParse(args);
+        const parsed = gistsListStarredParameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
@@ -302,7 +302,7 @@ server.setRequestHandler(
           "gists_list_starred",
           parsed.data
         );
-        const maybeResult = gists_list_starredReturnType.safeParse(rawResult);
+        const maybeResult = gistsListStarredReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
@@ -318,12 +318,12 @@ server.setRequestHandler(
       }
 
       case "gists_get": {
-        const parsed = gists_getParameters.safeParse(args);
+        const parsed = gistsGetParameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
         const rawResult = await httpToolHandler("gists_get", parsed.data);
-        const maybeResult = gists_getReturnType.safeParse(rawResult);
+        const maybeResult = gistsGetReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
@@ -339,12 +339,12 @@ server.setRequestHandler(
       }
 
       case "gists_update": {
-        const parsed = gists_updateParameters.safeParse(args);
+        const parsed = gistsUpdateParameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
         const rawResult = await httpToolHandler("gists_update", parsed.data);
-        const maybeResult = gists_updateReturnType.safeParse(rawResult);
+        const maybeResult = gistsUpdateReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
@@ -360,12 +360,12 @@ server.setRequestHandler(
       }
 
       case "gists_delete": {
-        const parsed = gists_deleteParameters.safeParse(args);
+        const parsed = gistsDeleteParameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
         const rawResult = await httpToolHandler("gists_delete", parsed.data);
-        const maybeResult = gists_deleteReturnType.safeParse(rawResult);
+        const maybeResult = gistsDeleteReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
@@ -381,7 +381,7 @@ server.setRequestHandler(
       }
 
       case "gists_list_commits": {
-        const parsed = gists_list_commitsParameters.safeParse(args);
+        const parsed = gistsListCommitsParameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
@@ -389,7 +389,7 @@ server.setRequestHandler(
           "gists_list_commits",
           parsed.data
         );
-        const maybeResult = gists_list_commitsReturnType.safeParse(rawResult);
+        const maybeResult = gistsListCommitsReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
@@ -405,7 +405,7 @@ server.setRequestHandler(
       }
 
       case "gists_list_forks": {
-        const parsed = gists_list_forksParameters.safeParse(args);
+        const parsed = gistsListForksParameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
@@ -413,7 +413,7 @@ server.setRequestHandler(
           "gists_list_forks",
           parsed.data
         );
-        const maybeResult = gists_list_forksReturnType.safeParse(rawResult);
+        const maybeResult = gistsListForksReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
@@ -429,12 +429,12 @@ server.setRequestHandler(
       }
 
       case "gists_fork": {
-        const parsed = gists_forkParameters.safeParse(args);
+        const parsed = gistsForkParameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
         const rawResult = await httpToolHandler("gists_fork", parsed.data);
-        const maybeResult = gists_forkReturnType.safeParse(rawResult);
+        const maybeResult = gistsForkReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
@@ -450,12 +450,12 @@ server.setRequestHandler(
       }
 
       case "gists_star": {
-        const parsed = gists_starParameters.safeParse(args);
+        const parsed = gistsStarParameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
         const rawResult = await httpToolHandler("gists_star", parsed.data);
-        const maybeResult = gists_starReturnType.safeParse(rawResult);
+        const maybeResult = gistsStarReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
@@ -471,12 +471,12 @@ server.setRequestHandler(
       }
 
       case "gists_unstar": {
-        const parsed = gists_unstarParameters.safeParse(args);
+        const parsed = gistsUnstarParameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
         const rawResult = await httpToolHandler("gists_unstar", parsed.data);
-        const maybeResult = gists_unstarReturnType.safeParse(rawResult);
+        const maybeResult = gistsUnstarReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
@@ -492,7 +492,7 @@ server.setRequestHandler(
       }
 
       case "gists_is_starred": {
-        const parsed = gists_is_starredParameters.safeParse(args);
+        const parsed = gistsIsStarredParameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
@@ -500,7 +500,7 @@ server.setRequestHandler(
           "gists_is_starred",
           parsed.data
         );
-        const maybeResult = gists_is_starredReturnType.safeParse(rawResult);
+        const maybeResult = gistsIsStarredReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };

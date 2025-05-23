@@ -284,14 +284,14 @@ export const UnknownArray = z.array(z.unknown());
 
 export const UnknownArray_2 = z.array(z.unknown());
 
-export const get_repositoryParameters = z.object({
+export const getRepositoryParameters = z.object({
   owner: z
     .string()
     .describe("The username or organization name of the repository owner."),
   repo: z.string().describe("The name of the repository."),
 });
 
-export const get_repositoryReturnType = FullRepository
+export const getRepositoryReturnType = FullRepository
   .describe("Full representation of a GitHub repository. This model includes all the details of a repository, such as its owner, visibility, license, and various URLs for accessing its resources.");
 
 export const testParameters = z.object({
@@ -309,7 +309,7 @@ export const testParameters = z.object({
 
 export const testReturnType = z.void();
 
-export const gists_listParameters = z.object({
+export const gistsListParameters = z.object({
   since: z.coerce
     .date()
     .optional()
@@ -317,77 +317,77 @@ export const gists_listParameters = z.object({
       .describe("The time to start listing gists from. Optional. DO NOT PASS an empty string."),
 });
 
-export const gists_listReturnType = GistArray;
+export const gistsListReturnType = GistArray;
 
-export const gists_createParameters = z.object({
+export const gistsCreateParameters = z.object({
   gist: CreateGist,
 });
 
-export const gists_createReturnType = Gist.describe("Base Gist");
+export const gistsCreateReturnType = Gist.describe("Base Gist");
 
-export const gists_list_publicParameters = z.object({
+export const gistsListPublicParameters = z.object({
   since: z.coerce.date().optional(),
 });
 
-export const gists_list_publicReturnType = GistArray_2;
+export const gistsListPublicReturnType = GistArray_2;
 
-export const gists_list_starredParameters = z.object({
+export const gistsListStarredParameters = z.object({
   since: z.coerce.date().optional(),
 });
 
-export const gists_list_starredReturnType = GistArray_3;
+export const gistsListStarredReturnType = GistArray_3;
 
-export const gists_getParameters = z.object({
+export const gistsGetParameters = z.object({
   id: z.string(),
 });
 
-export const gists_getReturnType = Gist.describe("Base Gist");
+export const gistsGetReturnType = Gist.describe("Base Gist");
 
-export const gists_updateParameters = z.object({
+export const gistsUpdateParameters = z.object({
   id: z.string(),
   gist: CreateGist,
 });
 
-export const gists_updateReturnType = Gist.describe("Base Gist");
+export const gistsUpdateReturnType = Gist.describe("Base Gist");
 
-export const gists_deleteParameters = z.object({
+export const gistsDeleteParameters = z.object({
   id: z.string(),
 });
 
-export const gists_deleteReturnType = z.void();
+export const gistsDeleteReturnType = z.void();
 
-export const gists_list_commitsParameters = z.object({
+export const gistsListCommitsParameters = z.object({
   id: z.string(),
 });
 
-export const gists_list_commitsReturnType = UnknownArray;
+export const gistsListCommitsReturnType = UnknownArray;
 
-export const gists_list_forksParameters = z.object({
+export const gistsListForksParameters = z.object({
   id: z.string(),
 });
 
-export const gists_list_forksReturnType = UnknownArray_2;
+export const gistsListForksReturnType = UnknownArray_2;
 
-export const gists_forkParameters = z.object({
+export const gistsForkParameters = z.object({
   id: z.string(),
 });
 
-export const gists_forkReturnType = Gist.describe("Base Gist");
+export const gistsForkReturnType = Gist.describe("Base Gist");
 
-export const gists_starParameters = z.object({
+export const gistsStarParameters = z.object({
   id: z.string(),
 });
 
-export const gists_starReturnType = z.void();
+export const gistsStarReturnType = z.void();
 
-export const gists_unstarParameters = z.object({
+export const gistsUnstarParameters = z.object({
   id: z.string(),
 });
 
-export const gists_unstarReturnType = z.void();
+export const gistsUnstarReturnType = z.void();
 
-export const gists_is_starredParameters = z.object({
+export const gistsIsStarredParameters = z.object({
   id: z.string(),
 });
 
-export const gists_is_starredReturnType = z.boolean();
+export const gistsIsStarredReturnType = z.boolean();
