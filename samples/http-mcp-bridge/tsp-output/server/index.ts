@@ -24,7 +24,7 @@ server.setRequestHandler(
     return {
       tools: [
         {
-          name: "getRepository",
+          name: "get_repository",
           description: "Get a GitHub repository by owner and repository name.",
           inputSchema: zodToJsonSchema(
             getRepositoryParameters,
@@ -44,12 +44,12 @@ server.setRequestHandler(
     const name = request.params.name;
     const args = request.params.arguments;
     switch (name) {
-      case "getRepository": {
+      case "get_repository": {
         const parsed = getRepositoryParameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
-        const rawResult = await httpToolHandler("getRepository", parsed.data);
+        const rawResult = await httpToolHandler("get_repository", parsed.data);
         const maybeResult = getRepositoryReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
@@ -70,7 +70,7 @@ server.setRequestHandler(
 )
 
 const tools = {
-  getRepository: "/repos/{owner}/{repo}",
+  get_repository: "/repos/{owner}/{repo}",
 } as const;
 
 async function httpToolHandler(tool: keyof typeof tools, data: any) {
