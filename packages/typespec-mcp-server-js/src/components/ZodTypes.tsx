@@ -6,7 +6,7 @@ import { useMCPServerContext } from "../context/McpServer.js";
 import { getPlausibleName } from "../utils.js";
 
 export function ZodTypes() {
-  const { tools, allTypes, namePolicy } = useMCPServerContext();
+  const { tools, allTypes, namePolicy, skipValidateResult } = useMCPServerContext();
   const { program } = useTsp();
   return (
     <List doubleHardline>
@@ -22,22 +22,25 @@ export function ZodTypes() {
           // todo: these are only needed because I can't access members inside
           // ZodSchemaDeclaration props without causing an error.
           const parametersRk = tool.keys.zodParametersSchema;
-          const returnTypeRk = tool.keys.zodReturnSchema;
-
           const parametersName = namePolicy.getName(tool.name + "Parameters", "variable");
-          const returnTypeName = namePolicy.getName(tool.name + "ReturnType", "variable");
 
           const schemas = [
             <ZodSchemaDeclaration export name={parametersName} type={tool.op.parameters} refkey={parametersRk} />,
           ];
-          schemas.push(
-            <VarDeclaration
-              export
-              name={returnTypeName}
-              refkey={returnTypeRk}
-              initializer={<ZodSchema nested type={tool.implementationOp.returnType} />}
-            />,
-          );
+
+          if (!skipValidateResult) {
+            const returnTypeRk = tool.keys.zodReturnSchema;
+            const returnTypeName = namePolicy.getName(tool.name + "ReturnType", "variable");
+
+            schemas.push(
+              <VarDeclaration
+                export
+                name={returnTypeName}
+                refkey={returnTypeRk}
+                initializer={<ZodSchema nested type={tool.implementationOp.returnType} />}
+              />,
+            );
+          }
 
           return <List doubleHardline semicolon enderPunctuation children={schemas} />;
         }}

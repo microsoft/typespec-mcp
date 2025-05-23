@@ -17,6 +17,7 @@ import { splitOutErrors } from "../../utils.js";
 import type { McpElements } from "../name-policy.js";
 
 export interface ToolDescriptor {
+  rawOp: Operation;
   op: Operation;
   /** Tool full name as exposed by the server (snake_case style) */
   name: string;
@@ -116,6 +117,7 @@ export function resolveToolDescriptors(
     });
 
     toolDescriptors.push({
+      rawOp: rawToolOp,
       op: toolOp,
       name: naming.getName(toolName, "tool"),
       implementationOp,

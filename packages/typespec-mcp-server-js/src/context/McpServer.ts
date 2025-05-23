@@ -54,6 +54,7 @@ export interface MCPServerContext {
   allTypes: Type[];
   instructions?: string;
   namePolicy: NamePolicy<McpElements>;
+  skipValidateResult?: boolean;
 }
 
 export const MCPServerContext: ComponentContext<MCPServerContext> = createContext();
@@ -68,7 +69,7 @@ export function useMCPServerContext(): MCPServerContext {
 
 export function createMCPServerContext(
   program: Program,
-  { toolDispatcher }: { toolDispatcher?: Refkey } = {},
+  { toolDispatcher, skipValidateResult }: { toolDispatcher?: Refkey; skipValidateResult?: boolean } = {},
 ): MCPServerContext {
   const naming = createMcpNamingPolicy();
   const tk = $(program);
@@ -77,7 +78,9 @@ export function createMCPServerContext(
   const toolDescriptors = resolveToolDescriptors(program, server, naming);
   const allTypes = discoverTypesFrom(
     program,
-    toolDescriptors.flatMap((tool) => [tool.op.parameters, tool.implementationOp.returnType]),
+    toolDescriptors.flatMap((tool) =>
+      skipValidateResult ? [tool.op.parameters] : [tool.op.parameters, tool.implementationOp.returnType],
+    ),
   );
 
   return {
@@ -97,6 +100,7 @@ export function createMCPServerContext(
       setToolHandler: refkey(),
       toolDispatcher: toolDispatcher,
     },
+    skipValidateResult,
   };
 }
 
