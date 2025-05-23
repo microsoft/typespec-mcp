@@ -4,9 +4,7 @@ import { mcpSdk } from "../externals/mcp-sdk.js";
 
 export interface ServerDeclarationProps {}
 
-export const commonInstructions = [
-  "- DO NOT pass optional parameters if they are empty. DO NOT PASS an empty string",
-].join("\n");
+export const commonInstructions = ["- DO NOT pass optional parameters if they are empty. DO NOT PASS an empty string"];
 
 /**
  * Declares an MCP Server.
@@ -16,7 +14,7 @@ export function ServerDeclaration(props: ServerDeclarationProps) {
   const serverMetadata = {
     name: mcpContext.name,
     version: mcpContext.version,
-    instructions: `${mcpContext.instructions} \n\n${commonInstructions}`,
+    instructions: [mcpContext.instructions, ...commonInstructions].filter((x) => x).join("\n"),
   };
 
   const capabilities = {

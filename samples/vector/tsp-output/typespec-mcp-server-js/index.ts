@@ -9,7 +9,7 @@ export const server = new Server(
   {
     name: "VectorMCP",
     version: "1.0.0",
-    instructions: "Use this MCP server to perform vector operations in 3D space. \n\n- DO NOT pass optional parameters if they are empty. DO NOT PASS an empty string",
+    instructions: "Use this MCP server to perform vector operations in 3D space.\n- DO NOT pass optional parameters if they are empty. DO NOT PASS an empty string",
   },
   {
     capabilities: {
