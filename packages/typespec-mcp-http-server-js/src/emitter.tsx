@@ -36,7 +36,7 @@ export function HttpTools(props: { refkey: Refkey }) {
   for (const tool of tools) {
     const httpOp = $.httpOperation.get(tool.op);
     if (httpOp) {
-      toolsUris[tool.op.name] = httpOp.uriTemplate;
+      toolsUris[tool.name] = httpOp.uriTemplate;
     }
   }
 

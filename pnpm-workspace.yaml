@@ -21,6 +21,7 @@ catalog:
   "@typespec/rest": ^0.70.0
   "@typespec/tspd": "^0.70.0"
   concurrently: ^9.1.2
+  change-case: "^5.4.4"
   prettier: ^3.5.3
   typescript: ^5.8.3
   typespec-zod: 0.0.0-51

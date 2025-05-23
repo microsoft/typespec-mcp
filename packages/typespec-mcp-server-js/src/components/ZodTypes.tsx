@@ -22,7 +22,7 @@ export function ZodTypes() {
           // todo: these are only needed because I can't access members inside
           // ZodSchemaDeclaration props without causing an error.
           const parametersRk = tool.keys.zodParametersSchema;
-          const parametersName = tool.op.name + "Parameters";
+          const parametersName = tool.name + "Parameters";
 
           const schemas = [
             <ZodSchemaDeclaration export name={parametersName} type={tool.op.parameters} refkey={parametersRk} />,
@@ -30,7 +30,7 @@ export function ZodTypes() {
 
           if (!skipValidateResult) {
             const returnTypeRk = tool.keys.zodReturnSchema;
-            const returnTypeName = tool.op.name + "ReturnType";
+            const returnTypeName = tool.name + "ReturnType";
 
             schemas.push(
               <VarDeclaration

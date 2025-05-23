@@ -16,6 +16,7 @@
     }
   },
   "dependencies": {
+    "change-case": "catalog:",
     "typespec-mcp": "workspace:*",
     "typespec-zod": "catalog:"
   },
@@ -38,6 +39,7 @@
   "devDependencies": {
     "@alloy-js/cli": "catalog:",
     "@types/node": "catalog:",
+    "vitest": "catalog:",
     "concurrently": "catalog:"
   }
 }

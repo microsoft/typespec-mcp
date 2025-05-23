@@ -21,7 +21,7 @@ export async function $onEmit(context: EmitContext) {
 
   writeOutput(
     context.program,
-    <Output program={context.program} externals={libs}>
+    <Output program={context.program} externals={libs} namePolicy={mcpServerContext.namePolicy}>
       <MCPServerContext.Provider value={mcpServerContext}>
         <SourceFile path="zod-types.ts">
           <ZodTypes />
