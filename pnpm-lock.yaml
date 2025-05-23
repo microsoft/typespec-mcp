@@ -274,6 +274,9 @@ importers:
       '@alloy-js/cli':
         specifier: 'catalog:'
         version: 0.16.0
+      '@alloy-js/rollup-plugin':
+        specifier: 'catalog:'
+        version: 0.1.0(@babel/core@7.27.1)(rollup@4.40.2)
       '@types/node':
         specifier: 'catalog:'
         version: 22.15.15
