@@ -2,7 +2,7 @@ import { zodToJsonSchema } from "zod-to-json-schema";
 import { fromZodError } from "zod-validation-error";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
-import { getLatestNewsParameters } from "./schema.js";
+import { newsGetLatestNewsParameters } from "./schema.js";
 import { toolHandler } from "./tools.js";
 
 export const server = new Server(
@@ -24,10 +24,10 @@ server.setRequestHandler(
     return {
       tools: [
         {
-          name: "get_latest_news",
+          name: "news_get_latest_news",
           description: "Provides access to the latest and breaking news. The news articles are sorted by the published date. The news articles are up to the past 48 hours.",
           inputSchema: zodToJsonSchema(
-            getLatestNewsParameters,
+            newsGetLatestNewsParameters,
             {
               $refStrategy: "none",
             }
@@ -44,12 +44,12 @@ server.setRequestHandler(
     const name = request.params.name;
     const args = request.params.arguments;
     switch (name) {
-      case "get_latest_news": {
-        const parsed = getLatestNewsParameters.safeParse(args);
+      case "news_get_latest_news": {
+        const parsed = newsGetLatestNewsParameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
-        const result = await toolHandler.getLatestNews(
+        const result = await toolHandler.newsGetLatestNews(
           parsed.data.q,
           parsed.data.language,
           parsed.data.country

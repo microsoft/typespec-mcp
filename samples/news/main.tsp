@@ -28,25 +28,27 @@ model Article {
   content?: string;
 }
 
-/**
- * Provides access to the latest and breaking news. The news articles are sorted by the published date. The news articles are up to the past 48 hours.
- */
-@route("/latest")
-@get
-@summary("Retrieve the latest and breaking news")
-op getLatestNews(
+interface News {
   /**
-   * Search news articles for specific keywords or phrases present in the news title, content, URL, meta keywords and meta description. The value must be URL-encoded and the maximum character limit permitted is 100 characters.
+   * Provides access to the latest and breaking news. The news articles are sorted by the published date. The news articles are up to the past 48 hours.
    */
-  @query q?: string,
+  @route("/latest")
+  @get
+  @summary("Retrieve the latest and breaking news")
+  getLatestNews(
+    /**
+     * Search news articles for specific keywords or phrases present in the news title, content, URL, meta keywords and meta description. The value must be URL-encoded and the maximum character limit permitted is 100 characters.
+     */
+    @query q?: string,
 
-  /**
-   * Search the news articles for a specific language. You can add up to 5 languages in a single query. For example: zh,en.
-   */
-  @query language?: string,
+    /**
+     * Search the news articles for a specific language. You can add up to 5 languages in a single query. For example: zh,en.
+     */
+    @query language?: string,
 
-  /**
-   * Search the news articles from a specific country. You can add up to 5 countries in a single query.
-   */
-  @query country?: string,
-): NewsResponse;
+    /**
+     * Search the news articles from a specific country. You can add up to 5 countries in a single query.
+     */
+    @query country?: string,
+  ): NewsResponse;
+}

@@ -1,9 +1,9 @@
 import type { PathUncheckedResponse } from "@typespec/ts-http-runtime";
 import { handleApiCallError, handleRawResponse } from "./utils.js";
-import { NewsDataioApiClient } from "../service-client/newsDataioApiClient.js";
+import { NewsClient } from "../service-client/newsDataioApiClient.js";
 
 export const toolHandler = {
-  getLatestNews: async function getLatestNews(
+  newsGetLatestNews: async function getLatestNews(
     q?: string,
     language?: string,
     country?: string,
@@ -11,7 +11,7 @@ export const toolHandler = {
     const credential = {
       key: process.env.APIKEY ?? "UNKNOWN"
     };
-    const client = new NewsDataioApiClient(
+    const client = new NewsClient(
       credential,
       { allowInsecureConnection: true }
     );

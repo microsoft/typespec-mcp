@@ -2,7 +2,7 @@ import { z } from "zod";
 
 
 
-export const getLatestNewsParameters = z.object({
+export const newsGetLatestNewsParameters = z.object({
   q: z
     .string()
     .optional()
