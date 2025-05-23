@@ -24,7 +24,7 @@ server.setRequestHandler(
     return {
       tools: [
         {
-          name: "learnTypeSpec",
+          name: "learn_type_spec",
           description: "Teach the agent how to use typespec.\n**Call this tool before trying to generate TypeSpec code.**\nAn area can be specified to learn about a specific work stream with typespec(e.g. MCP, Rest API, etc.)",
           inputSchema: zodToJsonSchema(
             learnTypeSpecParameters,
@@ -74,7 +74,7 @@ server.setRequestHandler(
     const name = request.params.name;
     const args = request.params.arguments;
     switch (name) {
-      case "learnTypeSpec": {
+      case "learn_type_spec": {
         const parsed = learnTypeSpecParameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });

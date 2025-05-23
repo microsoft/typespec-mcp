@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "description": "",
   "dependencies": {
+    "@modelcontextprotocol/inspector": "catalog:",
     "@modelcontextprotocol/sdk": "catalog:",
     "@typespec/compiler": "catalog:",
     "@typespec/http": "catalog:",
