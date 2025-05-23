@@ -3,7 +3,7 @@ import { fromZodError } from "zod-validation-error";
 import { parseTemplate } from "url-template";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
-import { get_repositoryParameters, get_repositoryReturnType } from "./zod-types.js";
+import { getRepositoryParameters, getRepositoryReturnType } from "./zod-types.js";
 
 export const server = new Server(
   {
@@ -27,7 +27,7 @@ server.setRequestHandler(
           name: "get_repository",
           description: "Get a GitHub repository by owner and repository name.",
           inputSchema: zodToJsonSchema(
-            get_repositoryParameters,
+            getRepositoryParameters,
             {
               $refStrategy: "none",
             }

@@ -221,12 +221,12 @@ export const FullRepository = z
 
     .describe("Full representation of a GitHub repository. This model includes all the details of a repository, such as its owner, visibility, license, and various URLs for accessing its resources.");
 
-export const get_repositoryParameters = z.object({
+export const getRepositoryParameters = z.object({
   owner: z
     .string()
     .describe("The username or organization name of the repository owner."),
   repo: z.string().describe("The name of the repository."),
 });
 
-export const get_repositoryReturnType = FullRepository
+export const getRepositoryReturnType = FullRepository
   .describe("Full representation of a GitHub repository. This model includes all the details of a repository, such as its owner, visibility, license, and various URLs for accessing its resources.");
