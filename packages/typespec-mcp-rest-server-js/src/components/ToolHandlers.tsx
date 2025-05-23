@@ -11,7 +11,7 @@ import { useTransformNamePolicy, useTsp } from "@typespec/emitter-framework";
 import { FunctionDeclaration } from "@typespec/emitter-framework/typescript";
 import { HttpOperation, HttpProperty } from "@typespec/http";
 import { InternalClient, useClientLibrary } from "@typespec/http-client";
-import { httpRuntimeTemplateLib } from "http-client-js-for-mcp/experimental";
+import { httpRuntimeTemplateLib } from "@typespec/http-client-js/components";
 import { McpServer } from "typespec-mcp";
 import { useMCPServerContext } from "typespec-mcp-server-js";
 import { hasDefaultValue } from "../utils/parameters.jsx";

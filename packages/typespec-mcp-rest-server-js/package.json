@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@typespec/http-client": "catalog:",
-    "http-client-js-for-mcp": "catalog:",
+    "@typespec/http-client-js": "catalog:",
     "typespec-mcp": "workspace:*",
     "typespec-mcp-server-js": "workspace:*",
     "typespec-zod": "catalog:"

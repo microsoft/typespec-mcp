@@ -3,7 +3,7 @@ import { fromZodError } from "zod-validation-error";
 import { parseTemplate } from "url-template";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
-import { getRepositoryParameters, getRepositoryReturnType } from "./zod-types.js";
+import { get_repositoryParameters, get_repositoryReturnType } from "./zod-types.js";
 
 export const server = new Server(
   {
@@ -24,10 +24,10 @@ server.setRequestHandler(
     return {
       tools: [
         {
-          name: "getRepository",
+          name: "get_repository",
           description: "Get a GitHub repository by owner and repository name.",
           inputSchema: zodToJsonSchema(
-            getRepositoryParameters,
+            get_repositoryParameters,
             {
               $refStrategy: "none",
             }
@@ -44,13 +44,13 @@ server.setRequestHandler(
     const name = request.params.name;
     const args = request.params.arguments;
     switch (name) {
-      case "getRepository": {
-        const parsed = getRepositoryParameters.safeParse(args);
+      case "get_repository": {
+        const parsed = get_repositoryParameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
-        const rawResult = await httpToolHandler("getRepository", parsed.data);
-        const maybeResult = getRepositoryReturnType.safeParse(rawResult);
+        const rawResult = await httpToolHandler("get_repository", parsed.data);
+        const maybeResult = get_repositoryReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
@@ -70,7 +70,7 @@ server.setRequestHandler(
 )
 
 const tools = {
-  getRepository: "/repos/{owner}/{repo}",
+  get_repository: "/repos/{owner}/{repo}",
 } as const;
 
 async function httpToolHandler(tool: keyof typeof tools, data: any) {

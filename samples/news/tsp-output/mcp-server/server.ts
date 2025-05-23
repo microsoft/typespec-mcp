@@ -24,7 +24,7 @@ server.setRequestHandler(
     return {
       tools: [
         {
-          name: "getLatestNews",
+          name: "get_latest_news",
           description: "Provides access to the latest and breaking news. The news articles are sorted by the published date. The news articles are up to the past 48 hours.",
           inputSchema: zodToJsonSchema(
             getLatestNewsParameters,
@@ -44,7 +44,7 @@ server.setRequestHandler(
     const name = request.params.name;
     const args = request.params.arguments;
     switch (name) {
-      case "getLatestNews": {
+      case "get_latest_news": {
         const parsed = getLatestNewsParameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });

@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-export const LearnArea = z.union([z.literal("mcp"), z.literal("mcp on http")]);
+export const learnArea = z.union([z.literal("mcp"), z.literal("mcp on http")]);
 
-export const Workflow = z.union([
+export const workflow = z.union([
   z.literal("mcp"),
   z.literal("mcp on http"),
   z.literal("rest api"),
@@ -10,7 +10,7 @@ export const Workflow = z.union([
   z.literal("rest api with csharp server")
 ]);
 
-export const KnownEmitters = z.union([
+export const knownEmitters = z.union([
   z.literal("@typespec/openapi3"),
   z.literal("@typespec/http-client-csharp"),
   z.literal("@typespec/http-client-js"),
@@ -20,7 +20,7 @@ export const KnownEmitters = z.union([
   z.literal("typespec-mcp")
 ]);
 
-export const InitOptions = z.object({
+export const initOptions = z.object({
   outDir: z
     .string()
 
@@ -30,31 +30,31 @@ export const InitOptions = z.object({
     .optional()
 
       .describe("Name of the project. Default to the outDir name if not specified."),
-  workflow: Workflow.optional().describe("Workflow needed."),
+  workflow: workflow.optional().describe("Workflow needed."),
   additionalEmitters: z
-    .array(z.union([KnownEmitters, z.string()]))
+    .array(z.union([knownEmitters, z.string()]))
     .optional()
     .describe("Additional emitters to enable"),
 });
 
-export const CompileOptions = z.object({
+export const compileOptions = z.object({
   entrypoint: z.string().describe("Entrypoint to build"),
 });
 
 export const learnTypeSpecParameters = z.object({
-  area: LearnArea.optional(),
+  area: learnArea.optional(),
 });
 
 export const learnTypeSpecReturnType = z.string();
 
 export const initParameters = z.object({
-  options: InitOptions.describe("Initialization options."),
+  options: initOptions.describe("Initialization options."),
 });
 
 export const initReturnType = z.string();
 
 export const compileParameters = z.object({
-  options: CompileOptions.describe("CompileOptions"),
+  options: compileOptions.describe("CompileOptions"),
 });
 
 export const compileReturnType = z.string();

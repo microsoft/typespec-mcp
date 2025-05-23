@@ -1,6 +1,6 @@
 import { code, refkey, StatementList } from "@alloy-js/core";
 import { FunctionDeclaration } from "@alloy-js/typescript";
-import { httpRuntimeTemplateLib } from "http-client-js-for-mcp/experimental";
+import { httpRuntimeTemplateLib } from "@typespec/http-client-js/components";
 
 export interface UtilsProps {}
 

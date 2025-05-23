@@ -24,6 +24,7 @@
     "typescript": "catalog:"
   },
   "scripts": {
+    "build": "npm run build-tsp && npm run build-ts",
     "build-tsp": "tsp compile mcp.tsp",
     "build-ts": "tsc -p .",
     "mcp": "mcp-cli node dist/src/index.js",
