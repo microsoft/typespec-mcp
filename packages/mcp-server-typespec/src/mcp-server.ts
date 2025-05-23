@@ -9,11 +9,19 @@ import { setToolHandler } from "../tsp-output/typespec-mcp-server-js/tools.js";
 import { projectRoot } from "./utils.js";
 import { WorkflowConfig, workflows } from "./workflows.js";
 
-const instructions = (await readFile(join(projectRoot, "assets", "instructions", "mcp.md"))).toString();
+const mcpInstructions = (await readFile(join(projectRoot, "assets", "instructions", "mcp.md"))).toString();
+const mcpHttpInstructions = (await readFile(join(projectRoot, "assets", "instructions", "mcp-http.md"))).toString();
 
 setToolHandler({
   learnTypeSpec(area) {
-    return instructions;
+    switch (area) {
+      case "mcp":
+        return mcpInstructions;
+      case "mcp on http":
+        return mcpHttpInstructions;
+      default:
+        throw new Error(`No instructions found for ${area}`);
+    }
   },
   async init({ outDir, workflow: workflowName, name, additionalEmitters }) {
     name ??= basename(outDir);

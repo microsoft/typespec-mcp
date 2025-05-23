@@ -1,4 +1,4 @@
-import type { CompileOptions, InitOptions } from "./ts-types.js";
+import type { CompileOptions, InitOptions, LearnArea } from "./ts-types.js";
 
 interface Tools {
   /**
@@ -6,7 +6,7 @@ interface Tools {
    * **Call this tool before trying to generate TypeSpec code.**
    * An area can be specified to learn about a specific work stream with typespec(e.g. MCP, Rest API, etc.)
    */
-  learnTypeSpec(area?: "mcp"): string | Promise<string>
+  learnTypeSpec(area?: LearnArea): string | Promise<string>
 
   /**
    * Init a typespec project in the given directory.
