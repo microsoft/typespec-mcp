@@ -1,35 +1,15 @@
 import "typespec-mcp";
 import "@typespec/http";
+import "./gist.tsp";
+import "./user.tsp";
 
 using MCP;
 using Http;
 
-@mcpServer(#{
-  name: "VectorMCP",
-  version: "1.0.0",
-  instructions: "Use this MCP server to perform vector operations in 3D space.",
-})
+@mcpServer(#{ name: "VectorMCP", version: "1.0.0", instructions: "Use this MCP to access GitHub API." })
 @service
 @server("https://api.github.com")
-namespace VectorMCP;
-
-/** Github user */
-model Owner {
-  /** The username of the owner */
-  login: string;
-
-  /** Unique identifier of the owner */
-  id: int32;
-
-  /** Node ID of the owner */
-  node_id: string;
-
-  /** Avatar URL of the owner */
-  avatar_url: string;
-
-  /** HTML URL of the owner's profile */
-  html_url: string;
-}
+namespace Github;
 
 /**
  * Full representation of a GitHub repository.
@@ -276,3 +256,20 @@ model FullRepository {
 @tool
 @route("/repos/{owner}/{repo}")
 op getRepository(owner: string, repo: string): FullRepository;
+
+/**
+ * Get a list of GitHub repositories for a user.
+ * @param username - The username of the owner.
+ */
+@post @tool op test(
+  @header foo: string,
+  @header bar: string,
+  @bodyIgnore options: {
+    @header baz: string;
+  },
+  payload: {
+    @header qux: string;
+    name: string;
+    other: string;
+  },
+): void;

@@ -1,6 +1,6 @@
 import type { CompileOptions, InitOptions } from "./ts-types.js";
 
-interface Tools {
+export interface Tools {
   /**
    * Teach the agent how to use typespec.
    * **Call this tool before trying to generate TypeSpec code.**

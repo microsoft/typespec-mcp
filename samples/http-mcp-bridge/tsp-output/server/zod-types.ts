@@ -221,6 +221,69 @@ export const FullRepository = z
 
     .describe("Full representation of a GitHub repository. This model includes all the details of a repository, such as its owner, visibility, license, and various URLs for accessing its resources.");
 
+export const GistFile = z.object({
+  filename: z.string(),
+  type: z.string(),
+  language: z.union([z.string(), z.null()]),
+  raw_url: z.string(),
+  size: z.number().int().gte(-2147483648).lte(2147483647),
+  encoding: z.string().optional(),
+});
+
+export const Gist = z
+  .object({
+    id: z.string(),
+    node_id: z.string(),
+    url: z.string().describe("URL of the gist"),
+    forks_url: z.string().describe("API URL for forks"),
+    commits_url: z.string().describe("API URL for commits"),
+    git_pull_url: z.string().describe("Git pull URL"),
+    git_push_url: z.string().describe("Git push URL"),
+    html_url: z.string().describe("HTML URL of the gist"),
+    comments_url: z.string().describe("API URL for comments"),
+    public: z.boolean().describe("Whether the gist is public"),
+    description: z
+      .union([z.string(), z.null()])
+      .describe("Description of the gist"),
+    comments: z
+      .number()
+      .int()
+      .gte(-2147483648)
+      .lte(2147483647)
+      .describe("Number of comments"),
+    user: z
+      .union([Owner.describe("Github user"), z.null()])
+      .describe("The gist owner (user)"),
+    files: z.record(z.string(), GistFile).describe("Files in the gist"),
+    created_at: z.string().describe("Creation timestamp"),
+    updated_at: z.string().describe("Last update timestamp"),
+    owner: Owner.optional().describe("Owner of the gist"),
+    comments_enabled: z
+      .boolean()
+      .optional()
+      .describe("Whether comments are enabled"),
+    truncated: z.boolean().optional().describe("Whether the gist is truncated"),
+    forks: z.array(z.unknown()).optional().describe("Forks of the gist"),
+    history: z.array(z.unknown()).optional().describe("History of the gist"),
+  })
+  .describe("Base Gist");
+
+export const GistArray = z.array(Gist.describe("Base Gist"));
+
+export const CreateGist = z.object({
+  description: z.string(),
+  public: z.boolean(),
+  files: z.record(z.string(), GistFile),
+});
+
+export const GistArray_2 = z.array(Gist.describe("Base Gist"));
+
+export const GistArray_3 = z.array(Gist.describe("Base Gist"));
+
+export const UnknownArray = z.array(z.unknown());
+
+export const UnknownArray_2 = z.array(z.unknown());
+
 export const getRepositoryParameters = z.object({
   owner: z
     .string()
@@ -230,3 +293,101 @@ export const getRepositoryParameters = z.object({
 
 export const getRepositoryReturnType = FullRepository
   .describe("Full representation of a GitHub repository. This model includes all the details of a repository, such as its owner, visibility, license, and various URLs for accessing its resources.");
+
+export const testParameters = z.object({
+  foo: z.string(),
+  bar: z.string(),
+  options: z.object({
+    baz: z.string(),
+  }),
+  payload: z.object({
+    qux: z.string(),
+    name: z.string(),
+    other: z.string(),
+  }),
+});
+
+export const testReturnType = z.void();
+
+export const gistsListParameters = z.object({
+  since: z.coerce
+    .date()
+    .optional()
+
+      .describe("The time to start listing gists from. Optional. DO NOT PASS an empty string."),
+});
+
+export const gistsListReturnType = GistArray;
+
+export const gistsCreateParameters = z.object({
+  gist: CreateGist,
+});
+
+export const gistsCreateReturnType = Gist.describe("Base Gist");
+
+export const gistsListPublicParameters = z.object({
+  since: z.coerce.date().optional(),
+});
+
+export const gistsListPublicReturnType = GistArray_2;
+
+export const gistsListStarredParameters = z.object({
+  since: z.coerce.date().optional(),
+});
+
+export const gistsListStarredReturnType = GistArray_3;
+
+export const gistsGetParameters = z.object({
+  id: z.string(),
+});
+
+export const gistsGetReturnType = Gist.describe("Base Gist");
+
+export const gistsUpdateParameters = z.object({
+  id: z.string(),
+  gist: CreateGist,
+});
+
+export const gistsUpdateReturnType = Gist.describe("Base Gist");
+
+export const gistsDeleteParameters = z.object({
+  id: z.string(),
+});
+
+export const gistsDeleteReturnType = z.void();
+
+export const gistsListCommitsParameters = z.object({
+  id: z.string(),
+});
+
+export const gistsListCommitsReturnType = UnknownArray;
+
+export const gistsListForksParameters = z.object({
+  id: z.string(),
+});
+
+export const gistsListForksReturnType = UnknownArray_2;
+
+export const gistsForkParameters = z.object({
+  id: z.string(),
+});
+
+export const gistsForkReturnType = Gist.describe("Base Gist");
+
+export const gistsStarParameters = z.object({
+  id: z.string(),
+});
+
+export const gistsStarReturnType = z.void();
+
+export const gistsUnstarParameters = z.object({
+  id: z.string(),
+});
+
+export const gistsUnstarReturnType = z.void();
+
+export const gistsIsStarredParameters = z.object({
+  id: z.string(),
+});
+
+export const gistsIsStarredReturnType = z.boolean();

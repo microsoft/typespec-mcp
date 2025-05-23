@@ -1,10 +1,11 @@
-import { code, List, Refkey, refkey } from "@alloy-js/core";
+import { List, type Refkey, refkey } from "@alloy-js/core";
 import * as ts from "@alloy-js/typescript";
-import { EmitContext } from "@typespec/compiler";
+import type { EmitContext } from "@typespec/compiler";
 import { useTsp, writeOutput } from "@typespec/emitter-framework";
-import { getServers } from "@typespec/http";
 import { useMCPServerContext } from "typespec-mcp-server-js";
 import { McpServer } from "typespec-mcp-server-js/components";
+import { HttpRequestType } from "./components/http-tool-handler.jsx";
+import { HttpToolsDispatcher } from "./components/http-tools-dispatcher.jsx";
 import { urlTemplate } from "./externals/url-template.js";
 
 export async function $onEmit(context: EmitContext) {
@@ -24,27 +25,25 @@ export async function $onEmit(context: EmitContext) {
 }
 
 export function HttpTools(props: { refkey: Refkey }) {
-  const { tools, server } = useMCPServerContext();
+  const mcpContext = useMCPServerContext();
+  const { tools, server } = mcpContext;
+
   const { $ } = useTsp();
   if (server === undefined || server.container === undefined || server.container.kind !== "Namespace") {
     throw new Error("Expected to be an http server too");
   }
 
-  const servers = getServers($.program, server.container);
-  const host = servers![0];
-  const toolsUris: Record<string, string> = {};
+  const toolsMap: Record<string, string> = {};
   for (const tool of tools) {
-    const httpOp = $.httpOperation.get(tool.op);
-    if (httpOp) {
-      toolsUris[tool.name] = httpOp.uriTemplate;
-    }
+    toolsMap[tool.name] = tool.implementationOp.name;
   }
 
   const uriTemplateVar = refkey();
+  const dispatcherRefKey = refkey();
   return (
     <List doubleHardline semicolon>
       <ts.VarDeclaration name="tools" refkey={uriTemplateVar} const>
-        <ts.ObjectExpression jsValue={toolsUris} /> as const
+        <ts.ObjectExpression jsValue={toolsMap} /> as const
       </ts.VarDeclaration>
       <ts.FunctionDeclaration
         async
@@ -55,14 +54,13 @@ export function HttpTools(props: { refkey: Refkey }) {
         ]}
         refkey={props.refkey}
       >
-        {code`
-        const templateStr = ${uriTemplateVar}[tool];
-        const template = ${urlTemplate.parseTemplate}("${host.url}" + templateStr);
-        const url = template.expand(data);
-        const res = await fetch(url);
-        return res.json();
-      `}
+        return {dispatcherRefKey}
+        [tool](data)
       </ts.FunctionDeclaration>
+      <ts.VarDeclaration refkey={dispatcherRefKey} const name="dispatcher">
+        <HttpToolsDispatcher tools={tools} />
+      </ts.VarDeclaration>
+      <HttpRequestType />
     </List>
   );
 }

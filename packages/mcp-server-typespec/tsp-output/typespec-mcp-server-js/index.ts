@@ -9,7 +9,7 @@ export const server = new Server(
   {
     name: "MCP Server",
     version: "1.0.0",
-    instructions: undefined,
+    instructions: "- DO NOT pass optional parameters if they are empty. DO NOT PASS an empty string",
   },
   {
     capabilities: {

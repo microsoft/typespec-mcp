@@ -4,6 +4,7 @@
     "jsx": "preserve",
     "emitDeclarationOnly": true,
     "jsxImportSource": "@alloy-js/core",
+    "verbatimModuleSyntax": true,
     "outDir": "./dist"
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "testing/**/*.ts", "test/**/*.ts", "test/**/*.tsx"],
