@@ -5,7 +5,6 @@ import type { Workflow } from "../tsp-output/typespec-mcp-server-js/ts-types.js"
 import { projectRoot } from "./utils.js";
 
 const mcpTemplates = await getMcpTemplates();
-const mcpHttpTemplates = await getMcpHttpTemplates();
 const coreTemplates = await getTypeSpecCoreTemplates();
 
 export interface WorkflowConfig {
@@ -33,7 +32,6 @@ function useTemplate(
 
 export const workflows: Record<Workflow, WorkflowConfig> = {
   "mcp": useTemplate(mcpTemplates, "mcp"),
-  "mcp on http": useTemplate(mcpHttpTemplates, "mcp on http"),
   "rest api": {
     ...useTemplate(coreTemplates, "rest"),
   },
@@ -59,14 +57,7 @@ async function getMcpTemplates(): Promise<{
   readonly baseUri: string;
   readonly templates: Record<string, any>;
 }> {
-  return loadTemplates(join(projectRoot, "templates", "mcp"));
-}
-
-async function getMcpHttpTemplates(): Promise<{
-  readonly baseUri: string;
-  readonly templates: Record<string, any>;
-}> {
-  return loadTemplates(join(projectRoot, "templates", "mcp-http"));
+  return loadTemplates(join(projectRoot, "templates"));
 }
 
 async function loadTemplates(templatesDir: string): Promise<{

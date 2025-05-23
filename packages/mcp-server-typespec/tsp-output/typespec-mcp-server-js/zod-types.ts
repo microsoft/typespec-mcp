@@ -1,16 +1,13 @@
 import { z } from "zod";
 
-export const learnArea = z.union([z.literal("mcp"), z.literal("mcp on http")]);
-
-export const workflow = z.union([
+export const Workflow = z.union([
   z.literal("mcp"),
-  z.literal("mcp on http"),
   z.literal("rest api"),
   z.literal("rest api with js server"),
   z.literal("rest api with csharp server")
 ]);
 
-export const knownEmitters = z.union([
+export const KnownEmitters = z.union([
   z.literal("@typespec/openapi3"),
   z.literal("@typespec/http-client-csharp"),
   z.literal("@typespec/http-client-js"),
@@ -20,7 +17,7 @@ export const knownEmitters = z.union([
   z.literal("typespec-mcp")
 ]);
 
-export const initOptions = z.object({
+export const InitOptions = z.object({
   outDir: z
     .string()
 
@@ -30,31 +27,31 @@ export const initOptions = z.object({
     .optional()
 
       .describe("Name of the project. Default to the outDir name if not specified."),
-  workflow: workflow.optional().describe("Workflow needed."),
+  workflow: Workflow.optional().describe("Workflow needed."),
   additionalEmitters: z
-    .array(z.union([knownEmitters, z.string()]))
+    .array(z.union([KnownEmitters, z.string()]))
     .optional()
     .describe("Additional emitters to enable"),
 });
 
-export const compileOptions = z.object({
+export const CompileOptions = z.object({
   entrypoint: z.string().describe("Entrypoint to build"),
 });
 
 export const learnTypeSpecParameters = z.object({
-  area: learnArea.optional(),
+  area: z.literal("mcp").optional(),
 });
 
 export const learnTypeSpecReturnType = z.string();
 
 export const initParameters = z.object({
-  options: initOptions.describe("Initialization options."),
+  options: InitOptions.describe("Initialization options."),
 });
 
 export const initReturnType = z.string();
 
 export const compileParameters = z.object({
-  options: compileOptions.describe("CompileOptions"),
+  options: CompileOptions.describe("CompileOptions"),
 });
 
 export const compileReturnType = z.string();
