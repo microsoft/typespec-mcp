@@ -8,6 +8,7 @@
     "@modelcontextprotocol/sdk": "^1.9.0",
     "@typespec/compiler": "catalog:",
     "execa": "^9.5.2",
+    "tsx": "^4.19.4",
     "typespec-mcp": "workspace:*",
     "typespec-mcp-server-js": "workspace:*",
     "zod": "^3.24.2",
@@ -17,13 +18,15 @@
   "devDependencies": {
     "@types/node": "catalog:",
     "@wong2/mcp-cli": "^1.6.0",
+    "esbuild": "^0.25.4",
     "prettier": "^3.5.3",
     "typescript": "catalog:"
   },
   "scripts": {
     "build": "pnpm build-tsp && pnpm build-ts",
     "build-tsp": "tsp compile . --emit typespec-mcp-server-js",
-    "build-ts": "tsc -p .",
+    "check-ts": "tsc -p . --noEmit",
+    "build-ts": "tsx ./scripts/build.ts",
     "mcp": "mcp-cli node dist/src/mcp-server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "inspect": "mcp-inspector node ./dist/src/mcp-server.js"
