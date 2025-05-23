@@ -6,7 +6,7 @@ import { useMCPServerContext } from "../context/McpServer.js";
 import { getPlausibleName } from "../utils.js";
 
 export function ZodTypes() {
-  const { tools, allTypes, skipValidateResult } = useMCPServerContext();
+  const { tools, allTypes, namePolicy, skipValidateResult } = useMCPServerContext();
   const { program } = useTsp();
   return (
     <List doubleHardline>
@@ -22,7 +22,7 @@ export function ZodTypes() {
           // todo: these are only needed because I can't access members inside
           // ZodSchemaDeclaration props without causing an error.
           const parametersRk = tool.keys.zodParametersSchema;
-          const parametersName = tool.name + "Parameters";
+          const parametersName = namePolicy.getName(tool.name + "Parameters", "variable");
 
           const schemas = [
             <ZodSchemaDeclaration export name={parametersName} type={tool.op.parameters} refkey={parametersRk} />,
@@ -30,7 +30,7 @@ export function ZodTypes() {
 
           if (!skipValidateResult) {
             const returnTypeRk = tool.keys.zodReturnSchema;
-            const returnTypeName = tool.name + "ReturnType";
+            const returnTypeName = namePolicy.getName(tool.name + "ReturnType", "variable");
 
             schemas.push(
               <VarDeclaration

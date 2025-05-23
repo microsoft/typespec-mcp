@@ -45,12 +45,12 @@ server.setRequestHandler(
     const args = request.params.arguments;
     switch (name) {
       case "get_repository": {
-        const parsed = get_repositoryParameters.safeParse(args);
+        const parsed = getRepositoryParameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
         const rawResult = await httpToolHandler("get_repository", parsed.data);
-        const maybeResult = get_repositoryReturnType.safeParse(rawResult);
+        const maybeResult = getRepositoryReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
