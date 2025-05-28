@@ -5,6 +5,10 @@ export const $lib = createTypeSpecLibrary({
   diagnostics: {},
   state: {
     tool: { description: "An MCP tool" },
+    readonly: { description: "Readonly tool" },
+    nondestructive: { description: "Non destructive tool" },
+    idempotent: { description: "Idempotent tool" },
+    closedWorld: { description: "Closed world tool" },
     serializeAsText: {
       description: "Holds the type which is serialized to text",
     },
