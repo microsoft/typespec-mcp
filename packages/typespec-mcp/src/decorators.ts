@@ -1,13 +1,43 @@
-import { DecoratorContext, Interface, Namespace, Operation, Type } from "@typespec/compiler";
+import { DecoratorContext, DecoratorFunction, Interface, Namespace, Type } from "@typespec/compiler";
 import { useStateMap, useStateSet } from "@typespec/compiler/utils";
-import { McpServerDecorator, McpServerOptions } from "../generated-defs/MCP.js";
+import {
+  ClosedWorldDecorator,
+  IdempotentDecorator,
+  McpServerDecorator,
+  McpServerOptions,
+  NondestructiveDecorator,
+  ReadonlyDecorator,
+  ToolDecorator,
+} from "../generated-defs/MCP.js";
 import { stateKeys } from "./lib.js";
 
-export const [isTool, markTool] = useStateSet<Operation>(stateKeys.tool);
-
-export function $tool(context: DecoratorContext, target: Operation) {
-  markTool(context.program, target);
+function createMarkerDecorator<T extends DecoratorFunction>(
+  key: symbol,
+  validate?: (...args: Parameters<T>) => boolean,
+) {
+  const [is, mark] = useStateSet<Parameters<T>[1]>(key);
+  const decorator = (...args: Parameters<T>) => {
+    if (validate && !validate(...args)) {
+      return;
+    }
+    const [context, target] = args;
+    mark(context.program, target);
+  };
+  return [is, mark, decorator as T] as const;
 }
+
+export const [isTool, markTool, toolDecorator] = createMarkerDecorator<ToolDecorator>(stateKeys.tool);
+export const [isReadonly, markReadonly, readonlyDecorator] = createMarkerDecorator<ReadonlyDecorator>(
+  stateKeys.readonly,
+);
+export const [isNondestructive, markNondestructive, nondestructiveDecorator] =
+  createMarkerDecorator<NondestructiveDecorator>(stateKeys.nondestructive);
+export const [isIdempotent, markIdempotent, idempotentDecorator] = createMarkerDecorator<IdempotentDecorator>(
+  stateKeys.idempotent,
+);
+export const [isClosedWorld, markClosedWorld, closedWorldDecorator] = createMarkerDecorator<ClosedWorldDecorator>(
+  stateKeys.closedWorld,
+);
 
 export const [getSerializeAsText, setSerializeAsText] = useStateMap<Type, { dataType: Type }>(
   stateKeys.serializeAsText,

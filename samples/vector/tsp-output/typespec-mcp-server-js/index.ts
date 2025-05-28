@@ -32,6 +32,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         },
         {
           name: "math_sub_vector",
@@ -42,6 +48,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         },
         {
           name: "math_cross_product",
@@ -52,6 +64,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         },
         {
           name: "math_dot_product",
@@ -62,6 +80,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         }
       ],
     };

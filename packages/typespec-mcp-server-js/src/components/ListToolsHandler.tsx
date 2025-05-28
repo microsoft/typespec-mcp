@@ -45,5 +45,6 @@ function operationToToolDescriptor(tool: ToolDescriptor) {
         />
       </>
     ),
+    annotations: tool.annotations,
   };
 }

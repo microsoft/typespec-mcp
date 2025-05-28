@@ -1,5 +1,6 @@
 import { NamePolicy, Refkey, refkey } from "@alloy-js/core";
 import {
+  getSummary,
   Interface,
   isNeverType,
   Namespace,
@@ -11,7 +12,7 @@ import {
 } from "@typespec/compiler";
 import { unsafe_mutateSubgraph } from "@typespec/compiler/experimental";
 import { $ } from "@typespec/compiler/typekit";
-import type { McpServer } from "typespec-mcp";
+import { isClosedWorld, isIdempotent, isNondestructive, isReadonly, type McpServer } from "typespec-mcp";
 import { EnumToUnion } from "../../mutators.jsx";
 import { splitOutErrors } from "../../utils.js";
 import type { McpElements } from "../name-policy.js";
@@ -20,6 +21,13 @@ export interface ToolDescriptor {
   op: Operation;
   /** Tool full name as exposed by the server (snake_case style) */
   name: string;
+  annotations?: {
+    title?: string;
+    destructiveHint?: boolean;
+    idempotentHint?: boolean;
+    readonlyHint?: boolean;
+    openWorldHint?: boolean;
+  };
   implementationOp: Operation;
   parameters: Model;
   result: ResultDescriptor;
@@ -116,6 +124,18 @@ export function resolveToolDescriptors(
       returnType: resultDescriptor.resultType,
     });
 
+    const annotations: ToolDescriptor["annotations"] = {
+      readonlyHint: !!isReadonly(program, toolOp),
+      destructiveHint: !isNondestructive(program, toolOp),
+      idempotentHint: isIdempotent(program, toolOp),
+      openWorldHint: !isClosedWorld(program, toolOp),
+    };
+
+    const title = getSummary(program, toolOp);
+    if (title) {
+      annotations.title = title;
+    }
+
     toolDescriptors.push({
       op: toolOp,
       name: naming.getName(toolName, "tool"),
@@ -130,6 +150,7 @@ export function resolveToolDescriptors(
         zodParametersSchema: refkey(),
         tsReturnType: refkey(),
       },
+      annotations,
     });
   }
 

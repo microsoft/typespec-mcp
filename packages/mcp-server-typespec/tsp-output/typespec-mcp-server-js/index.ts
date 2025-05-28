@@ -32,6 +32,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         },
         {
           name: "init",
@@ -42,6 +48,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         },
         {
           name: "compile",
@@ -52,6 +64,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         },
         {
           name: "build",
@@ -62,6 +80,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         }
       ],
     };
