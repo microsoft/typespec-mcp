@@ -66,5 +66,3 @@ function ToolsInterfaceBody(props: ToolsInterfaceBodyProps) {
     </List>
   );
 }
-
-
