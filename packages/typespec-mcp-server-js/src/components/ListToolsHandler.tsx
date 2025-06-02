@@ -35,7 +35,7 @@ function operationToToolDescriptor(tool: ToolDescriptor) {
   const doc = getDoc($.program, tool.op);
 
   return {
-    name: tool.name,
+    name: tool.id,
     description: doc ?? "",
     inputSchema: () => (
       <>

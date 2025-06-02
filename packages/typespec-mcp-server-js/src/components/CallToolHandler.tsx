@@ -25,7 +25,7 @@ export function CallToolHandler(props: CallToolHandlerProps) {
   } = useMCPServerContext();
   const parseResultKey = refkey();
   return (
-    <CaseClause expression={`"${props.tool.name}"`} block>
+    <CaseClause expression={`"${props.tool.id}"`} block>
       <Show when={props.tool.op.parameters.properties.size > 0}>
         <List ender>
           <VarDeclaration name="parsed">
@@ -42,7 +42,7 @@ export function CallToolHandler(props: CallToolHandlerProps) {
         <VarDeclaration name="rawResult">
           await{" "}
           {toolDispatcher ? (
-            <FunctionCallExpression target={toolDispatcher} args={[`"${props.tool.name}"`, "parsed.data"]} />
+            <FunctionCallExpression target={toolDispatcher} args={[`"${props.tool.id}"`, "parsed.data"]} />
           ) : (
             <FunctionCallExpression
               target={

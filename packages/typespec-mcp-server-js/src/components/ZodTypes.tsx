@@ -24,8 +24,8 @@ export function ZodTypes() {
           const parametersRk = tool.keys.zodParametersSchema;
           const returnTypeRk = tool.keys.zodReturnSchema;
 
-          const parametersName = namePolicy.getName(tool.name + "Parameters", "variable");
-          const returnTypeName = namePolicy.getName(tool.name + "ReturnType", "variable");
+          const parametersName = namePolicy.getName(tool.id + "Parameters", "variable");
+          const returnTypeName = namePolicy.getName(tool.id + "ReturnType", "variable");
 
           const schemas = [
             <ZodSchemaDeclaration export name={parametersName} type={tool.op.parameters} refkey={parametersRk} />,

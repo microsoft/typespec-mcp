@@ -19,7 +19,7 @@ export function HttpToolsDispatcher(props: HttpToolsDispatcherProps) {
     <>
       <ObjectExpression>
         <For each={httpOps} comma enderPunctuation>
-          {(op) => <ObjectProperty name={op.tool.name} value={<HttpToolHandler op={op.httpOp} tool={op.tool} />} />}
+          {(op) => <ObjectProperty name={op.tool.id} value={<HttpToolHandler op={op.httpOp} tool={op.tool} />} />}
         </For>
       </ObjectExpression>
     </>

@@ -12,15 +12,29 @@ import {
 } from "@typespec/compiler";
 import { unsafe_mutateSubgraph } from "@typespec/compiler/experimental";
 import { $ } from "@typespec/compiler/typekit";
-import { isClosedWorld, isIdempotent, isNondestructive, isReadonly, type McpServer } from "typespec-mcp";
+import { isClosedWorld, isIdempotent, isNondestructive, isReadonly, isTool, type McpServer } from "typespec-mcp";
 import { EnumToUnion } from "../../mutators.jsx";
 import { splitOutErrors } from "../../utils.js";
 import type { McpElements } from "../name-policy.js";
 
+export interface ToolGroup {
+  /** Name of the tool group */
+  name: string;
+  /** Path of the tool group from the MCP server root. */
+  path: string[];
+  /** Tools just as this level(excluding ones from sub groups) */
+  tools: ToolDescriptor[];
+  /** All tools (including the ones from sub groups) */
+  allTools: ToolDescriptor[];
+  /** Sub groups */
+  subGroups: ToolGroup[];
+}
+
 export interface ToolDescriptor {
   op: Operation;
   /** Tool full name as exposed by the server (snake_case style) */
-  name: string;
+  id: string;
+  path: string[];
   annotations?: {
     title?: string;
     destructiveHint?: boolean;
@@ -84,95 +98,127 @@ export type ResultDescriptor = SingleResultDescriptor | ArrayResultDescriptor | 
 export function resolveToolDescriptors(
   program: Program,
   server: McpServer | undefined,
-  naming: NamePolicy<McpElements>,
-) {
-  const tk = $(program);
-  const toolOps = tk.mcp.tools.list(server);
-  const toolDescriptors: ToolDescriptor[] = [];
-
-  for (const rawToolOp of toolOps) {
-    const toolOpMutation = unsafe_mutateSubgraph(tk.program, [EnumToUnion], rawToolOp);
-    const toolOp = toolOpMutation.type as Operation;
-    const { successes, errors } = splitOutErrors(program, toolOp);
-
-    // the declared return type is the type of the successful results from the
-    // MCP server, as declared in the TypeSpec.
-    let declaredReturnType: Type;
-    if (successes.length === 0) {
-      declaredReturnType = tk.intrinsic.void;
-    } else if (successes.length === 1) {
-      declaredReturnType = successes[0];
-    } else {
-      declaredReturnType = tk.union.create({
-        variants: successes.map((type) => {
-          return tk.unionVariant.create({ type });
-        }),
-      });
-    }
-
-    // Next we need to determine the types we expect from the implementation.
-    const resultDescriptor = resultDescriptorFromDeclaredType(program, declaredReturnType);
-
-    const toolName = getToolName(toolOp, server?.container ?? program.getGlobalNamespaceType());
-    // finally we can make the signature we expect the business logic to
-    // implement.
-    const implementationOp = tk.operation.create({
-      name: naming.getName(toolName, "interface-member"),
-      parameters: Array.from(toolOp.parameters.properties.values()).map((p) => {
-        return tk.type.clone(p);
-      }),
-      returnType: resultDescriptor.resultType,
-    });
-
-    const annotations: ToolDescriptor["annotations"] = {
-      readonlyHint: !!isReadonly(program, toolOp),
-      destructiveHint: !isNondestructive(program, toolOp),
-      idempotentHint: isIdempotent(program, toolOp),
-      openWorldHint: !isClosedWorld(program, toolOp),
-    };
-
-    const title = getSummary(program, toolOp);
-    if (title) {
-      annotations.title = title;
-    }
-
-    toolDescriptors.push({
-      op: toolOp,
-      name: naming.getName(toolName, "tool"),
-      implementationOp,
-      errors,
-      parameters: toolOp.parameters,
-      returnType: resultDescriptor.resultType,
-      result: resultDescriptor,
-      keys: {
-        functionSignature: refkey(),
-        zodReturnSchema: refkey(),
-        zodParametersSchema: refkey(),
-        tsReturnType: refkey(),
-      },
-      annotations,
-    });
-  }
-
-  return toolDescriptors;
+  namePolicy: NamePolicy<McpElements>,
+): ToolGroup {
+  const base = server?.container ?? program.getGlobalNamespaceType();
+  const group: ToolGroup = resolveToolGroup(program, base, namePolicy, []);
+  return group;
 }
 
-function getToolName(toolOp: Operation, base: Namespace | Interface): string {
-  const segments = [toolOp.name];
-  let current: Operation | Interface | Namespace = toolOp;
-  if (toolOp.interface) {
-    if (toolOp.interface === base) {
-      return segments.join("_");
+function resolveToolGroup(
+  program: Program,
+  container: Namespace | Interface,
+  namePolicy: NamePolicy<McpElements>,
+  path: string[],
+): ToolGroup {
+  const group: ToolGroup = {
+    name: container.name,
+    path,
+    tools: [],
+    allTools: [],
+    subGroups: [],
+  };
+
+  for (const operation of container.operations.values()) {
+    if (isTool(program, operation)) {
+      group.tools.push(resolveTool(program, operation, namePolicy, group.path));
     }
-    segments.unshift(toolOp.interface.name);
-    current = toolOp.interface;
   }
 
-  while (current.namespace && current.namespace !== base) {
-    segments.unshift(current.namespace.name);
-    current = current.namespace;
+  if (container.kind === "Namespace") {
+    for (const subContainer of container.namespaces.values()) {
+      const subGroup = resolveToolGroup(program, subContainer, namePolicy, [...group.path, subContainer.name]);
+
+      if (subGroup.allTools.length > 0) {
+        group.subGroups.push(subGroup);
+      }
+    }
+    for (const subContainer of container.interfaces.values()) {
+      const subGroup = resolveToolGroup(program, subContainer, namePolicy, [...group.path, subContainer.name]);
+
+      if (subGroup.allTools.length > 0) {
+        group.subGroups.push(subGroup);
+      }
+    }
   }
 
+  group.allTools = [...group.tools, ...group.subGroups.flatMap((g) => g.allTools)];
+  return group;
+}
+
+function resolveTool(
+  program: Program,
+  rawToolOp: Operation,
+  namePolicy: NamePolicy<McpElements>,
+  parentPath: string[],
+): ToolDescriptor {
+  const tk = $(program);
+
+  const toolOpMutation = unsafe_mutateSubgraph(tk.program, [EnumToUnion], rawToolOp);
+  const toolOp = toolOpMutation.type as Operation;
+  const { successes, errors } = splitOutErrors(program, toolOp);
+
+  // the declared return type is the type of the successful results from the
+  // MCP server, as declared in the TypeSpec.
+  let declaredReturnType: Type;
+  if (successes.length === 0) {
+    declaredReturnType = tk.intrinsic.void;
+  } else if (successes.length === 1) {
+    declaredReturnType = successes[0];
+  } else {
+    declaredReturnType = tk.union.create({
+      variants: successes.map((type) => {
+        return tk.unionVariant.create({ type });
+      }),
+    });
+  }
+
+  // Next we need to determine the types we expect from the implementation.
+  const resultDescriptor = resultDescriptorFromDeclaredType(program, declaredReturnType);
+
+  const toolName = getToolName(toolOp, parentPath);
+  // finally we can make the signature we expect the business logic to
+  // implement.
+  const implementationOp = tk.operation.create({
+    name: namePolicy.getName(toolName, "interface-member"),
+    parameters: Array.from(toolOp.parameters.properties.values()).map((p) => {
+      return tk.type.clone(p);
+    }),
+    returnType: resultDescriptor.resultType,
+  });
+
+  const annotations: ToolDescriptor["annotations"] = {
+    readonlyHint: !!isReadonly(program, toolOp),
+    destructiveHint: !isNondestructive(program, toolOp),
+    idempotentHint: isIdempotent(program, toolOp),
+    openWorldHint: !isClosedWorld(program, toolOp),
+  };
+
+  const title = getSummary(program, toolOp);
+  if (title) {
+    annotations.title = title;
+  }
+
+  return {
+    op: toolOp,
+    id: namePolicy.getName(toolName, "tool"),
+    path: [...parentPath, toolOp.name],
+    implementationOp,
+    errors,
+    parameters: toolOp.parameters,
+    returnType: resultDescriptor.resultType,
+    result: resultDescriptor,
+    keys: {
+      functionSignature: refkey(),
+      zodReturnSchema: refkey(),
+      zodParametersSchema: refkey(),
+      tsReturnType: refkey(),
+    },
+    annotations,
+  };
+}
+function getToolName(toolOp: Operation, parentPath: string[]): string {
+  const segments = [...parentPath, toolOp.name];
   return segments.join("_");
 }
 
