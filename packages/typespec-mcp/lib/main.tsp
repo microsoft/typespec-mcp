@@ -4,8 +4,32 @@ namespace MCP;
 
 /**
  * Declare an operation that is an MCP Tool.
+ * @param value - Default is true.
  */
 extern dec tool(target: Reflection.Operation);
+
+/**
+ * Tool does not modify its environment.
+ * @param value - Default is true.
+ */
+extern dec readonly(target: Reflection.Operation, value?: boolean);
+
+/**
+ * Tool will not perform any destructive operations.
+ * @param value - Default is true.
+ */
+extern dec nondestructive(target: Reflection.Operation, value?: boolean);
+/**
+ * Repeated calls with same args have no additional effect
+ * @param value - Default is true.
+ */
+extern dec idempotent(target: Reflection.Operation, value?: boolean);
+
+/**
+ * Tool will not interacts with external entities
+ * @param value - Default is true.
+ */
+extern dec closedWorld(target: Reflection.Operation, value?: boolean);
 
 model McpServerOptions {
   name?: string;

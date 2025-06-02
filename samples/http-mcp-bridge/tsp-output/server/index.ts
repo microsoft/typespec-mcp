@@ -33,6 +33,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         },
         {
           name: "test",
@@ -43,6 +49,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         },
         {
           name: "gists_list",
@@ -53,6 +65,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         },
         {
           name: "gists_create",
@@ -63,6 +81,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         },
         {
           name: "gists_list_public",
@@ -73,6 +97,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         },
         {
           name: "gists_list_starred",
@@ -83,6 +113,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         },
         {
           name: "gists_get",
@@ -93,6 +129,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         },
         {
           name: "gists_update",
@@ -103,6 +145,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         },
         {
           name: "gists_delete",
@@ -113,6 +161,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         },
         {
           name: "gists_list_commits",
@@ -123,6 +177,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         },
         {
           name: "gists_list_forks",
@@ -133,6 +193,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         },
         {
           name: "gists_fork",
@@ -143,6 +209,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         },
         {
           name: "gists_star",
@@ -153,6 +225,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         },
         {
           name: "gists_unstar",
@@ -163,6 +241,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         },
         {
           name: "gists_is_starred",
@@ -173,6 +257,12 @@ server.setRequestHandler(
               $refStrategy: "none",
             }
           ),
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
         }
       ],
     };
