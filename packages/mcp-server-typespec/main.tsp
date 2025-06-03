@@ -1,10 +1,14 @@
 import "typespec-mcp";
 using MCP;
 
-alias LearnArea = "mcp";
+union LearnArea {
+  "mcp",
+  "mcp on http",
+}
 
 union Workflow {
   "mcp",
+  "mcp on http",
   "rest api",
   "rest api with js server",
   "rest api with csharp server",
