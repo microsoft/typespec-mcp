@@ -1,6 +1,5 @@
 import { zodToJsonSchema } from "zod-to-json-schema";
 import { fromZodError } from "zod-validation-error";
-import { parseTemplate } from "url-template";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import type { CreateGist } from "./ts-types.js";
@@ -638,22 +637,21 @@ const dispatcher = {
         repo: string;
       },
   ) => {
-    const urlTemplate = parseTemplate("https://api.github.com/repos/{owner}/{repo}");;
-    const httpRequest: HttpRequest = {
-      pathParams: {
-        owner: data["owner"],
-        repo: data["repo"],
-      }
-    };
-    const url = urlTemplate.expand({...httpRequest.pathParams, ...httpRequest.queryParams});;
-    const response = await fetch(url, {
-      headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
-      body: httpRequest.body?.value,
-    });;
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    ;
+    const client = new <Unresolved Symbol>({ allowInsecureConnection: true });
+    let rawResponse: <Unresolved Symbol> | undefined = undefined;
+    try {
+      await client.<unresolved symbol>(
+        owner,
+        repo,
+        {
+          operationOptions: { onResponse: (response) => (rawResponse = response) }
+        }
+      )
+    } catch(error) {
+      return <Unresolved Symbol>(error);
     }
-    return await response.json();
+    return <Unresolved Symbol>(rawResponse);;
   },
   test: async (
     data: {
@@ -669,136 +667,117 @@ const dispatcher = {
         };
       },
   ) => {
-    const urlTemplate = parseTemplate("https://api.github.com/");;
-    const httpRequest: HttpRequest = {
-      headers: {
-        foo: data["foo"],
-        bar: data["bar"],
-      },
-      queryParams: {
-        options: data["options"],
-        payload: data["payload"],
-      },
-      body: {
-        value: data["payload"],
-        contentType: "application/json",
-      }
-    };
-    const url = urlTemplate.expand({...httpRequest.pathParams, ...httpRequest.queryParams});;
-    const response = await fetch(url, {
-      headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
-      body: httpRequest.body?.value,
-    });;
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    ;
+    const client = new <Unresolved Symbol>({ allowInsecureConnection: true });
+    let rawResponse: <Unresolved Symbol> | undefined = undefined;
+    try {
+      await client.<unresolved symbol>(
+        foo,
+        bar,
+        options,
+        payload,
+        {
+          baz: options.baz,
+          qux: payload.qux,
+          name: payload.name,
+          other: payload.other,operationOptions: { onResponse: (response) => (rawResponse = response) }
+        }
+      )
+    } catch(error) {
+      return <Unresolved Symbol>(error);
     }
-    return await response.json();
+    return <Unresolved Symbol>(rawResponse);;
   },
   gists_list: async (
     data: {
         since?: Date;
       },
   ) => {
-    const urlTemplate = parseTemplate("https://api.github.com/gists{?since}");;
-    const httpRequest: HttpRequest = {
-      queryParams: {
-        since: data["since"],
-      }
-    };
-    const url = urlTemplate.expand({...httpRequest.pathParams, ...httpRequest.queryParams});;
-    const response = await fetch(url, {
-      headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
-      body: httpRequest.body?.value,
-    });;
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    ;
+    const client = new <Unresolved Symbol>({ allowInsecureConnection: true });
+    let rawResponse: <Unresolved Symbol> | undefined = undefined;
+    try {
+      await client.<unresolved symbol>({
+        since: since,operationOptions: { onResponse: (response) => (rawResponse = response) }
+      })
+    } catch(error) {
+      return <Unresolved Symbol>(error);
     }
-    return await response.json();
+    return <Unresolved Symbol>(rawResponse);;
   },
   gists_create: async (
     data: {
         gist: CreateGist;
       },
   ) => {
-    const urlTemplate = parseTemplate("https://api.github.com/gists");;
-    const httpRequest: HttpRequest = {
-      body: {
-        value: data["gist"],
-        contentType: "application/json",
-      }
-    };
-    const url = urlTemplate.expand({...httpRequest.pathParams, ...httpRequest.queryParams});;
-    const response = await fetch(url, {
-      headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
-      body: httpRequest.body?.value,
-    });;
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    ;
+    const client = new <Unresolved Symbol>({ allowInsecureConnection: true });
+    let rawResponse: <Unresolved Symbol> | undefined = undefined;
+    try {
+      await client.<unresolved symbol>(
+        gist,
+        {
+          operationOptions: { onResponse: (response) => (rawResponse = response) }
+        }
+      )
+    } catch(error) {
+      return <Unresolved Symbol>(error);
     }
-    return await response.json();
+    return <Unresolved Symbol>(rawResponse);;
   },
   gists_list_public: async (
     data: {
         since?: Date;
       },
   ) => {
-    const urlTemplate = parseTemplate("https://api.github.com/gists/public{?since}");;
-    const httpRequest: HttpRequest = {
-      queryParams: {
-        since: data["since"],
-      }
-    };
-    const url = urlTemplate.expand({...httpRequest.pathParams, ...httpRequest.queryParams});;
-    const response = await fetch(url, {
-      headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
-      body: httpRequest.body?.value,
-    });;
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    ;
+    const client = new <Unresolved Symbol>({ allowInsecureConnection: true });
+    let rawResponse: <Unresolved Symbol> | undefined = undefined;
+    try {
+      await client.<unresolved symbol>({
+        since: since,operationOptions: { onResponse: (response) => (rawResponse = response) }
+      })
+    } catch(error) {
+      return <Unresolved Symbol>(error);
     }
-    return await response.json();
+    return <Unresolved Symbol>(rawResponse);;
   },
   gists_list_starred: async (
     data: {
         since?: Date;
       },
   ) => {
-    const urlTemplate = parseTemplate("https://api.github.com/gists/starred{?since}");;
-    const httpRequest: HttpRequest = {
-      queryParams: {
-        since: data["since"],
-      }
-    };
-    const url = urlTemplate.expand({...httpRequest.pathParams, ...httpRequest.queryParams});;
-    const response = await fetch(url, {
-      headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
-      body: httpRequest.body?.value,
-    });;
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    ;
+    const client = new <Unresolved Symbol>({ allowInsecureConnection: true });
+    let rawResponse: <Unresolved Symbol> | undefined = undefined;
+    try {
+      await client.<unresolved symbol>({
+        since: since,operationOptions: { onResponse: (response) => (rawResponse = response) }
+      })
+    } catch(error) {
+      return <Unresolved Symbol>(error);
     }
-    return await response.json();
+    return <Unresolved Symbol>(rawResponse);;
   },
   gists_get: async (
     data: {
         id: string;
       },
   ) => {
-    const urlTemplate = parseTemplate("https://api.github.com/gists/{id}");;
-    const httpRequest: HttpRequest = {
-      pathParams: {
-        id: data["id"],
-      }
-    };
-    const url = urlTemplate.expand({...httpRequest.pathParams, ...httpRequest.queryParams});;
-    const response = await fetch(url, {
-      headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
-      body: httpRequest.body?.value,
-    });;
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    ;
+    const client = new <Unresolved Symbol>({ allowInsecureConnection: true });
+    let rawResponse: <Unresolved Symbol> | undefined = undefined;
+    try {
+      await client.<unresolved symbol>(
+        id,
+        {
+          operationOptions: { onResponse: (response) => (rawResponse = response) }
+        }
+      )
+    } catch(error) {
+      return <Unresolved Symbol>(error);
     }
-    return await response.json();
+    return <Unresolved Symbol>(rawResponse);;
   },
   gists_update: async (
     data: {
@@ -806,172 +785,161 @@ const dispatcher = {
         gist: CreateGist;
       },
   ) => {
-    const urlTemplate = parseTemplate("https://api.github.com/gists/{id}");;
-    const httpRequest: HttpRequest = {
-      pathParams: {
-        id: data["id"],
-      },
-      body: {
-        value: data["gist"],
-        contentType: "application/json",
-      }
-    };
-    const url = urlTemplate.expand({...httpRequest.pathParams, ...httpRequest.queryParams});;
-    const response = await fetch(url, {
-      headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
-      body: httpRequest.body?.value,
-    });;
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    ;
+    const client = new <Unresolved Symbol>({ allowInsecureConnection: true });
+    let rawResponse: <Unresolved Symbol> | undefined = undefined;
+    try {
+      await client.<unresolved symbol>(
+        id,
+        gist,
+        {
+          operationOptions: { onResponse: (response) => (rawResponse = response) }
+        }
+      )
+    } catch(error) {
+      return <Unresolved Symbol>(error);
     }
-    return await response.json();
+    return <Unresolved Symbol>(rawResponse);;
   },
   gists_delete: async (
     data: {
         id: string;
       },
   ) => {
-    const urlTemplate = parseTemplate("https://api.github.com/gists/{id}");;
-    const httpRequest: HttpRequest = {
-      pathParams: {
-        id: data["id"],
-      }
-    };
-    const url = urlTemplate.expand({...httpRequest.pathParams, ...httpRequest.queryParams});;
-    const response = await fetch(url, {
-      headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
-      body: httpRequest.body?.value,
-    });;
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    ;
+    const client = new <Unresolved Symbol>({ allowInsecureConnection: true });
+    let rawResponse: <Unresolved Symbol> | undefined = undefined;
+    try {
+      await client.<unresolved symbol>(
+        id,
+        {
+          operationOptions: { onResponse: (response) => (rawResponse = response) }
+        }
+      )
+    } catch(error) {
+      return <Unresolved Symbol>(error);
     }
-    return await response.json();
+    return <Unresolved Symbol>(rawResponse);;
   },
   gists_list_commits: async (
     data: {
         id: string;
       },
   ) => {
-    const urlTemplate = parseTemplate("https://api.github.com/gists/{id}/commits");;
-    const httpRequest: HttpRequest = {
-      pathParams: {
-        id: data["id"],
-      }
-    };
-    const url = urlTemplate.expand({...httpRequest.pathParams, ...httpRequest.queryParams});;
-    const response = await fetch(url, {
-      headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
-      body: httpRequest.body?.value,
-    });;
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    ;
+    const client = new <Unresolved Symbol>({ allowInsecureConnection: true });
+    let rawResponse: <Unresolved Symbol> | undefined = undefined;
+    try {
+      await client.<unresolved symbol>(
+        id,
+        {
+          operationOptions: { onResponse: (response) => (rawResponse = response) }
+        }
+      )
+    } catch(error) {
+      return <Unresolved Symbol>(error);
     }
-    return await response.json();
+    return <Unresolved Symbol>(rawResponse);;
   },
   gists_list_forks: async (
     data: {
         id: string;
       },
   ) => {
-    const urlTemplate = parseTemplate("https://api.github.com/gists/{id}/forks");;
-    const httpRequest: HttpRequest = {
-      pathParams: {
-        id: data["id"],
-      }
-    };
-    const url = urlTemplate.expand({...httpRequest.pathParams, ...httpRequest.queryParams});;
-    const response = await fetch(url, {
-      headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
-      body: httpRequest.body?.value,
-    });;
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    ;
+    const client = new <Unresolved Symbol>({ allowInsecureConnection: true });
+    let rawResponse: <Unresolved Symbol> | undefined = undefined;
+    try {
+      await client.<unresolved symbol>(
+        id,
+        {
+          operationOptions: { onResponse: (response) => (rawResponse = response) }
+        }
+      )
+    } catch(error) {
+      return <Unresolved Symbol>(error);
     }
-    return await response.json();
+    return <Unresolved Symbol>(rawResponse);;
   },
   gists_fork: async (
     data: {
         id: string;
       },
   ) => {
-    const urlTemplate = parseTemplate("https://api.github.com/gists/{id}/forks");;
-    const httpRequest: HttpRequest = {
-      pathParams: {
-        id: data["id"],
-      }
-    };
-    const url = urlTemplate.expand({...httpRequest.pathParams, ...httpRequest.queryParams});;
-    const response = await fetch(url, {
-      headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
-      body: httpRequest.body?.value,
-    });;
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    ;
+    const client = new <Unresolved Symbol>({ allowInsecureConnection: true });
+    let rawResponse: <Unresolved Symbol> | undefined = undefined;
+    try {
+      await client.<unresolved symbol>(
+        id,
+        {
+          operationOptions: { onResponse: (response) => (rawResponse = response) }
+        }
+      )
+    } catch(error) {
+      return <Unresolved Symbol>(error);
     }
-    return await response.json();
+    return <Unresolved Symbol>(rawResponse);;
   },
   gists_star: async (
     data: {
         id: string;
       },
   ) => {
-    const urlTemplate = parseTemplate("https://api.github.com/gists/{id}/star");;
-    const httpRequest: HttpRequest = {
-      pathParams: {
-        id: data["id"],
-      }
-    };
-    const url = urlTemplate.expand({...httpRequest.pathParams, ...httpRequest.queryParams});;
-    const response = await fetch(url, {
-      headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
-      body: httpRequest.body?.value,
-    });;
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    ;
+    const client = new <Unresolved Symbol>({ allowInsecureConnection: true });
+    let rawResponse: <Unresolved Symbol> | undefined = undefined;
+    try {
+      await client.<unresolved symbol>(
+        id,
+        {
+          operationOptions: { onResponse: (response) => (rawResponse = response) }
+        }
+      )
+    } catch(error) {
+      return <Unresolved Symbol>(error);
     }
-    return await response.json();
+    return <Unresolved Symbol>(rawResponse);;
   },
   gists_unstar: async (
     data: {
         id: string;
       },
   ) => {
-    const urlTemplate = parseTemplate("https://api.github.com/gists/{id}/star");;
-    const httpRequest: HttpRequest = {
-      pathParams: {
-        id: data["id"],
-      }
-    };
-    const url = urlTemplate.expand({...httpRequest.pathParams, ...httpRequest.queryParams});;
-    const response = await fetch(url, {
-      headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
-      body: httpRequest.body?.value,
-    });;
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    ;
+    const client = new <Unresolved Symbol>({ allowInsecureConnection: true });
+    let rawResponse: <Unresolved Symbol> | undefined = undefined;
+    try {
+      await client.<unresolved symbol>(
+        id,
+        {
+          operationOptions: { onResponse: (response) => (rawResponse = response) }
+        }
+      )
+    } catch(error) {
+      return <Unresolved Symbol>(error);
     }
-    return await response.json();
+    return <Unresolved Symbol>(rawResponse);;
   },
   gists_is_starred: async (
     data: {
         id: string;
       },
   ) => {
-    const urlTemplate = parseTemplate("https://api.github.com/gists/{id}/star");;
-    const httpRequest: HttpRequest = {
-      pathParams: {
-        id: data["id"],
-      }
-    };
-    const url = urlTemplate.expand({...httpRequest.pathParams, ...httpRequest.queryParams});;
-    const response = await fetch(url, {
-      headers: {...httpRequest.headers, ...(httpRequest.body ? {"Content-Type": httpRequest.body.contentType}: {}) },
-      body: httpRequest.body?.value,
-    });;
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status} ${response.statusText}\n\n${response.text()}`);
+    ;
+    const client = new <Unresolved Symbol>({ allowInsecureConnection: true });
+    let rawResponse: <Unresolved Symbol> | undefined = undefined;
+    try {
+      await client.<unresolved symbol>(
+        id,
+        {
+          operationOptions: { onResponse: (response) => (rawResponse = response) }
+        }
+      )
+    } catch(error) {
+      return <Unresolved Symbol>(error);
     }
-    return await response.json();
+    return <Unresolved Symbol>(rawResponse);;
   },
 };
 
