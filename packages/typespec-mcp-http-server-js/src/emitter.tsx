@@ -2,6 +2,7 @@ import { List, type Refkey, refkey } from "@alloy-js/core";
 import * as ts from "@alloy-js/typescript";
 import type { EmitContext } from "@typespec/compiler";
 import { useTsp, writeOutput } from "@typespec/emitter-framework";
+import { ClientLibrary } from "@typespec/http-client/components";
 import { useMCPServerContext } from "typespec-mcp-server-js";
 import { McpServer } from "typespec-mcp-server-js/components";
 import { HttpRequestType } from "./components/http-tool-basic-handler.jsx";
@@ -12,14 +13,16 @@ export async function $onEmit(context: EmitContext) {
   const dispatchKey = refkey();
   writeOutput(
     context.program,
-    <McpServer
-      externals={[urlTemplate]}
-      program={context.program}
-      toolImplementation={{
-        dispatcher: dispatchKey,
-        implementation: <HttpTools refkey={dispatchKey} />,
-      }}
-    />,
+    <ClientLibrary program={context.program}>
+      <McpServer
+        externals={[urlTemplate]}
+        program={context.program}
+        toolImplementation={{
+          dispatcher: dispatchKey,
+          implementation: <HttpTools refkey={dispatchKey} />,
+        }}
+      />
+    </ClientLibrary>,
     context.emitterOutputDir,
   );
 }
