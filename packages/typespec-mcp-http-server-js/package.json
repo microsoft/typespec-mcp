@@ -22,7 +22,9 @@
     "@alloy-js/typescript": "catalog:",
     "@typespec/compiler": "catalog:",
     "@typespec/http": "catalog:",
-    "@typespec/emitter-framework": "catalog:"
+    "@typespec/emitter-framework": "catalog:",
+    "@typespec/http-client": "catalog:",
+    "@typespec/http-client-js": "catalog:"
   },
   "scripts": {
     "build": "alloy build",

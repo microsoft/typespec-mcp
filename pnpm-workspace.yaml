@@ -11,6 +11,8 @@ catalog:
   "@types/node": ^22.14.0
   "@typespec/compiler": ^1.0.0
   "@typespec/emitter-framework": ^0.7.1
+  "@typespec/http-client": 0.7.0-dev.1
+  "@typespec/http-client-js": 0.6.0-dev.4
   "@typespec/http": ^1.0.0
   "@typespec/tspd": "^0.70.0"
   "@modelcontextprotocol/inspector": ^0.12.0

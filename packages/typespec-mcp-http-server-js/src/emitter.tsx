@@ -4,7 +4,7 @@ import type { EmitContext } from "@typespec/compiler";
 import { useTsp, writeOutput } from "@typespec/emitter-framework";
 import { useMCPServerContext } from "typespec-mcp-server-js";
 import { McpServer } from "typespec-mcp-server-js/components";
-import { HttpRequestType } from "./components/http-tool-handler.jsx";
+import { HttpRequestType } from "./components/http-tool-basic-handler.jsx";
 import { HttpToolsDispatcher } from "./components/http-tools-dispatcher.jsx";
 import { urlTemplate } from "./externals/url-template.js";
 

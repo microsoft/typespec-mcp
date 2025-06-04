@@ -2,7 +2,7 @@ import { For } from "@alloy-js/core";
 import { ObjectExpression, ObjectProperty } from "@alloy-js/typescript";
 import { useTsp } from "@typespec/emitter-framework";
 import { type ToolDescriptor } from "typespec-mcp-server-js";
-import { HttpToolHandler } from "./http-tool-handler.jsx";
+import { HttpToolClientHandler } from "./http-tool-client-handler.jsx";
 
 export interface HttpToolsDispatcherProps {
   tools: ToolDescriptor[];
@@ -19,7 +19,7 @@ export function HttpToolsDispatcher(props: HttpToolsDispatcherProps) {
     <>
       <ObjectExpression>
         <For each={httpOps} comma enderPunctuation>
-          {(op) => <ObjectProperty name={op.tool.id} value={<HttpToolHandler op={op.httpOp} tool={op.tool} />} />}
+          {(op) => <ObjectProperty name={op.tool.id} value={<HttpToolClientHandler op={op.httpOp} tool={op.tool} />} />}
         </For>
       </ObjectExpression>
     </>
