@@ -1,9 +1,9 @@
-import { ComponentContext, createContext, NamePolicy, refkey, Refkey, useContext } from "@alloy-js/core";
-import { navigateType, Program, Type } from "@typespec/compiler";
+import { type ComponentContext, createContext, type NamePolicy, refkey, type Refkey, useContext } from "@alloy-js/core";
+import { navigateType, type Program, type Type } from "@typespec/compiler";
 import { $ } from "@typespec/compiler/typekit";
-import { McpServer } from "typespec-mcp";
-import { createMcpNamingPolicy, McpElements } from "./name-policy.js";
-import { resolveToolDescriptors, ToolGroup, type ToolDescriptor } from "./utils/tool-descriptor.js";
+import type { McpServer } from "typespec-mcp";
+import { createMcpNamingPolicy, type McpElements } from "./name-policy.js";
+import { resolveToolDescriptors, type ToolDescriptor, type ToolGroup } from "./utils/tool-descriptor.js";
 
 export interface MCPServerKeys {
   server: Refkey;

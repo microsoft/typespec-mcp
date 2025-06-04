@@ -1,4 +1,4 @@
-import { unsafe_Mutator, unsafe_MutatorFlow } from "@typespec/compiler/experimental";
+import { type unsafe_Mutator, unsafe_MutatorFlow } from "@typespec/compiler/experimental";
 import { $ } from "@typespec/compiler/typekit";
 // Unsure if the filter/replace for non-enum types should be needed.
 // https://github.com/microsoft/typespec/issues/7003

@@ -1,5 +1,5 @@
-import { createNamePolicy, NamePolicy } from "@alloy-js/core";
-import { createTSNamePolicy, TypeScriptElements } from "@alloy-js/typescript";
+import { createNamePolicy, type NamePolicy } from "@alloy-js/core";
+import { createTSNamePolicy, type TypeScriptElements } from "@alloy-js/typescript";
 import { snakeCase } from "change-case";
 
 export type McpElements = "tool" | TypeScriptElements;

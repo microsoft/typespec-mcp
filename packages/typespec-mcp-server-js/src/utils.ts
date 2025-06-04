@@ -1,4 +1,4 @@
-import { isErrorModel, Operation, Program, Type } from "@typespec/compiler";
+import { isErrorModel, type Operation, type Program, type Type } from "@typespec/compiler";
 import { $ } from "@typespec/compiler/typekit";
 
 export function splitOutErrors(

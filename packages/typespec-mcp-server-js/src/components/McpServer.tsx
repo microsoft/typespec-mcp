@@ -1,6 +1,6 @@
-import { Children, List, Refkey, SymbolCreator } from "@alloy-js/core";
+import { type Children, List, type Refkey, type SymbolCreator } from "@alloy-js/core";
 import { SourceFile } from "@alloy-js/typescript";
-import { Program } from "@typespec/compiler";
+import type { Program } from "@typespec/compiler";
 import { Output } from "@typespec/emitter-framework";
 import { zod } from "typespec-zod";
 import { createMCPServerContext, MCPServerContext } from "../context/McpServer.js";

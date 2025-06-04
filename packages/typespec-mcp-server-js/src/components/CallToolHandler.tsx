@@ -1,4 +1,4 @@
-import { Block, Children, code, For, List, refkey, Refkey, Show, StatementList } from "@alloy-js/core";
+import { Block, type Children, code, For, List, refkey, type Refkey, Show, StatementList } from "@alloy-js/core";
 import {
   ArrayExpression,
   CaseClause,
@@ -9,10 +9,14 @@ import {
   ObjectProperty,
   VarDeclaration,
 } from "@alloy-js/typescript";
-import { Type } from "@typespec/compiler";
+import type { Type } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";
 import { useMCPServerContext } from "../context/McpServer.js";
-import { ArrayResultDescriptor, SingleResultDescriptor, ToolDescriptor } from "../context/utils/tool-descriptor.js";
+import type {
+  ArrayResultDescriptor,
+  SingleResultDescriptor,
+  ToolDescriptor,
+} from "../context/utils/tool-descriptor.js";
 import { zodValidationError } from "../externals/zod-validation-error.js";
 
 export interface CallToolHandlerProps {

@@ -1,6 +1,6 @@
-import { DecoratorContext, DecoratorFunction, Interface, Namespace, Type } from "@typespec/compiler";
+import type { DecoratorContext, DecoratorFunction, Interface, Namespace, Type } from "@typespec/compiler";
 import { useStateMap, useStateSet } from "@typespec/compiler/utils";
-import {
+import type {
   ClosedWorldDecorator,
   IdempotentDecorator,
   McpServerDecorator,

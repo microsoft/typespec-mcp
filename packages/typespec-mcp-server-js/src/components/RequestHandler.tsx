@@ -1,5 +1,5 @@
-import { Refkey, refkey } from "@alloy-js/core";
-import { Children } from "@alloy-js/core/jsx-runtime";
+import { type Refkey, refkey } from "@alloy-js/core";
+import type { Children } from "@alloy-js/core/jsx-runtime";
 import { FunctionCallExpression, FunctionDeclaration } from "@alloy-js/typescript";
 import { useMCPServerContext } from "../context/McpServer.js";
 
