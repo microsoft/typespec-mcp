@@ -15,20 +15,20 @@ async function getToolDescriptors(code: string) {
 
 describe("tool name", () => {
   it("snake_case", async () => {
-    const tools = await getToolDescriptors(`
+    const { allTools } = await getToolDescriptors(`
     @mcpServer
     namespace Test;
 
     @tool op firstTool(): void;
     @tool op secondTool(): void;
  `);
-    expect(tools).toHaveLength(2);
-    expect(tools[0].name).toEqual("first_tool");
-    expect(tools[1].name).toEqual("second_tool");
+    expect(allTools).toHaveLength(2);
+    expect(allTools[0].id).toEqual("first_tool");
+    expect(allTools[1].id).toEqual("second_tool");
   });
 
   it("include parent interface", async () => {
-    const tools = await getToolDescriptors(`
+    const { allTools } = await getToolDescriptors(`
     @mcpServer
     namespace Test;
     
@@ -36,12 +36,12 @@ describe("tool name", () => {
         @tool op firstTool(): void;
     }
  `);
-    expect(tools).toHaveLength(1);
-    expect(tools[0].name).toEqual("parent_first_tool");
+    expect(allTools).toHaveLength(1);
+    expect(allTools[0].id).toEqual("parent_first_tool");
   });
 
   it("include parent namespace", async () => {
-    const tools = await getToolDescriptors(`
+    const { allTools } = await getToolDescriptors(`
     @mcpServer
     namespace Test;
     
@@ -49,12 +49,12 @@ describe("tool name", () => {
         @tool op firstTool(): void;
     }
  `);
-    expect(tools).toHaveLength(1);
-    expect(tools[0].name).toEqual("parent_first_tool");
+    expect(allTools).toHaveLength(1);
+    expect(allTools[0].id).toEqual("parent_first_tool");
   });
 
   it("include parent namespace and interface", async () => {
-    const tools = await getToolDescriptors(`
+    const { allTools } = await getToolDescriptors(`
     @mcpServer
     namespace Test;
     
@@ -64,7 +64,7 @@ describe("tool name", () => {
       }
     }
  `);
-    expect(tools).toHaveLength(1);
-    expect(tools[0].name).toEqual("group_parent_interface_first_tool");
+    expect(allTools).toHaveLength(1);
+    expect(allTools[0].id).toEqual("group_parent_interface_first_tool");
   });
 });

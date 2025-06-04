@@ -3,7 +3,7 @@ import { navigateType, Program, Type } from "@typespec/compiler";
 import { $ } from "@typespec/compiler/typekit";
 import { McpServer } from "typespec-mcp";
 import { createMcpNamingPolicy, McpElements } from "./name-policy.js";
-import { resolveToolDescriptors, type ToolDescriptor } from "./utils/tool-descriptor.js";
+import { resolveToolDescriptors, ToolGroup, type ToolDescriptor } from "./utils/tool-descriptor.js";
 
 export interface MCPServerKeys {
   server: Refkey;
@@ -49,6 +49,7 @@ export interface MCPServerContext {
   server?: McpServer;
   version: string;
   capabilities: string[];
+  structure: ToolGroup;
   tools: ToolDescriptor[];
   keys: MCPServerKeys;
   allTypes: Type[];
@@ -74,10 +75,11 @@ export function createMCPServerContext(
   const tk = $(program);
   const server = tk.mcp.servers.list()[0] as McpServer | undefined;
 
-  const toolDescriptors = resolveToolDescriptors(program, server, naming);
+  const toolGroup = resolveToolDescriptors(program, server, naming);
+  const allTools = toolGroup.allTools;
   const allTypes = discoverTypesFrom(
     program,
-    toolDescriptors.flatMap((tool) => [tool.op.parameters, tool.implementationOp.returnType]),
+    allTools.flatMap((tool) => [tool.op.parameters, tool.implementationOp.returnType]),
   );
 
   return {
@@ -88,7 +90,8 @@ export function createMCPServerContext(
     server,
     // hard code for now
     capabilities: ["tools"],
-    tools: toolDescriptors,
+    structure: toolGroup,
+    tools: allTools,
     allTypes,
     keys: {
       server: refkey(),

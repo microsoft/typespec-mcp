@@ -35,7 +35,7 @@ export function HttpTools(props: { refkey: Refkey }) {
 
   const toolsMap: Record<string, string> = {};
   for (const tool of tools) {
-    toolsMap[tool.name] = tool.implementationOp.name;
+    toolsMap[tool.id] = tool.implementationOp.name;
   }
 
   const uriTemplateVar = refkey();

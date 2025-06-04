@@ -7,7 +7,7 @@ export interface Tools {
   getRepository(
     owner: string,
     repo: string,
-  ): FullRepository | Promise<FullRepository>
+  ): FullRepository | Promise<FullRepository>;
 
   /**
    * Get a list of GitHub repositories for a user.
@@ -23,72 +23,74 @@ export interface Tools {
         name: string
         other: string;
       },
-  ): void | Promise<void>
+  ): void | Promise<void>;
+  readonly Gists: {
+    /**
+     * List gists for the authenticated user
+     */
+    list(since?: Date): Array<Gist> | Promise<Array<Gist>>;
 
-  /**
-   * List gists for the authenticated user
-   */
-  gistsList(since?: Date): Array<Gist> | Promise<Array<Gist>>
+    /**
+     * Create a gist
+     */
+    create(gist: CreateGist): Gist | Promise<Gist>;
 
-  /**
-   * Create a gist
-   */
-  gistsCreate(gist: CreateGist): Gist | Promise<Gist>
+    /**
+     * List public gists
+     */
+    listPublic(since?: Date): Array<Gist> | Promise<Array<Gist>>;
 
-  /**
-   * List public gists
-   */
-  gistsListPublic(since?: Date): Array<Gist> | Promise<Array<Gist>>
+    /**
+     * List starred gists
+     */
+    listStarred(since?: Date): Array<Gist> | Promise<Array<Gist>>;
 
-  /**
-   * List starred gists
-   */
-  gistsListStarred(since?: Date): Array<Gist> | Promise<Array<Gist>>
+    /**
+     * Get a gist
+     */
+    get(id: string): Gist | Promise<Gist>;
 
-  /**
-   * Get a gist
-   */
-  gistsGet(id: string): Gist | Promise<Gist>
+    /**
+     * Update a gist
+     */
+    update(id: string, gist: CreateGist): Gist | Promise<Gist>;
 
-  /**
-   * Update a gist
-   */
-  gistsUpdate(id: string, gist: CreateGist): Gist | Promise<Gist>
+    /**
+     * Delete a gist
+     */
+    delete_(id: string): void | Promise<void>;
 
-  /**
-   * Delete a gist
-   */
-  gistsDelete(id: string): void | Promise<void>
+    /**
+     * List gist commits
+     */
+    listCommits(id: string): Array<unknown> | Promise<Array<unknown>>;
 
-  /**
-   * List gist commits
-   */
-  gistsListCommits(id: string): Array<unknown> | Promise<Array<unknown>>
+    /**
+     * List gist forks
+     */
+    listForks(id: string): Array<unknown> | Promise<Array<unknown>>;
 
-  /**
-   * List gist forks
-   */
-  gistsListForks(id: string): Array<unknown> | Promise<Array<unknown>>
+    /**
+     * Fork a gist
+     */
+    fork(id: string): Gist | Promise<Gist>;
 
-  /**
-   * Fork a gist
-   */
-  gistsFork(id: string): Gist | Promise<Gist>
+    /**
+     * Star a gist
+     */
+    star(id: string): void | Promise<void>;
 
-  /**
-   * Star a gist
-   */
-  gistsStar(id: string): void | Promise<void>
+    /**
+     * Unstar a gist
+     */
+    unstar(id: string): void | Promise<void>;
 
-  /**
-   * Unstar a gist
-   */
-  gistsUnstar(id: string): void | Promise<void>
+    /**
+     * Check if a gist is starred
+     */
+    isStarred(id: string): boolean | Promise<boolean>;
 
-  /**
-   * Check if a gist is starred
-   */
-  gistsIsStarred(id: string): boolean | Promise<boolean>
+  };
 }
 
 export let toolHandler: Tools = undefined as any;

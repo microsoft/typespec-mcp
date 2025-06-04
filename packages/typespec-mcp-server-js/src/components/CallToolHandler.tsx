@@ -4,6 +4,7 @@ import {
   CaseClause,
   CommaList,
   FunctionCallExpression,
+  MemberExpression,
   ObjectExpression,
   ObjectProperty,
   VarDeclaration,
@@ -21,11 +22,12 @@ export interface CallToolHandlerProps {
 
 export function CallToolHandler(props: CallToolHandlerProps) {
   const {
+    namePolicy,
     keys: { getToolHandler, toolDispatcher },
   } = useMCPServerContext();
   const parseResultKey = refkey();
   return (
-    <CaseClause expression={`"${props.tool.name}"`} block>
+    <CaseClause expression={`"${props.tool.id}"`} block>
       <Show when={props.tool.op.parameters.properties.size > 0}>
         <List ender>
           <VarDeclaration name="parsed">
@@ -42,12 +44,17 @@ export function CallToolHandler(props: CallToolHandlerProps) {
         <VarDeclaration name="rawResult">
           await{" "}
           {toolDispatcher ? (
-            <FunctionCallExpression target={toolDispatcher} args={[`"${props.tool.name}"`, "parsed.data"]} />
+            <FunctionCallExpression target={toolDispatcher} args={[`"${props.tool.id}"`, "parsed.data"]} />
           ) : (
             <FunctionCallExpression
               target={
                 <>
-                  {getToolHandler}.{props.tool.implementationOp.name}
+                  <MemberExpression>
+                    <MemberExpression.Part refkey={getToolHandler} />
+                    {props.tool.path.map((x) => (
+                      <MemberExpression.Part id={namePolicy.getName(x, "interface-member")} />
+                    ))}
+                  </MemberExpression>
                 </>
               }
               args={[...props.tool.parameters.properties.values()].map((p) => {
