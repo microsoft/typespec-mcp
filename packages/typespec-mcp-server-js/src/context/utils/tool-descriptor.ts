@@ -1,13 +1,13 @@
-import { NamePolicy, Refkey, refkey } from "@alloy-js/core";
+import { type NamePolicy, type Refkey, refkey } from "@alloy-js/core";
 import {
   getSummary,
-  Interface,
+  type Interface,
   isNeverType,
-  Namespace,
-  Tuple,
   type Model,
+  type Namespace,
   type Operation,
   type Program,
+  type Tuple,
   type Type,
 } from "@typespec/compiler";
 import { unsafe_mutateSubgraph } from "@typespec/compiler/experimental";

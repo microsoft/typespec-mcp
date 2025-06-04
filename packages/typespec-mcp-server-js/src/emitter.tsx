@@ -1,6 +1,6 @@
 import { List } from "@alloy-js/core";
 import { SourceFile } from "@alloy-js/typescript";
-import { EmitContext } from "@typespec/compiler";
+import type { EmitContext } from "@typespec/compiler";
 import { Output, writeOutput } from "@typespec/emitter-framework";
 import { zod } from "typespec-zod";
 import { CallToolHandlers } from "./components/CallToolHandlers.jsx";

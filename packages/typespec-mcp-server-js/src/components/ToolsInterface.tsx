@@ -4,7 +4,7 @@ import { getDoc } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";
 import { InterfaceDeclaration, InterfaceMethod, TypeExpression } from "@typespec/emitter-framework/typescript";
 import { useMCPServerContext } from "../context/McpServer.js";
-import { ToolGroup } from "../context/utils/tool-descriptor.js";
+import type { ToolGroup } from "../context/utils/tool-descriptor.js";
 
 export interface ToolsInterfaceProps {}
 

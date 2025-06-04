@@ -1,5 +1,5 @@
-import { MCPDecorators } from "../generated-defs/MCP.js";
-import { MCPPrivateDecorators } from "../generated-defs/MCP.Private.js";
+import type { MCPDecorators } from "../generated-defs/MCP.js";
+import type { MCPPrivateDecorators } from "../generated-defs/MCP.Private.js";
 import {
   $mcpServer,
   $serializeAsText,
