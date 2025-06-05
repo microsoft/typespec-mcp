@@ -15,6 +15,16 @@ export const owner = z
   })
   .describe("Github user");
 
+export const license = z.object({
+  key: z.string().describe("Key of the license"),
+  name: z.string().describe("Name of the license"),
+  spdxId: z.string().describe("SPDX ID of the license"),
+  url: z
+    .union([z.string(), z.null()])
+    .optional()
+    .describe("URL of the license"),
+});
+
 export const fullRepository = z
   .object({
     id: z
@@ -197,16 +207,7 @@ export const fullRepository = z
     updatedAt: z
       .string()
       .describe("Timestamp of the last update to the repository"),
-    license: z
-      .object({
-        key: z.string().describe("Key of the license"),
-        name: z.string().describe("Name of the license"),
-        spdxId: z.string().describe("SPDX ID of the license"),
-        url: z
-          .union([z.string(), z.null()])
-          .optional()
-          .describe("URL of the license"),
-      })
+    license: license
       .optional()
       .describe("License information of the repository"),
   })

@@ -6,6 +6,13 @@ export interface Owner {
   htmlUrl: string;
 }
 
+export interface License {
+  key: string
+  name: string
+  spdxId: string
+  url?: string | null;
+}
+
 export interface FullRepository {
   id: number
   nodeId: string
@@ -79,12 +86,7 @@ export interface FullRepository {
   pushedAt: string
   createdAt: string
   updatedAt: string
-  license?: {
-    key: string
-    name_2: string
-    spdxId: string
-    url_2?: string | null;
-  };
+  license?: License;
 }
 
 export interface GistFile {

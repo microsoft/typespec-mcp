@@ -114,6 +114,7 @@ export function HttpTools(props: { refkey: Refkey }) {
   for (const tool of tools) {
     toolsMap[tool.id] = tool.implementationOp.name;
   }
+  console.log("Tools", toolsMap);
 
   const uriTemplateVar = refkey();
   const dispatcherRefKey = refkey();

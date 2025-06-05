@@ -124,10 +124,12 @@ export interface FullRepository {
   pushedAt: string
   createdAt: string
   updatedAt: string
-  license?: {
-    key: string
-    name_2: string
-    spdxId: string
-    url_2?: string | null;
-  };
+  license?: License;
+}
+
+export interface License {
+  key: string
+  name: string
+  spdxId: string
+  url?: string | null;
 }
