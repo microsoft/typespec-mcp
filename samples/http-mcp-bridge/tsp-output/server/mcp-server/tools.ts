@@ -31,8 +31,13 @@ const dispatcher = {
         repo: string;
       },
   ) {
-    ;
-    const client = new GithubClient({ allowInsecureConnection: true });
+    const credential = {
+      key: process.env.APIKEY ?? "UNKNOWN"
+    };
+    const client = new GithubClient(
+      credential,
+      { allowInsecureConnection: true }
+    );
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.getRepository(
@@ -52,8 +57,13 @@ const dispatcher = {
         since?: Date;
       },
   ) {
-    ;
-    const client = new GistsClient({ allowInsecureConnection: true });
+    const credential = {
+      key: process.env.APIKEY ?? "UNKNOWN"
+    };
+    const client = new GistsClient(
+      credential,
+      { allowInsecureConnection: true }
+    );
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.list({
@@ -71,8 +81,13 @@ const dispatcher = {
         gist: CreateGist;
       },
   ) {
-    ;
-    const client = new GistsClient({ allowInsecureConnection: true });
+    const credential = {
+      key: process.env.APIKEY ?? "UNKNOWN"
+    };
+    const client = new GistsClient(
+      credential,
+      { allowInsecureConnection: true }
+    );
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.create(
@@ -91,8 +106,13 @@ const dispatcher = {
         since?: Date;
       },
   ) {
-    ;
-    const client = new GistsClient({ allowInsecureConnection: true });
+    const credential = {
+      key: process.env.APIKEY ?? "UNKNOWN"
+    };
+    const client = new GistsClient(
+      credential,
+      { allowInsecureConnection: true }
+    );
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.listPublic({
@@ -110,8 +130,13 @@ const dispatcher = {
         since?: Date;
       },
   ) {
-    ;
-    const client = new GistsClient({ allowInsecureConnection: true });
+    const credential = {
+      key: process.env.APIKEY ?? "UNKNOWN"
+    };
+    const client = new GistsClient(
+      credential,
+      { allowInsecureConnection: true }
+    );
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.listStarred({
@@ -129,8 +154,13 @@ const dispatcher = {
         id: string;
       },
   ) {
-    ;
-    const client = new GistsClient({ allowInsecureConnection: true });
+    const credential = {
+      key: process.env.APIKEY ?? "UNKNOWN"
+    };
+    const client = new GistsClient(
+      credential,
+      { allowInsecureConnection: true }
+    );
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.get(
@@ -150,8 +180,13 @@ const dispatcher = {
         gist: CreateGist;
       },
   ) {
-    ;
-    const client = new GistsClient({ allowInsecureConnection: true });
+    const credential = {
+      key: process.env.APIKEY ?? "UNKNOWN"
+    };
+    const client = new GistsClient(
+      credential,
+      { allowInsecureConnection: true }
+    );
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.update(
@@ -171,8 +206,13 @@ const dispatcher = {
         id: string;
       },
   ) {
-    ;
-    const client = new GistsClient({ allowInsecureConnection: true });
+    const credential = {
+      key: process.env.APIKEY ?? "UNKNOWN"
+    };
+    const client = new GistsClient(
+      credential,
+      { allowInsecureConnection: true }
+    );
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.delete_(
@@ -191,8 +231,13 @@ const dispatcher = {
         id: string;
       },
   ) {
-    ;
-    const client = new GistsClient({ allowInsecureConnection: true });
+    const credential = {
+      key: process.env.APIKEY ?? "UNKNOWN"
+    };
+    const client = new GistsClient(
+      credential,
+      { allowInsecureConnection: true }
+    );
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.listCommits(
@@ -211,8 +256,13 @@ const dispatcher = {
         id: string;
       },
   ) {
-    ;
-    const client = new GistsClient({ allowInsecureConnection: true });
+    const credential = {
+      key: process.env.APIKEY ?? "UNKNOWN"
+    };
+    const client = new GistsClient(
+      credential,
+      { allowInsecureConnection: true }
+    );
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.listForks(
@@ -231,8 +281,13 @@ const dispatcher = {
         id: string;
       },
   ) {
-    ;
-    const client = new GistsClient({ allowInsecureConnection: true });
+    const credential = {
+      key: process.env.APIKEY ?? "UNKNOWN"
+    };
+    const client = new GistsClient(
+      credential,
+      { allowInsecureConnection: true }
+    );
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.fork(
@@ -251,8 +306,13 @@ const dispatcher = {
         id: string;
       },
   ) {
-    ;
-    const client = new GistsClient({ allowInsecureConnection: true });
+    const credential = {
+      key: process.env.APIKEY ?? "UNKNOWN"
+    };
+    const client = new GistsClient(
+      credential,
+      { allowInsecureConnection: true }
+    );
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.star(
@@ -271,8 +331,13 @@ const dispatcher = {
         id: string;
       },
   ) {
-    ;
-    const client = new GistsClient({ allowInsecureConnection: true });
+    const credential = {
+      key: process.env.APIKEY ?? "UNKNOWN"
+    };
+    const client = new GistsClient(
+      credential,
+      { allowInsecureConnection: true }
+    );
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.unstar(
@@ -291,8 +356,13 @@ const dispatcher = {
         id: string;
       },
   ) {
-    ;
-    const client = new GistsClient({ allowInsecureConnection: true });
+    const credential = {
+      key: process.env.APIKEY ?? "UNKNOWN"
+    };
+    const client = new GistsClient(
+      credential,
+      { allowInsecureConnection: true }
+    );
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.isStarred(

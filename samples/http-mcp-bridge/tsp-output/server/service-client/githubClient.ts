@@ -1,3 +1,4 @@
+import type { ApiKeyCredential } from "@typespec/ts-http-runtime";
 import { createGistsClientContext, type GistsClientContext, type GistsClientOptions } from "./api/gistsClient/gistsClientContext.js";
 import { create, type CreateOptions, delete_, type DeleteOptions, fork, type ForkOptions, get, type GetOptions, isStarred, type IsStarredOptions, list, listCommits, type ListCommitsOptions, listForks, type ListForksOptions, type ListOptions, listPublic, type ListPublicOptions, listStarred, type ListStarredOptions, star, type StarOptions, unstar, type UnstarOptions, update, type UpdateOptions } from "./api/gistsClient/gistsClientOperations.js";
 import { createGithubClientContext, type GithubClientContext, type GithubClientOptions } from "./api/githubClientContext.js";
@@ -7,9 +8,9 @@ import type { CreateGist } from "./models/models.js";
 export class GithubClient {
   #context: GithubClientContext
   gistsClient: GistsClient
-  constructor(options?: GithubClientOptions) {
-    this.#context = createGithubClientContext(options);
-    this.gistsClient = new GistsClient(options);
+  constructor(credential: ApiKeyCredential, options?: GithubClientOptions) {
+    this.#context = createGithubClientContext(credential, options);
+    this.gistsClient = new GistsClient(credential, options);
   }
   async getRepository(
     owner: string,
@@ -22,8 +23,8 @@ export class GithubClient {
 export class GistsClient {
   #context: GistsClientContext
 
-  constructor(options?: GistsClientOptions) {
-    this.#context = createGistsClientContext(options);
+  constructor(credential: ApiKeyCredential, options?: GistsClientOptions) {
+    this.#context = createGistsClientContext(credential, options);
 
   }
   async list(options?: ListOptions) {

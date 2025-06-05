@@ -9,6 +9,7 @@ using Http;
 @mcpServer(#{ name: "VectorMCP", version: "1.0.0", instructions: "Use this MCP to access GitHub API." })
 @service
 @server("https://api.github.com")
+@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Authorization"> | NoAuth)
 namespace Github;
 
 /**
