@@ -1,22 +1,8 @@
 import { createNamePolicy, List, NamePolicyContext, type Refkey, refkey, SourceDirectory } from "@alloy-js/core";
 import * as ts from "@alloy-js/typescript";
-import { createTSNamePolicy } from "@alloy-js/typescript";
 import type { EmitContext } from "@typespec/compiler";
-import { Output, TransformNamePolicyContext, useTsp, writeOutput } from "@typespec/emitter-framework";
-import {
-  Client,
-  createTransformNamePolicy,
-  EncodingProvider,
-  httpRuntimeTemplateLib,
-  Interfaces,
-  Models,
-  ModelSerializers,
-  MultipartHelpers,
-  OperationsDirectory,
-  PagingHelpers,
-  RestError,
-  uriTemplateLib,
-} from "@typespec/http-client-js/components";
+import { Output, useTsp, writeOutput } from "@typespec/emitter-framework";
+import { httpRuntimeTemplateLib, uriTemplateLib } from "@typespec/http-client-js/components";
 import { ClientLibrary } from "@typespec/http-client/components";
 import { createMCPServerContext, Libs, MCPServerContext, useMCPServerContext } from "typespec-mcp-server-js";
 import {
@@ -26,14 +12,13 @@ import {
   TsTypes,
   ZodTypes,
 } from "typespec-mcp-server-js/components";
+import { Clients } from "./components/clients.jsx";
 import { HttpRequestType } from "./components/http-tool-basic-handler.jsx";
 import { HttpToolsDispatcher } from "./components/http-tools-dispatcher.jsx";
 import { Utils } from "./components/utils.js";
 
 export async function $onEmit(context: EmitContext) {
   const dispatchKey = refkey();
-  const tsNamePolicy = createTSNamePolicy();
-  const defaultTransformNamePolicy = createTransformNamePolicy();
   const libs = [...Libs, uriTemplateLib, httpRuntimeTemplateLib];
   const mcpServerContext: MCPServerContext = createMCPServerContext(context.program, {
     toolDispatcher: dispatchKey,
@@ -44,56 +29,37 @@ export async function $onEmit(context: EmitContext) {
     <Output namePolicy={mcpServerContext.namePolicy} externals={libs} program={context.program}>
       <ClientLibrary program={context.program}>
         <MCPServerContext.Provider value={mcpServerContext}>
-          <TransformNamePolicyContext.Provider value={defaultTransformNamePolicy}>
-            <EncodingProvider>
-              <SourceDirectory path="service-client">
-                <Client />
-                <SourceDirectory path="models">
-                  <Models />
-                  <SourceDirectory path="internal">
-                    <ModelSerializers />
-                  </SourceDirectory>
-                </SourceDirectory>
-                <SourceDirectory path="api">
-                  <OperationsDirectory />
-                </SourceDirectory>
-                <SourceDirectory path="helpers">
-                  <PagingHelpers />
-                  <Interfaces />
-                  <MultipartHelpers />
-                  <ts.SourceFile path="error.ts">
-                    <RestError />
-                  </ts.SourceFile>
-                </SourceDirectory>
-              </SourceDirectory>
+          <SourceDirectory path="service-client">
+            <Clients />
+          </SourceDirectory>
 
-              <SourceDirectory path="mcp-server">
-                <ts.SourceFile path="schema.ts">
-                  <ZodTypes />
-                </ts.SourceFile>
-                <ts.SourceFile path="server.ts">
-                  <List doubleHardline>
-                    <ServerDeclaration />
-                    <ListToolsHandler />
-                    <CallToolHandlers />
-                  </List>
-                </ts.SourceFile>
-                <ts.SourceFile path="ts-types.ts">
-                  <TsTypes />
-                </ts.SourceFile>
-                <ts.SourceFile path="tools.ts">
-                  <List doubleHardline>
-                    <HttpTools refkey={dispatchKey} />
-                  </List>
-                </ts.SourceFile>
-                <ts.SourceFile path="utils.ts">
-                  <List doubleHardline>
-                    <Utils />
-                  </List>
-                </ts.SourceFile>
-              </SourceDirectory>
-            </EncodingProvider>
-          </TransformNamePolicyContext.Provider>
+          <SourceDirectory path="mcp-server">
+            <ts.SourceFile path="schema.ts">
+              <NamePolicyContext.Provider value={createNamePolicy((x) => x)}>
+                <ZodTypes />
+              </NamePolicyContext.Provider>
+            </ts.SourceFile>
+            <ts.SourceFile path="server.ts">
+              <List doubleHardline>
+                <ServerDeclaration />
+                <ListToolsHandler />
+                <CallToolHandlers />
+              </List>
+            </ts.SourceFile>
+            <ts.SourceFile path="ts-types.ts">
+              <TsTypes />
+            </ts.SourceFile>
+            <ts.SourceFile path="tools.ts">
+              <List doubleHardline>
+                <HttpTools refkey={dispatchKey} />
+              </List>
+            </ts.SourceFile>
+            <ts.SourceFile path="utils.ts">
+              <List doubleHardline>
+                <Utils />
+              </List>
+            </ts.SourceFile>
+          </SourceDirectory>
         </MCPServerContext.Provider>
       </ClientLibrary>
     </Output>,
