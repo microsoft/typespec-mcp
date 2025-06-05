@@ -27,6 +27,7 @@ import { useClientLibrary } from "@typespec/http-client";
 import { httpRuntimeTemplateLib } from "@typespec/http-client-js/components";
 import { useMCPServerContext, type ToolDescriptor } from "typespec-mcp-server-js";
 import { hasDefaultValue } from "../utils/parameters.js";
+import { HttpPropertyAccessor } from "./http-operation-mapper.jsx";
 
 export function HttpToolClientHandler(props: { op: HttpOperation; tool: ToolDescriptor }) {
   const mcpContext = useMCPServerContext();
@@ -73,7 +74,7 @@ export function HttpToolClientHandler(props: { op: HttpOperation; tool: ToolDesc
         </VarDeclaration>
         <>{code`
                           try {
-                            ${(<CallToolClient clientRefKey={clientRefKey} httpOp={props.op} />)}
+                            ${(<CallToolClient clientRefKey={clientRefKey} httpOp={props.op} dataRefKey={argsRefkey} />)}
                           } catch(error) {
                             return ${refkey("handleApiCallError")}(error);
                           }
@@ -121,6 +122,7 @@ function InitializeToolClient(props: InitializeToolClientProps) {
 interface CallToolClientProps {
   clientRefKey: Refkey;
   httpOp: HttpOperation;
+  dataRefKey: Refkey;
 }
 
 function CallToolClient(props: CallToolClientProps) {
@@ -131,7 +133,7 @@ function CallToolClient(props: CallToolClientProps) {
   props.httpOp.parameters.properties.forEach((param) => {
     if (!param.property.optional && !hasDefaultValue(param) && param.path.length === 1) {
       // required parameters
-      parametersChildren.push(param.property.name);
+      parametersChildren.push(<HttpPropertyAccessor refkey={props.dataRefKey} path={param.path} />);
     } else {
       // optional parameters goes to option bag
       optionParameters.push(param);
@@ -141,15 +143,12 @@ function CallToolClient(props: CallToolClientProps) {
     <ObjectExpression>
       <For comma softline enderPunctuation each={optionParameters}>
         {(param) => {
-          if (param.path.length === 1) {
-            return (
-              <ObjectProperty name={transformNamer.getApplicationName(param.property)} value={param.property.name} />
-            );
-          } else {
-            return (
-              <ObjectProperty name={transformNamer.getApplicationName(param.property)} value={param.path.join(".")} />
-            );
-          }
+          return (
+            <ObjectProperty
+              name={transformNamer.getApplicationName(param.property)}
+              value={<HttpPropertyAccessor refkey={props.dataRefKey} path={param.path} />}
+            />
+          );
         }}
       </For>
       <ObjectProperty name="operationOptions" value={code`{ onResponse: (response) => (rawResponse = response) }`} />

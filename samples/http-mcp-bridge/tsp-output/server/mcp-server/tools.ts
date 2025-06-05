@@ -5,7 +5,6 @@ import { GistsClient, GithubClient } from "../service-client/githubClient.js";
 
 const tools = {
   getRepository: "getRepository",
-  test: "test",
   gistsList: "list",
   gistsCreate: "create",
   gistsListPublic: "listPublic",
@@ -37,45 +36,10 @@ const dispatcher = {
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.getRepository(
-        owner,
-        repo,
+        data["owner"],
+        data["repo"],
         {
           operationOptions: { onResponse: (response) => (rawResponse = response) }
-        }
-      )
-    } catch(error) {
-      return handleApiCallError(error);
-    }
-    return handleRawResponse(rawResponse);;
-  },
-  test: async function test(
-    data: {
-        foo: string
-        bar: string
-        options: {
-          baz: string;
-        }
-        payload: {
-          qux: string
-          name: string
-          other: string;
-        };
-      },
-  ) {
-    ;
-    const client = new GithubClient({ allowInsecureConnection: true });
-    let rawResponse: PathUncheckedResponse | undefined = undefined;
-    try {
-      await client.test(
-        foo,
-        bar,
-        options,
-        payload,
-        {
-          baz: options.baz,
-          qux: payload.qux,
-          name: payload.name,
-          other: payload.other,operationOptions: { onResponse: (response) => (rawResponse = response) }
         }
       )
     } catch(error) {
@@ -93,7 +57,9 @@ const dispatcher = {
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.list({
-        since: since,operationOptions: { onResponse: (response) => (rawResponse = response) }
+        since: data[
+          "since"
+        ],operationOptions: { onResponse: (response) => (rawResponse = response) }
       })
     } catch(error) {
       return handleApiCallError(error);
@@ -110,7 +76,7 @@ const dispatcher = {
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.create(
-        gist,
+        data["gist"],
         {
           operationOptions: { onResponse: (response) => (rawResponse = response) }
         }
@@ -130,7 +96,9 @@ const dispatcher = {
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.listPublic({
-        since: since,operationOptions: { onResponse: (response) => (rawResponse = response) }
+        since: data[
+          "since"
+        ],operationOptions: { onResponse: (response) => (rawResponse = response) }
       })
     } catch(error) {
       return handleApiCallError(error);
@@ -147,7 +115,9 @@ const dispatcher = {
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.listStarred({
-        since: since,operationOptions: { onResponse: (response) => (rawResponse = response) }
+        since: data[
+          "since"
+        ],operationOptions: { onResponse: (response) => (rawResponse = response) }
       })
     } catch(error) {
       return handleApiCallError(error);
@@ -164,7 +134,7 @@ const dispatcher = {
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.get(
-        id,
+        data["id"],
         {
           operationOptions: { onResponse: (response) => (rawResponse = response) }
         }
@@ -185,8 +155,8 @@ const dispatcher = {
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.update(
-        id,
-        gist,
+        data["id"],
+        data["gist"],
         {
           operationOptions: { onResponse: (response) => (rawResponse = response) }
         }
@@ -206,7 +176,7 @@ const dispatcher = {
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.delete_(
-        id,
+        data["id"],
         {
           operationOptions: { onResponse: (response) => (rawResponse = response) }
         }
@@ -226,7 +196,7 @@ const dispatcher = {
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.listCommits(
-        id,
+        data["id"],
         {
           operationOptions: { onResponse: (response) => (rawResponse = response) }
         }
@@ -246,7 +216,7 @@ const dispatcher = {
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.listForks(
-        id,
+        data["id"],
         {
           operationOptions: { onResponse: (response) => (rawResponse = response) }
         }
@@ -266,7 +236,7 @@ const dispatcher = {
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.fork(
-        id,
+        data["id"],
         {
           operationOptions: { onResponse: (response) => (rawResponse = response) }
         }
@@ -286,7 +256,7 @@ const dispatcher = {
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.star(
-        id,
+        data["id"],
         {
           operationOptions: { onResponse: (response) => (rawResponse = response) }
         }
@@ -306,7 +276,7 @@ const dispatcher = {
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.unstar(
-        id,
+        data["id"],
         {
           operationOptions: { onResponse: (response) => (rawResponse = response) }
         }
@@ -326,7 +296,7 @@ const dispatcher = {
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.isStarred(
-        id,
+        data["id"],
         {
           operationOptions: { onResponse: (response) => (rawResponse = response) }
         }

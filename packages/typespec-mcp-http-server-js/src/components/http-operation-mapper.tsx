@@ -93,7 +93,7 @@ export function HttpOperationMapper(props: HttpOperationMapperProps) {
   );
 }
 
-function HttpPropertyAccessor(props: { refkey: Refkey; path: (string | number)[] }) {
+export function HttpPropertyAccessor(props: { refkey: Refkey; path: (string | number)[] }) {
   return (
     <MemberExpression>
       <MemberExpression.Part refkey={props.refkey} />

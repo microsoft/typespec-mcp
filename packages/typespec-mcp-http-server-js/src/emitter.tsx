@@ -41,7 +41,7 @@ export async function $onEmit(context: EmitContext) {
 
   writeOutput(
     context.program,
-    <Output namePolicy={tsNamePolicy} externals={libs} program={context.program}>
+    <Output namePolicy={mcpServerContext.namePolicy} externals={libs} program={context.program}>
       <ClientLibrary program={context.program}>
         <MCPServerContext.Provider value={mcpServerContext}>
           <TransformNamePolicyContext.Provider value={defaultTransformNamePolicy}>

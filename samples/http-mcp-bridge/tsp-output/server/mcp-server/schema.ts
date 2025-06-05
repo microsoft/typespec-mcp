@@ -286,21 +286,6 @@ export const getRepositoryParameters = z.object({
 export const getRepositoryReturnType = fullRepository
   .describe("Full representation of a GitHub repository. This model includes all the details of a repository, such as its owner, visibility, license, and various URLs for accessing its resources.");
 
-export const testParameters = z.object({
-  foo: z.string(),
-  bar: z.string(),
-  options: z.object({
-    baz: z.string(),
-  }),
-  payload: z.object({
-    qux: z.string(),
-    name: z.string(),
-    other: z.string(),
-  }),
-});
-
-export const testReturnType = z.void();
-
 export const gistsListParameters = z.object({
   since: z.coerce
     .date()

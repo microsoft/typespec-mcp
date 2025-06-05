@@ -2,7 +2,7 @@ import { zodToJsonSchema } from "zod-to-json-schema";
 import { fromZodError } from "zod-validation-error";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
-import { getRepositoryParameters, getRepositoryReturnType, gistsCreateParameters, gistsCreateReturnType, gistsDeleteParameters, gistsDeleteReturnType, gistsForkParameters, gistsForkReturnType, gistsGetParameters, gistsGetReturnType, gistsIsStarredParameters, gistsIsStarredReturnType, gistsListCommitsParameters, gistsListCommitsReturnType, gistsListForksParameters, gistsListForksReturnType, gistsListParameters, gistsListPublicParameters, gistsListPublicReturnType, gistsListReturnType, gistsListStarredParameters, gistsListStarredReturnType, gistsStarParameters, gistsStarReturnType, gistsUnstarParameters, gistsUnstarReturnType, gistsUpdateParameters, gistsUpdateReturnType, testParameters, testReturnType } from "./schema.js";
+import { getRepositoryParameters, getRepositoryReturnType, gistsCreateParameters, gistsCreateReturnType, gistsDeleteParameters, gistsDeleteReturnType, gistsForkParameters, gistsForkReturnType, gistsGetParameters, gistsGetReturnType, gistsIsStarredParameters, gistsIsStarredReturnType, gistsListCommitsParameters, gistsListCommitsReturnType, gistsListForksParameters, gistsListForksReturnType, gistsListParameters, gistsListPublicParameters, gistsListPublicReturnType, gistsListReturnType, gistsListStarredParameters, gistsListStarredReturnType, gistsStarParameters, gistsStarReturnType, gistsUnstarParameters, gistsUnstarReturnType, gistsUpdateParameters, gistsUpdateReturnType } from "./schema.js";
 import { httpToolHandler } from "./tools.js";
 
 export const server = new Server(
@@ -28,22 +28,6 @@ server.setRequestHandler(
           description: "Get a GitHub repository by owner and repository name.",
           inputSchema: zodToJsonSchema(
             getRepositoryParameters,
-            {
-              $refStrategy: "none",
-            }
-          ),
-          annotations: {
-            readonlyHint: false,
-            destructiveHint: true,
-            idempotentHint: false,
-            openWorldHint: true,
-          },
-        },
-        {
-          name: "test",
-          description: "Get a list of GitHub repositories for a user.",
-          inputSchema: zodToJsonSchema(
-            testParameters,
             {
               $refStrategy: "none",
             }
@@ -281,27 +265,6 @@ server.setRequestHandler(
         }
         const rawResult = await httpToolHandler("get_repository", parsed.data);
         const maybeResult = getRepositoryReturnType.safeParse(rawResult);
-        if (!maybeResult.success) {
-          throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
-        };
-        const result = maybeResult.data;
-        return {
-          content: [
-            {
-              type: "text",
-              text: JSON.stringify(result, null, 2),
-            }
-          ],
-        };
-      }
-
-      case "test": {
-        const parsed = testParameters.safeParse(args);
-        if (!parsed.success) {
-          throw fromZodError(parsed.error, { prefix: "Request validation error" });
-        }
-        const rawResult = await httpToolHandler("test", parsed.data);
-        const maybeResult = testReturnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };

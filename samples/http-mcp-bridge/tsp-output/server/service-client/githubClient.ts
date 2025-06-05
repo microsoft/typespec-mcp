@@ -1,7 +1,7 @@
 import { createGistsClientContext, type GistsClientContext, type GistsClientOptions } from "./api/gistsClient/gistsClientContext.js";
 import { create, type CreateOptions, delete_, type DeleteOptions, fork, type ForkOptions, get, type GetOptions, isStarred, type IsStarredOptions, list, listCommits, type ListCommitsOptions, listForks, type ListForksOptions, type ListOptions, listPublic, type ListPublicOptions, listStarred, type ListStarredOptions, star, type StarOptions, unstar, type UnstarOptions, update, type UpdateOptions } from "./api/gistsClient/gistsClientOperations.js";
 import { createGithubClientContext, type GithubClientContext, type GithubClientOptions } from "./api/githubClientContext.js";
-import { getRepository, type GetRepositoryOptions, test, type TestOptions } from "./api/githubClientOperations.js";
+import { getRepository, type GetRepositoryOptions } from "./api/githubClientOperations.js";
 import type { CreateGist } from "./models/models.js";
 
 export class GithubClient {
@@ -17,21 +17,6 @@ export class GithubClient {
     options?: GetRepositoryOptions,
   ) {
     return getRepository(this.#context, owner, repo, options);
-  };
-  async test(
-    foo: string,
-    bar: string,
-    options: {
-        baz: string;
-      },
-    payload: {
-        qux: string
-        name: string
-        other: string;
-      },
-    options_2?: TestOptions,
-  ) {
-    return test(this.#context, foo, bar, options, payload, options_2);
   }
 }
 export class GistsClient {
