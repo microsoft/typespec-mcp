@@ -1,8 +1,19 @@
 {
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "githubToken",
+      "description": "Github token",
+      "password": true
+    }
+  ],
   "servers": {
     "TypeSpec MPC": {
       "command": "node",
-      "args": ["${workspaceFolder}/samples/http-mcp-bridge/dist/src/mcp-server.js"]
+      "args": ["${workspaceFolder}/samples/http-mcp-bridge/dist/src/mcp-server.js"],
+      "env": {
+        "APIKEY": "Bearer ${input:githubToken}"
+      }
     }
   }
 }
