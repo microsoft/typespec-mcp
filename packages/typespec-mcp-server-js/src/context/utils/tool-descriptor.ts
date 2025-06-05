@@ -31,6 +31,10 @@ export interface ToolGroup {
 }
 
 export interface ToolDescriptor {
+  /** Original operation */
+  originalOp: Operation;
+
+  /** Processed operation for the tool view */
   op: Operation;
   /** Tool full name as exposed by the server (snake_case style) */
   id: string;
@@ -200,6 +204,7 @@ function resolveTool(
   }
 
   return {
+    originalOp: rawToolOp,
     op: toolOp,
     id: namePolicy.getName(toolName, "tool"),
     path: [...parentPath, toolOp.name],

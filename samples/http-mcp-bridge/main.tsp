@@ -233,19 +233,21 @@ model FullRepository {
   updated_at: string;
 
   /** License information of the repository */
-  license?: {
-    /** Key of the license */
-    key: string;
+  license?: License;
+}
 
-    /** Name of the license */
-    name: string;
+model License {
+  /** Key of the license */
+  key: string;
 
-    /** SPDX ID of the license */
-    spdx_id: string;
+  /** Name of the license */
+  name: string;
 
-    /** URL of the license */
-    url?: string | null;
-  };
+  /** SPDX ID of the license */
+  spdx_id: string;
+
+  /** URL of the license */
+  url?: string | null;
 }
 
 /**
@@ -256,20 +258,3 @@ model FullRepository {
 @tool
 @route("/repos/{owner}/{repo}")
 op getRepository(owner: string, repo: string): FullRepository;
-
-/**
- * Get a list of GitHub repositories for a user.
- * @param username - The username of the owner.
- */
-@post @tool op test(
-  @header foo: string,
-  @header bar: string,
-  @bodyIgnore options: {
-    @header baz: string;
-  },
-  payload: {
-    @header qux: string;
-    name: string;
-    other: string;
-  },
-): void;

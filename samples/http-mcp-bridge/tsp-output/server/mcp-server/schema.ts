@@ -15,6 +15,16 @@ export const Owner = z
   })
   .describe("Github user");
 
+export const License = z.object({
+  key: z.string().describe("Key of the license"),
+  name: z.string().describe("Name of the license"),
+  spdx_id: z.string().describe("SPDX ID of the license"),
+  url: z
+    .union([z.string(), z.null()])
+    .optional()
+    .describe("URL of the license"),
+});
+
 export const FullRepository = z
   .object({
     id: z
@@ -205,16 +215,7 @@ export const FullRepository = z
     updated_at: z
       .string()
       .describe("Timestamp of the last update to the repository"),
-    license: z
-      .object({
-        key: z.string().describe("Key of the license"),
-        name: z.string().describe("Name of the license"),
-        spdx_id: z.string().describe("SPDX ID of the license"),
-        url: z
-          .union([z.string(), z.null()])
-          .optional()
-          .describe("URL of the license"),
-      })
+    license: License
       .optional()
       .describe("License information of the repository"),
   })
@@ -293,21 +294,6 @@ export const getRepositoryParameters = z.object({
 
 export const getRepositoryReturnType = FullRepository
   .describe("Full representation of a GitHub repository. This model includes all the details of a repository, such as its owner, visibility, license, and various URLs for accessing its resources.");
-
-export const testParameters = z.object({
-  foo: z.string(),
-  bar: z.string(),
-  options: z.object({
-    baz: z.string(),
-  }),
-  payload: z.object({
-    qux: z.string(),
-    name: z.string(),
-    other: z.string(),
-  }),
-});
-
-export const testReturnType = z.void();
 
 export const gistsListParameters = z.object({
   since: z.coerce

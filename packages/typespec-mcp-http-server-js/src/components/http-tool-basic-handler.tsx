@@ -9,7 +9,7 @@ import type { ToolDescriptor } from "../../../typespec-mcp-server-js/dist/src/co
 import { urlTemplate } from "../externals/url-template.js";
 import { HttpOperationMapper } from "./http-operation-mapper.jsx";
 
-export function HttpToolHandler(props: { op: HttpOperation; tool: ToolDescriptor }) {
+export function HttpToolBasicHandler(props: { op: HttpOperation; tool: ToolDescriptor }) {
   const { $ } = useTsp();
   const mcpContext = useMCPServerContext();
   const server = mcpContext.server;

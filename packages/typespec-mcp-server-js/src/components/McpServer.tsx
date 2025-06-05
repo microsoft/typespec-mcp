@@ -28,7 +28,7 @@ export function McpServer(props: McpServerProps) {
     toolDispatcher: props.toolImplementation?.dispatcher,
   });
 
-  const libs = [mcpSdk, zod, zodToJsonSchema, zodValidationError, ...(props.externals ?? [])];
+  const libs = [...Libs, ...(props.externals ?? [])];
 
   return (
     <Output program={props.program} externals={libs}>
@@ -57,3 +57,5 @@ export function McpServer(props: McpServerProps) {
     </Output>
   );
 }
+
+export const Libs = [mcpSdk, zod, zodToJsonSchema, zodValidationError];
