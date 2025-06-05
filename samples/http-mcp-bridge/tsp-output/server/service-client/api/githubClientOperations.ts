@@ -1,0 +1,83 @@
+import { parse } from "uri-template";
+import type { GithubClientContext } from "./githubClientContext.js";
+import { createRestError } from "../helpers/error.js";
+import type { OperationOptions } from "../helpers/interfaces.js";
+import { jsonFullRepositoryToApplicationTransform } from "../models/internal/serializers.js";
+import { FullRepository } from "../models/models.js";
+
+export interface GetRepositoryOptions extends OperationOptions {
+
+}
+export async function getRepository(
+  client: GithubClientContext,
+  owner: string,
+  repo: string,
+  options?: GetRepositoryOptions,
+): Promise<FullRepository> {
+  const path = parse("/repos/{owner}/{repo}").expand({
+    owner: owner,
+    repo: repo
+  });
+  const httpRequestOptions = {
+    headers: {
+
+    },
+  };
+  const response = await client.pathUnchecked(path).get(httpRequestOptions);
+
+  ;
+  if (typeof options?.operationOptions?.onResponse === "function") {
+    options?.operationOptions?.onResponse(response);
+  }
+  if (+response.status === 200 && response.headers["content-type"]?.includes("application/json")) {
+    return jsonFullRepositoryToApplicationTransform(response.body)!;
+  }
+  throw createRestError(response);
+}
+;
+export interface TestOptions extends OperationOptions {
+
+}
+export async function test(
+  client: GithubClientContext,
+  foo: string,
+  bar: string,
+  options: {
+      baz: string;
+    },
+  payload: {
+      qux: string
+      name: string
+      other: string;
+    },
+  options_2?: TestOptions,
+): Promise<void> {
+  const path = parse("/").expand({
+
+  });
+  const httpRequestOptions = {
+    headers: {
+      foo: foo,
+      bar: bar,
+      baz: options.baz,
+      qux: payload.qux
+    },body: {
+      options: {
+        baz: options.baz
+      },payload: {
+        qux: payload.qux,name: payload.name,other: payload.other
+      }
+    },
+  };
+  const response = await client.pathUnchecked(path).post(httpRequestOptions);
+
+  ;
+  if (typeof options?.operationOptions?.onResponse === "function") {
+    options?.operationOptions?.onResponse(response);
+  }
+  if (+response.status === 204 && !response.body) {
+    return;
+  }
+  throw createRestError(response);
+}
+;

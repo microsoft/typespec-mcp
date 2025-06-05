@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const Owner = z
+export const owner = z
   .object({
     login: z.string().describe("The username of the owner"),
     id: z
@@ -9,13 +9,13 @@ export const Owner = z
       .gte(-2147483648)
       .lte(2147483647)
       .describe("Unique identifier of the owner"),
-    node_id: z.string().describe("Node ID of the owner"),
-    avatar_url: z.string().describe("Avatar URL of the owner"),
-    html_url: z.string().describe("HTML URL of the owner's profile"),
+    nodeId: z.string().describe("Node ID of the owner"),
+    avatarUrl: z.string().describe("Avatar URL of the owner"),
+    htmlUrl: z.string().describe("HTML URL of the owner's profile"),
   })
   .describe("Github user");
 
-export const FullRepository = z
+export const fullRepository = z
   .object({
     id: z
       .number()
@@ -23,124 +23,116 @@ export const FullRepository = z
       .gte(-2147483648)
       .lte(2147483647)
       .describe("Unique identifier of the repository"),
-    node_id: z.string().describe("Node ID of the repository"),
+    nodeId: z.string().describe("Node ID of the repository"),
     name: z.string().describe("The name of the repository"),
-    full_name: z
+    fullName: z
       .string()
       .describe("The full name of the repository, including the owner"),
-    owner: Owner.describe("The owner of the repository"),
-    private: z
+    owner: owner.describe("The owner of the repository"),
+    private_: z
       .boolean()
       .describe("Whether the repository is private or public"),
-    html_url: z.string().describe("HTML URL of the repository"),
+    htmlUrl: z.string().describe("HTML URL of the repository"),
     description: z
       .union([z.string(), z.null()])
       .optional()
       .describe("Description of the repository"),
     fork: z.boolean().describe("Whether the repository is a fork"),
     url: z.string().describe("API URL of the repository"),
-    archive_url: z
+    archiveUrl: z
       .string()
       .describe("URL for accessing the repository's archive"),
-    assignees_url: z
+    assigneesUrl: z
       .string()
       .describe("URL for accessing the repository's assignees"),
-    blobs_url: z.string().describe("URL for accessing the repository's blobs"),
-    branches_url: z
+    blobsUrl: z.string().describe("URL for accessing the repository's blobs"),
+    branchesUrl: z
       .string()
       .describe("URL for accessing the repository's branches"),
-    collaborators_url: z
+    collaboratorsUrl: z
       .string()
       .describe("URL for accessing the repository's collaborators"),
-    comments_url: z
+    commentsUrl: z
       .string()
       .describe("URL for accessing the repository's comments"),
-    commits_url: z
+    commitsUrl: z
       .string()
       .describe("URL for accessing the repository's commits"),
-    compare_url: z
+    compareUrl: z
       .string()
       .describe("URL for comparing branches in the repository"),
-    contents_url: z
+    contentsUrl: z
       .string()
       .describe("URL for accessing the repository's contents"),
-    contributors_url: z
+    contributorsUrl: z
       .string()
       .describe("URL for accessing the repository's contributors"),
-    deployments_url: z
+    deploymentsUrl: z
       .string()
       .describe("URL for accessing the repository's deployments"),
-    downloads_url: z
+    downloadsUrl: z
       .string()
       .describe("URL for accessing the repository's downloads"),
-    events_url: z
-      .string()
-      .describe("URL for accessing the repository's events"),
-    forks_url: z.string().describe("URL for accessing the repository's forks"),
-    git_commits_url: z
+    eventsUrl: z.string().describe("URL for accessing the repository's events"),
+    forksUrl: z.string().describe("URL for accessing the repository's forks"),
+    gitCommitsUrl: z
       .string()
       .describe("URL for accessing the repository's git commits"),
-    git_refs_url: z
+    gitRefsUrl: z
       .string()
       .describe("URL for accessing the repository's git refs"),
-    git_tags_url: z
+    gitTagsUrl: z
       .string()
       .describe("URL for accessing the repository's git tags"),
-    git_url: z.string().describe("Git URL of the repository"),
-    issue_comment_url: z
+    gitUrl: z.string().describe("Git URL of the repository"),
+    issueCommentUrl: z
       .string()
       .describe("URL for accessing the repository's issue comments"),
-    issue_events_url: z
+    issueEventsUrl: z
       .string()
       .describe("URL for accessing the repository's issue events"),
-    issues_url: z
-      .string()
-      .describe("URL for accessing the repository's issues"),
-    keys_url: z.string().describe("URL for accessing the repository's keys"),
-    labels_url: z
-      .string()
-      .describe("URL for accessing the repository's labels"),
-    languages_url: z
+    issuesUrl: z.string().describe("URL for accessing the repository's issues"),
+    keysUrl: z.string().describe("URL for accessing the repository's keys"),
+    labelsUrl: z.string().describe("URL for accessing the repository's labels"),
+    languagesUrl: z
       .string()
       .describe("URL for accessing the repository's languages"),
-    merges_url: z
-      .string()
-      .describe("URL for accessing the repository's merges"),
-    milestones_url: z
+    mergesUrl: z.string().describe("URL for accessing the repository's merges"),
+    milestonesUrl: z
       .string()
       .describe("URL for accessing the repository's milestones"),
-    notifications_url: z
+    notificationsUrl: z
       .string()
       .describe("URL for accessing the repository's notifications"),
-    pulls_url: z
+    pullsUrl: z
       .string()
       .describe("URL for accessing the repository's pull requests"),
-    releases_url: z
+    releasesUrl: z
       .string()
       .describe("URL for accessing the repository's releases"),
-    ssh_url: z.string().describe("SSH URL of the repository"),
-    stargazers_url: z
+    sshUrl: z.string().describe("SSH URL of the repository"),
+    stargazersUrl: z
       .string()
       .describe("URL for accessing the repository's stargazers"),
-    statuses_url: z
+    statusesUrl: z
       .string()
       .describe("URL for accessing the repository's statuses"),
-    subscribers_url: z
+    subscribersUrl: z
       .string()
       .describe("URL for accessing the repository's subscribers"),
-    subscription_url: z
+    subscriptionUrl: z
       .string()
       .describe("URL for accessing the repository's subscription"),
-    tags_url: z.string().describe("URL for accessing the repository's tags"),
-    teams_url: z.string().describe("URL for accessing the repository's teams"),
-    trees_url: z.string().describe("URL for accessing the repository's trees"),
-    clone_url: z.string().describe("Clone URL of the repository"),
-    mirror_url: z
+    tagsUrl: z.string().describe("URL for accessing the repository's tags"),
+    teamsUrl: z.string().describe("URL for accessing the repository's teams"),
+    treesUrl: z.string().describe("URL for accessing the repository's trees"),
+    cloneUrl: z.string().describe("Clone URL of the repository"),
+    mirrorUrl: z
       .union([z.string(), z.null()])
       .optional()
       .describe("Mirror URL of the repository"),
-    hooks_url: z.string().describe("URL for accessing the repository's hooks"),
-    svn_url: z.string().describe("SVN URL of the repository"),
+    hooksUrl: z.string().describe("URL for accessing the repository's hooks"),
+    svnUrl: z.string().describe("SVN URL of the repository"),
     homepage: z
       .union([z.string(), z.null()])
       .optional()
@@ -149,19 +141,19 @@ export const FullRepository = z
       .union([z.string(), z.null()])
       .optional()
       .describe("Primary language of the repository"),
-    forks_count: z
+    forksCount: z
       .number()
       .int()
       .gte(-2147483648)
       .lte(2147483647)
       .describe("Number of forks of the repository"),
-    stargazers_count: z
+    stargazersCount: z
       .number()
       .int()
       .gte(-2147483648)
       .lte(2147483647)
       .describe("Number of stargazers of the repository"),
-    watchers_count: z
+    watchersCount: z
       .number()
       .int()
       .gte(-2147483648)
@@ -173,43 +165,43 @@ export const FullRepository = z
       .gte(-2147483648)
       .lte(2147483647)
       .describe("Size of the repository in kilobytes"),
-    default_branch: z.string().describe("Default branch of the repository"),
-    open_issues_count: z
+    defaultBranch: z.string().describe("Default branch of the repository"),
+    openIssuesCount: z
       .number()
       .int()
       .gte(-2147483648)
       .lte(2147483647)
       .describe("Number of open issues in the repository"),
-    is_template: z.boolean().describe("Whether the repository is a template"),
+    isTemplate: z.boolean().describe("Whether the repository is a template"),
     topics: z
       .array(z.string())
       .describe("Topics associated with the repository"),
-    has_issues: z
+    hasIssues: z
       .boolean()
       .describe("Whether the repository has issues enabled"),
-    has_projects: z
+    hasProjects: z
       .boolean()
       .describe("Whether the repository has projects enabled"),
-    has_wiki: z.boolean().describe("Whether the repository has a wiki enabled"),
-    has_pages: z.boolean().describe("Whether the repository has pages enabled"),
-    has_downloads: z
+    hasWiki: z.boolean().describe("Whether the repository has a wiki enabled"),
+    hasPages: z.boolean().describe("Whether the repository has pages enabled"),
+    hasDownloads: z
       .boolean()
       .describe("Whether the repository has downloads enabled"),
     archived: z.boolean().describe("Whether the repository is archived"),
     disabled: z.boolean().describe("Whether the repository is disabled"),
     visibility: z.string().describe("Visibility of the repository"),
-    pushed_at: z
+    pushedAt: z
       .string()
       .describe("Timestamp of the last push to the repository"),
-    created_at: z.string().describe("Timestamp of the repository's creation"),
-    updated_at: z
+    createdAt: z.string().describe("Timestamp of the repository's creation"),
+    updatedAt: z
       .string()
       .describe("Timestamp of the last update to the repository"),
     license: z
       .object({
         key: z.string().describe("Key of the license"),
         name: z.string().describe("Name of the license"),
-        spdx_id: z.string().describe("SPDX ID of the license"),
+        spdxId: z.string().describe("SPDX ID of the license"),
         url: z
           .union([z.string(), z.null()])
           .optional()
@@ -221,27 +213,27 @@ export const FullRepository = z
 
     .describe("Full representation of a GitHub repository. This model includes all the details of a repository, such as its owner, visibility, license, and various URLs for accessing its resources.");
 
-export const GistFile = z.object({
+export const gistFile = z.object({
   filename: z.string(),
   type: z.string(),
   language: z.union([z.string(), z.null()]),
-  raw_url: z.string(),
+  rawUrl: z.string(),
   size: z.number().int().gte(-2147483648).lte(2147483647),
   encoding: z.string().optional(),
 });
 
-export const Gist = z
+export const gist = z
   .object({
     id: z.string(),
-    node_id: z.string(),
+    nodeId: z.string(),
     url: z.string().describe("URL of the gist"),
-    forks_url: z.string().describe("API URL for forks"),
-    commits_url: z.string().describe("API URL for commits"),
-    git_pull_url: z.string().describe("Git pull URL"),
-    git_push_url: z.string().describe("Git push URL"),
-    html_url: z.string().describe("HTML URL of the gist"),
-    comments_url: z.string().describe("API URL for comments"),
-    public: z.boolean().describe("Whether the gist is public"),
+    forksUrl: z.string().describe("API URL for forks"),
+    commitsUrl: z.string().describe("API URL for commits"),
+    gitPullUrl: z.string().describe("Git pull URL"),
+    gitPushUrl: z.string().describe("Git push URL"),
+    htmlUrl: z.string().describe("HTML URL of the gist"),
+    commentsUrl: z.string().describe("API URL for comments"),
+    public_: z.boolean().describe("Whether the gist is public"),
     description: z
       .union([z.string(), z.null()])
       .describe("Description of the gist"),
@@ -252,13 +244,13 @@ export const Gist = z
       .lte(2147483647)
       .describe("Number of comments"),
     user: z
-      .union([Owner.describe("Github user"), z.null()])
+      .union([owner.describe("Github user"), z.null()])
       .describe("The gist owner (user)"),
-    files: z.record(z.string(), GistFile).describe("Files in the gist"),
-    created_at: z.string().describe("Creation timestamp"),
-    updated_at: z.string().describe("Last update timestamp"),
-    owner: Owner.optional().describe("Owner of the gist"),
-    comments_enabled: z
+    files: z.record(z.string(), gistFile).describe("Files in the gist"),
+    createdAt: z.string().describe("Creation timestamp"),
+    updatedAt: z.string().describe("Last update timestamp"),
+    owner: owner.optional().describe("Owner of the gist"),
+    commentsEnabled: z
       .boolean()
       .optional()
       .describe("Whether comments are enabled"),
@@ -268,21 +260,21 @@ export const Gist = z
   })
   .describe("Base Gist");
 
-export const GistArray = z.array(Gist.describe("Base Gist"));
+export const gistArray = z.array(gist.describe("Base Gist"));
 
-export const CreateGist = z.object({
+export const createGist = z.object({
   description: z.string(),
-  public: z.boolean(),
-  files: z.record(z.string(), GistFile),
+  public_: z.boolean(),
+  files: z.record(z.string(), gistFile),
 });
 
-export const GistArray_2 = z.array(Gist.describe("Base Gist"));
+export const gistArray_2 = z.array(gist.describe("Base Gist"));
 
-export const GistArray_3 = z.array(Gist.describe("Base Gist"));
+export const gistArray_3 = z.array(gist.describe("Base Gist"));
 
-export const UnknownArray = z.array(z.unknown());
+export const unknownArray = z.array(z.unknown());
 
-export const UnknownArray_2 = z.array(z.unknown());
+export const unknownArray_2 = z.array(z.unknown());
 
 export const getRepositoryParameters = z.object({
   owner: z
@@ -291,7 +283,7 @@ export const getRepositoryParameters = z.object({
   repo: z.string().describe("The name of the repository."),
 });
 
-export const getRepositoryReturnType = FullRepository
+export const getRepositoryReturnType = fullRepository
   .describe("Full representation of a GitHub repository. This model includes all the details of a repository, such as its owner, visibility, license, and various URLs for accessing its resources.");
 
 export const testParameters = z.object({
@@ -317,38 +309,38 @@ export const gistsListParameters = z.object({
       .describe("The time to start listing gists from. Optional. DO NOT PASS an empty string."),
 });
 
-export const gistsListReturnType = GistArray;
+export const gistsListReturnType = gistArray;
 
 export const gistsCreateParameters = z.object({
-  gist: CreateGist,
+  gist: createGist,
 });
 
-export const gistsCreateReturnType = Gist.describe("Base Gist");
+export const gistsCreateReturnType = gist.describe("Base Gist");
 
 export const gistsListPublicParameters = z.object({
   since: z.coerce.date().optional(),
 });
 
-export const gistsListPublicReturnType = GistArray_2;
+export const gistsListPublicReturnType = gistArray_2;
 
 export const gistsListStarredParameters = z.object({
   since: z.coerce.date().optional(),
 });
 
-export const gistsListStarredReturnType = GistArray_3;
+export const gistsListStarredReturnType = gistArray_3;
 
 export const gistsGetParameters = z.object({
   id: z.string(),
 });
 
-export const gistsGetReturnType = Gist.describe("Base Gist");
+export const gistsGetReturnType = gist.describe("Base Gist");
 
 export const gistsUpdateParameters = z.object({
   id: z.string(),
-  gist: CreateGist,
+  gist: createGist,
 });
 
-export const gistsUpdateReturnType = Gist.describe("Base Gist");
+export const gistsUpdateReturnType = gist.describe("Base Gist");
 
 export const gistsDeleteParameters = z.object({
   id: z.string(),
@@ -360,19 +352,19 @@ export const gistsListCommitsParameters = z.object({
   id: z.string(),
 });
 
-export const gistsListCommitsReturnType = UnknownArray;
+export const gistsListCommitsReturnType = unknownArray;
 
 export const gistsListForksParameters = z.object({
   id: z.string(),
 });
 
-export const gistsListForksReturnType = UnknownArray_2;
+export const gistsListForksReturnType = unknownArray_2;
 
 export const gistsForkParameters = z.object({
   id: z.string(),
 });
 
-export const gistsForkReturnType = Gist.describe("Base Gist");
+export const gistsForkReturnType = gist.describe("Base Gist");
 
 export const gistsStarParameters = z.object({
   id: z.string(),

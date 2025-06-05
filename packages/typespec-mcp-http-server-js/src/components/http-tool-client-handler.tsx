@@ -12,7 +12,14 @@ import {
   type Refkey,
 } from "@alloy-js/core";
 import * as ts from "@alloy-js/typescript";
-import { createTSSymbol, ObjectExpression, ObjectProperty, useTSScope, VarDeclaration } from "@alloy-js/typescript";
+import {
+  createTSSymbol,
+  FunctionDeclaration,
+  ObjectExpression,
+  ObjectProperty,
+  useTSScope,
+  VarDeclaration,
+} from "@alloy-js/typescript";
 import { useTransformNamePolicy, useTsp } from "@typespec/emitter-framework";
 import { InterfaceExpression } from "@typespec/emitter-framework/typescript";
 import { type HttpOperation, type HttpProperty } from "@typespec/http";
@@ -41,7 +48,8 @@ export function HttpToolClientHandler(props: { op: HttpOperation; tool: ToolDesc
   const clientRefKey = refkey(props.tool, "client");
 
   return (
-    <ts.ArrowFunction
+    <FunctionDeclaration
+      name={props.tool.id}
       parameters={[
         {
           name: "data",
@@ -72,7 +80,7 @@ export function HttpToolClientHandler(props: { op: HttpOperation; tool: ToolDesc
                           return ${refkey("handleRawResponse")}(rawResponse);
                           `}</>
       </StatementList>
-    </ts.ArrowFunction>
+    </FunctionDeclaration>
   );
 }
 

@@ -2,7 +2,7 @@ import { List, type Refkey, refkey, SourceDirectory } from "@alloy-js/core";
 import * as ts from "@alloy-js/typescript";
 import { createTSNamePolicy } from "@alloy-js/typescript";
 import type { EmitContext } from "@typespec/compiler";
-import { Output, useTsp, writeOutput } from "@typespec/emitter-framework";
+import { Output, TransformNamePolicyContext, useTsp, writeOutput } from "@typespec/emitter-framework";
 import {
   Client,
   createTransformNamePolicy,
@@ -19,7 +19,13 @@ import {
 } from "@typespec/http-client-js/components";
 import { ClientLibrary } from "@typespec/http-client/components";
 import { createMCPServerContext, Libs, MCPServerContext, useMCPServerContext } from "typespec-mcp-server-js";
-import { CallToolHandlers, ListToolsHandler, ServerDeclaration, ZodTypes } from "typespec-mcp-server-js/components";
+import {
+  CallToolHandlers,
+  ListToolsHandler,
+  ServerDeclaration,
+  TsTypes,
+  ZodTypes,
+} from "typespec-mcp-server-js/components";
 import { HttpRequestType } from "./components/http-tool-basic-handler.jsx";
 import { HttpToolsDispatcher } from "./components/http-tools-dispatcher.jsx";
 import { Utils } from "./components/utils.js";
@@ -29,58 +35,65 @@ export async function $onEmit(context: EmitContext) {
   const tsNamePolicy = createTSNamePolicy();
   const defaultTransformNamePolicy = createTransformNamePolicy();
   const libs = [...Libs, uriTemplateLib, httpRuntimeTemplateLib];
-  const mcpServerContext: MCPServerContext = createMCPServerContext(context.program, {});
+  const mcpServerContext: MCPServerContext = createMCPServerContext(context.program, {
+    toolDispatcher: dispatchKey,
+  });
 
   writeOutput(
     context.program,
     <Output namePolicy={tsNamePolicy} externals={libs} program={context.program}>
       <ClientLibrary program={context.program}>
         <MCPServerContext.Provider value={mcpServerContext}>
-          <EncodingProvider>
-            <SourceDirectory path="service-client">
-              <Client />
-              <SourceDirectory path="models">
-                <Models />
-                <SourceDirectory path="internal">
-                  <ModelSerializers />
+          <TransformNamePolicyContext.Provider value={defaultTransformNamePolicy}>
+            <EncodingProvider>
+              <SourceDirectory path="service-client">
+                <Client />
+                <SourceDirectory path="models">
+                  <Models />
+                  <SourceDirectory path="internal">
+                    <ModelSerializers />
+                  </SourceDirectory>
+                </SourceDirectory>
+                <SourceDirectory path="api">
+                  <OperationsDirectory />
+                </SourceDirectory>
+                <SourceDirectory path="helpers">
+                  <PagingHelpers />
+                  <Interfaces />
+                  <MultipartHelpers />
+                  <ts.SourceFile path="error.ts">
+                    <RestError />
+                  </ts.SourceFile>
                 </SourceDirectory>
               </SourceDirectory>
-              <SourceDirectory path="api">
-                <OperationsDirectory />
-              </SourceDirectory>
-              <SourceDirectory path="helpers">
-                <PagingHelpers />
-                <Interfaces />
-                <MultipartHelpers />
-                <ts.SourceFile path="error.ts">
-                  <RestError />
+
+              <SourceDirectory path="mcp-server">
+                <ts.SourceFile path="schema.ts">
+                  <ZodTypes />
+                </ts.SourceFile>
+                <ts.SourceFile path="server.ts">
+                  <List doubleHardline>
+                    <ServerDeclaration />
+                    <ListToolsHandler />
+                    <CallToolHandlers />
+                  </List>
+                </ts.SourceFile>
+                <ts.SourceFile path="ts-types.ts">
+                  <TsTypes />
+                </ts.SourceFile>
+                <ts.SourceFile path="tools.ts">
+                  <List doubleHardline>
+                    <HttpTools refkey={dispatchKey} />
+                  </List>
+                </ts.SourceFile>
+                <ts.SourceFile path="utils.ts">
+                  <List doubleHardline>
+                    <Utils />
+                  </List>
                 </ts.SourceFile>
               </SourceDirectory>
-            </SourceDirectory>
-
-            <SourceDirectory path="mcp-server">
-              <ts.SourceFile path="schema.ts">
-                <ZodTypes />
-              </ts.SourceFile>
-              <ts.SourceFile path="server.ts">
-                <List doubleHardline>
-                  <ServerDeclaration />
-                  <ListToolsHandler />
-                  <CallToolHandlers />
-                </List>
-              </ts.SourceFile>
-              <ts.SourceFile path="tools.ts">
-                <List doubleHardline>
-                  <HttpTools refkey={dispatchKey} />
-                </List>
-              </ts.SourceFile>
-              <ts.SourceFile path="utils.ts">
-                <List doubleHardline>
-                  <Utils />
-                </List>
-              </ts.SourceFile>
-            </SourceDirectory>
-          </EncodingProvider>
+            </EncodingProvider>
+          </TransformNamePolicyContext.Provider>
         </MCPServerContext.Provider>
       </ClientLibrary>
     </Output>,
@@ -111,6 +124,7 @@ export function HttpTools(props: { refkey: Refkey }) {
       </ts.VarDeclaration>
       <ts.FunctionDeclaration
         async
+        export
         name={"httpToolHandler"}
         parameters={[
           { name: "tool", type: <>keyof typeof {uriTemplateVar}</> },
