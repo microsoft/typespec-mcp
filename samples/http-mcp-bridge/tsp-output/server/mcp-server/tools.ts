@@ -21,7 +21,7 @@ const tools = {
 } as const;
 
 export async function httpToolHandler(tool: keyof typeof tools, data: any) {
-  return dispatcher[tool](data)
+  return dispatcher[tools[tool]](data)
 };
 
 const dispatcher = {

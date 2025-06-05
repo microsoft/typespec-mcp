@@ -114,14 +114,13 @@ export function HttpTools(props: { refkey: Refkey }) {
   for (const tool of tools) {
     toolsMap[tool.id] = mcpContext.namePolicy.getName(tool.id, "function");
   }
-  console.log("Tools", toolsMap);
 
-  const uriTemplateVar = refkey();
+  const toolMapRefKey = refkey();
   const dispatcherRefKey = refkey();
   return (
     <List doubleHardline semicolon>
       <NamePolicyContext.Provider value={createNamePolicy((x) => x)}>
-        <ts.VarDeclaration name="tools" refkey={uriTemplateVar} const>
+        <ts.VarDeclaration name="tools" refkey={toolMapRefKey} const>
           <ts.ObjectExpression jsValue={toolsMap} /> as const
         </ts.VarDeclaration>
       </NamePolicyContext.Provider>
@@ -130,13 +129,12 @@ export function HttpTools(props: { refkey: Refkey }) {
         export
         name={"httpToolHandler"}
         parameters={[
-          { name: "tool", type: <>keyof typeof {uriTemplateVar}</> },
+          { name: "tool", type: <>keyof typeof {toolMapRefKey}</> },
           { name: "data", type: "any" },
         ]}
         refkey={props.refkey}
       >
-        return {dispatcherRefKey}
-        [tool](data)
+        return {dispatcherRefKey}[{toolMapRefKey}[tool]](data)
       </ts.FunctionDeclaration>
       <ts.VarDeclaration refkey={dispatcherRefKey} const name="dispatcher">
         <HttpToolsDispatcher tools={tools} />
