@@ -1,12 +1,7 @@
-import { type PathUncheckedResponse, RestError } from "@typespec/ts-http-runtime";
+import type { PathUncheckedResponse } from "@typespec/ts-http-runtime";
 
 export function handleApiCallError(error: unknown) {
-  if (error instanceof RestError) {
-    return error;
-  }
-  return {
-    result: "Unknown error occurred",
-  };
+  throw error;
 };
 export function handleRawResponse(rawResponse?: PathUncheckedResponse) {
   if (!rawResponse) {
@@ -14,5 +9,10 @@ export function handleRawResponse(rawResponse?: PathUncheckedResponse) {
       result: "No response received",
     };
   }
-  return rawResponse.body;
+  const status = parseInt(rawResponse.status, 10);
+  if(status >= 200 && status < 300) {
+    return rawResponse.body;
+  } else {
+    throw new Error(`API call failed with status ${rawResponse.status}: ${JSON.stringify(rawResponse.body)}`);
+  }
 };

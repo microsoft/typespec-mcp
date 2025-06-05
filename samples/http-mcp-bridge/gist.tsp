@@ -121,13 +121,21 @@ model CreateGist {
   files: Record<GistFile>;
 }
 
+@error
+model BasicError {
+  message: string;
+  documentation_url: string;
+  url?: string;
+  status?: int32;
+}
+
 @route("/gists")
 interface Gists {
   /**
    * List gists for the authenticated user
    * @param since - The time to start listing gists from. Optional. DO NOT PASS an empty string.
    */
-  @tool list(@query since?: utcDateTime): Gist[];
+  @tool list(@query since?: utcDateTime): Gist[] | BasicError;
   /** Create a gist */
   @tool @post create(@body gist: CreateGist): Gist;
   /** List public gists */
@@ -135,7 +143,7 @@ interface Gists {
   /** List starred gists */
   @tool @route("/starred") listStarred(@query since?: utcDateTime): Gist[];
   /** Get a gist */
-  @tool @route("/{id}") get(@path id: string): Gist;
+  @tool @route("/{id}") get(@path id: string): Gist | BasicError;
   /** Update a gist */
   @tool
   @patch(#{ implicitOptionality: true })

@@ -14,12 +14,7 @@ export function Utils(props: UtilsProps) {
         parameters={[{ name: "error", type: "unknown" }]}
       >
         {code`
-        if (error instanceof ${httpRuntimeTemplateLib.RestError}) {
-            return error;
-        }
-        return {
-            result: "Unknown error occurred",
-        };
+        throw error;
         `}
       </FunctionDeclaration>
       <FunctionDeclaration
@@ -40,7 +35,12 @@ export function Utils(props: UtilsProps) {
                 result: "No response received",
             };
         }
-        return rawResponse.body;
+        const status = parseInt(rawResponse.status, 10);
+        if(status >= 200 && status < 300) {
+          return rawResponse.body;
+        } else {
+          throw new Error(\`API call failed with status \${rawResponse.status}: \${JSON.stringify(rawResponse.body)}\`);
+        }
         `}
       </FunctionDeclaration>
     </StatementList>
