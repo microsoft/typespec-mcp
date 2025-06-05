@@ -4,20 +4,20 @@ import { handleApiCallError, handleRawResponse } from "./utils.js";
 import { GistsClient, GithubClient } from "../service-client/githubClient.js";
 
 const tools = {
-  getRepository: "getRepository",
-  gistsList: "list",
-  gistsCreate: "create",
-  gistsListPublic: "listPublic",
-  gistsListStarred: "listStarred",
-  gistsGet: "get",
-  gistsUpdate: "update",
-  gistsDelete: "delete_",
-  gistsListCommits: "listCommits",
-  gistsListForks: "listForks",
-  gistsFork: "fork",
-  gistsStar: "star",
-  gistsUnstar: "unstar",
-  gistsIsStarred: "isStarred",
+  get_repository: "getRepository",
+  gists_list: "gistsList",
+  gists_create: "gistsCreate",
+  gists_list_public: "gistsListPublic",
+  gists_list_starred: "gistsListStarred",
+  gists_get: "gistsGet",
+  gists_update: "gistsUpdate",
+  gists_delete: "gistsDelete",
+  gists_list_commits: "gistsListCommits",
+  gists_list_forks: "gistsListForks",
+  gists_fork: "gistsFork",
+  gists_star: "gistsStar",
+  gists_unstar: "gistsUnstar",
+  gists_is_starred: "gistsIsStarred",
 } as const;
 
 export async function httpToolHandler(tool: keyof typeof tools, data: any) {

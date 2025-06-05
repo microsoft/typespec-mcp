@@ -1,4 +1,4 @@
-import { List, type Refkey, refkey, SourceDirectory } from "@alloy-js/core";
+import { createNamePolicy, List, NamePolicyContext, type Refkey, refkey, SourceDirectory } from "@alloy-js/core";
 import * as ts from "@alloy-js/typescript";
 import { createTSNamePolicy } from "@alloy-js/typescript";
 import type { EmitContext } from "@typespec/compiler";
@@ -112,7 +112,7 @@ export function HttpTools(props: { refkey: Refkey }) {
 
   const toolsMap: Record<string, string> = {};
   for (const tool of tools) {
-    toolsMap[tool.id] = tool.implementationOp.name;
+    toolsMap[tool.id] = mcpContext.namePolicy.getName(tool.id, "function");
   }
   console.log("Tools", toolsMap);
 
@@ -120,9 +120,11 @@ export function HttpTools(props: { refkey: Refkey }) {
   const dispatcherRefKey = refkey();
   return (
     <List doubleHardline semicolon>
-      <ts.VarDeclaration name="tools" refkey={uriTemplateVar} const>
-        <ts.ObjectExpression jsValue={toolsMap} /> as const
-      </ts.VarDeclaration>
+      <NamePolicyContext.Provider value={createNamePolicy((x) => x)}>
+        <ts.VarDeclaration name="tools" refkey={uriTemplateVar} const>
+          <ts.ObjectExpression jsValue={toolsMap} /> as const
+        </ts.VarDeclaration>
+      </NamePolicyContext.Provider>
       <ts.FunctionDeclaration
         async
         export
