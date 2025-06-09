@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "verbatimModuleSyntax": false, // https://github.com/microsoft/typespec/issues/7561
+    "outDir": "./dist"
+  },
+  "include": ["tsp-output/**/*.ts", "src/**/*.ts", "src/**/*.tsx", "testing/**/*.ts", "test/**/*.ts", "test/**/*.tsx"],
+  "exclude": ["node_modules", "dist"]
+}

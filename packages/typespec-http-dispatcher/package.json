@@ -1,0 +1,38 @@
+{
+  "name": "typespec-http-dispatcher",
+  "private": true,
+  "version": "0.0.0-0",
+  "description": "",
+  "exports": {
+    ".": {
+      "import": "./dist/src/index.js"
+    }
+  },
+  "scripts": {
+    "build-tsp": "tsp compile .",
+    "build-ts": "tsc -p .",
+    "build": "pnpm build-tsp && pnpm build-ts",
+    "mcp": "mcp-cli node dist/src/mcp-server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "inspect": "mcp-inspector node ./dist/src/mcp-server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/inspector": "catalog:",
+    "@modelcontextprotocol/sdk": "catalog:",
+    "zod": "catalog:",
+    "zod-to-json-schema": "catalog:",
+    "zod-validation-error": "catalog:"
+  },
+  "devDependencies": {
+    "@typespec/compiler": "catalog:",
+    "typespec-mcp": "workspace:*",
+    "typespec-mcp-server-js": "workspace:*",
+    "@types/node": "catalog:",
+    "@typespec/tspd": "catalog:",
+    "prettier": "catalog:"
+  }
+}
