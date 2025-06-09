@@ -12,6 +12,7 @@
     "typespec-mcp": "workspace:*",
     "typespec-mcp-server-js": "workspace:*",
     "typespec-mcp-http-server-js": "workspace:*",
+    "typespec-http-dispatcher": "workspace:*",
     "zod": "catalog:",
     "zod-to-json-schema": "catalog:",
     "zod-validation-error": "catalog:",

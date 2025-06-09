@@ -15,6 +15,7 @@ import {
 import { Clients } from "./components/clients.jsx";
 import { HttpRequestType } from "./components/http-tool-basic-handler.jsx";
 import { HttpToolsDispatcher } from "./components/http-tools-dispatcher.jsx";
+import { StartServer } from "./components/start-server.jsx";
 import { Utils } from "./components/utils.js";
 
 export async function $onEmit(context: EmitContext) {
@@ -29,6 +30,9 @@ export async function $onEmit(context: EmitContext) {
     <Output namePolicy={mcpServerContext.namePolicy} externals={libs} program={context.program}>
       <ClientLibrary program={context.program}>
         <MCPServerContext.Provider value={mcpServerContext}>
+          <ts.SourceFile path="main.ts">
+            <StartServer />
+          </ts.SourceFile>
           <SourceDirectory path="service-client">
             <Clients />
           </SourceDirectory>

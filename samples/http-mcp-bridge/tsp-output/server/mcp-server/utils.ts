@@ -9,10 +9,5 @@ export function handleRawResponse(rawResponse?: PathUncheckedResponse) {
       result: "No response received",
     };
   }
-  const status = parseInt(rawResponse.status, 10);
-  if(status >= 200 && status < 300) {
-    return rawResponse.body;
-  } else {
-    throw new Error(`API call failed with status ${rawResponse.status}: ${JSON.stringify(rawResponse.body)}`);
-  }
+  return rawResponse.body;
 };
