@@ -38,26 +38,30 @@ export const compileOptions = z.object({
   entrypoint: z.string().describe("Entrypoint to build"),
 });
 
-export const learnTypeSpecParameters = z.object({
-  area: z.literal("mcp").optional(),
-});
+export const learnTypeSpecToolZodSchemas = {
+  parameters: z.object({
+    area: z.literal("mcp").optional(),
+  }),
+  returnType: z.string(),
+}
 
-export const learnTypeSpecReturnType = z.string();
+export const initToolZodSchemas = {
+  parameters: z.object({
+    options: initOptions.describe("Initialization options."),
+  }),
+  returnType: z.string(),
+}
 
-export const initParameters = z.object({
-  options: initOptions.describe("Initialization options."),
-});
+export const compileToolZodSchemas = {
+  parameters: z.object({
+    options: compileOptions.describe("CompileOptions"),
+  }),
+  returnType: z.string(),
+}
 
-export const initReturnType = z.string();
-
-export const compileParameters = z.object({
-  options: compileOptions.describe("CompileOptions"),
-});
-
-export const compileReturnType = z.string();
-
-export const buildParameters = z.object({
-  dir: z.string(),
-});
-
-export const buildReturnType = z.string();
+export const buildToolZodSchemas = {
+  parameters: z.object({
+    dir: z.string(),
+  }),
+  returnType: z.string(),
+}

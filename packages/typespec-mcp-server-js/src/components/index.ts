@@ -1,4 +1,5 @@
 export { CallToolHandlers } from "./CallToolHandlers.jsx";
+export { JsonSchemas } from "./json-schemas.jsx";
 export { ListToolsHandler } from "./ListToolsHandler.jsx";
 export { McpServer } from "./McpServer.js";
 export { ServerDeclaration } from "./ServerDeclaration.jsx";
