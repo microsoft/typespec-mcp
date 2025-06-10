@@ -11,26 +11,19 @@ export const server = new Server(
     capabilities: {
       tools: {},
     },
-  }
-)
+  },
+);
 
-server.setRequestHandler(
-  ListToolsRequestSchema,
-  async function listTools(request) {
-    return {
-      tools: [],
-    };
-  }
-)
+server.setRequestHandler(ListToolsRequestSchema, async function listTools(request) {
+  return {
+    tools: [],
+  };
+});
 
-server.setRequestHandler(
-  CallToolRequestSchema,
-  async function callTool(request) {
-    const name = request.params.name;
-    const args = request.params.arguments;
-    switch (name) {
-
-    };
-    return { content: [{ type: "text", text: "Unknown tool" }] };
+server.setRequestHandler(CallToolRequestSchema, async function callTool(request) {
+  const name = request.params.name;
+  const args = request.params.arguments;
+  switch (name) {
   }
-)
+  return { content: [{ type: "text", text: "Unknown tool" }] };
+});

@@ -289,9 +289,6 @@ importers:
       concurrently:
         specifier: 'catalog:'
         version: 9.1.2
-      typespec-http-dispatcher:
-        specifier: workspace:^
-        version: link:../typespec-http-dispatcher
       vitest:
         specifier: 'catalog:'
         version: 3.2.3(@types/node@22.15.31)(yaml@2.7.1)

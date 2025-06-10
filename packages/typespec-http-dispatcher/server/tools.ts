@@ -1,7 +1,4 @@
-export interface Tools {
-
-
-}
+export interface Tools {}
 
 export let toolHandler: Tools = undefined as any;
 
