@@ -1,9 +1,9 @@
-import { zodToJsonSchema } from "zod-to-json-schema";
 import { fromZodError } from "zod-validation-error";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
+import { callEndpointToolJsonSchemas, getEndpointSchemaToolJsonSchemas, listEndpointsToolJsonSchemas } from "./schemas/json-schemas.js";
+import { callEndpointToolZodSchemas, getEndpointSchemaToolZodSchemas, listEndpointsToolZodSchemas } from "./schemas/zod.js";
 import { toolHandler } from "./tools.js";
-import { callEndpointParameters, callEndpointReturnType, getEndpointSchemaParameters, getEndpointSchemaReturnType, listEndpointsParameters, listEndpointsReturnType } from "./zod-types.js";
 
 export const server = new Server(
   {
@@ -26,12 +26,7 @@ server.setRequestHandler(
         {
           name: "list_endpoints",
           description: "List available endpoints",
-          inputSchema: zodToJsonSchema(
-            listEndpointsParameters,
-            {
-              $refStrategy: "none",
-            }
-          ),
+          inputSchema: listEndpointsToolJsonSchemas.parameters,
           annotations: {
             readonlyHint: false,
             destructiveHint: true,
@@ -42,12 +37,7 @@ server.setRequestHandler(
         {
           name: "get_endpoint_schema",
           description: "Get the schema of the given endpoint. (Json schema format)\nUse the list endpoint tool to figure out the list of endpoint available.",
-          inputSchema: zodToJsonSchema(
-            getEndpointSchemaParameters,
-            {
-              $refStrategy: "none",
-            }
-          ),
+          inputSchema: getEndpointSchemaToolJsonSchemas.parameters,
           annotations: {
             readonlyHint: false,
             destructiveHint: true,
@@ -58,12 +48,7 @@ server.setRequestHandler(
         {
           name: "call_endpoint",
           description: "Call the given endpoint.\nUse the list endpoint tool to figure out the list of endpoint available.\nUse the getEndpoint schema to get the schema of the endpoint.",
-          inputSchema: zodToJsonSchema(
-            callEndpointParameters,
-            {
-              $refStrategy: "none",
-            }
-          ),
+          inputSchema: callEndpointToolJsonSchemas.parameters,
           annotations: {
             readonlyHint: false,
             destructiveHint: true,
@@ -84,7 +69,7 @@ server.setRequestHandler(
     switch (name) {
       case "list_endpoints": {
         const rawResult = await toolHandler.listEndpoints();
-        const maybeResult = listEndpointsReturnType.safeParse(rawResult);
+        const maybeResult = listEndpointsToolZodSchemas.returnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
@@ -100,12 +85,12 @@ server.setRequestHandler(
       }
 
       case "get_endpoint_schema": {
-        const parsed = getEndpointSchemaParameters.safeParse(args);
+        const parsed = getEndpointSchemaToolZodSchemas.parameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
         const rawResult = await toolHandler.getEndpointSchema(parsed.data.name);
-        const maybeResult = getEndpointSchemaReturnType.safeParse(rawResult);
+        const maybeResult = getEndpointSchemaToolZodSchemas.returnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
@@ -121,7 +106,7 @@ server.setRequestHandler(
       }
 
       case "call_endpoint": {
-        const parsed = callEndpointParameters.safeParse(args);
+        const parsed = callEndpointToolZodSchemas.parameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
@@ -129,7 +114,7 @@ server.setRequestHandler(
           parsed.data.name,
           parsed.data.data
         );
-        const maybeResult = callEndpointReturnType.safeParse(rawResult);
+        const maybeResult = callEndpointToolZodSchemas.returnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };

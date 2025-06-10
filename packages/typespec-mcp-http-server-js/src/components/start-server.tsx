@@ -1,6 +1,13 @@
 import { code, For, List } from "@alloy-js/core";
-import { ArrayExpression, ObjectExpression, ObjectProperty, VarDeclaration } from "@alloy-js/typescript";
+import {
+  ArrayExpression,
+  FunctionCallExpression,
+  ObjectExpression,
+  ObjectProperty,
+  VarDeclaration,
+} from "@alloy-js/typescript";
 import { useMCPServerContext } from "typespec-mcp-server-js";
+import { getToolImplementationRefKey } from "../utils/ref-keys.js";
 
 export function StartServer() {
   return <StartServerWithDispatcher />;
@@ -24,7 +31,7 @@ function StartServerWithDispatcher() {
                       name="handler"
                       value={code`
                     async (data: any) => {
-                      return await toolMap["${tool.id}"](data);
+                      return await ${(<FunctionCallExpression target={getToolImplementationRefKey(tool)} args={["data"]} />)};
                     }  
                   `}
                     />
