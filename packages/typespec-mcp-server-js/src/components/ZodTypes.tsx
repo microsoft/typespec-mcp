@@ -1,12 +1,13 @@
 import { For, List, refkey } from "@alloy-js/core";
-import { VarDeclaration } from "@alloy-js/typescript";
+import { ObjectExpression, ObjectProperty, VarDeclaration } from "@alloy-js/typescript";
 import { useTsp } from "@typespec/emitter-framework";
 import { ZodSchema, ZodSchemaDeclaration } from "typespec-zod";
 import { useMCPServerContext } from "../context/McpServer.js";
+import type { ToolDescriptor } from "../context/utils/tool-descriptor.js";
 import { getPlausibleName } from "../utils.js";
 
 export function ZodTypes() {
-  const { tools, allTypes, namePolicy } = useMCPServerContext();
+  const { tools, allTypes } = useMCPServerContext();
   const { program } = useTsp();
   return (
     <List doubleHardline>
@@ -18,30 +19,31 @@ export function ZodTypes() {
         }}
       </For>
       <For each={tools} doubleHardline>
-        {(tool) => {
-          // todo: these are only needed because I can't access members inside
-          // ZodSchemaDeclaration props without causing an error.
-          const parametersRk = tool.keys.zodParametersSchema;
-          const returnTypeRk = tool.keys.zodReturnSchema;
-
-          const parametersName = namePolicy.getName(tool.id + "Parameters", "variable");
-          const returnTypeName = namePolicy.getName(tool.id + "ReturnType", "variable");
-
-          const schemas = [
-            <ZodSchemaDeclaration export name={parametersName} type={tool.op.parameters} refkey={parametersRk} />,
-          ];
-          schemas.push(
-            <VarDeclaration
-              export
-              name={returnTypeName}
-              refkey={returnTypeRk}
-              initializer={<ZodSchema nested type={tool.implementationOp.returnType} />}
-            />,
-          );
-
-          return <List doubleHardline semicolon enderPunctuation children={schemas} />;
-        }}
+        {(tool) => (
+          <VarDeclaration export name={`${tool.id}ToolZodSchemas`} initializer={<ToolZodSchema tool={tool} />} />
+        )}
       </For>
     </List>
+  );
+}
+
+interface ToolZodSchemaProps {
+  tool: ToolDescriptor;
+}
+
+function ToolZodSchema(props: ToolZodSchemaProps) {
+  const parametersRk = props.tool.keys.zodParametersSchema;
+  const returnTypeRk = props.tool.keys.zodReturnSchema;
+  return (
+    <ObjectExpression>
+      <List softline enderPunctuation comma>
+        <ObjectProperty name="parameters" value={<ZodSchema type={props.tool.op.parameters} />} refkey={parametersRk} />
+        <ObjectProperty
+          name="returnType"
+          value={<ZodSchema nested type={props.tool.implementationOp.returnType} />}
+          refkey={returnTypeRk}
+        />
+      </List>
+    </ObjectExpression>
   );
 }

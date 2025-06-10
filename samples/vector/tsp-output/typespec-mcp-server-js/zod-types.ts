@@ -8,31 +8,34 @@ export const vec3 = z
   })
   .describe("A vector in 3D space.");
 
-export const mathAddVectorParameters = z.object({
-  v1: vec3.describe("A vector in 3D space."),
-  v2: vec3.describe("A vector in 3D space."),
-});
+export const mathAddVectorToolZodSchemas = {
+  parameters: z.object({
+    v1: vec3.describe("A vector in 3D space."),
+    v2: vec3.describe("A vector in 3D space."),
+  }),
+  returnType: vec3.describe("A vector in 3D space."),
+}
 
-export const mathAddVectorReturnType = vec3.describe("A vector in 3D space.");
+export const mathSubVectorToolZodSchemas = {
+  parameters: z.object({
+    v1: vec3.describe("A vector in 3D space."),
+    v2: vec3.describe("A vector in 3D space."),
+  }),
+  returnType: vec3.describe("A vector in 3D space."),
+}
 
-export const mathSubVectorParameters = z.object({
-  v1: vec3.describe("A vector in 3D space."),
-  v2: vec3.describe("A vector in 3D space."),
-});
+export const mathCrossProductToolZodSchemas = {
+  parameters: z.object({
+    v1: vec3.describe("A vector in 3D space."),
+    v2: vec3.describe("A vector in 3D space."),
+  }),
+  returnType: vec3.describe("A vector in 3D space."),
+}
 
-export const mathSubVectorReturnType = vec3.describe("A vector in 3D space.");
-
-export const mathCrossProductParameters = z.object({
-  v1: vec3.describe("A vector in 3D space."),
-  v2: vec3.describe("A vector in 3D space."),
-});
-
-export const mathCrossProductReturnType = vec3
-  .describe("A vector in 3D space.");
-
-export const mathDotProductParameters = z.object({
-  v1: vec3.describe("A vector in 3D space."),
-  v2: vec3.describe("A vector in 3D space."),
-});
-
-export const mathDotProductReturnType = z.number();
+export const mathDotProductToolZodSchemas = {
+  parameters: z.object({
+    v1: vec3.describe("A vector in 3D space."),
+    v2: vec3.describe("A vector in 3D space."),
+  }),
+  returnType: z.number(),
+}
