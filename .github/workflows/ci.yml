@@ -16,11 +16,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
-      - uses: pnpm/action-setup@v4
+      - uses: ./.github/actions/setup
 
       - name: Install dependencies
         run: pnpm install
@@ -35,13 +31,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set node version to ${{ inputs.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
-      - uses: pnpm/action-setup@v4
+      - uses: ./.github/actions/setup
+
       - name: Install dependencies
         run: pnpm install
 
       - run: pnpm format:check
         name: Check formatting
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+
+      - run: pnpm install
+        name: Install dependencies
+
+      - run: pnpm run lint
+        name: Lint
