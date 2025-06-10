@@ -26,7 +26,7 @@ export async function $onEmit(context: EmitContext) {
     toolDispatcher: dispatchKey,
   });
 
-  writeOutput(
+  await writeOutput(
     context.program,
     <Output namePolicy={mcpServerContext.namePolicy} externals={libs} program={context.program}>
       <ClientLibrary program={context.program}>

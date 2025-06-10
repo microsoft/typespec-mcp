@@ -3,20 +3,26 @@
   "private": true,
   "version": "0.1.0",
   "description": "",
-  "packageManager": "pnpm@10.8.1",
+  "packageManager": "pnpm@10.11.0",
+  "type": "module",
   "scripts": {
     "build": "pnpm -r build",
     "test": "vitest run",
     "test:watch": "vitest --watch",
+    "lint": "eslint .",
     "format": "prettier . --write",
     "format:check": "prettier . --check"
   },
   "devDependencies": {
+    "@eslint/js": "^9.28.0",
+    "eslint": "^9.23.0",
     "@types/node": "catalog:",
     "@typespec/prettier-plugin-typespec": "^1.0.0",
+    "@vitest/eslint-plugin": "^1.2.1",
     "prettier": "catalog:",
     "prettier-plugin-organize-imports": "^4.1.0",
     "typescript": "catalog:",
+    "typescript-eslint": "^8.33.0",
     "vitest": "catalog:"
   },
   "keywords": [],

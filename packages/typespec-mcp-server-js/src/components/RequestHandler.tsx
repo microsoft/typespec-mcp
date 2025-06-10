@@ -28,7 +28,7 @@ export interface RequestHandlerProps {
 export function RequestHandler(props: RequestHandlerProps) {
   const requestParam = refkey();
   const {
-    keys: { server, getToolHandler },
+    keys: { server },
   } = useMCPServerContext();
   return (
     <FunctionCallExpression
