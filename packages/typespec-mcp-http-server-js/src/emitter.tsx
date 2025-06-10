@@ -81,11 +81,6 @@ export function HttpTools(props: { refkey: Refkey }) {
     throw new Error("Expected to be an http server too");
   }
 
-  const toolsMap: Record<string, string> = {};
-  for (const tool of tools) {
-    toolsMap[tool.id] = mcpContext.namePolicy.getName(tool.id, "function");
-  }
-
   return (
     <List doubleHardline semicolon>
       <HttpToolsDispatcher refkey={props.refkey} />
