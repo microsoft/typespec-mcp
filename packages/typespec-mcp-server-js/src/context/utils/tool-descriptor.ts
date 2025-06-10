@@ -52,6 +52,9 @@ export interface ToolDescriptor {
   returnType: Type;
   errors: Type[];
   keys: {
+    jsonSchemas: {
+      parameters: Refkey;
+    };
     functionSignature: Refkey;
     zodReturnSchema: Refkey;
     zodParametersSchema: Refkey;
@@ -218,6 +221,9 @@ function resolveTool(
       zodReturnSchema: refkey(),
       zodParametersSchema: refkey(),
       tsReturnType: refkey(),
+      jsonSchemas: {
+        parameters: refkey(),
+      },
     },
     annotations,
   };

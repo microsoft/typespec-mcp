@@ -7,6 +7,7 @@ import { ClientLibrary } from "@typespec/http-client/components";
 import { createMCPServerContext, Libs, MCPServerContext, useMCPServerContext } from "typespec-mcp-server-js";
 import {
   CallToolHandlers,
+  JsonSchemas,
   ListToolsHandler,
   ServerDeclaration,
   TsTypes,
@@ -34,11 +35,16 @@ export async function $onEmit(context: EmitContext) {
           </SourceDirectory>
 
           <SourceDirectory path="mcp-server">
-            <ts.SourceFile path="schema.ts">
-              <NamePolicyContext.Provider value={createNamePolicy((x) => x)}>
-                <ZodTypes />
-              </NamePolicyContext.Provider>
-            </ts.SourceFile>
+            <SourceDirectory path="schemas">
+              <ts.SourceFile path="zod.ts">
+                <NamePolicyContext.Provider value={createNamePolicy((x) => x)}>
+                  <ZodTypes />
+                </NamePolicyContext.Provider>
+              </ts.SourceFile>
+              <ts.SourceFile path="json-schema.ts">
+                <JsonSchemas />
+              </ts.SourceFile>
+            </SourceDirectory>
             <ts.SourceFile path="server.ts">
               <List doubleHardline>
                 <ServerDeclaration />

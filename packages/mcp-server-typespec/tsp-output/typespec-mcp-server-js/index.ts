@@ -1,9 +1,9 @@
-import { zodToJsonSchema } from "zod-to-json-schema";
 import { fromZodError } from "zod-validation-error";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
+import { buildToolJsonSchemas, compileToolJsonSchemas, initToolJsonSchemas, learnTypeSpecToolJsonSchemas } from "./schemas/json-schemas.js";
+import { buildToolZodSchemas, compileToolZodSchemas, initToolZodSchemas, learnTypeSpecToolZodSchemas } from "./schemas/zod.js";
 import { toolHandler } from "./tools.js";
-import { buildParameters, buildReturnType, compileParameters, compileReturnType, initParameters, initReturnType, learnTypeSpecParameters, learnTypeSpecReturnType } from "./zod-types.js";
 
 export const server = new Server(
   {
@@ -26,12 +26,7 @@ server.setRequestHandler(
         {
           name: "learn_type_spec",
           description: "Teach the agent how to use typespec.\n**Call this tool before trying to generate TypeSpec code.**\nAn area can be specified to learn about a specific work stream with typespec(e.g. MCP, Rest API, etc.)",
-          inputSchema: zodToJsonSchema(
-            learnTypeSpecParameters,
-            {
-              $refStrategy: "none",
-            }
-          ),
+          inputSchema: learnTypeSpecToolJsonSchemas.parameters,
           annotations: {
             readonlyHint: false,
             destructiveHint: true,
@@ -42,12 +37,7 @@ server.setRequestHandler(
         {
           name: "init",
           description: "Init a typespec project in the given directory.",
-          inputSchema: zodToJsonSchema(
-            initParameters,
-            {
-              $refStrategy: "none",
-            }
-          ),
+          inputSchema: initToolJsonSchemas.parameters,
           annotations: {
             readonlyHint: false,
             destructiveHint: true,
@@ -58,12 +48,7 @@ server.setRequestHandler(
         {
           name: "compile",
           description: "Compile the typespec project in the given directory.",
-          inputSchema: zodToJsonSchema(
-            compileParameters,
-            {
-              $refStrategy: "none",
-            }
-          ),
+          inputSchema: compileToolJsonSchemas.parameters,
           annotations: {
             readonlyHint: false,
             destructiveHint: true,
@@ -74,12 +59,7 @@ server.setRequestHandler(
         {
           name: "build",
           description: "Build typespec mcp project",
-          inputSchema: zodToJsonSchema(
-            buildParameters,
-            {
-              $refStrategy: "none",
-            }
-          ),
+          inputSchema: buildToolJsonSchemas.parameters,
           annotations: {
             readonlyHint: false,
             destructiveHint: true,
@@ -99,12 +79,12 @@ server.setRequestHandler(
     const args = request.params.arguments;
     switch (name) {
       case "learn_type_spec": {
-        const parsed = learnTypeSpecParameters.safeParse(args);
+        const parsed = learnTypeSpecToolZodSchemas.parameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
         const rawResult = await toolHandler.learnTypeSpec(parsed.data.area);
-        const maybeResult = learnTypeSpecReturnType.safeParse(rawResult);
+        const maybeResult = learnTypeSpecToolZodSchemas.returnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
@@ -120,12 +100,12 @@ server.setRequestHandler(
       }
 
       case "init": {
-        const parsed = initParameters.safeParse(args);
+        const parsed = initToolZodSchemas.parameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
         const rawResult = await toolHandler.init(parsed.data.options);
-        const maybeResult = initReturnType.safeParse(rawResult);
+        const maybeResult = initToolZodSchemas.returnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
@@ -141,12 +121,12 @@ server.setRequestHandler(
       }
 
       case "compile": {
-        const parsed = compileParameters.safeParse(args);
+        const parsed = compileToolZodSchemas.parameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
         const rawResult = await toolHandler.compile(parsed.data.options);
-        const maybeResult = compileReturnType.safeParse(rawResult);
+        const maybeResult = compileToolZodSchemas.returnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };
@@ -162,12 +142,12 @@ server.setRequestHandler(
       }
 
       case "build": {
-        const parsed = buildParameters.safeParse(args);
+        const parsed = buildToolZodSchemas.parameters.safeParse(args);
         if (!parsed.success) {
           throw fromZodError(parsed.error, { prefix: "Request validation error" });
         }
         const rawResult = await toolHandler.build(parsed.data.dir);
-        const maybeResult = buildReturnType.safeParse(rawResult);
+        const maybeResult = buildToolZodSchemas.returnType.safeParse(rawResult);
         if (!maybeResult.success) {
           throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
         };

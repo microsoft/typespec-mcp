@@ -1,4 +1,4 @@
-import { type Children, List, type Refkey, type SymbolCreator } from "@alloy-js/core";
+import { type Children, List, type Refkey, SourceDirectory, type SymbolCreator } from "@alloy-js/core";
 import { SourceFile } from "@alloy-js/typescript";
 import type { Program } from "@typespec/compiler";
 import { Output } from "@typespec/emitter-framework";
@@ -14,6 +14,7 @@ import { ToolHandlerAccessors } from "./ToolHandlerAccessors.jsx";
 import { ToolsInterface } from "./ToolsInterface.jsx";
 import { TsTypes } from "./TsTypes.jsx";
 import { ZodTypes } from "./ZodTypes.jsx";
+import { JsonSchemas } from "./json-schemas.jsx";
 
 export interface McpServerProps {
   program: Program;
@@ -31,11 +32,16 @@ export function McpServer(props: McpServerProps) {
   const libs = [...Libs, ...(props.externals ?? [])];
 
   return (
-    <Output program={props.program} externals={libs}>
+    <Output program={props.program} externals={libs} namePolicy={mcpServerContext.namePolicy}>
       <MCPServerContext.Provider value={mcpServerContext}>
-        <SourceFile path="zod-types.ts">
-          <ZodTypes />
-        </SourceFile>
+        <SourceDirectory path="schemas">
+          <SourceFile path="zod.ts">
+            <ZodTypes />
+          </SourceFile>
+          <SourceFile path="json-schemas.ts">
+            <JsonSchemas />
+          </SourceFile>
+        </SourceDirectory>
         <SourceFile path="ts-types.ts">
           <TsTypes />
         </SourceFile>

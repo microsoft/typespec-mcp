@@ -1,10 +1,9 @@
-import { FunctionCallExpression, ObjectExpression } from "@alloy-js/typescript";
+import { ObjectExpression } from "@alloy-js/typescript";
 import { getDoc } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";
 import { useMCPServerContext } from "../context/McpServer.js";
 import type { ToolDescriptor } from "../context/utils/tool-descriptor.js";
 import { mcpSdk } from "../externals/mcp-sdk.js";
-import { zodToJsonSchema } from "../externals/zodToJsonSchema.js";
 import { RequestHandler } from "./RequestHandler.jsx";
 
 export interface ListToolsHandlerProps {}
@@ -37,14 +36,7 @@ function operationToToolDescriptor(tool: ToolDescriptor) {
   return {
     name: tool.id,
     description: doc ?? "",
-    inputSchema: () => (
-      <>
-        <FunctionCallExpression
-          target={zodToJsonSchema.zodToJsonSchema}
-          args={[tool.keys.zodParametersSchema, <ObjectExpression jsValue={{ $refStrategy: "none" }} />]}
-        />
-      </>
-    ),
+    inputSchema: () => tool.keys.jsonSchemas.parameters,
     annotations: tool.annotations,
   };
 }
