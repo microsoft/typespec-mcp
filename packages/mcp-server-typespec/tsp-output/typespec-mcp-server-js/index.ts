@@ -1,9 +1,9 @@
 import { fromZodError } from "zod-validation-error";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
-import { buildToolJsonSchemas, compileToolJsonSchemas, initToolJsonSchemas, learnTypeSpecToolJsonSchemas } from "./json-schemas.js";
+import { buildToolJsonSchemas, compileToolJsonSchemas, initToolJsonSchemas, learnTypeSpecToolJsonSchemas } from "./schemas/json-schemas.js";
+import { buildToolZodSchemas, compileToolZodSchemas, initToolZodSchemas, learnTypeSpecToolZodSchemas } from "./schemas/zod.js";
 import { toolHandler } from "./tools.js";
-import { buildToolZodSchemas, compileToolZodSchemas, initToolZodSchemas, learnTypeSpecToolZodSchemas } from "./zod-types.js";
 
 export const server = new Server(
   {

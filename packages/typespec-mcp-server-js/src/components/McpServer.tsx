@@ -1,4 +1,4 @@
-import { type Children, List, type Refkey, type SymbolCreator } from "@alloy-js/core";
+import { type Children, List, type Refkey, SourceDirectory, type SymbolCreator } from "@alloy-js/core";
 import { SourceFile } from "@alloy-js/typescript";
 import type { Program } from "@typespec/compiler";
 import { Output } from "@typespec/emitter-framework";
@@ -34,12 +34,14 @@ export function McpServer(props: McpServerProps) {
   return (
     <Output program={props.program} externals={libs} namePolicy={mcpServerContext.namePolicy}>
       <MCPServerContext.Provider value={mcpServerContext}>
-        <SourceFile path="zod-types.ts">
-          <ZodTypes />
-        </SourceFile>
-        <SourceFile path="json-schemas.ts">
-          <JsonSchemas />
-        </SourceFile>
+        <SourceDirectory path="schemas">
+          <SourceFile path="zod.ts">
+            <ZodTypes />
+          </SourceFile>
+          <SourceFile path="json-schemas.ts">
+            <JsonSchemas />
+          </SourceFile>
+        </SourceDirectory>
         <SourceFile path="ts-types.ts">
           <TsTypes />
         </SourceFile>
