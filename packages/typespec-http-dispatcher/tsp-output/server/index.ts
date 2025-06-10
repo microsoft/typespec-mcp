@@ -36,7 +36,7 @@ server.setRequestHandler(
         },
         {
           name: "get_endpoint_schema",
-          description: "Get the schema of the given endpoint. (Json schema format)\nUse the list endpoint tool to figure out the list of endpoint available.",
+          description: "Get the schema of the given endpoint. (Json schema format)\nUse the `list_endpoint` tool to figure out the list of endpoint available.",
           inputSchema: getEndpointSchemaToolJsonSchemas.parameters,
           annotations: {
             readonlyHint: false,
@@ -47,7 +47,7 @@ server.setRequestHandler(
         },
         {
           name: "call_endpoint",
-          description: "Call the given endpoint.\nUse the list endpoint tool to figure out the list of endpoint available.\nUse the getEndpoint schema to get the schema of the endpoint.",
+          description: "Call the given endpoint.\nUse the `list_endpoint` tool to figure out the list of endpoint available.\nUse the `get_endpoint_schema` tool to get the schema of the endpoint.",
           inputSchema: callEndpointToolJsonSchemas.parameters,
           annotations: {
             readonlyHint: false,

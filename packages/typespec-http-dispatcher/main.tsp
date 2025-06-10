@@ -13,7 +13,7 @@ model Endpoint {
 
 /**
  * Get the schema of the given endpoint. (Json schema format)
- * Use the list endpoint tool to figure out the list of endpoint available.
+ * Use the `list_endpoint` tool to figure out the list of endpoint available.
  * @param name The name of the endpoint to get the schema for.
  * @returns The schema of the endpoint.
  */
@@ -21,8 +21,8 @@ model Endpoint {
 
 /**
  * Call the given endpoint.
- * Use the list endpoint tool to figure out the list of endpoint available.
- * Use the getEndpoint schema to get the schema of the endpoint.
+ * Use the `list_endpoint` tool to figure out the list of endpoint available.
+ * Use the `get_endpoint_schema` tool to get the schema of the endpoint.
  * @param name The name of the endpoint to call.
  * @param data The data to send to the endpoint.
  * @returns The response from the endpoint.

@@ -8,14 +8,14 @@ export interface Tools {
 
   /**
    * Get the schema of the given endpoint. (Json schema format)
-   * Use the list endpoint tool to figure out the list of endpoint available.
+   * Use the `list_endpoint` tool to figure out the list of endpoint available.
    */
   getEndpointSchema(name: string): unknown | Promise<unknown>;
 
   /**
    * Call the given endpoint.
-   * Use the list endpoint tool to figure out the list of endpoint available.
-   * Use the getEndpoint schema to get the schema of the endpoint.
+   * Use the `list_endpoint` tool to figure out the list of endpoint available.
+   * Use the `get_endpoint_schema` tool to get the schema of the endpoint.
    */
   callEndpoint(name: string, data: unknown): unknown | Promise<unknown>;
 
