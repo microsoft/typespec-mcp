@@ -19,7 +19,7 @@ function StartServerWithDispatcher() {
                 <ObjectExpression>
                   <List softline enderPunctuation comma>
                     <ObjectProperty name="name" jsValue={tool.id} />
-                    <ObjectProperty name="schema" value={tool.keys.zodParametersSchema} />
+                    <ObjectProperty name="schema" value={tool.keys.jsonSchemas.parameters} />
                     <ObjectProperty
                       name="handler"
                       value={code`
