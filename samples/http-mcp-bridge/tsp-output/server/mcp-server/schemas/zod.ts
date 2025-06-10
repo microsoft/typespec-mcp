@@ -285,95 +285,109 @@ export const UnknownArray = z.array(z.unknown());
 
 export const UnknownArray_2 = z.array(z.unknown());
 
-export const getRepositoryParameters = z.object({
-  owner: z
-    .string()
-    .describe("The username or organization name of the repository owner."),
-  repo: z.string().describe("The name of the repository."),
-});
+export const get_repositoryToolZodSchemas = {
+  parameters: z.object({
+    owner: z
+      .string()
+      .describe("The username or organization name of the repository owner."),
+    repo: z.string().describe("The name of the repository."),
+  }),
+  returnType: FullRepository
+    .describe("Full representation of a GitHub repository. This model includes all the details of a repository, such as its owner, visibility, license, and various URLs for accessing its resources."),
+}
 
-export const getRepositoryReturnType = FullRepository
-  .describe("Full representation of a GitHub repository. This model includes all the details of a repository, such as its owner, visibility, license, and various URLs for accessing its resources.");
+export const gists_listToolZodSchemas = {
+  parameters: z.object({
+    since: z.coerce
+      .date()
+      .optional()
 
-export const gistsListParameters = z.object({
-  since: z.coerce
-    .date()
-    .optional()
+        .describe("The time to start listing gists from. Optional. DO NOT PASS an empty string."),
+  }),
+  returnType: GistArray,
+}
 
-      .describe("The time to start listing gists from. Optional. DO NOT PASS an empty string."),
-});
+export const gists_createToolZodSchemas = {
+  parameters: z.object({
+    gist: CreateGist,
+  }),
+  returnType: Gist.describe("Base Gist"),
+}
 
-export const gistsListReturnType = GistArray;
+export const gists_list_publicToolZodSchemas = {
+  parameters: z.object({
+    since: z.coerce.date().optional(),
+  }),
+  returnType: GistArray_2,
+}
 
-export const gistsCreateParameters = z.object({
-  gist: CreateGist,
-});
+export const gists_list_starredToolZodSchemas = {
+  parameters: z.object({
+    since: z.coerce.date().optional(),
+  }),
+  returnType: GistArray_3,
+}
 
-export const gistsCreateReturnType = Gist.describe("Base Gist");
+export const gists_getToolZodSchemas = {
+  parameters: z.object({
+    id: z.string(),
+  }),
+  returnType: Gist.describe("Base Gist"),
+}
 
-export const gistsListPublicParameters = z.object({
-  since: z.coerce.date().optional(),
-});
+export const gists_updateToolZodSchemas = {
+  parameters: z.object({
+    id: z.string(),
+    gist: CreateGist,
+  }),
+  returnType: Gist.describe("Base Gist"),
+}
 
-export const gistsListPublicReturnType = GistArray_2;
+export const gists_deleteToolZodSchemas = {
+  parameters: z.object({
+    id: z.string(),
+  }),
+  returnType: z.void(),
+}
 
-export const gistsListStarredParameters = z.object({
-  since: z.coerce.date().optional(),
-});
+export const gists_list_commitsToolZodSchemas = {
+  parameters: z.object({
+    id: z.string(),
+  }),
+  returnType: UnknownArray,
+}
 
-export const gistsListStarredReturnType = GistArray_3;
+export const gists_list_forksToolZodSchemas = {
+  parameters: z.object({
+    id: z.string(),
+  }),
+  returnType: UnknownArray_2,
+}
 
-export const gistsGetParameters = z.object({
-  id: z.string(),
-});
+export const gists_forkToolZodSchemas = {
+  parameters: z.object({
+    id: z.string(),
+  }),
+  returnType: Gist.describe("Base Gist"),
+}
 
-export const gistsGetReturnType = Gist.describe("Base Gist");
+export const gists_starToolZodSchemas = {
+  parameters: z.object({
+    id: z.string(),
+  }),
+  returnType: z.void(),
+}
 
-export const gistsUpdateParameters = z.object({
-  id: z.string(),
-  gist: CreateGist,
-});
+export const gists_unstarToolZodSchemas = {
+  parameters: z.object({
+    id: z.string(),
+  }),
+  returnType: z.void(),
+}
 
-export const gistsUpdateReturnType = Gist.describe("Base Gist");
-
-export const gistsDeleteParameters = z.object({
-  id: z.string(),
-});
-
-export const gistsDeleteReturnType = z.void();
-
-export const gistsListCommitsParameters = z.object({
-  id: z.string(),
-});
-
-export const gistsListCommitsReturnType = UnknownArray;
-
-export const gistsListForksParameters = z.object({
-  id: z.string(),
-});
-
-export const gistsListForksReturnType = UnknownArray_2;
-
-export const gistsForkParameters = z.object({
-  id: z.string(),
-});
-
-export const gistsForkReturnType = Gist.describe("Base Gist");
-
-export const gistsStarParameters = z.object({
-  id: z.string(),
-});
-
-export const gistsStarReturnType = z.void();
-
-export const gistsUnstarParameters = z.object({
-  id: z.string(),
-});
-
-export const gistsUnstarReturnType = z.void();
-
-export const gistsIsStarredParameters = z.object({
-  id: z.string(),
-});
-
-export const gistsIsStarredReturnType = z.boolean();
+export const gists_is_starredToolZodSchemas = {
+  parameters: z.object({
+    id: z.string(),
+  }),
+  returnType: z.boolean(),
+}

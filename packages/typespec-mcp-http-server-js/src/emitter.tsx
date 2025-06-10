@@ -35,12 +35,16 @@ export async function $onEmit(context: EmitContext) {
           </SourceDirectory>
 
           <SourceDirectory path="mcp-server">
-            <ts.SourceFile path="schema.ts">
-              <NamePolicyContext.Provider value={createNamePolicy((x) => x)}>
-                <ZodTypes />
+            <SourceDirectory path="schemas">
+              <ts.SourceFile path="zod.ts">
+                <NamePolicyContext.Provider value={createNamePolicy((x) => x)}>
+                  <ZodTypes />
+                </NamePolicyContext.Provider>
+              </ts.SourceFile>
+              <ts.SourceFile path="json-schema.ts">
                 <JsonSchemas />
-              </NamePolicyContext.Provider>
-            </ts.SourceFile>
+              </ts.SourceFile>
+            </SourceDirectory>
             <ts.SourceFile path="server.ts">
               <List doubleHardline>
                 <ServerDeclaration />
