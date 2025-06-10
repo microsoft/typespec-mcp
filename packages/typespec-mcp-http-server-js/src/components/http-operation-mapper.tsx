@@ -51,9 +51,11 @@ export function HttpOperationMapper(props: HttpOperationMapperProps) {
         break;
       case "bodyProperty":
         queryParams.set(httpProp.property.name, accessor);
+        break;
       case "body":
       case "bodyRoot":
         body = accessor;
+        break;
       case "contentType":
       case "statusCode":
         // ignore

@@ -102,4 +102,5 @@ function resolveEmitters(workflow: WorkflowConfig, userAdditionalEmitters: strin
 }
 const transport = new StdioServerTransport();
 await server.connect(transport);
+// eslint-disable-next-line no-console
 console.error("MCP Server running on stdio");
