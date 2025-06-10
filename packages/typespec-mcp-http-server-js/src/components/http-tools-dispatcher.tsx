@@ -26,7 +26,7 @@ export function HttpToolsDispatcher(props: HttpToolsDispatcherProps) {
       <SwitchStatement expression={"tool"}>
         <For each={tools} doubleHardline>
           {(tool) => (
-            <CaseClause expression={`"${tool.id}"`} block>
+            <CaseClause expression={`"${tool.id}"`}>
               return <FunctionCallExpression target={getToolImplementationRefKey(tool)} args={["data"]} />
             </CaseClause>
           )}

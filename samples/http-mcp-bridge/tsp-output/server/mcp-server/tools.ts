@@ -5,61 +5,47 @@ import { GistsClient, GithubClient } from "../service-client/githubClient.js";
 
 export async function httpToolHandler(tool: string, data: any) {
   switch (tool) {
-    case "get_repository": {
+    case "get_repository":
       return dispatcher.get_repository(data)
-    }
 
-    case "gists_list": {
+    case "gists_list":
       return dispatcher.gists_list(data)
-    }
 
-    case "gists_create": {
+    case "gists_create":
       return dispatcher.gists_create(data)
-    }
 
-    case "gists_list_public": {
+    case "gists_list_public":
       return dispatcher.gists_list_public(data)
-    }
 
-    case "gists_list_starred": {
+    case "gists_list_starred":
       return dispatcher.gists_list_starred(data)
-    }
 
-    case "gists_get": {
+    case "gists_get":
       return dispatcher.gists_get(data)
-    }
 
-    case "gists_update": {
+    case "gists_update":
       return dispatcher.gists_update(data)
-    }
 
-    case "gists_delete": {
+    case "gists_delete":
       return dispatcher.gists_delete(data)
-    }
 
-    case "gists_list_commits": {
+    case "gists_list_commits":
       return dispatcher.gists_list_commits(data)
-    }
 
-    case "gists_list_forks": {
+    case "gists_list_forks":
       return dispatcher.gists_list_forks(data)
-    }
 
-    case "gists_fork": {
+    case "gists_fork":
       return dispatcher.gists_fork(data)
-    }
 
-    case "gists_star": {
+    case "gists_star":
       return dispatcher.gists_star(data)
-    }
 
-    case "gists_unstar": {
+    case "gists_unstar":
       return dispatcher.gists_unstar(data)
-    }
 
-    case "gists_is_starred": {
+    case "gists_is_starred":
       return dispatcher.gists_is_starred(data)
-    }
   }
 };
 
