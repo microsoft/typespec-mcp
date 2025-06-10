@@ -3,29 +3,68 @@ import type { CreateGist } from "./ts-types.js";
 import { handleApiCallError, handleRawResponse } from "./utils.js";
 import { GistsClient, GithubClient } from "../service-client/githubClient.js";
 
-const tools = {
-  get_repository: "getRepository",
-  gists_list: "gistsList",
-  gists_create: "gistsCreate",
-  gists_list_public: "gistsListPublic",
-  gists_list_starred: "gistsListStarred",
-  gists_get: "gistsGet",
-  gists_update: "gistsUpdate",
-  gists_delete: "gistsDelete",
-  gists_list_commits: "gistsListCommits",
-  gists_list_forks: "gistsListForks",
-  gists_fork: "gistsFork",
-  gists_star: "gistsStar",
-  gists_unstar: "gistsUnstar",
-  gists_is_starred: "gistsIsStarred",
-} as const;
+export async function httpToolHandler(tool: string, data: any) {
+  switch (tool) {
+    case "get_repository": {
+      return dispatcher.get_repository(data)
+    }
 
-export async function httpToolHandler(tool: keyof typeof tools, data: any) {
-  return dispatcher[tools[tool]](data)
+    case "gists_list": {
+      return dispatcher.gists_list(data)
+    }
+
+    case "gists_create": {
+      return dispatcher.gists_create(data)
+    }
+
+    case "gists_list_public": {
+      return dispatcher.gists_list_public(data)
+    }
+
+    case "gists_list_starred": {
+      return dispatcher.gists_list_starred(data)
+    }
+
+    case "gists_get": {
+      return dispatcher.gists_get(data)
+    }
+
+    case "gists_update": {
+      return dispatcher.gists_update(data)
+    }
+
+    case "gists_delete": {
+      return dispatcher.gists_delete(data)
+    }
+
+    case "gists_list_commits": {
+      return dispatcher.gists_list_commits(data)
+    }
+
+    case "gists_list_forks": {
+      return dispatcher.gists_list_forks(data)
+    }
+
+    case "gists_fork": {
+      return dispatcher.gists_fork(data)
+    }
+
+    case "gists_star": {
+      return dispatcher.gists_star(data)
+    }
+
+    case "gists_unstar": {
+      return dispatcher.gists_unstar(data)
+    }
+
+    case "gists_is_starred": {
+      return dispatcher.gists_is_starred(data)
+    }
+  }
 };
 
 const dispatcher = {
-  getRepository: async function getRepository(
+  get_repository: async function get_repository(
     data: {
         owner: string
         repo: string;
@@ -52,7 +91,7 @@ const dispatcher = {
     }
     return handleRawResponse(rawResponse);;
   },
-  gistsList: async function gistsList(
+  gists_list: async function gists_list(
     data: {
         since?: Date;
       },
@@ -76,7 +115,7 @@ const dispatcher = {
     }
     return handleRawResponse(rawResponse);;
   },
-  gistsCreate: async function gistsCreate(
+  gists_create: async function gists_create(
     data: {
         gist: CreateGist;
       },
@@ -101,7 +140,7 @@ const dispatcher = {
     }
     return handleRawResponse(rawResponse);;
   },
-  gistsListPublic: async function gistsListPublic(
+  gists_list_public: async function gists_list_public(
     data: {
         since?: Date;
       },
@@ -125,7 +164,7 @@ const dispatcher = {
     }
     return handleRawResponse(rawResponse);;
   },
-  gistsListStarred: async function gistsListStarred(
+  gists_list_starred: async function gists_list_starred(
     data: {
         since?: Date;
       },
@@ -149,7 +188,7 @@ const dispatcher = {
     }
     return handleRawResponse(rawResponse);;
   },
-  gistsGet: async function gistsGet(
+  gists_get: async function gists_get(
     data: {
         id: string;
       },
@@ -174,7 +213,7 @@ const dispatcher = {
     }
     return handleRawResponse(rawResponse);;
   },
-  gistsUpdate: async function gistsUpdate(
+  gists_update: async function gists_update(
     data: {
         id: string
         gist: CreateGist;
@@ -201,7 +240,7 @@ const dispatcher = {
     }
     return handleRawResponse(rawResponse);;
   },
-  gistsDelete: async function gistsDelete(
+  gists_delete: async function gists_delete(
     data: {
         id: string;
       },
@@ -226,7 +265,7 @@ const dispatcher = {
     }
     return handleRawResponse(rawResponse);;
   },
-  gistsListCommits: async function gistsListCommits(
+  gists_list_commits: async function gists_list_commits(
     data: {
         id: string;
       },
@@ -251,7 +290,7 @@ const dispatcher = {
     }
     return handleRawResponse(rawResponse);;
   },
-  gistsListForks: async function gistsListForks(
+  gists_list_forks: async function gists_list_forks(
     data: {
         id: string;
       },
@@ -276,7 +315,7 @@ const dispatcher = {
     }
     return handleRawResponse(rawResponse);;
   },
-  gistsFork: async function gistsFork(
+  gists_fork: async function gists_fork(
     data: {
         id: string;
       },
@@ -301,7 +340,7 @@ const dispatcher = {
     }
     return handleRawResponse(rawResponse);;
   },
-  gistsStar: async function gistsStar(
+  gists_star: async function gists_star(
     data: {
         id: string;
       },
@@ -326,7 +365,7 @@ const dispatcher = {
     }
     return handleRawResponse(rawResponse);;
   },
-  gistsUnstar: async function gistsUnstar(
+  gists_unstar: async function gists_unstar(
     data: {
         id: string;
       },
@@ -351,7 +390,7 @@ const dispatcher = {
     }
     return handleRawResponse(rawResponse);;
   },
-  gistsIsStarred: async function gistsIsStarred(
+  gists_is_starred: async function gists_is_starred(
     data: {
         id: string;
       },
