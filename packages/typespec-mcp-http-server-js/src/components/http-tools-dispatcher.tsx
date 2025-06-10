@@ -1,44 +1,37 @@
-import { For } from "@alloy-js/core";
-import { ObjectExpression, ObjectProperty } from "@alloy-js/typescript";
-import type { Operation } from "@typespec/compiler";
-import { useTsp } from "@typespec/emitter-framework";
-import type { HttpOperation } from "@typespec/http";
-import type { InternalClient } from "@typespec/http-client";
-import { useMCPServerContext, type ToolDescriptor } from "typespec-mcp-server-js";
-import { HttpToolClientHandler } from "./http-tool-client-handler.jsx";
+import { For, type Refkey } from "@alloy-js/core";
+import { CaseClause, FunctionCallExpression, FunctionDeclaration, SwitchStatement } from "@alloy-js/typescript";
+import { useMCPServerContext } from "typespec-mcp-server-js";
+import { getToolImplementationRefKey } from "../utils/ref-keys.js";
 
 export interface HttpToolsDispatcherProps {
-  tools: ToolDescriptor[];
+  /**Dispatcher Refkey */
+  refkey: Refkey;
 }
 
+/** Generate a function that take the tool id and data as input and dispatch it to the right tool  */
 export function HttpToolsDispatcher(props: HttpToolsDispatcherProps) {
-  const { $ } = useTsp();
-  const mcpContext = useMCPServerContext();
-  const server = mcpContext.server;
-  if (server === undefined || server.container === undefined || server.container.kind !== "Namespace") {
-    throw new Error("Expected to be an http server too");
-  }
-  const client = $.client.getClient(server.container);
-  const operationHttpOperationMap = new Map<Operation, HttpOperation>();
-  $.client
-    .flat(client)
-    .map((client: InternalClient) =>
-      $.client
-        .listHttpOperations(client)
-        .map((httpOp: HttpOperation) => operationHttpOperationMap.set(httpOp.operation, httpOp)),
-    );
-
-  const httpOps = props.tools.map((x) => {
-    return { httpOp: operationHttpOperationMap.get(x.originalOp)!, tool: x };
-  });
+  const { tools } = useMCPServerContext();
 
   return (
-    <>
-      <ObjectExpression>
-        <For each={httpOps} comma enderPunctuation>
-          {(op) => <ObjectProperty name={op.tool.id} value={<HttpToolClientHandler op={op.httpOp} tool={op.tool} />} />}
+    <FunctionDeclaration
+      async
+      export
+      name={"httpToolHandler"}
+      parameters={[
+        { name: "tool", type: "string" },
+        { name: "data", type: "any" },
+      ]}
+      refkey={props.refkey}
+    >
+      <SwitchStatement expression={"tool"}>
+        <For each={tools} doubleHardline>
+          {(tool) => (
+            <CaseClause expression={`"${tool.id}"`}>
+              return <FunctionCallExpression target={getToolImplementationRefKey(tool)} args={["data"]} />
+            </CaseClause>
+          )}
         </For>
-      </ObjectExpression>
-    </>
+      </SwitchStatement>
+    </FunctionDeclaration>
   );
 }

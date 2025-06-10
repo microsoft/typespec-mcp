@@ -1,7 +1,7 @@
 import { createNamePolicy, List, NamePolicyContext, type Refkey, refkey, SourceDirectory } from "@alloy-js/core";
 import * as ts from "@alloy-js/typescript";
 import type { EmitContext } from "@typespec/compiler";
-import { Output, useTsp, writeOutput } from "@typespec/emitter-framework";
+import { Output, writeOutput } from "@typespec/emitter-framework";
 import { httpRuntimeTemplateLib, uriTemplateLib } from "@typespec/http-client-js/components";
 import { ClientLibrary } from "@typespec/http-client/components";
 import { createMCPServerContext, Libs, MCPServerContext, useMCPServerContext } from "typespec-mcp-server-js";
@@ -16,6 +16,7 @@ import {
 import { Clients } from "./components/clients.jsx";
 import { HttpRequestType } from "./components/http-tool-basic-handler.jsx";
 import { HttpToolsDispatcher } from "./components/http-tools-dispatcher.jsx";
+import { HttpToolsImplementations } from "./components/http-tools-implementations.jsx";
 import { Utils } from "./components/utils.js";
 
 export async function $onEmit(context: EmitContext) {
@@ -76,41 +77,14 @@ export async function $onEmit(context: EmitContext) {
 export function HttpTools(props: { refkey: Refkey }) {
   const mcpContext = useMCPServerContext();
   const { tools, server } = mcpContext;
-
-  const { $ } = useTsp();
   if (server === undefined || server.container === undefined || server.container.kind !== "Namespace") {
     throw new Error("Expected to be an http server too");
   }
 
-  const toolsMap: Record<string, string> = {};
-  for (const tool of tools) {
-    toolsMap[tool.id] = mcpContext.namePolicy.getName(tool.id, "function");
-  }
-
-  const toolMapRefKey = refkey();
-  const dispatcherRefKey = refkey();
   return (
     <List doubleHardline semicolon>
-      <NamePolicyContext.Provider value={createNamePolicy((x) => x)}>
-        <ts.VarDeclaration name="tools" refkey={toolMapRefKey} const>
-          <ts.ObjectExpression jsValue={toolsMap} /> as const
-        </ts.VarDeclaration>
-      </NamePolicyContext.Provider>
-      <ts.FunctionDeclaration
-        async
-        export
-        name={"httpToolHandler"}
-        parameters={[
-          { name: "tool", type: <>keyof typeof {toolMapRefKey}</> },
-          { name: "data", type: "any" },
-        ]}
-        refkey={props.refkey}
-      >
-        return {dispatcherRefKey}[{toolMapRefKey}[tool]](data)
-      </ts.FunctionDeclaration>
-      <ts.VarDeclaration refkey={dispatcherRefKey} const name="dispatcher">
-        <HttpToolsDispatcher tools={tools} />
-      </ts.VarDeclaration>
+      <HttpToolsDispatcher refkey={props.refkey} />
+      <HttpToolsImplementations tools={tools} />
       <HttpRequestType />
     </List>
   );
