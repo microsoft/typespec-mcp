@@ -1,7 +1,7 @@
-import { zodToJsonSchema } from "zod-to-json-schema";
 import { fromZodError } from "zod-validation-error";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
+import { mathAddVectorToolJsonSchemas, mathCrossProductToolJsonSchemas, mathDotProductToolJsonSchemas, mathSubVectorToolJsonSchemas } from "./json-schemas.js";
 import { toolHandler } from "./tools.js";
 import { mathAddVectorToolZodSchemas, mathCrossProductToolZodSchemas, mathDotProductToolZodSchemas, mathSubVectorToolZodSchemas } from "./zod-types.js";
 
@@ -26,12 +26,7 @@ server.setRequestHandler(
         {
           name: "math_add_vector",
           description: "Adds two vectors together. Use this when you want to combine two vectors to\nget a resultant vector. For example, adding a movement vector to a position\nvector to get a new position.",
-          inputSchema: zodToJsonSchema(
-            mathAddVectorToolZodSchemas.parameters,
-            {
-              $refStrategy: "none",
-            }
-          ),
+          inputSchema: mathAddVectorToolJsonSchemas.parameters,
           annotations: {
             readonlyHint: false,
             destructiveHint: true,
@@ -42,12 +37,7 @@ server.setRequestHandler(
         {
           name: "math_sub_vector",
           description: "Subtracts one vector from another. Use this to find the difference between\ntwo vectors. For example, calculating the direction and distance from one\npoint to another.",
-          inputSchema: zodToJsonSchema(
-            mathSubVectorToolZodSchemas.parameters,
-            {
-              $refStrategy: "none",
-            }
-          ),
+          inputSchema: mathSubVectorToolJsonSchemas.parameters,
           annotations: {
             readonlyHint: false,
             destructiveHint: true,
@@ -58,12 +48,7 @@ server.setRequestHandler(
         {
           name: "math_cross_product",
           description: "Computes the cross product of two vectors. Use this to find a vector that is\nperpendicular to both input vectors. This is useful in 3D graphics for\ncalculating surface normals or rotational axes.",
-          inputSchema: zodToJsonSchema(
-            mathCrossProductToolZodSchemas.parameters,
-            {
-              $refStrategy: "none",
-            }
-          ),
+          inputSchema: mathCrossProductToolJsonSchemas.parameters,
           annotations: {
             readonlyHint: false,
             destructiveHint: true,
@@ -74,12 +59,7 @@ server.setRequestHandler(
         {
           name: "math_dot_product",
           description: "Computes the dot product of two vectors. Use this to find the scalar\nprojection of one vector onto another. This is useful for determining angles\nbetween vectors or checking if they are pointing in the same direction.",
-          inputSchema: zodToJsonSchema(
-            mathDotProductToolZodSchemas.parameters,
-            {
-              $refStrategy: "none",
-            }
-          ),
+          inputSchema: mathDotProductToolJsonSchemas.parameters,
           annotations: {
             readonlyHint: false,
             destructiveHint: true,
