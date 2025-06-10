@@ -29,8 +29,8 @@
   },
   "devDependencies": {
     "@typespec/compiler": "catalog:",
-    "typespec-mcp": "workspace:*",
-    "typespec-mcp-server-js": "workspace:*",
+    "typespec-mcp": "workspace:^",
+    "typespec-mcp-server-js": "workspace:^",
     "@types/node": "catalog:",
     "@typespec/tspd": "catalog:",
     "prettier": "catalog:"

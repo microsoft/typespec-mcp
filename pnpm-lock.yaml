@@ -182,10 +182,10 @@ importers:
         specifier: 'catalog:'
         version: 3.5.3
       typespec-mcp:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../typespec-mcp
       typespec-mcp-server-js:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../typespec-mcp-server-js
 
   packages/typespec-mcp:
