@@ -27,7 +27,7 @@ export async function startHttpDispatcher(options: HttpDispatcherOptions): Promi
       if (!endpoint) {
         throw new Error(`Endpoint ${name} not found`);
       }
-      return endpoint.handler(data);
+      return endpoint.handler(data ?? {});
     },
     getEndpointSchema: (name: string) => {
       const endpoint = endpoints.get(name);

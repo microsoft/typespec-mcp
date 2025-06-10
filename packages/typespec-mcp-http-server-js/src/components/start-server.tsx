@@ -46,6 +46,8 @@ function StartServerWithDispatcher() {
     </List>
   );
 }
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function StartServerWithTools() {
   return code`
         import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
