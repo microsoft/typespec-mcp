@@ -79,7 +79,9 @@ export const implementations = {
   },
   gists_list: async function gists_list(
     data: {
-        since?: Date;
+        since?: Date
+        page?: number
+        per_page?: number;
       },
   ) {
     const credential = {
@@ -92,8 +94,10 @@ export const implementations = {
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.list({
-        since: data[
-          "since"
+        since: data["since"],
+        page: data["page"],
+        per_page: data[
+          "per_page"
         ],operationOptions: { onResponse: (response) => (rawResponse = response) }
       })
     } catch(error) {

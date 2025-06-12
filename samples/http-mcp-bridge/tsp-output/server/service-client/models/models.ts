@@ -1,5 +1,10 @@
 export type String = string;
 export type UtcDateTime = Date;
+export type Int32 = number;
+export type Int64 = bigint;
+export type Integer = number;
+export type Numeric = number;
+
 
 export interface Gist {
   id: string
@@ -25,10 +30,6 @@ export interface Gist {
   history?: Array<unknown>;
 }
 export type Boolean = boolean;
-export type Int32 = number;
-export type Int64 = bigint;
-export type Integer = number;
-export type Numeric = number;
 export interface Owner {
   login: string
   id: number

@@ -10,7 +10,8 @@ import { useMCPServerContext } from "typespec-mcp-server-js";
 import { getToolImplementationRefKey } from "../utils/ref-keys.js";
 
 export function StartServer() {
-  return <StartServerWithDispatcher />;
+  return <StartServerWithTools />;
+  // return <StartServerWithDispatcher />;
 }
 
 function StartServerWithDispatcher() {
@@ -47,7 +48,6 @@ function StartServerWithDispatcher() {
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function StartServerWithTools() {
   return code`
         import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";

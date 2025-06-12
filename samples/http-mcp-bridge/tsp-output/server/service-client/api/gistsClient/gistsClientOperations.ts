@@ -1,37 +1,75 @@
 import { parse } from "uri-template";
+import type { PathUncheckedResponse } from "@typespec/ts-http-runtime";
 import type { GistsClientContext } from "./gistsClientContext.js";
 import { createRestError } from "../../helpers/error.js";
 import type { OperationOptions } from "../../helpers/interfaces.js";
-import { dateRfc3339Serializer, jsonArrayGistToApplicationTransform, jsonArrayUnknownToApplicationTransform, jsonCreateGistToTransportTransform, jsonGistToApplicationTransform } from "../../models/internal/serializers.js";
+import { buildPagedAsyncIterator, PagedAsyncIterableIterator } from "../../helpers/pagingHelpers.js";
+import { dateRfc3339Serializer, jsonArrayArrayToApplicationTransform, jsonArrayGistToApplicationTransform, jsonArrayUnknownToApplicationTransform, jsonCreateGistToTransportTransform, jsonGistToApplicationTransform } from "../../models/internal/serializers.js";
 import { type CreateGist, Gist } from "../../models/models.js";
 
 export interface ListOptions extends OperationOptions {
   since?: Date
 }
-export async function list(
+export interface ListPageSettings {
+  page?: number
+  perPage?: number
+}
+export interface ListPageResponse {
+  items: Array<Array<Gist>>
+}
+async function listSend(
   client: GistsClientContext,
-  options?: ListOptions,
-): Promise<Array<Gist>> {
-  const path = parse("/gists{?since}").expand({
-    ...(options?.since && {since: dateRfc3339Serializer(options.since)})
+  options?: Record<string, any>,
+) {
+  const path = parse("/gists{?since,page,per_page}").expand({
+    ...(options?.since && {since: dateRfc3339Serializer(options.since)}),
+    page: options?.page ?? 30,
+    per_page: options?.perPage ?? 1
   });
   const httpRequestOptions = {
     headers: {
 
     },
   };
-  const response = await client.pathUnchecked(path).get(httpRequestOptions);
-
-  ;
+  return await client.pathUnchecked(path).get(httpRequestOptions);;
+}
+function listDeserialize(
+  response: PathUncheckedResponse,
+  options?: ListOptions,
+) {
   if (typeof options?.operationOptions?.onResponse === "function") {
     options?.operationOptions?.onResponse(response);
-  }
-  if (+response.status === 200 && response.headers["content-type"]?.includes("application/json")) {
-    return jsonArrayGistToApplicationTransform(response.body)!;
+  }if (+response.status === 200 && response.headers["content-type"]?.includes("application/json")) {
+    return jsonArrayArrayToApplicationTransform(response.body)!;
   }
   throw createRestError(response);
 }
-;
+export function list(
+  client: GistsClientContext,
+  options?: ListOptions,
+): PagedAsyncIterableIterator<Array<Gist>,ListPageResponse,ListPageSettings> {
+  function getElements(response: ListPageResponse) {
+    return response.items;
+  }
+  async function getPagedResponse(
+    nextToken?: string,
+    settings?: ListPageSettings,
+  ) {
+
+            let response: PathUncheckedResponse;
+            if (nextToken) {
+              response = await client.pathUnchecked(nextToken).get();
+            } else {
+              const combinedOptions = { ...options, ...settings };
+              response = await listSend(client, combinedOptions);
+            }
+    return {
+    pagedResponse: await listDeserialize(response, options),
+    nextToken: undefined,
+    };
+  }
+  return buildPagedAsyncIterator<Array<Gist>, ListPageResponse, ListPageSettings>({getElements, getPagedResponse});
+}
 export interface CreateOptions extends OperationOptions {
 
 }

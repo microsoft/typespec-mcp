@@ -221,12 +221,12 @@ server.setRequestHandler(
         };
         const result = maybeResult.data;
         return {
-          content: result.map((item) => {
-            return {
+          content: [
+            {
               type: "text",
-              text: JSON.stringify(item, null, 2),
+              text: JSON.stringify(result, null, 2),
             }
-          }),
+          ],
         };
       }
 
