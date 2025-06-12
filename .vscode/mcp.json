@@ -17,7 +17,7 @@
     },
     "Vector CSharp": {
       "command": "dotnet",
-      "args": ["run", "${workspaceFolder}/samples/vector-cs/mcp.csproj"]
+      "args": ["run", "--project", "${workspaceFolder}/samples/vector-cs/Mcp.csproj"]
     }
   }
 }

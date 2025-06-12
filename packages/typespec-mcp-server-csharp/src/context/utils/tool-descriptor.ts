@@ -183,7 +183,7 @@ function resolveTool(
   // finally we can make the signature we expect the business logic to
   // implement.
   const implementationOp = tk.operation.create({
-    name: namePolicy.getName(toolOp.name, "interface-member"),
+    name: namePolicy.getName(toolOp.name, "class-method"),
     parameters: Array.from(toolOp.parameters.properties.values()).map((p) => {
       return tk.type.clone(p);
     }),
