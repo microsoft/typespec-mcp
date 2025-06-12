@@ -10,10 +10,8 @@ import {
   type Tuple,
   type Type,
 } from "@typespec/compiler";
-import { unsafe_mutateSubgraph } from "@typespec/compiler/experimental";
 import { $ } from "@typespec/compiler/typekit";
 import { isClosedWorld, isIdempotent, isNondestructive, isReadonly, isTool, type McpServer } from "typespec-mcp";
-import { EnumToUnion } from "../../mutators.jsx";
 import { splitOutErrors } from "../../utils.js";
 import type { McpElements } from "../name-policy.js";
 
@@ -160,9 +158,7 @@ function resolveTool(
   parentPath: string[],
 ): ToolDescriptor {
   const tk = $(program);
-
-  const toolOpMutation = unsafe_mutateSubgraph(tk.program, [EnumToUnion], rawToolOp);
-  const toolOp = toolOpMutation.type as Operation;
+  const toolOp = rawToolOp;
   const { successes, errors } = splitOutErrors(program, toolOp);
 
   // the declared return type is the type of the successful results from the

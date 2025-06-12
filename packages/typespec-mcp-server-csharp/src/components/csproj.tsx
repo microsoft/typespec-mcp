@@ -1,0 +1,26 @@
+import { code, SourceFile } from "@alloy-js/core";
+
+export function CsprojFile() {
+  return (
+    <SourceFile path="Mcp.csproj" filetype="csproj">
+      <Csproj />
+    </SourceFile>
+  );
+}
+
+export function Csproj() {
+  return code`
+    <Project Sdk="Microsoft.NET.Sdk">
+        <PropertyGroup>
+            <OutputType>Exe</OutputType>
+            <TargetFramework>net9.0</TargetFramework>
+            <ImplicitUsings>enable</ImplicitUsings>
+            <Nullable>enable</Nullable>
+        </PropertyGroup>
+        <ItemGroup>
+            <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.6" />
+            <PackageReference Include="ModelContextProtocol" Version="0.2.0-preview.3" />
+        </ItemGroup>
+    </Project>
+    `;
+}

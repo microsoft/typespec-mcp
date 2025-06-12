@@ -14,6 +14,10 @@
       "env": {
         "APIKEY": "Bearer ${input:githubToken}"
       }
+    },
+    "Vector CSharp": {
+      "command": "dotnet",
+      "args": ["run", "${workspaceFolder}/samples/vector-cs/mcp.csproj"]
     }
   }
 }
