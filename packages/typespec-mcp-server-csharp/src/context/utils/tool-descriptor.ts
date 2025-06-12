@@ -1,4 +1,4 @@
-import { type NamePolicy, type Refkey, refkey } from "@alloy-js/core";
+import { type NamePolicy } from "@alloy-js/core";
 import {
   getSummary,
   type Interface,
@@ -49,15 +49,7 @@ export interface ToolDescriptor {
   result: ResultDescriptor;
   returnType: Type;
   errors: Type[];
-  keys: {
-    jsonSchemas: {
-      parameters: Refkey;
-    };
-    functionSignature: Refkey;
-    zodReturnSchema: Refkey;
-    zodParametersSchema: Refkey;
-    tsReturnType: Refkey;
-  };
+  keys: {};
 }
 
 /**
@@ -212,15 +204,7 @@ function resolveTool(
     parameters: toolOp.parameters,
     returnType: resultDescriptor.resultType,
     result: resultDescriptor,
-    keys: {
-      functionSignature: refkey(),
-      zodReturnSchema: refkey(),
-      zodParametersSchema: refkey(),
-      tsReturnType: refkey(),
-      jsonSchemas: {
-        parameters: refkey(),
-      },
-    },
+    keys: {},
     annotations,
   };
 }
