@@ -6,50 +6,50 @@ import { GistsClient, GithubClient } from "../service-client/githubClient.js";
 export async function httpToolHandler(tool: string, data: any) {
   switch (tool) {
     case "get_repository":
-      return dispatcher.get_repository(data)
+      return implementations.get_repository(data)
 
     case "gists_list":
-      return dispatcher.gists_list(data)
+      return implementations.gists_list(data)
 
     case "gists_create":
-      return dispatcher.gists_create(data)
+      return implementations.gists_create(data)
 
     case "gists_list_public":
-      return dispatcher.gists_list_public(data)
+      return implementations.gists_list_public(data)
 
     case "gists_list_starred":
-      return dispatcher.gists_list_starred(data)
+      return implementations.gists_list_starred(data)
 
     case "gists_get":
-      return dispatcher.gists_get(data)
+      return implementations.gists_get(data)
 
     case "gists_update":
-      return dispatcher.gists_update(data)
+      return implementations.gists_update(data)
 
     case "gists_delete":
-      return dispatcher.gists_delete(data)
+      return implementations.gists_delete(data)
 
     case "gists_list_commits":
-      return dispatcher.gists_list_commits(data)
+      return implementations.gists_list_commits(data)
 
     case "gists_list_forks":
-      return dispatcher.gists_list_forks(data)
+      return implementations.gists_list_forks(data)
 
     case "gists_fork":
-      return dispatcher.gists_fork(data)
+      return implementations.gists_fork(data)
 
     case "gists_star":
-      return dispatcher.gists_star(data)
+      return implementations.gists_star(data)
 
     case "gists_unstar":
-      return dispatcher.gists_unstar(data)
+      return implementations.gists_unstar(data)
 
     case "gists_is_starred":
-      return dispatcher.gists_is_starred(data)
+      return implementations.gists_is_starred(data)
   }
 };
 
-const dispatcher = {
+export const implementations = {
   get_repository: async function get_repository(
     data: {
         owner: string

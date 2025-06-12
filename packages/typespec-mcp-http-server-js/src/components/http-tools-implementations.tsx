@@ -35,7 +35,7 @@ export function HttpToolsImplementations(props: HttpToolsImplementationsProps) {
   });
 
   return (
-    <VarDeclaration refkey={props.refkey} const name="dispatcher">
+    <VarDeclaration refkey={props.refkey} export const name="implementations">
       <ObjectExpression>
         <For each={httpOps} comma enderPunctuation>
           {(op) => (
