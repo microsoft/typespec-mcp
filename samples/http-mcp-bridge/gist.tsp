@@ -135,7 +135,7 @@ interface Gists {
    * List gists for the authenticated user
    * @param since - The time to start listing gists from. Optional. DO NOT PASS an empty string.
    */
-  @tool list(@query since?: utcDateTime): Gist[] | BasicError;
+  @tool @list list(@query since?: utcDateTime, ...PagingParams): PagedResponse<Gist[]> | BasicError;
   /** Create a gist */
   @tool @post create(@body gist: CreateGist): Gist;
   /** List public gists */

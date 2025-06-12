@@ -1,5 +1,6 @@
 import "typespec-mcp";
 import "@typespec/http";
+import "./common.tsp";
 import "./gist.tsp";
 import "./user.tsp";
 

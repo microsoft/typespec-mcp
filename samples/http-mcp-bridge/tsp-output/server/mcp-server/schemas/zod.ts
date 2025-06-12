@@ -269,7 +269,12 @@ export const Gist = z
   })
   .describe("Base Gist");
 
-export const GistArray = z.array(Gist.describe("Base Gist"));
+export const GistArrayPagedResponse = z.object({
+  items: z
+    .array(z.array(Gist.describe("Base Gist")))
+    .describe("The items on the current page"),
+  links: z.string(),
+});
 
 export const CreateGist = z.object({
   description: z.string(),
@@ -277,9 +282,9 @@ export const CreateGist = z.object({
   files: z.record(z.string(), GistFile),
 });
 
-export const GistArray_2 = z.array(Gist.describe("Base Gist"));
+export const GistArray = z.array(Gist.describe("Base Gist"));
 
-export const GistArray_3 = z.array(Gist.describe("Base Gist"));
+export const GistArray_2 = z.array(Gist.describe("Base Gist"));
 
 export const UnknownArray = z.array(z.unknown());
 
@@ -303,8 +308,24 @@ export const gists_listToolZodSchemas = {
       .optional()
 
         .describe("The time to start listing gists from. Optional. DO NOT PASS an empty string."),
+    page: z
+      .number()
+      .int()
+      .gte(-2147483648)
+      .lte(2147483647)
+      .optional()
+      .default(30)
+      .describe("The page number to retrieve"),
+    per_page: z
+      .number()
+      .int()
+      .gte(-2147483648)
+      .lte(2147483647)
+      .optional()
+      .default(1)
+      .describe("The number of items per page"),
   }),
-  returnType: GistArray,
+  returnType: GistArrayPagedResponse,
 }
 
 export const gists_createToolZodSchemas = {
@@ -318,14 +339,14 @@ export const gists_list_publicToolZodSchemas = {
   parameters: z.object({
     since: z.coerce.date().optional(),
   }),
-  returnType: GistArray_2,
+  returnType: GistArray,
 }
 
 export const gists_list_starredToolZodSchemas = {
   parameters: z.object({
     since: z.coerce.date().optional(),
   }),
-  returnType: GistArray_3,
+  returnType: GistArray_2,
 }
 
 export const gists_getToolZodSchemas = {

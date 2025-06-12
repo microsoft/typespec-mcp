@@ -122,8 +122,9 @@ export interface Gist {
   history?: Array<unknown>;
 }
 
-export interface GistArray extends Array<Gist> {
-
+export interface GistArrayPagedResponse {
+  items: Array<Array<Gist>>
+  links: string;
 }
 
 export interface CreateGist {
@@ -132,11 +133,11 @@ export interface CreateGist {
   files: Record<string, GistFile>;
 }
 
-export interface GistArray_2 extends Array<Gist> {
+export interface GistArray extends Array<Gist> {
 
 }
 
-export interface GistArray_3 extends Array<Gist> {
+export interface GistArray_2 extends Array<Gist> {
 
 }
 

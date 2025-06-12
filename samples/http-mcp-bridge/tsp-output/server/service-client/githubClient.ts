@@ -27,7 +27,7 @@ export class GistsClient {
     this.#context = createGistsClientContext(credential, options);
 
   }
-  async list(options?: ListOptions) {
+  list(options?: ListOptions) {
     return list(this.#context, options);
   };
   async create(gist: CreateGist, options?: CreateOptions) {

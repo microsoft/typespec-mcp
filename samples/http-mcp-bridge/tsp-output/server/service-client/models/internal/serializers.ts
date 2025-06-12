@@ -57,6 +57,34 @@ export function decodeBase64(value: string): Uint8Array | undefined {
   return jsonCreateGistToTransportTransform(payload)!;
 }export function updatePayloadToTransport(payload: CreateGist) {
   return jsonCreateGistToTransportTransform(payload)!;
+}export function jsonArrayArrayToTransportTransform(
+  items_?: Array<Array<Gist>> | null,
+): any {
+  if(!items_) {
+    return items_ as any;
+  }
+  const _transformedArray = [];
+
+  for (const item of items_ ?? []) {
+    const transformedItem = jsonArrayGistToTransportTransform(item as any);
+    _transformedArray.push(transformedItem);
+  }
+
+  return _transformedArray as any;
+}export function jsonArrayArrayToApplicationTransform(
+  items_?: any,
+): Array<Array<Gist>> {
+  if(!items_) {
+    return items_ as any;
+  }
+  const _transformedArray = [];
+
+  for (const item of items_ ?? []) {
+    const transformedItem = jsonArrayGistToApplicationTransform(item as any);
+    _transformedArray.push(transformedItem);
+  }
+
+  return _transformedArray as any;
 }export function jsonArrayGistToTransportTransform(
   items_?: Array<Gist> | null,
 ): any {
