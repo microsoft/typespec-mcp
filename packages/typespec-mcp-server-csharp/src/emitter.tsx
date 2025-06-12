@@ -22,7 +22,7 @@ export function McpServer(props: McpServerProps) {
       <MCPServerContext.Provider value={mcpServerContext}>
         <CsprojFile />
         <Namespace name="Mcp">
-          <SourceDirectory path="src">
+          <SourceDirectory path="generated">
             <SourceDirectory path="tools">
               <Tools />
             </SourceDirectory>
