@@ -13,8 +13,8 @@ catalogs:
       specifier: ~0.17.0
       version: 0.17.0
     '@alloy-js/csharp':
-      specifier: ~0.17.0
-      version: 0.17.0
+      specifier: ~0.18.0-dev.3
+      version: 0.18.0-dev.3
     '@alloy-js/rollup-plugin':
       specifier: ^0.1.0
       version: 0.1.0
@@ -263,7 +263,7 @@ importers:
         version: 0.17.0
       '@alloy-js/csharp':
         specifier: 'catalog:'
-        version: 0.17.0
+        version: 0.18.0-dev.3
       '@typespec/compiler':
         specifier: 'catalog:'
         version: 1.1.0(@types/node@22.15.31)
@@ -497,8 +497,8 @@ packages:
   '@alloy-js/core@0.17.0':
     resolution: {integrity: sha512-ydVGcbdKfvazkbUDrmeoQAzCQDzSudJDtk/nzubnQjGJmLlq62RLKR5eKj1l9sope4L7UX98DLclJxiwiF5WAA==}
 
-  '@alloy-js/csharp@0.17.0':
-    resolution: {integrity: sha512-/fdj0R9GI3bVbZkUM8M96cX4VenhECXEdQ0bxsdh6NpvAUfskeXuU6IlkVxI3XWB5ZF8QsQPugFMdKanmVKcAA==}
+  '@alloy-js/csharp@0.18.0-dev.3':
+    resolution: {integrity: sha512-ln6N/ZcOJj0GIAMsahozTlDoOM2IGSwZbDFCccivGPK1nt3V3JcRZ3LOsxoW/4qo/JnF29MRhSFXBom27brrjQ==}
 
   '@alloy-js/rollup-plugin@0.1.0':
     resolution: {integrity: sha512-MXR8mBdSh/pxMP8kIXAcMYKsm5yOWZ+igxcaRX1vBXFiHU4eK7gE/5q6Fk8Vdydh+MItWtgekwIhUWvcszdNFQ==}
@@ -3542,7 +3542,7 @@ snapshots:
       picocolors: 1.1.1
       prettier: 3.5.3
 
-  '@alloy-js/csharp@0.17.0':
+  '@alloy-js/csharp@0.18.0-dev.3':
     dependencies:
       '@alloy-js/core': 0.17.0
       change-case: 5.4.4

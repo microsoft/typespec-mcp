@@ -12,6 +12,7 @@ export function ToolClass({ group }: ToolClassProps) {
   return (
     <List>
       <UsingDirective namespaces={["ModelContextProtocol.Server", "System.ComponentModel"]} />
+      abstract{" "}
       <Class name={group.name} accessModifier="public">
         <For each={group.tools}>{(tool) => <ToolMethod tool={tool} />}</For>
       </Class>
