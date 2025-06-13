@@ -5,6 +5,10 @@ inputs:
     required: false
     description: Node version for setup-node
     default: 20.x
+  dotnet-version:
+    required: false
+    description: Node version for setup-node
+    default: 9.0.x
 
 runs:
   using: composite
@@ -18,3 +22,8 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
         cache: pnpm
+
+    - name: Set dotnet version to ${{ inputs.node-version }}
+      uses: actions/setup-dotnet@v4
+      with:
+        node-version: ${{ inputs.dotnet-version }}
