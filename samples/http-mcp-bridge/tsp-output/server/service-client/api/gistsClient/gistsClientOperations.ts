@@ -1,13 +1,19 @@
 import { parse } from "uri-template";
-import type { GistsClientContext } from "./gistsClientContext.js";
+import { GistsClientContext } from "./gistsClientContext.js";
 import { createRestError } from "../../helpers/error.js";
 import type { OperationOptions } from "../../helpers/interfaces.js";
 import { dateRfc3339Serializer, jsonArrayGistToApplicationTransform, jsonArrayUnknownToApplicationTransform, jsonCreateGistToTransportTransform, jsonGistToApplicationTransform } from "../../models/internal/serializers.js";
-import { type CreateGist, Gist } from "../../models/models.js";
+import { CreateGist, Gist } from "../../models/models.js";
 
 export interface ListOptions extends OperationOptions {
   since?: Date
 }
+/**
+ * List gists for the authenticated user
+ *
+ * @param {GistsClientContext} client
+ * @param {ListOptions} [options]
+ */
 export async function list(
   client: GistsClientContext,
   options?: ListOptions,
@@ -35,6 +41,13 @@ export async function list(
 export interface CreateOptions extends OperationOptions {
 
 }
+/**
+ * Create a gist
+ *
+ * @param {GistsClientContext} client
+ * @param {CreateGist} gist
+ * @param {CreateOptions} [options]
+ */
 export async function create(
   client: GistsClientContext,
   gist: CreateGist,
@@ -63,6 +76,12 @@ export async function create(
 export interface ListPublicOptions extends OperationOptions {
   since?: Date
 }
+/**
+ * List public gists
+ *
+ * @param {GistsClientContext} client
+ * @param {ListPublicOptions} [options]
+ */
 export async function listPublic(
   client: GistsClientContext,
   options?: ListPublicOptions,
@@ -90,6 +109,12 @@ export async function listPublic(
 export interface ListStarredOptions extends OperationOptions {
   since?: Date
 }
+/**
+ * List starred gists
+ *
+ * @param {GistsClientContext} client
+ * @param {ListStarredOptions} [options]
+ */
 export async function listStarred(
   client: GistsClientContext,
   options?: ListStarredOptions,
@@ -117,6 +142,13 @@ export async function listStarred(
 export interface GetOptions extends OperationOptions {
 
 }
+/**
+ * Get a gist
+ *
+ * @param {GistsClientContext} client
+ * @param {string} id
+ * @param {GetOptions} [options]
+ */
 export async function get(
   client: GistsClientContext,
   id: string,
@@ -145,6 +177,14 @@ export async function get(
 export interface UpdateOptions extends OperationOptions {
 
 }
+/**
+ * Update a gist
+ *
+ * @param {GistsClientContext} client
+ * @param {string} id
+ * @param {CreateGist} gist
+ * @param {UpdateOptions} [options]
+ */
 export async function update(
   client: GistsClientContext,
   id: string,
@@ -174,6 +214,13 @@ export async function update(
 export interface DeleteOptions extends OperationOptions {
 
 }
+/**
+ * Delete a gist
+ *
+ * @param {GistsClientContext} client
+ * @param {string} id
+ * @param {DeleteOptions} [options]
+ */
 export async function delete_(
   client: GistsClientContext,
   id: string,
@@ -202,6 +249,13 @@ export async function delete_(
 export interface ListCommitsOptions extends OperationOptions {
 
 }
+/**
+ * List gist commits
+ *
+ * @param {GistsClientContext} client
+ * @param {string} id
+ * @param {ListCommitsOptions} [options]
+ */
 export async function listCommits(
   client: GistsClientContext,
   id: string,
@@ -230,6 +284,13 @@ export async function listCommits(
 export interface ListForksOptions extends OperationOptions {
 
 }
+/**
+ * List gist forks
+ *
+ * @param {GistsClientContext} client
+ * @param {string} id
+ * @param {ListForksOptions} [options]
+ */
 export async function listForks(
   client: GistsClientContext,
   id: string,
@@ -258,6 +319,13 @@ export async function listForks(
 export interface ForkOptions extends OperationOptions {
 
 }
+/**
+ * Fork a gist
+ *
+ * @param {GistsClientContext} client
+ * @param {string} id
+ * @param {ForkOptions} [options]
+ */
 export async function fork(
   client: GistsClientContext,
   id: string,
@@ -286,6 +354,13 @@ export async function fork(
 export interface StarOptions extends OperationOptions {
 
 }
+/**
+ * Star a gist
+ *
+ * @param {GistsClientContext} client
+ * @param {string} id
+ * @param {StarOptions} [options]
+ */
 export async function star(
   client: GistsClientContext,
   id: string,
@@ -314,6 +389,13 @@ export async function star(
 export interface UnstarOptions extends OperationOptions {
 
 }
+/**
+ * Unstar a gist
+ *
+ * @param {GistsClientContext} client
+ * @param {string} id
+ * @param {UnstarOptions} [options]
+ */
 export async function unstar(
   client: GistsClientContext,
   id: string,
@@ -342,6 +424,13 @@ export async function unstar(
 export interface IsStarredOptions extends OperationOptions {
 
 }
+/**
+ * Check if a gist is starred
+ *
+ * @param {GistsClientContext} client
+ * @param {string} id
+ * @param {IsStarredOptions} [options]
+ */
 export async function isStarred(
   client: GistsClientContext,
   id: string,

@@ -7,17 +7,15 @@ import {
   refkey,
   StatementList,
   Switch,
-  useBinder,
   type Children,
   type Refkey,
 } from "@alloy-js/core";
 import * as ts from "@alloy-js/typescript";
 import {
-  createTSSymbol,
   FunctionDeclaration,
   ObjectExpression,
   ObjectProperty,
-  useTSScope,
+  TSOutputSymbol,
   VarDeclaration,
 } from "@alloy-js/typescript";
 import { useTransformNamePolicy, useTsp } from "@typespec/emitter-framework";
@@ -37,15 +35,11 @@ export function HttpToolClientHandler(props: { op: HttpOperation; tool: ToolDesc
   if (server === undefined || server.container === undefined || server.container.kind !== "Namespace") {
     throw new Error("Expected to be an http server too");
   }
-  const binder = useBinder();
-  const scope = useTSScope();
-  const sym = createTSSymbol({
-    binder,
-    scope: scope,
-    name: "httpToolHandler",
+  const sym = new TSOutputSymbol("httpToolHandler", {
     flags: OutputSymbolFlags.StaticMemberContainer,
   });
 
+  const credentialVarRefkey = refkey();
   const clientRefKey = refkey(props.tool, "client");
 
   return (
@@ -65,9 +59,9 @@ export function HttpToolClientHandler(props: { op: HttpOperation; tool: ToolDesc
       async
     >
       <StatementList>
-        <CredentialVariable httpOp={props.op} />
+        <CredentialVariable httpOp={props.op} refKey={credentialVarRefkey} />
         <VarDeclaration name="client" refkey={clientRefKey}>
-          new <InitializeToolClient httpOp={props.op}></InitializeToolClient>
+          new <InitializeToolClient httpOp={props.op} credentialVarRefkey={credentialVarRefkey}></InitializeToolClient>
         </VarDeclaration>
         <VarDeclaration name="rawResponse" let type={<>{httpRuntimeTemplateLib.PathUncheckedResponse} | undefined</>}>
           undefined
@@ -87,6 +81,7 @@ export function HttpToolClientHandler(props: { op: HttpOperation; tool: ToolDesc
 
 interface InitializeToolClientProps {
   httpOp: HttpOperation;
+  credentialVarRefkey: Refkey;
 }
 
 function InitializeToolClient(props: InitializeToolClientProps) {
@@ -110,7 +105,7 @@ function InitializeToolClient(props: InitializeToolClientProps) {
       params.push(code`process.env.ENDPOINT ?? "UNKNOWN"`);
     } else if (param.name === "credential") {
       // the credential is already defined in the parent scope
-      params.push(refkey(client, "credential"));
+      params.push(props.credentialVarRefkey);
     }
   });
   // TODO: remove for https endpoint
@@ -169,6 +164,7 @@ function CallToolClient(props: CallToolClientProps) {
 
 interface CredentialVariableProps {
   httpOp: HttpOperation;
+  refKey?: Refkey;
 }
 
 function CredentialVariable(props: CredentialVariableProps) {
@@ -191,7 +187,7 @@ function CredentialVariable(props: CredentialVariableProps) {
       const authScheme = authSchemes[0];
       // TODO: http bearer oauth, oauth2 and openIdConnect
       result = (
-        <VarDeclaration name="credential" refkey={refkey(client, "credential")}>
+        <VarDeclaration name="credential" refkey={props.refKey} const>
           <Switch>
             <Match when={authScheme.type === "apiKey"}>
               <ObjectExpression>
