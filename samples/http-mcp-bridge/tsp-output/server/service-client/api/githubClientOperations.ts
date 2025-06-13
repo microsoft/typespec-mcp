@@ -1,5 +1,5 @@
 import { parse } from "uri-template";
-import type { GithubClientContext } from "./githubClientContext.js";
+import { GithubClientContext } from "./githubClientContext.js";
 import { createRestError } from "../helpers/error.js";
 import type { OperationOptions } from "../helpers/interfaces.js";
 import { jsonFullRepositoryToApplicationTransform } from "../models/internal/serializers.js";
@@ -8,6 +8,14 @@ import { FullRepository } from "../models/models.js";
 export interface GetRepositoryOptions extends OperationOptions {
 
 }
+/**
+ * Get a GitHub repository by owner and repository name.
+ *
+ * @param {GithubClientContext} client
+ * @param {string} owner
+ * @param {string} repo
+ * @param {GetRepositoryOptions} [options]
+ */
 export async function getRepository(
   client: GithubClientContext,
   owner: string,
