@@ -8,7 +8,7 @@ inputs:
   dotnet-version:
     required: false
     description: Node version for setup-node
-    default: 9.0.x
+    default: 8.0.x
 
 runs:
   using: composite
