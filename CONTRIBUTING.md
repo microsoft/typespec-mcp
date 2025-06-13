@@ -13,6 +13,8 @@ There are many ways to contribute to the TypeSpec MCP project: reporting bugs, s
 2. Install [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot) and [GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat) extensions.
 3. Install [Node.js](https://nodejs.org/en/download) 20 or later
    - Ensure `node` and `npm` are in your path
+4. Install [Dotnet](https://dotnet.microsoft.com/download) 8.0 or later
+   - Ensure `dotnet` is in your path
 
 ## Development Process
 
