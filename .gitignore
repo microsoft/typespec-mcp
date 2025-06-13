@@ -136,3 +136,18 @@ dist
 .pnp.*
 
 .DS_Store
+
+# CSharp
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# Build results
+
+[Dd]ebug/
+[Rr]elease/
+x64/
+[Bb]in/
+[Oo]bj/
