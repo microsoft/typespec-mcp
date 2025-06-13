@@ -7,7 +7,7 @@ catalog:
   "@alloy-js/core": ~0.17.0
   "@alloy-js/typescript": ~0.17.0
   "@alloy-js/rollup-plugin": ^0.1.0
-  "@alloy-js/csharp": ~0.18.0-dev.3
+  "@alloy-js/csharp": ~0.18.0-dev.4
   "@rollup/plugin-babel": ^6.0.4
   "@types/node": ^22.14.0
   "@typespec/compiler": ^1.1.0
