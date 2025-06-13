@@ -1,6 +1,6 @@
-import { code, List, MemberScope, OutputSymbolFlags, refkey, useBinder } from "@alloy-js/core";
+import { code, List, MemberScope, OutputSymbolFlags, refkey } from "@alloy-js/core";
 import * as ts from "@alloy-js/typescript";
-import { createTSSymbol, useTSScope } from "@alloy-js/typescript";
+import { TSOutputSymbol } from "@alloy-js/typescript";
 import { useTsp } from "@typespec/emitter-framework";
 import { InterfaceExpression } from "@typespec/emitter-framework/typescript";
 import { getServers, type HttpOperation } from "@typespec/http";
@@ -20,12 +20,7 @@ export function HttpToolBasicHandler(props: { op: HttpOperation; tool: ToolDescr
   }
   const servers = getServers($.program, server.container);
   const host = servers![0];
-  const binder = useBinder();
-  const scope = useTSScope();
-  const sym = createTSSymbol({
-    binder,
-    scope: scope,
-    name: "httpToolHandler",
+  const sym = new TSOutputSymbol("httpToolHandler", {
     flags: OutputSymbolFlags.StaticMemberContainer,
   });
 

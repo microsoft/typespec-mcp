@@ -7,17 +7,15 @@ import {
   refkey,
   StatementList,
   Switch,
-  useBinder,
   type Children,
   type Refkey,
 } from "@alloy-js/core";
 import * as ts from "@alloy-js/typescript";
 import {
-  createTSSymbol,
   FunctionDeclaration,
   ObjectExpression,
   ObjectProperty,
-  useTSScope,
+  TSOutputSymbol,
   VarDeclaration,
 } from "@alloy-js/typescript";
 import { useTransformNamePolicy, useTsp } from "@typespec/emitter-framework";
@@ -37,12 +35,7 @@ export function HttpToolClientHandler(props: { op: HttpOperation; tool: ToolDesc
   if (server === undefined || server.container === undefined || server.container.kind !== "Namespace") {
     throw new Error("Expected to be an http server too");
   }
-  const binder = useBinder();
-  const scope = useTSScope();
-  const sym = createTSSymbol({
-    binder,
-    scope: scope,
-    name: "httpToolHandler",
+  const sym = new TSOutputSymbol("httpToolHandler", {
     flags: OutputSymbolFlags.StaticMemberContainer,
   });
 
