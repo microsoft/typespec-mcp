@@ -26,4 +26,4 @@ runs:
     - name: Set dotnet version to ${{ inputs.node-version }}
       uses: actions/setup-dotnet@v4
       with:
-        node-version: ${{ inputs.dotnet-version }}
+        dotnet-version: ${{ inputs.dotnet-version }}
