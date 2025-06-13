@@ -3,17 +3,17 @@ packages:
   - "samples/*"
 
 catalog:
-  "@alloy-js/cli": ~0.16.0
-  "@alloy-js/core": ~0.16.0
-  "@alloy-js/typescript": ~0.16.0
-  "@alloy-js/csharp": ~0.16.0
+  "@alloy-js/cli": ~0.17.0
+  "@alloy-js/core": ~0.17.0
+  "@alloy-js/typescript": ~0.17.0
   "@alloy-js/rollup-plugin": ^0.1.0
+  "@alloy-js/csharp": ~0.17.0
   "@rollup/plugin-babel": ^6.0.4
   "@types/node": ^22.14.0
-  "@typespec/compiler": ^1.0.0
-  "@typespec/emitter-framework": ^0.7.1
-  "@typespec/http-client": 0.7.0-dev.1
-  "@typespec/http-client-js": 0.6.0-dev.4
+  "@typespec/compiler": ^1.1.0
+  "@typespec/emitter-framework": ^0.8.0
+  "@typespec/http-client": 0.7.0
+  "@typespec/http-client-js": 0.6.0
   "@typespec/http": ^1.0.0
   "@typespec/tspd": "^0.70.0"
   "@modelcontextprotocol/inspector": ^0.12.0
@@ -22,7 +22,7 @@ catalog:
   change-case: "^5.4.4"
   prettier: ^3.5.3
   typescript: ^5.8.3
-  typespec-zod: ^0.0.0-51
+  typespec-zod: ^0.0.0-52
   vitest: ^3.1.1
   "zod": "^3.24.2"
   "zod-to-json-schema": "^3.24.5"

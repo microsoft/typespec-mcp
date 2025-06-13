@@ -52,7 +52,7 @@ export async function httpToolHandler(tool: string, data: any) {
 export const implementations = {
   get_repository: async function get_repository(
     data: {
-        owner: string
+        owner: string;
         repo: string;
       },
   ) {
@@ -201,7 +201,7 @@ export const implementations = {
   },
   gists_update: async function gists_update(
     data: {
-        id: string
+        id: string;
         gist: CreateGist;
       },
   ) {
