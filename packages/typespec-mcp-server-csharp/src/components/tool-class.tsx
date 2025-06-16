@@ -1,5 +1,5 @@
 import { For, List } from "@alloy-js/core";
-import { Class, ClassMethod, UsingDirective } from "@alloy-js/csharp";
+import { ClassDeclaration, ClassMethod, UsingDirective } from "@alloy-js/csharp";
 import { getDoc } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";
 import type { ToolDescriptor, ToolGroup } from "../context/utils/tool-descriptor.js";
@@ -12,10 +12,9 @@ export function ToolClass({ group }: ToolClassProps) {
   return (
     <List>
       <UsingDirective namespaces={["ModelContextProtocol.Server", "System.ComponentModel"]} />
-      abstract{" "}
-      <Class name={group.name} accessModifier="public">
+      <ClassDeclaration name={group.name} public abstract>
         <For each={group.tools}>{(tool) => <ToolMethod tool={tool} />}</For>
-      </Class>
+      </ClassDeclaration>
     </List>
   );
 }
@@ -28,7 +27,7 @@ function ToolMethod(props: ToolMethodProps) {
   return (
     <List>
       <ToolAttributes tool={props.tool} />
-      <ClassMethod name={props.tool.originalOp.name} methodModifier="abstract" accessModifier="public" />
+      <ClassMethod name={props.tool.originalOp.name} abstract public />
     </List>
   );
 }
