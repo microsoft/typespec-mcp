@@ -27,6 +27,11 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - run: |
+          git status --porcelain
+          git diff --no-ext-diff --quiet --exit-code
+        name: Check not out of date generated files
+
   format:
     runs-on: ubuntu-latest
     steps:

@@ -6,7 +6,7 @@ namespace Mcp
     using ModelContextProtocol.Server;
     using System.ComponentModel;public class Program
     {
-        static async public Task Main()
+        public static async Task Main()
         {
             var builder = Host.CreateApplicationBuilder();
             builder.Logging.AddConsole(consoleLogOptions =>
