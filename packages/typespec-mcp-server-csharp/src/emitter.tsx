@@ -3,9 +3,9 @@ import { Namespace } from "@alloy-js/csharp";
 import type { EmitContext, Program } from "@typespec/compiler";
 import { Output, writeOutput } from "@typespec/emitter-framework";
 import { CsprojFile } from "./components/csproj.jsx";
-import { Models } from "./components/models.jsx";
 import { ProgramFile } from "./components/program.jsx";
 import { Tools } from "./components/tools.jsx";
+import { Models } from "./components/types.jsx";
 import { createMCPServerContext, MCPServerContext } from "./context/mcp-server.js";
 
 export async function $onEmit(context: EmitContext) {

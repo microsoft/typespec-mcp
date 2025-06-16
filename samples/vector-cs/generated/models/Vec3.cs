@@ -1,6 +1,6 @@
 namespace Mcp
 {
-    class Vec3
+    public class Vec3
     {
         public int x
         {
