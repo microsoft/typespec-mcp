@@ -1,7 +1,8 @@
-import { For, List, refkey } from "@alloy-js/core";
+import { For, List } from "@alloy-js/core";
 import { ClassDeclaration, ClassMethod, UsingDirective } from "@alloy-js/csharp";
 import { getDoc } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";
+import { TypeExpression } from "@typespec/emitter-framework/csharp";
 import type { ToolDescriptor, ToolGroup } from "../context/utils/tool-descriptor.js";
 
 export interface ToolClassProps {
@@ -27,14 +28,20 @@ function ToolMethod(props: ToolMethodProps) {
   const parameters = [...props.tool.originalOp.parameters.properties.values()].map((p) => {
     return {
       name: p.name,
-      type: refkey(p.type),
+      type: <TypeExpression type={p.type} />,
       required: !p.optional,
     };
   });
   return (
     <List>
       <ToolAttributes tool={props.tool} />
-      <ClassMethod name={props.tool.originalOp.name} abstract public parameters={parameters} />
+      <ClassMethod
+        name={props.tool.originalOp.name}
+        abstract
+        public
+        parameters={parameters}
+        returns={<TypeExpression type={props.tool.originalOp.returnType} />}
+      />
     </List>
   );
 }

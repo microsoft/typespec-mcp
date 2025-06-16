@@ -1,4 +1,4 @@
-import { For, refkey } from "@alloy-js/core";
+import { For } from "@alloy-js/core";
 import { SourceFile } from "@alloy-js/csharp";
 import type { Type } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";
@@ -24,7 +24,7 @@ export function Model(props: { type: Type }) {
   const { program } = useTsp();
   switch (props.type.kind) {
     case "Model":
-      return <ClassDeclaration public type={props.type} refkey={refkey(props.type)} />;
+      return <ClassDeclaration public type={props.type} />;
     default:
       reportDiagnostic(program, { code: "unsupported-type", format: { kind: props.type.kind }, target: props.type });
       return <></>;
