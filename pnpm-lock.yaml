@@ -12,9 +12,6 @@ catalogs:
     '@alloy-js/core':
       specifier: ~0.17.0
       version: 0.17.0
-    '@alloy-js/csharp':
-      specifier: ~0.18.0-dev.6
-      version: 0.18.0-dev.6
     '@alloy-js/rollup-plugin':
       specifier: ^0.1.0
       version: 0.1.0
@@ -71,6 +68,7 @@ overrides:
   '@typespec/emitter-framework': ^0.9.0-dev.2
   '@typespec/http-client': ^0.8.0-dev
   '@typespec/http-client-js': ^0.7.0-dev
+  '@alloy-js/csharp': ~0.18.0-dev.6
 
 importers:
 
@@ -258,7 +256,7 @@ importers:
         specifier: 'catalog:'
         version: 0.17.0
       '@alloy-js/csharp':
-        specifier: 'catalog:'
+        specifier: ~0.18.0-dev.6
         version: 0.18.0-dev.6
       '@typespec/compiler':
         specifier: 'catalog:'
@@ -1696,7 +1694,7 @@ packages:
     resolution: {integrity: sha512-EaUdFvfeHqPlcydHmhJKulxGgXxGrNVKgU9jNIDqzCpfMtEeIdjTx1/LXneNAHx/osIbnZJUcCpFh62PzOu7CQ==}
     peerDependencies:
       '@alloy-js/core': ^0.17.0
-      '@alloy-js/csharp': ^0.17.0
+      '@alloy-js/csharp': ~0.18.0-dev.6
       '@alloy-js/typescript': ^0.17.0
       '@typespec/compiler': ^1.1.0
       '@typespec/http': ^1.1.0
