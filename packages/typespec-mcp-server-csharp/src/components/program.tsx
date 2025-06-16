@@ -1,5 +1,5 @@
 import { code } from "@alloy-js/core";
-import { Class, ClassMethod, SourceFile } from "@alloy-js/csharp";
+import { ClassDeclaration, ClassMethod, SourceFile } from "@alloy-js/csharp";
 
 export function ProgramFile() {
   return (
@@ -11,12 +11,11 @@ export function ProgramFile() {
         using ModelContextProtocol.Server;
         using System.ComponentModel;
         `}
-      <Class name="Program" accessModifier="public">
-        {"static async "}
-        <ClassMethod name="Main" accessModifier="public" returns="Task">
+      <ClassDeclaration name="Program" public>
+        <ClassMethod name="Main" public static async returns="Task">
           {<Main />}
         </ClassMethod>
-      </Class>
+      </ClassDeclaration>
     </SourceFile>
   );
 }

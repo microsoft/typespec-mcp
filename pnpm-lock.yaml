@@ -13,8 +13,8 @@ catalogs:
       specifier: ~0.17.0
       version: 0.17.0
     '@alloy-js/csharp':
-      specifier: ~0.18.0-dev.3
-      version: 0.18.0-dev.3
+      specifier: ~0.18.0-dev.6
+      version: 0.18.0-dev.6
     '@alloy-js/rollup-plugin':
       specifier: ^0.1.0
       version: 0.1.0
@@ -37,8 +37,8 @@ catalogs:
       specifier: ^0.8.0
       version: 0.8.0
     '@typespec/http':
-      specifier: ^1.0.0
-      version: 1.0.1
+      specifier: ^1.1.0
+      version: 1.1.0
     '@typespec/http-client':
       specifier: 0.7.0
       version: 0.7.0
@@ -87,8 +87,8 @@ importers:
         specifier: 'catalog:'
         version: 22.15.31
       '@typespec/prettier-plugin-typespec':
-        specifier: ^1.0.0
-        version: 1.0.0
+        specifier: ^1.1.0
+        version: 1.1.0
       '@vitest/eslint-plugin':
         specifier: ^1.2.1
         version: 1.2.2(eslint@9.28.0)(typescript@5.8.3)(vitest@3.2.3(@types/node@22.15.31)(yaml@2.7.1))
@@ -220,16 +220,16 @@ importers:
         version: 1.1.0(@types/node@22.15.31)
       '@typespec/emitter-framework':
         specifier: 'catalog:'
-        version: 0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31))))
+        version: 0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31))))
       '@typespec/http':
         specifier: 'catalog:'
-        version: 1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31))
+        version: 1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31))
       '@typespec/http-client':
         specifier: 'catalog:'
-        version: 0.7.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/emitter-framework@0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))
+        version: 0.7.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/emitter-framework@0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))
       '@typespec/http-client-js':
         specifier: 'catalog:'
-        version: 0.6.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31))))
+        version: 0.6.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31))))
       typespec-mcp:
         specifier: workspace:*
         version: link:../typespec-mcp
@@ -238,7 +238,7 @@ importers:
         version: link:../typespec-mcp-server-js
       typespec-zod:
         specifier: 'catalog:'
-        version: 0.0.0-52(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/emitter-framework@0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))))
+        version: 0.0.0-52(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/emitter-framework@0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))))
     devDependencies:
       '@alloy-js/cli':
         specifier: 'catalog:'
@@ -263,13 +263,13 @@ importers:
         version: 0.17.0
       '@alloy-js/csharp':
         specifier: 'catalog:'
-        version: 0.18.0-dev.3
+        version: 0.18.0-dev.6
       '@typespec/compiler':
         specifier: 'catalog:'
         version: 1.1.0(@types/node@22.15.31)
       '@typespec/emitter-framework':
         specifier: 'catalog:'
-        version: 0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31))))
+        version: 0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31))))
       change-case:
         specifier: 'catalog:'
         version: 5.4.4
@@ -278,7 +278,7 @@ importers:
         version: link:../typespec-mcp
       typespec-zod:
         specifier: 'catalog:'
-        version: 0.0.0-52(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/emitter-framework@0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))))
+        version: 0.0.0-52(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/emitter-framework@0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))))
     devDependencies:
       '@alloy-js/cli':
         specifier: 'catalog:'
@@ -309,7 +309,7 @@ importers:
         version: 1.1.0(@types/node@22.15.31)
       '@typespec/emitter-framework':
         specifier: 'catalog:'
-        version: 0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31))))
+        version: 0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31))))
       change-case:
         specifier: 'catalog:'
         version: 5.4.4
@@ -318,7 +318,7 @@ importers:
         version: link:../typespec-mcp
       typespec-zod:
         specifier: 'catalog:'
-        version: 0.0.0-52(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/emitter-framework@0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))))
+        version: 0.0.0-52(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/emitter-framework@0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))))
     devDependencies:
       '@alloy-js/cli':
         specifier: 'catalog:'
@@ -349,10 +349,10 @@ importers:
         version: 1.1.0(@types/node@22.15.31)
       '@typespec/http':
         specifier: 'catalog:'
-        version: 1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31))
+        version: 1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31))
       '@typespec/ts-http-runtime':
-        specifier: 0.2.2
-        version: 0.2.2
+        specifier: 0.2.3
+        version: 0.2.3
       typespec-http-dispatcher:
         specifier: workspace:*
         version: link:../../packages/typespec-http-dispatcher
@@ -497,8 +497,8 @@ packages:
   '@alloy-js/core@0.17.0':
     resolution: {integrity: sha512-ydVGcbdKfvazkbUDrmeoQAzCQDzSudJDtk/nzubnQjGJmLlq62RLKR5eKj1l9sope4L7UX98DLclJxiwiF5WAA==}
 
-  '@alloy-js/csharp@0.18.0-dev.3':
-    resolution: {integrity: sha512-ln6N/ZcOJj0GIAMsahozTlDoOM2IGSwZbDFCccivGPK1nt3V3JcRZ3LOsxoW/4qo/JnF29MRhSFXBom27brrjQ==}
+  '@alloy-js/csharp@0.18.0-dev.6':
+    resolution: {integrity: sha512-rulnP8QiHLKuUcKQKs567tp9dbt/nWX5vcfj2f6R+sZAZbXt0yxPcDT8pBMzSKQELHKYGd1aILavu4EQPhPXng==}
 
   '@alloy-js/rollup-plugin@0.1.0':
     resolution: {integrity: sha512-MXR8mBdSh/pxMP8kIXAcMYKsm5yOWZ+igxcaRX1vBXFiHU4eK7gE/5q6Fk8Vdydh+MItWtgekwIhUWvcszdNFQ==}
@@ -1721,18 +1721,18 @@ packages:
       '@typespec/emitter-framework': ^0.8.0
       '@typespec/http': ^1.1.0
 
-  '@typespec/http@1.0.1':
-    resolution: {integrity: sha512-J5tqBWlmkvI/W+kJn4EFuN0laGxbY8qT68jzEQEiYeAXSfNyFGRSoCwn8Ex6dJphq4IozOMdVTNtOZWIJlwmfw==}
+  '@typespec/http@1.1.0':
+    resolution: {integrity: sha512-1doVGmkv3N8l57fVuci4jGMZ61EZBlDzuNZO2b9o0+mexCOs/P96CIpFkaNVvTQgjpyFsW1DlXiUKAvUC9zQfg==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
-      '@typespec/compiler': ^1.0.0
-      '@typespec/streams': ^0.70.0
+      '@typespec/compiler': ^1.1.0
+      '@typespec/streams': ^0.71.0
     peerDependenciesMeta:
       '@typespec/streams':
         optional: true
 
-  '@typespec/prettier-plugin-typespec@1.0.0':
-    resolution: {integrity: sha512-pnZRJ0hdjDUTfem49YncT9LwiUBf/XPYn/jSdifvjyspOUg0an6YmqqmG4dGOEvkwRJQQvDftT7HxxT+7f40YQ==}
+  '@typespec/prettier-plugin-typespec@1.1.0':
+    resolution: {integrity: sha512-Wi2ShQdbSXDq+sysguTXq4o1vVIQNZreyy0COVL3DnMZbq92TH0d9dtexOqEJsNsCbfx4RFD5il4dAbSX1/88w==}
 
   '@typespec/rest@0.70.0':
     resolution: {integrity: sha512-pn3roMQV6jBNT4bVA/hnrBAAHleXSyfWQqNO+DhI3+tLU4jCrJHmUZDi82nI9xBl+jkmy2WZFZOelZA9PSABeg==}
@@ -1741,8 +1741,8 @@ packages:
       '@typespec/compiler': ^1.0.0
       '@typespec/http': ^1.0.0
 
-  '@typespec/ts-http-runtime@0.2.2':
-    resolution: {integrity: sha512-Gz/Sm64+Sq/vklJu1tt9t+4R2lvnud8NbTD/ZfpZtMiUX7YeVpCA8j6NSW8ptwcoLL+NmYANwqP8DV0q/bwl2w==}
+  '@typespec/ts-http-runtime@0.2.3':
+    resolution: {integrity: sha512-oRhjSzcVjX8ExyaF8hC0zzTqxlVuRlgMHL/Bh4w3xB9+wjbm0FpXylVU/lBrn+kgphwYTrOk3tp+AVShGmlYCg==}
     engines: {node: '>=18.0.0'}
 
   '@typespec/tspd@0.70.0':
@@ -3542,7 +3542,7 @@ snapshots:
       picocolors: 1.1.1
       prettier: 3.5.3
 
-  '@alloy-js/csharp@0.18.0-dev.3':
+  '@alloy-js/csharp@0.18.0-dev.6':
     dependencies:
       '@alloy-js/core': 0.17.0
       change-case: 5.4.4
@@ -4787,47 +4787,47 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@typespec/emitter-framework@0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31))))':
+  '@typespec/emitter-framework@0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31))))':
     dependencies:
       '@alloy-js/core': 0.17.0
       '@alloy-js/typescript': 0.17.0
       '@typespec/compiler': 1.1.0(@types/node@22.15.31)
-      '@typespec/http': 1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31))
-      '@typespec/rest': 0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))
+      '@typespec/http': 1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31))
+      '@typespec/rest': 0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))
 
-  '@typespec/http-client-js@0.6.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31))))':
+  '@typespec/http-client-js@0.6.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31))))':
     dependencies:
       '@alloy-js/core': 0.17.0
       '@alloy-js/typescript': 0.17.0
       '@typespec/compiler': 1.1.0(@types/node@22.15.31)
-      '@typespec/emitter-framework': 0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31))))
-      '@typespec/http': 1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31))
-      '@typespec/http-client': 0.7.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/emitter-framework@0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))
-      '@typespec/rest': 0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))
+      '@typespec/emitter-framework': 0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31))))
+      '@typespec/http': 1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31))
+      '@typespec/http-client': 0.7.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/emitter-framework@0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))
+      '@typespec/rest': 0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))
       prettier: 3.5.3
 
-  '@typespec/http-client@0.7.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/emitter-framework@0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))':
+  '@typespec/http-client@0.7.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/emitter-framework@0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))':
     dependencies:
       '@alloy-js/core': 0.17.0
       '@alloy-js/typescript': 0.17.0
       '@typespec/compiler': 1.1.0(@types/node@22.15.31)
-      '@typespec/emitter-framework': 0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31))))
-      '@typespec/http': 1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31))
+      '@typespec/emitter-framework': 0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31))))
+      '@typespec/http': 1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31))
 
-  '@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31))':
+  '@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31))':
     dependencies:
       '@typespec/compiler': 1.1.0(@types/node@22.15.31)
 
-  '@typespec/prettier-plugin-typespec@1.0.0':
+  '@typespec/prettier-plugin-typespec@1.1.0':
     dependencies:
       prettier: 3.5.3
 
-  '@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))':
+  '@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))':
     dependencies:
       '@typespec/compiler': 1.1.0(@types/node@22.15.31)
-      '@typespec/http': 1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31))
+      '@typespec/http': 1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31))
 
-  '@typespec/ts-http-runtime@0.2.2':
+  '@typespec/ts-http-runtime@0.2.3':
     dependencies:
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.6
@@ -6363,12 +6363,12 @@ snapshots:
 
   typescript@5.8.3: {}
 
-  typespec-zod@0.0.0-52(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/emitter-framework@0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31))))):
+  typespec-zod@0.0.0-52(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/emitter-framework@0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31))))):
     dependencies:
       '@alloy-js/core': 0.17.0
       '@alloy-js/typescript': 0.17.0
       '@typespec/compiler': 1.1.0(@types/node@22.15.31)
-      '@typespec/emitter-framework': 0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.0.1(@typespec/compiler@1.1.0(@types/node@22.15.31))))
+      '@typespec/emitter-framework': 0.8.0(@alloy-js/core@0.17.0)(@alloy-js/typescript@0.17.0)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31))))
 
   uc.micro@2.1.0: {}
 

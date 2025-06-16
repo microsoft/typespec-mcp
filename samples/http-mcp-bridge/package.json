@@ -8,7 +8,7 @@
     "@modelcontextprotocol/sdk": "catalog:",
     "@typespec/compiler": "catalog:",
     "@typespec/http": "catalog:",
-    "@typespec/ts-http-runtime": "0.2.2",
+    "@typespec/ts-http-runtime": "0.2.3",
     "typespec-mcp": "workspace:*",
     "typespec-mcp-server-js": "workspace:*",
     "typespec-mcp-http-server-js": "workspace:*",

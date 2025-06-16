@@ -7,14 +7,14 @@ catalog:
   "@alloy-js/core": ~0.17.0
   "@alloy-js/typescript": ~0.17.0
   "@alloy-js/rollup-plugin": ^0.1.0
-  "@alloy-js/csharp": ~0.18.0-dev.3
+  "@alloy-js/csharp": ~0.18.0-dev.6
   "@rollup/plugin-babel": ^6.0.4
   "@types/node": ^22.14.0
   "@typespec/compiler": ^1.1.0
   "@typespec/emitter-framework": ^0.8.0
   "@typespec/http-client": 0.7.0
   "@typespec/http-client-js": 0.6.0
-  "@typespec/http": ^1.0.0
+  "@typespec/http": ^1.1.0
   "@typespec/tspd": "^0.70.0"
   "@modelcontextprotocol/inspector": ^0.12.0
   "@modelcontextprotocol/sdk": ^1.11.4
