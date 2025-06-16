@@ -2,7 +2,6 @@ namespace Mcp
 {
     using ModelContextProtocol.Server;
     using System.ComponentModel;
-    [McpServerToolType]
     public abstract class Math
     {
         [McpServerTool(Name = "math_add_vector"), Description(@"Adds two vectors together. Use this when you want to combine two vectors to

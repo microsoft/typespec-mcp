@@ -1,4 +1,8 @@
+using ModelContextProtocol.Server;
+
 namespace Mcp;
+
+[McpServerToolType]
 
 public class MathImpl : Math
 {

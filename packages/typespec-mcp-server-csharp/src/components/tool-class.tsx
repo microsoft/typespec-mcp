@@ -13,8 +13,6 @@ export function ToolClass({ group }: ToolClassProps) {
   return (
     <List>
       <UsingDirective namespaces={["ModelContextProtocol.Server", "System.ComponentModel"]} />
-
-      {"[McpServerToolType]"}
       <ClassDeclaration name={group.name} public abstract>
         <For each={group.tools}>{(tool) => <ToolMethod tool={tool} />}</For>
       </ClassDeclaration>
