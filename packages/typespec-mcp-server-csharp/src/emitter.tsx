@@ -7,13 +7,19 @@ import { ProgramFile } from "./components/program.jsx";
 import { Tools } from "./components/tools.jsx";
 import { Models } from "./components/types.jsx";
 import { createMCPServerContext, MCPServerContext } from "./context/mcp-server.js";
+import type { EmitterOptions } from "./lib.js";
 
-export async function $onEmit(context: EmitContext) {
-  await writeOutput(context.program, <McpServer program={context.program} />, context.emitterOutputDir);
+export async function $onEmit(context: EmitContext<EmitterOptions>) {
+  await writeOutput(
+    context.program,
+    <McpServer program={context.program} scaffold={context.options.scaffold} />,
+    context.emitterOutputDir,
+  );
 }
 
 export interface McpServerProps {
   program: Program;
+  scaffold?: boolean;
 }
 
 export function McpServer(props: McpServerProps) {
@@ -30,7 +36,7 @@ export function McpServer(props: McpServerProps) {
             <SourceDirectory path="models">
               <Models />
             </SourceDirectory>
-            <ProgramFile />
+            {props.scaffold && <ProgramFile />}
           </SourceDirectory>
         </Namespace>
       </MCPServerContext.Provider>
