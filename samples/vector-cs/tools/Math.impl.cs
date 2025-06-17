@@ -2,16 +2,16 @@ using ModelContextProtocol.Server;
 
 namespace Mcp;
 
-[McpServerToolType]
 
-public class MathImpl : Math
+
+public class MathImpl : IMath
 {
-    public override Vec3 addVector(Vec3 v1, Vec3 v2)
+    public Vec3 addVector(Vec3 v1, Vec3 v2)
     {
         return new Vec3 { x = v1.x + v2.x, y = v1.y + v2.y, z = v1.z + v2.z };
     }
 
-    public override Vec3 crossProduct(Vec3 v1, Vec3 v2)
+    public Vec3 crossProduct(Vec3 v1, Vec3 v2)
     {
         return new Vec3
         {
@@ -21,12 +21,12 @@ public class MathImpl : Math
         };
     }
 
-    public override double dotProduct(Vec3 v1, Vec3 v2)
+    public double dotProduct(Vec3 v1, Vec3 v2)
     {
         return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
     }
 
-    public override Vec3 subVector(Vec3 v1, Vec3 v2)
+    public Vec3 subVector(Vec3 v1, Vec3 v2)
     {
         return new Vec3 { x = v1.x - v2.x, y = v1.y - v2.y, z = v1.z - v2.z };
     }
