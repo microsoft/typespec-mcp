@@ -34,4 +34,4 @@ overrides:
   "@typespec/http-client-js": ^0.7.0-dev
   "@alloy-js/core": ~0.18.0-dev
   "@alloy-js/typescript": ~0.18.0-dev
-  "@alloy-js/csharp": ~0.18.0-dev.6
+  "@alloy-js/csharp": ~0.18.0-dev.7

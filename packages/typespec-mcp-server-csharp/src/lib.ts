@@ -1,5 +1,9 @@
 import { createTypeSpecLibrary, paramMessage } from "@typespec/compiler";
 
+export interface EmitterOptions {
+  readonly scaffold?: boolean;
+}
+
 export const $lib = createTypeSpecLibrary({
   name: "typespec-mcp-server-csharp",
   diagnostics: {
@@ -7,6 +11,18 @@ export const $lib = createTypeSpecLibrary({
       severity: "warning",
       messages: {
         default: paramMessage`Unsupported type ${"kind"}`,
+      },
+    },
+  },
+  emitter: {
+    options: {
+      type: "object",
+      properties: {
+        scaffold: {
+          type: "boolean",
+          default: false,
+          nullable: true,
+        },
       },
     },
   },

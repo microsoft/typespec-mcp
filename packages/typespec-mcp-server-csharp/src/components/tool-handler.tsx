@@ -1,20 +1,33 @@
-import { For, List } from "@alloy-js/core";
-import { ClassDeclaration, ClassMethod, UsingDirective } from "@alloy-js/csharp";
+import { code, For, List } from "@alloy-js/core";
+import { ClassConstructor, ClassDeclaration, ClassMember, ClassMethod, UsingDirective } from "@alloy-js/csharp";
 import { getDoc } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";
 import { TypeExpression } from "@typespec/emitter-framework/csharp";
 import type { ToolDescriptor, ToolGroup } from "../context/utils/tool-descriptor.js";
+import { getToolInferfaceRefkey } from "./tool-interface.jsx";
 
-export interface ToolClassProps {
+export interface ToolGroupHandlerProps {
   group: ToolGroup;
 }
 
-export function ToolClass({ group }: ToolClassProps) {
+/** Generate the tool handler */
+export function ToolGroupHandler({ group }: ToolGroupHandlerProps) {
   return (
     <List>
       <UsingDirective namespaces={["ModelContextProtocol.Server", "System.ComponentModel"]} />
-      <ClassDeclaration name={group.name} public abstract>
-        <For each={group.tools}>{(tool) => <ToolMethod tool={tool} />}</For>
+      {"[McpServerToolType]"}
+      <ClassDeclaration name={`${group.name}Handler`} public>
+        <List doubleHardline>
+          <ClassMember private name="impl" type={getToolInferfaceRefkey(group)} />;
+          <ClassConstructor public parameters={[{ name: "impl", type: getToolInferfaceRefkey(group) }]}>
+            {code`
+              this.impl = impl; 
+            `}
+          </ClassConstructor>
+          <For each={group.tools} doubleHardline>
+            {(tool) => <ToolMethod tool={tool} />}
+          </For>
+        </List>
       </ClassDeclaration>
     </List>
   );
@@ -37,11 +50,14 @@ function ToolMethod(props: ToolMethodProps) {
       <ToolAttributes tool={props.tool} />
       <ClassMethod
         name={props.tool.originalOp.name}
-        abstract
         public
         parameters={parameters}
         returns={<TypeExpression type={props.tool.originalOp.returnType} />}
-      />
+      >
+        {code`
+          return this.impl.${props.tool.originalOp.name}(${parameters.map((p) => p.name).join(", ")});
+        `}
+      </ClassMethod>
     </List>
   );
 }
