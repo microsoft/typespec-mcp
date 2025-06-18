@@ -1,5 +1,13 @@
 import { For, List, refkey, type Refkey } from "@alloy-js/core";
-import { DocFromMarkdown, DocParam, DocSummary, InterfaceDeclaration, InterfaceMethod } from "@alloy-js/csharp";
+import {
+  DocFromMarkdown,
+  DocParam,
+  DocReturns,
+  DocSummary,
+  InterfaceDeclaration,
+  InterfaceMethod,
+} from "@alloy-js/csharp";
+import { getReturnsDoc } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";
 import { TypeExpression } from "@typespec/emitter-framework/csharp";
 import type { ToolDescriptor, ToolGroup } from "../context/utils/tool-descriptor.js";
@@ -63,27 +71,38 @@ function ToolMethod(props: ToolMethodProps) {
 function ToolDoc(props: ToolMethodProps) {
   const { $ } = useTsp();
   const doc = $.type.getDoc(props.tool.originalOp);
-  if (doc === undefined) {
-    return null;
-  }
-  const parameters = [...props.tool.originalOp.parameters.properties.values()].map((p) => {
-    return {
-      name: p.name,
-      doc: $.type.getDoc(p),
-    };
-  });
+  const returnsDoc = getReturnsDoc($.program, props.tool.originalOp);
+
+  const parameters = [...props.tool.originalOp.parameters.properties.values()]
+    .map((p) => {
+      const doc = $.type.getDoc(p);
+      return (
+        doc && {
+          name: p.name,
+          doc,
+        }
+      );
+    })
+    .filter((p) => !!p);
   return (
     <List>
-      <DocSummary>
-        <DocFromMarkdown markdown={doc} />
-      </DocSummary>
+      {doc && (
+        <DocSummary>
+          <DocFromMarkdown markdown={doc} />
+        </DocSummary>
+      )}
       <For each={parameters}>
         {(p) => (
           <DocParam name={p.name}>
-            <DocFromMarkdown markdown={p.doc ?? ""} />
+            <DocFromMarkdown markdown={p.doc} />
           </DocParam>
         )}
       </For>
+      {returnsDoc && (
+        <DocReturns>
+          <DocFromMarkdown markdown={returnsDoc} />
+        </DocReturns>
+      )}
     </List>
   );
 }
