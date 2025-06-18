@@ -4,7 +4,7 @@ import { getDoc } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";
 import { TypeExpression } from "@typespec/emitter-framework/csharp";
 import type { ToolDescriptor, ToolGroup } from "../context/utils/tool-descriptor.js";
-import { getToolInferfaceRefkey } from "./tool-interface.jsx";
+import { getToolGroupInferfaceRefkey } from "./tool-group-interface.jsx";
 
 export interface ToolGroupHandlerProps {
   group: ToolGroup;
@@ -18,8 +18,8 @@ export function ToolGroupHandler({ group }: ToolGroupHandlerProps) {
       {"[McpServerToolType]"}
       <ClassDeclaration name={`${group.name}Handler`} public>
         <List doubleHardline>
-          <ClassMember private name="impl" type={getToolInferfaceRefkey(group)} />;
-          <ClassConstructor public parameters={[{ name: "impl", type: getToolInferfaceRefkey(group) }]}>
+          <ClassMember private name="impl" type={getToolGroupInferfaceRefkey(group)} />;
+          <ClassConstructor public parameters={[{ name: "impl", type: getToolGroupInferfaceRefkey(group) }]}>
             {code`
               this.impl = impl; 
             `}

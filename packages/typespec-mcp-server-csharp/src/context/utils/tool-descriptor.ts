@@ -18,6 +18,8 @@ import type { McpElements } from "../name-policy.js";
 export interface ToolGroup {
   /** Name of the tool group */
   name: string;
+  /** Typespec type used to create this group */
+  type: Interface | Namespace;
   /** Path of the tool group from the MCP server root. */
   path: string[];
   /** Tools just as this level(excluding ones from sub groups) */
@@ -111,6 +113,7 @@ function resolveToolGroup(
   const group: ToolGroup = {
     name: container.name,
     path,
+    type: container,
     tools: [],
     allTools: [],
     subGroups: [],

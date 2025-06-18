@@ -1,8 +1,8 @@
 import { For } from "@alloy-js/core";
 import { SourceFile } from "@alloy-js/csharp";
 import { useMCPServerContext } from "../context/mcp-server.js";
+import { ToolGroupInterface } from "./tool-group-interface.jsx";
 import { ToolGroupHandler } from "./tool-handler.jsx";
-import { ToolsInterface } from "./tool-interface.jsx";
 
 export function Tools() {
   const { structure } = useMCPServerContext();
@@ -12,7 +12,7 @@ export function Tools() {
       {(x) => (
         <>
           <SourceFile path={`I${x.name}.cs`}>
-            <ToolsInterface group={x} />
+            <ToolGroupInterface group={x} />
           </SourceFile>
           <SourceFile path={`${x.name}.cs`}>
             <ToolGroupHandler group={x} />
