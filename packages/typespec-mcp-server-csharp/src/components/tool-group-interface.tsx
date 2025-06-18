@@ -1,4 +1,4 @@
-import { For, List, refkey, type Refkey } from "@alloy-js/core";
+import { code, For, List, refkey, type Refkey } from "@alloy-js/core";
 import {
   DocFromMarkdown,
   DocParam,
@@ -50,20 +50,23 @@ export interface ToolMethodProps {
 }
 
 function ToolMethod(props: ToolMethodProps) {
-  const parameters = [...props.tool.originalOp.parameters.properties.values()].map((p) => {
-    return {
-      name: p.name,
-      type: <TypeExpression type={p.type} />,
-      required: !p.optional,
-    };
-  });
+  const parameters = [
+    ...[...props.tool.originalOp.parameters.properties.values()].map((p) => {
+      return {
+        name: p.name,
+        type: <TypeExpression type={p.type} />,
+        required: !p.optional,
+      };
+    }),
+    { name: "cancellationToken", type: "CancellationToken", required: false },
+  ];
   return (
     <List>
       <InterfaceMethod
-        name={props.tool.originalOp.name}
+        name={props.tool.originalOp.name + "Async"}
         public
         parameters={parameters}
-        returns={<TypeExpression type={props.tool.originalOp.returnType} />}
+        returns={code`Task<${(<TypeExpression type={props.tool.originalOp.returnType} />)}>`}
         doc={<ToolDoc tool={props.tool} />}
       />
     </List>

@@ -16,7 +16,7 @@ catalog:
   "@typespec/http-client-js": ^0.6.0
   "@typespec/http": ^1.1.0
   "@typespec/tspd": "^0.70.0"
-  "@modelcontextprotocol/inspector": ^0.12.0
+  "@modelcontextprotocol/inspector": ^0.14.3
   "@modelcontextprotocol/sdk": ^1.11.4
   concurrently: ^9.1.2
   change-case: "^5.4.4"

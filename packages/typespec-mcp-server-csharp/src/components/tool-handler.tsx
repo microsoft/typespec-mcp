@@ -38,24 +38,28 @@ export interface ToolMethodProps {
 }
 
 function ToolMethod(props: ToolMethodProps) {
-  const parameters = [...props.tool.originalOp.parameters.properties.values()].map((p) => {
-    return {
-      name: p.name,
-      type: <TypeExpression type={p.type} />,
-      required: !p.optional,
-    };
-  });
+  const parameters = [
+    ...[...props.tool.originalOp.parameters.properties.values()].map((p) => {
+      return {
+        name: p.name,
+        type: <TypeExpression type={p.type} />,
+        required: !p.optional,
+      };
+    }),
+    { name: "cancellationToken", type: "CancellationToken", required: false },
+  ];
   return (
     <List>
       <ToolAttributes tool={props.tool} />
       <ClassMethod
-        name={props.tool.originalOp.name}
+        async
+        name={props.tool.originalOp.name + "Async"}
         public
         parameters={parameters}
-        returns={<TypeExpression type={props.tool.originalOp.returnType} />}
+        returns={code`Task<${(<TypeExpression type={props.tool.originalOp.returnType} />)}>`}
       >
         {code`
-          return this.impl.${props.tool.originalOp.name}(${parameters.map((p) => p.name).join(", ")});
+          return await this.impl.${props.tool.originalOp.name}Async(${parameters.map((p) => p.name).join(", ")});
         `}
       </ClassMethod>
     </List>
