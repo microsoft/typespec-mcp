@@ -19,7 +19,7 @@ namespace Mcp
         vector to get a new position.")]
         public async Task<Vec3> AddVectorAsync(Vec3 v1, Vec3 v2, CancellationToken cancellationToken)
         {
-            return await this.impl.addVectorAsync(v1, v2, cancellationToken);
+            return await this.impl.AddVectorAsync(v1, v2, cancellationToken);
         }
 
         [McpServerTool(Name = "math_sub_vector"), Description(@"Subtracts one vector from another. Use this to find the difference between
@@ -27,7 +27,7 @@ namespace Mcp
         point to another.")]
         public async Task<Vec3> SubVectorAsync(Vec3 v1, Vec3 v2, CancellationToken cancellationToken)
         {
-            return await this.impl.subVectorAsync(v1, v2, cancellationToken);
+            return await this.impl.SubVectorAsync(v1, v2, cancellationToken);
         }
 
         [McpServerTool(Name = "math_cross_product"), Description(@"Computes the cross product of two vectors. Use this to find a vector that is
@@ -35,7 +35,7 @@ namespace Mcp
         calculating surface normals or rotational axes.")]
         public async Task<Vec3> CrossProductAsync(Vec3 v1, Vec3 v2, CancellationToken cancellationToken)
         {
-            return await this.impl.crossProductAsync(v1, v2, cancellationToken);
+            return await this.impl.CrossProductAsync(v1, v2, cancellationToken);
         }
 
         [McpServerTool(Name = "math_dot_product"), Description(@"Computes the dot product of two vectors. Use this to find the scalar
@@ -43,7 +43,7 @@ namespace Mcp
         between vectors or checking if they are pointing in the same direction.")]
         public async Task<double> DotProductAsync(Vec3 v1, Vec3 v2, CancellationToken cancellationToken)
         {
-            return await this.impl.dotProductAsync(v1, v2, cancellationToken);
+            return await this.impl.DotProductAsync(v1, v2, cancellationToken);
         }
     }
 }
