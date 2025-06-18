@@ -76,9 +76,9 @@ function ToolAttributes(props: ToolMethodProps) {
 function McpServerToolAttribute(props: ToolMethodProps) {
   const values = [
     `Name = "${props.tool.id}"`,
-    props.tool.annotations?.destructiveHint && "Destructive = true",
+    !props.tool.annotations?.destructiveHint && "Destructive = false",
+    !props.tool.annotations?.openWorldHint && "OpenWorld = false",
     props.tool.annotations?.idempotentHint && "Idempotent = true",
-    props.tool.annotations?.openWorldHint && "OpenWorld = true",
     props.tool.annotations?.readonlyHint && "Readonly = true",
   ];
   return `McpServerTool(${values.filter((x) => x).join(", ")})`;
