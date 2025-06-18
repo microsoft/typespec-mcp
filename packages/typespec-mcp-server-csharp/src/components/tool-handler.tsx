@@ -1,5 +1,12 @@
 import { code, For, List } from "@alloy-js/core";
-import { ClassConstructor, ClassDeclaration, ClassMember, ClassMethod, UsingDirective } from "@alloy-js/csharp";
+import {
+  ClassConstructor,
+  ClassDeclaration,
+  ClassMember,
+  ClassMethod,
+  useCSharpNamePolicy,
+  UsingDirective,
+} from "@alloy-js/csharp";
 import { getDoc } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";
 import { TypeExpression } from "@typespec/emitter-framework/csharp";
@@ -48,6 +55,9 @@ function ToolMethod(props: ToolMethodProps) {
     }),
     { name: "cancellationToken", type: "CancellationToken", required: false },
   ];
+
+  const policy = useCSharpNamePolicy();
+  const name = policy.getName(props.tool.originalOp.name + "Async", "class-method");
   return (
     <List>
       <ToolAttributes tool={props.tool} />
@@ -59,7 +69,7 @@ function ToolMethod(props: ToolMethodProps) {
         returns={code`Task<${(<TypeExpression type={props.tool.originalOp.returnType} />)}>`}
       >
         {code`
-          return await this.impl.${props.tool.originalOp.name}Async(${parameters.map((p) => p.name).join(", ")});
+          return await this.impl.${name}(${parameters.map((p) => p.name).join(", ")});
         `}
       </ClassMethod>
     </List>

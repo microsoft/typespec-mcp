@@ -25,7 +25,7 @@ export interface McpServerProps {
 export function McpServer(props: McpServerProps) {
   const mcpServerContext: MCPServerContext = createMCPServerContext(props.program);
   return (
-    <Output program={props.program}>
+    <Output program={props.program} namePolicy={mcpServerContext.namePolicy}>
       <MCPServerContext.Provider value={mcpServerContext}>
         <CsprojFile />
         <Namespace name="Mcp">
