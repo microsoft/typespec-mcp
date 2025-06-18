@@ -15,7 +15,7 @@ namespace Mcp
         /// <returns>
         /// A new vector that is the sum of the two input vectors.
         /// </returns>
-        public Task<Vec3> addVectorAsync(Vec3 v1, Vec3 v2, CancellationToken cancellationToken);
+        public Task<Vec3> AddVectorAsync(Vec3 v1, Vec3 v2, CancellationToken cancellationToken);
 
         /// <summary>
         /// Subtracts one vector from another. Use this to find the difference between
@@ -27,7 +27,7 @@ namespace Mcp
         /// <returns>
         /// A new vector that is the difference between the two input vectors.
         /// </returns>
-        public Task<Vec3> subVectorAsync(Vec3 v1, Vec3 v2, CancellationToken cancellationToken);
+        public Task<Vec3> SubVectorAsync(Vec3 v1, Vec3 v2, CancellationToken cancellationToken);
 
         /// <summary>
         /// Computes the cross product of two vectors. Use this to find a vector that is
@@ -39,7 +39,7 @@ namespace Mcp
         /// <returns>
         /// A new vector that is the cross product of the two input vectors.
         /// </returns>
-        public Task<Vec3> crossProductAsync(Vec3 v1, Vec3 v2, CancellationToken cancellationToken);
+        public Task<Vec3> CrossProductAsync(Vec3 v1, Vec3 v2, CancellationToken cancellationToken);
 
         /// <summary>
         /// Computes the dot product of two vectors. Use this to find the scalar
@@ -50,6 +50,6 @@ namespace Mcp
         /// <returns>
         /// The dot product of the two input vectors.
         /// </returns>
-        public Task<double> dotProductAsync(Vec3 v1, Vec3 v2, CancellationToken cancellationToken);
+        public Task<double> DotProductAsync(Vec3 v1, Vec3 v2, CancellationToken cancellationToken);
     }
 }

@@ -2,17 +2,17 @@ namespace Mcp
 {
     public class Vec3
     {
-        public int x
+        public int X
         {
             get;
             set;
         }
-        public int y
+        public int Y
         {
             get;
             set;
         }
-        public int z
+        public int Z
         {
             get;
             set;
