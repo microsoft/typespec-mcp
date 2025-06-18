@@ -16,6 +16,7 @@ namespace Mcp
         /// A new vector that is the sum of the two input vectors.
         /// </returns>
         public Vec3 addVector(Vec3 v1, Vec3 v2);
+
         /// <summary>
         /// Subtracts one vector from another. Use this to find the difference between
         /// two vectors. For example, calculating the direction and distance from one
@@ -27,6 +28,7 @@ namespace Mcp
         /// A new vector that is the difference between the two input vectors.
         /// </returns>
         public Vec3 subVector(Vec3 v1, Vec3 v2);
+
         /// <summary>
         /// Computes the cross product of two vectors. Use this to find a vector that is
         /// perpendicular to both input vectors. This is useful in 3D graphics for
@@ -38,6 +40,7 @@ namespace Mcp
         /// A new vector that is the cross product of the two input vectors.
         /// </returns>
         public Vec3 crossProduct(Vec3 v1, Vec3 v2);
+
         /// <summary>
         /// Computes the dot product of two vectors. Use this to find the scalar
         /// projection of one vector onto another. This is useful for determining angles

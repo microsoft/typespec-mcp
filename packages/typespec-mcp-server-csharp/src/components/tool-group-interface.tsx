@@ -37,7 +37,9 @@ export function ToolGroupInterface({ group }: ToolGroupInterfaceProps) {
           )
         }
       >
-        <For each={group.tools}>{(tool) => <ToolMethod tool={tool} />}</For>
+        <For each={group.tools} doubleHardline>
+          {(tool) => <ToolMethod tool={tool} />}
+        </For>
       </InterfaceDeclaration>
     </List>
   );
