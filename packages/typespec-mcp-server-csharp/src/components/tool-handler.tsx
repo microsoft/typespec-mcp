@@ -66,9 +66,22 @@ function ToolAttributes(props: ToolMethodProps) {
   const { $ } = useTsp();
   return (
     <>
-      [McpServerTool(Name = "{props.tool.id}"), <DescriptionAttribute doc={getDoc($.program, props.tool.originalOp)} />]
+      [<McpServerToolAttribute tool={props.tool} />
+      {", "}
+      <DescriptionAttribute doc={getDoc($.program, props.tool.originalOp)} />]
     </>
   );
+}
+
+function McpServerToolAttribute(props: ToolMethodProps) {
+  const values = [
+    `Name = "${props.tool.id}"`,
+    props.tool.annotations?.destructiveHint && "Destructive = true",
+    props.tool.annotations?.idempotentHint && "Idempotent = true",
+    props.tool.annotations?.openWorldHint && "OpenWorld = true",
+    props.tool.annotations?.readonlyHint && "Readonly = true",
+  ];
+  return `McpServerTool(${values.filter((x) => x).join(", ")})`;
 }
 
 export interface DescriptionAttributeProps {
