@@ -392,6 +392,9 @@ importers:
       typespec-mcp:
         specifier: workspace:*
         version: link:../../packages/typespec-mcp
+      typespec-mcp-http-server-csharp:
+        specifier: workspace:*
+        version: link:../../packages/typespec-mcp-http-server-csharp
       typespec-mcp-http-server-js:
         specifier: workspace:*
         version: link:../../packages/typespec-mcp-http-server-js

@@ -1,0 +1,4 @@
+namespace Mcp
+{
+    class GistsHttpBinding;
+}
