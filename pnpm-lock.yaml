@@ -197,6 +197,49 @@ importers:
         specifier: 'catalog:'
         version: 3.5.3
 
+  packages/typespec-mcp-http-server-csharp:
+    dependencies:
+      '@alloy-js/core':
+        specifier: ~0.18.0-dev
+        version: 0.18.0-dev.3
+      '@alloy-js/csharp':
+        specifier: ~0.18.0-dev.10
+        version: 0.18.0-dev.10
+      '@typespec/compiler':
+        specifier: 'catalog:'
+        version: 1.1.0(@types/node@22.15.31)
+      '@typespec/emitter-framework':
+        specifier: https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655
+        version: https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0-dev.3)(@alloy-js/csharp@0.18.0-dev.10)(@alloy-js/typescript@0.18.0-dev.4)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31))))
+      '@typespec/http':
+        specifier: 'catalog:'
+        version: 1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31))
+      '@typespec/http-client':
+        specifier: ^0.8.0-dev
+        version: 0.8.0-dev.0(@alloy-js/core@0.18.0-dev.3)(@alloy-js/typescript@0.18.0-dev.4)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/emitter-framework@https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0-dev.3)(@alloy-js/csharp@0.18.0-dev.10)(@alloy-js/typescript@0.18.0-dev.4)(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))(@typespec/rest@0.70.0(@typespec/compiler@1.1.0(@types/node@22.15.31))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.31)))
+      typespec-mcp:
+        specifier: workspace:*
+        version: link:../typespec-mcp
+      typespec-mcp-server-csharp:
+        specifier: workspace:*
+        version: link:../typespec-mcp-server-csharp
+    devDependencies:
+      '@alloy-js/cli':
+        specifier: 'catalog:'
+        version: 0.17.0
+      '@alloy-js/rollup-plugin':
+        specifier: 'catalog:'
+        version: 0.1.0(@babel/core@7.27.4)(rollup@4.42.0)
+      '@types/node':
+        specifier: 'catalog:'
+        version: 22.15.31
+      concurrently:
+        specifier: 'catalog:'
+        version: 9.1.2
+      vitest:
+        specifier: 'catalog:'
+        version: 3.2.3(@types/node@22.15.31)(yaml@2.7.1)
+
   packages/typespec-mcp-http-server-js:
     dependencies:
       '@alloy-js/core':

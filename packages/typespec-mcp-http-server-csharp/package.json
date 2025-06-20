@@ -1,5 +1,5 @@
 {
-  "name": "typespec-mcp-http-server-js",
+  "name": "typespec-mcp-http-server-csharp",
   "version": "0.0.0-0",
   "description": "",
   "exports": {
@@ -14,17 +14,15 @@
   },
   "dependencies": {
     "typespec-mcp": "workspace:*",
-    "typespec-mcp-server-js": "workspace:*",
-    "typespec-zod": "catalog:"
+    "typespec-mcp-server-csharp": "workspace:*"
   },
   "peerDependencies": {
     "@alloy-js/core": "catalog:",
-    "@alloy-js/typescript": "catalog:",
+    "@alloy-js/csharp": "catalog:",
     "@typespec/compiler": "catalog:",
     "@typespec/http": "catalog:",
     "@typespec/emitter-framework": "catalog:",
-    "@typespec/http-client": "catalog:",
-    "@typespec/http-client-js": "catalog:"
+    "@typespec/http-client": "catalog:"
   },
   "scripts": {
     "build": "alloy build",
