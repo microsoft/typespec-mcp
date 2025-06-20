@@ -1,4 +1,4 @@
-import { For } from "@alloy-js/core";
+import { For, refkey, type Refkey } from "@alloy-js/core";
 import { SourceFile } from "@alloy-js/csharp";
 import type { Model, ModelProperty, Program, Type } from "@typespec/compiler";
 import { unsafe_mutateSubgraph } from "@typespec/compiler/experimental";
@@ -22,11 +22,21 @@ export function Models() {
   );
 }
 
+const refKeyPrefix = Symbol.for("emitter-framework:csharp");
+
+// Copy https://github.com/microsoft/typespec/issues/7700
+export function efRefkey(...args: unknown[]): Refkey {
+  if (args.length === 0) {
+    return refkey(); // Generates a unique refkey
+  }
+  return refkey(refKeyPrefix, ...args);
+}
+
 export function Model(props: { type: Type }) {
   const { program } = useTsp();
   switch (props.type.kind) {
     case "Model":
-      return <ClassDeclaration public refKey={efRefkey(props.type)} type={cleanModel(program, props.type)} />;
+      return <ClassDeclaration public refkey={efRefkey(props.type)} type={cleanModel(program, props.type)} />;
     default:
       reportDiagnostic(program, { code: "unsupported-type", format: { kind: props.type.kind }, target: props.type });
       return <></>;

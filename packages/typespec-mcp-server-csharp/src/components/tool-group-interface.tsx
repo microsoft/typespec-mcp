@@ -66,7 +66,7 @@ function ToolMethod(props: ToolMethodProps) {
         name={props.tool.originalOp.name + "Async"}
         public
         parameters={parameters}
-        returns={code`Task<${(<TypeExpression type={props.tool.originalOp.returnType} />)}>`}
+        returns={code`Task<${(<TypeExpression type={props.tool.implementationOp.returnType} />)}>`}
         doc={<ToolDoc tool={props.tool} />}
       />
     </List>
