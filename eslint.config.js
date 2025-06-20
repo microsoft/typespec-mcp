@@ -15,6 +15,8 @@ export default tsEslint.config(
       "eslint.config.js",
       "**/templates/**/*",
       "**/tsp-output/**/*",
+      "vitest.*.ts",
+      "packages/*/vitest.config.ts",
     ],
   },
   eslint.configs.recommended,
@@ -24,8 +26,6 @@ export default tsEslint.config(
       parserOptions: {
         projectService: {
           allowDefaultProject: [
-            "vitest.*.ts",
-            "packages/*/vitest.config.ts",
             ".github/workflows/set-prerelease-version.mjs",
             "packages/mcp-server-typespec/cmd/cli.js",
           ],
