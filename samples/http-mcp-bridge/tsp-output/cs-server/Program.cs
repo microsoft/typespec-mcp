@@ -15,7 +15,7 @@ namespace Mcp
                 consoleLogOptions.LogToStandardErrorThreshold = LogLevel.Trace;
             });
 
-            builder.Services.AddSingleton<IGist, GistsHttpBinding>();
+            builder.Services.AddSingleton<IGists, GistsHttpBinding>();
 
             builder.Services
                 .AddMcpServer()

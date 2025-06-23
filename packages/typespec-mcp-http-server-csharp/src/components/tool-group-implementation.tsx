@@ -14,7 +14,7 @@ export function ToolGroupImplementation(props: ToolGroupImplementationProps) {
   return (
     <List>
       <UsingDirective namespaces={["System.ClientModel.Primitives"]} />
-      <ClassDeclaration name={`${props.group.name}HttpBinding`}>
+      <ClassDeclaration name={`${props.group.name}HttpBinding`} interfaceTypes={[`I${props.group.name}`]} public>
         <For each={props.group.tools} doubleHardline>
           {(tool) => <ToolMethod tool={tool} />}
         </For>
@@ -62,7 +62,7 @@ function ToolMethod(props: ToolMethodProps) {
       >
         {code`
             HttpClientPipelineTransport transport = new(new HttpClient());
-            var uriParams = ${(<UriParams httpOp={httpOp} />)}
+            var uriParams = ${(<UriParams httpOp={httpOp} />)};
             var uri = Std.UriTemplate.Expand("${uri}", uriParams);
             using PipelineMessage message = transport.CreateMessage();
             message.Request.Method = "GET";
@@ -90,7 +90,9 @@ function UriParams(props: { httpOp: HttpOperation }) {
     <List>
       {`new Dictionary<string, object?>`}
       <Block newline>
-        <For each={params}>{(param) => <Block>{code`{ "${param.options.name}", ${param.property.name} }`}</Block>}</For>
+        <For each={params}>
+          {(param) => <Block inline>{code`"${param.options.name}", ${param.property.name}`}</Block>}
+        </For>
       </Block>
     </List>
   );

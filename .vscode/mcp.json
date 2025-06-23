@@ -8,9 +8,16 @@
     }
   ],
   "servers": {
-    "TypeSpec MPC": {
+    "TypeSpec Github JS": {
       "command": "node",
-      "args": ["${workspaceFolder}/samples/http-mcp-bridge/dist/tsp-output/server/main.js"],
+      "args": ["${workspaceFolder}/samples/http-mcp-bridge/dist/tsp-output/js-server/main.js"],
+      "env": {
+        "APIKEY": "Bearer ${input:githubToken}"
+      }
+    },
+    "Sample: Github CS": {
+      "command": "node",
+      "args": ["${workspaceFolder}/samples/http-mcp-bridge/dist/tsp-output/cs-server/main.js"],
       "env": {
         "APIKEY": "Bearer ${input:githubToken}"
       }
