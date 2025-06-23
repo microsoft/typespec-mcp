@@ -1,9 +1,10 @@
-import { code, For, List } from "@alloy-js/core";
-import { ClassDeclaration, ClassMethod, useCSharpNamePolicy } from "@alloy-js/csharp";
+import { Block, code, For, List } from "@alloy-js/core";
+import { ClassDeclaration, ClassMethod, UsingDirective } from "@alloy-js/csharp";
 import type { Operation } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";
 import { TypeExpression } from "@typespec/emitter-framework/csharp";
-import type { ToolDescriptor, ToolGroup } from "typespec-mcp-server-csharp";
+import { getServers, type HttpOperation } from "@typespec/http";
+import { useMCPServerContext, type ToolDescriptor, type ToolGroup } from "typespec-mcp-server-csharp";
 
 interface ToolGroupImplementationProps {
   group: ToolGroup; // Replace 'any' with a more specific type if available
@@ -11,11 +12,14 @@ interface ToolGroupImplementationProps {
 
 export function ToolGroupImplementation(props: ToolGroupImplementationProps) {
   return (
-    <ClassDeclaration name={`${props.group.name}HttpBinding`}>
-      <For each={props.group.tools} doubleHardline>
-        {(tool) => <ToolMethod tool={tool} />}
-      </For>
-    </ClassDeclaration>
+    <List>
+      <UsingDirective namespaces={["System.ClientModel.Primitives"]} />
+      <ClassDeclaration name={`${props.group.name}HttpBinding`}>
+        <For each={props.group.tools} doubleHardline>
+          {(tool) => <ToolMethod tool={tool} />}
+        </For>
+      </ClassDeclaration>
+    </List>
   );
 }
 
@@ -34,8 +38,19 @@ function ToolMethod(props: ToolMethodProps) {
     }),
     { name: "cancellationToken", type: "CancellationToken", required: false },
   ];
+  const mcpContext = useMCPServerContext();
+  const server = mcpContext.server;
 
-  const policy = useCSharpNamePolicy();
+  if (server === undefined || server.container === undefined || server.container.kind !== "Namespace") {
+    throw new Error("Expected to be an http server too");
+  }
+  const { $ } = useTsp();
+  const httpOp = $.httpOperation.get(props.tool.originalOp);
+
+  const servers = getServers($.program, server.container);
+  const host = servers![0];
+  const uri = `${host.url}${httpOp.uriTemplate}`;
+
   return (
     <List>
       <ClassMethod
@@ -47,10 +62,11 @@ function ToolMethod(props: ToolMethodProps) {
       >
         {code`
             HttpClientPipelineTransport transport = new(new HttpClient());
-
+            var uriParams = ${(<UriParams httpOp={httpOp} />)}
+            var uri = Std.UriTemplate.Expand("${uri}", uriParams);
             using PipelineMessage message = transport.CreateMessage();
             message.Request.Method = "GET";
-            message.Request.Uri = new Uri("/gists");
+            message.Request.Uri = new Uri(uri);
 
             await transport.ProcessAsync(message);
 
@@ -64,6 +80,18 @@ function ToolMethod(props: ToolMethodProps) {
             return result;
         `}
       </ClassMethod>
+    </List>
+  );
+}
+
+function UriParams(props: { httpOp: HttpOperation }) {
+  const params = props.httpOp.parameters.properties.filter((p) => p.kind === "path" || p.kind === "query");
+  return (
+    <List>
+      {`new Dictionary<string, object?>`}
+      <Block newline>
+        <For each={params}>{(param) => <Block>{code`{ "${param.options.name}", ${param.property.name} }`}</Block>}</For>
+      </Block>
     </List>
   );
 }

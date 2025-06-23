@@ -20,6 +20,8 @@ export function Csproj() {
         <ItemGroup>
             <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.6" />
             <PackageReference Include="ModelContextProtocol" Version="0.2.0-preview.3" />
+            <PackageReference Include="System.ClientModel" Version="1.5.0-beta.1" />
+            <PackageReference Include="Std.UriTemplate" Version="2.0.5" />
         </ItemGroup>
     </Project>
     `;

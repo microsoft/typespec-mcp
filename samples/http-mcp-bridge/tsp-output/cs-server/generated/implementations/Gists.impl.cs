@@ -1,14 +1,22 @@
 namespace Mcp
 {
+    using System.ClientModel.Primitives;
     class GistsHttpBinding
     {
         public async Task<Gist[]> ListAsync(DateTimeOffset since, CancellationToken cancellationToken)
         {
             HttpClientPipelineTransport transport = new(new HttpClient());
+            var uriParams = new Dictionary<string, object?>
 
+            {
+                {
+                    { "since", since }
+                }
+            }
+            var uri = Std.UriTemplate.Expand("https://api.github.com/gists{?since}", uriParams);
             using PipelineMessage message = transport.CreateMessage();
             message.Request.Method = "GET";
-            message.Request.Uri = new Uri("/gists");
+            message.Request.Uri = new Uri(uri);
 
             await transport.ProcessAsync(message);
 
