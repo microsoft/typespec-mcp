@@ -1,14 +1,16 @@
 namespace Mcp
 {
+    using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
     using ModelContextProtocol.Server;
-    using System.ComponentModel;public class Program
+    using System.ComponentModel;
+    public class Program
     {
         public static async Task Main()
         {
-            var builder = Host.CreateApplicationBuilder();
+            var builder = WebApplication.CreateBuilder();
             builder.Logging.AddConsole(consoleLogOptions =>
             {
                 // Configure all logs to go to stderr
@@ -19,9 +21,13 @@ namespace Mcp
 
             builder.Services
                 .AddMcpServer()
-                .WithStdioServerTransport()
+                .WithHttpTransport()
                 .WithToolsFromAssembly();
-            await builder.Build().RunAsync();
+            var app = builder.Build();
+
+            app.MapMcp();
+
+            app.Run("http://localhost:3001");
         }
     }
 }
