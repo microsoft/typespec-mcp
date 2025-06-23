@@ -1,7 +1,5 @@
 namespace Mcp
 {
-    using System.ClientModel.Primitives;
-
     class GistsHttpBinding
     {
         public async Task<Gist[]> ListAsync(DateTimeOffset since, CancellationToken cancellationToken)
