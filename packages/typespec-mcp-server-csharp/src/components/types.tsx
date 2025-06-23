@@ -61,7 +61,6 @@ function cleanModel(program: Program, type: Model): Model {
           clone.type = nonNullVariant.type;
           return clone;
         } else {
-          console.log("HERe");
           return $(program).intrinsic.any;
         }
       }
