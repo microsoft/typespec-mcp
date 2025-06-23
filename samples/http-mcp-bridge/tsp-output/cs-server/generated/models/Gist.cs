@@ -42,7 +42,7 @@ namespace Mcp
         /// <summary>
         /// Description of the gist
         /// </summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
         /// <summary>
         /// Number of comments
         /// </summary>
@@ -50,11 +50,11 @@ namespace Mcp
         /// <summary>
         /// The gist owner (user)
         /// </summary>
-        public <Unresolved Symbol> User { get; set; }
+        public Owner? User { get; set; }
         /// <summary>
         /// Files in the gist
         /// </summary>
-        public IDictionary<string, <Unresolved Symbol>> Files { get; set; }
+        public IDictionary<string, GistFile> Files { get; set; }
         /// <summary>
         /// Creation timestamp
         /// </summary>
@@ -66,7 +66,7 @@ namespace Mcp
         /// <summary>
         /// Owner of the gist
         /// </summary>
-        public <Unresolved Symbol> Owner { get; set; }
+        public Owner Owner { get; set; }
         /// <summary>
         /// Whether comments are enabled
         /// </summary>

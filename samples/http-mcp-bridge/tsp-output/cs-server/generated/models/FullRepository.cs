@@ -25,7 +25,7 @@ namespace Mcp
         /// <summary>
         /// The owner of the repository
         /// </summary>
-        public <Unresolved Symbol> Owner { get; set; }
+        public Owner Owner { get; set; }
         /// <summary>
         /// Whether the repository is private or public
         /// </summary>
@@ -37,7 +37,7 @@ namespace Mcp
         /// <summary>
         /// Description of the repository
         /// </summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
         /// <summary>
         /// Whether the repository is a fork
         /// </summary>
@@ -201,7 +201,7 @@ namespace Mcp
         /// <summary>
         /// Mirror URL of the repository
         /// </summary>
-        public string MirrorUrl { get; set; }
+        public string? MirrorUrl { get; set; }
         /// <summary>
         /// URL for accessing the repository's hooks
         /// </summary>
@@ -213,11 +213,11 @@ namespace Mcp
         /// <summary>
         /// Homepage URL of the repository
         /// </summary>
-        public string Homepage { get; set; }
+        public string? Homepage { get; set; }
         /// <summary>
         /// Primary language of the repository
         /// </summary>
-        public string Language { get; set; }
+        public string? Language { get; set; }
         /// <summary>
         /// Number of forks of the repository
         /// </summary>
@@ -297,6 +297,6 @@ namespace Mcp
         /// <summary>
         /// License information of the repository
         /// </summary>
-        public <Unresolved Symbol> License { get; set; }
+        public License License { get; set; }
     }
 }

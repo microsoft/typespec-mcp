@@ -17,6 +17,6 @@ namespace Mcp
         /// <summary>
         /// URL of the license
         /// </summary>
-        public string Url { get; set; }
+        public string? Url { get; set; }
     }
 }
