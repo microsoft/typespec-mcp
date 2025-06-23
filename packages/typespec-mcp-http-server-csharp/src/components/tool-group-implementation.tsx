@@ -1,5 +1,5 @@
 import { Block, code, For, List } from "@alloy-js/core";
-import { ClassDeclaration, ClassMethod, UsingDirective } from "@alloy-js/csharp";
+import { ClassDeclaration, ClassMethod, UsingDirective, type ParameterProps } from "@alloy-js/csharp";
 import type { Operation } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";
 import { TypeExpression } from "@typespec/emitter-framework/csharp";
@@ -28,15 +28,15 @@ export interface ToolMethodProps {
 }
 
 function ToolMethod(props: ToolMethodProps) {
-  const parameters = [
+  const parameters: ParameterProps[] = [
     ...[...props.tool.originalOp.parameters.properties.values()].map((p) => {
       return {
         name: p.name,
         type: <TypeExpression type={p.type} />,
-        required: !p.optional,
+        optional: p.optional,
       };
     }),
-    { name: "cancellationToken", type: "CancellationToken", required: false },
+    { name: "cancellationToken", type: "CancellationToken", default: "default" },
   ];
   const mcpContext = useMCPServerContext();
   const server = mcpContext.server;

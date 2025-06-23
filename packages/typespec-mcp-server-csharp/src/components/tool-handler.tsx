@@ -9,9 +9,8 @@ import {
 } from "@alloy-js/csharp";
 import { getDoc } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";
-import { TypeExpression } from "@typespec/emitter-framework/csharp";
 import type { ToolDescriptor, ToolGroup } from "../context/utils/tool-descriptor.js";
-import { getToolGroupInferfaceRefkey, ReturnTypeExpression } from "./tool-group-interface.jsx";
+import { getToolGroupInferfaceRefkey, getToolParameters, ReturnTypeExpression } from "./tool-group-interface.jsx";
 
 export interface ToolGroupHandlerProps {
   group: ToolGroup;
@@ -45,17 +44,7 @@ export interface ToolMethodProps {
 }
 
 function ToolMethod(props: ToolMethodProps) {
-  const parameters = [
-    ...[...props.tool.originalOp.parameters.properties.values()].map((p) => {
-      return {
-        name: p.name,
-        type: <TypeExpression type={p.type} />,
-        required: !p.optional,
-      };
-    }),
-    { name: "cancellationToken", type: "CancellationToken", required: false },
-  ];
-
+  const parameters = getToolParameters(props.tool);
   const policy = useCSharpNamePolicy();
   const name = policy.getName(props.tool.originalOp.name + "Async", "class-method");
   return (

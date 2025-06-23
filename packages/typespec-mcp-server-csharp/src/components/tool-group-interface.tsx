@@ -6,6 +6,7 @@ import {
   DocSummary,
   InterfaceDeclaration,
   InterfaceMethod,
+  type ParameterProps,
 } from "@alloy-js/csharp";
 import type { Operation } from "@typespec/compiler";
 import { getReturnsDoc } from "@typespec/compiler";
@@ -50,17 +51,25 @@ export interface ToolMethodProps {
   tool: ToolDescriptor;
 }
 
-function ToolMethod(props: ToolMethodProps) {
-  const parameters = [
-    ...[...props.tool.originalOp.parameters.properties.values()].map((p) => {
+export function getToolParameters(tool: ToolDescriptor): ParameterProps[] {
+  return [
+    ...[...tool.originalOp.parameters.properties.values()].map((p) => {
       return {
         name: p.name,
         type: <TypeExpression type={p.type} />,
-        required: !p.optional,
+        optional: p.optional,
       };
     }),
-    { name: "cancellationToken", type: "CancellationToken", required: false },
+    {
+      name: "cancellationToken",
+      type: "CancellationToken",
+      default: "default",
+    },
   ];
+}
+
+function ToolMethod(props: ToolMethodProps) {
+  const parameters: ParameterProps[] = getToolParameters(props.tool);
   return (
     <List>
       <InterfaceMethod

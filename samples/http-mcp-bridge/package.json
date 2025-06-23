@@ -32,7 +32,8 @@
     "build": "pnpm build:tsp && pnpm build:ts && pnpm build:cs",
     "mcp": "mcp-cli node dist/src/mcp-server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "inspect": "mcp-inspector node ./dist/tsp-output/cs-server/main.js"
+    "inspect:ts": "mcp-inspector node ./dist/tsp-output/cs-server/main.js",
+    "inspect:cs": "mcp-inspector dotnet run --project ./tsp-output/cs-server/Mcp.csproj"
   },
   "keywords": [],
   "author": "",
