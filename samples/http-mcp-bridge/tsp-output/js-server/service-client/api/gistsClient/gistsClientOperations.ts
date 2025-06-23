@@ -2,7 +2,7 @@ import { parse } from "uri-template";
 import { GistsClientContext } from "./gistsClientContext.js";
 import { createRestError } from "../../helpers/error.js";
 import type { OperationOptions } from "../../helpers/interfaces.js";
-import { dateRfc3339Serializer, jsonArrayGistToApplicationTransform, jsonArrayUnknownToApplicationTransform, jsonCreateGistToTransportTransform, jsonGistToApplicationTransform } from "../../models/internal/serializers.js";
+import { dateRfc3339Serializer, jsonArrayGistToApplicationTransform, jsonCreateGistToTransportTransform, jsonGistToApplicationTransform } from "../../models/internal/serializers.js";
 import { CreateGist, Gist } from "../../models/models.js";
 
 export interface ListOptions extends OperationOptions {
@@ -246,81 +246,11 @@ export async function delete_(
   throw createRestError(response);
 }
 ;
-export interface ListCommitsOptions extends OperationOptions {
-
-}
-/**
- * List gist commits
- *
- * @param {GistsClientContext} client
- * @param {string} id
- * @param {ListCommitsOptions} [options]
- */
-export async function listCommits(
-  client: GistsClientContext,
-  id: string,
-  options?: ListCommitsOptions,
-): Promise<Array<unknown>> {
-  const path = parse("/gists/{id}/commits").expand({
-    id: id
-  });
-  const httpRequestOptions = {
-    headers: {
-
-    },
-  };
-  const response = await client.pathUnchecked(path).get(httpRequestOptions);
-
-  ;
-  if (typeof options?.operationOptions?.onResponse === "function") {
-    options?.operationOptions?.onResponse(response);
-  }
-  if (+response.status === 200 && response.headers["content-type"]?.includes("application/json")) {
-    return jsonArrayUnknownToApplicationTransform(response.body)!;
-  }
-  throw createRestError(response);
-}
-;
-export interface ListForksOptions extends OperationOptions {
-
-}
-/**
- * List gist forks
- *
- * @param {GistsClientContext} client
- * @param {string} id
- * @param {ListForksOptions} [options]
- */
-export async function listForks(
-  client: GistsClientContext,
-  id: string,
-  options?: ListForksOptions,
-): Promise<Array<unknown>> {
-  const path = parse("/gists/{id}/forks").expand({
-    id: id
-  });
-  const httpRequestOptions = {
-    headers: {
-
-    },
-  };
-  const response = await client.pathUnchecked(path).get(httpRequestOptions);
-
-  ;
-  if (typeof options?.operationOptions?.onResponse === "function") {
-    options?.operationOptions?.onResponse(response);
-  }
-  if (+response.status === 200 && response.headers["content-type"]?.includes("application/json")) {
-    return jsonArrayUnknownToApplicationTransform(response.body)!;
-  }
-  throw createRestError(response);
-}
-;
 export interface ForkOptions extends OperationOptions {
 
 }
 /**
- * Fork a gist
+ * List gist commitsList gist forksFork a gist
  *
  * @param {GistsClientContext} client
  * @param {string} id

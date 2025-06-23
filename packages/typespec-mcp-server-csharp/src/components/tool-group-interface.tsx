@@ -7,6 +7,7 @@ import {
   InterfaceDeclaration,
   InterfaceMethod,
 } from "@alloy-js/csharp";
+import type { Operation } from "@typespec/compiler";
 import { getReturnsDoc } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";
 import { TypeExpression } from "@typespec/emitter-framework/csharp";
@@ -66,11 +67,19 @@ function ToolMethod(props: ToolMethodProps) {
         name={props.tool.originalOp.name + "Async"}
         public
         parameters={parameters}
-        returns={code`Task<${(<TypeExpression type={props.tool.implementationOp.returnType} />)}>`}
+        returns={code`Task<${(<ReturnTypeExpression op={props.tool.implementationOp} />)}>`}
         doc={<ToolDoc tool={props.tool} />}
       />
     </List>
   );
+}
+
+export function ReturnTypeExpression(props: { op: Operation }) {
+  const { $ } = useTsp();
+  if (props.op.returnType === $.intrinsic.void) {
+    return "Task";
+  }
+  return <TypeExpression type={props.op.returnType} />;
 }
 
 function ToolDoc(props: ToolMethodProps) {

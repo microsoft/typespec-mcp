@@ -29,12 +29,6 @@ export async function httpToolHandler(tool: string, data: any) {
     case "gists_delete":
       return implementations.gists_delete(data)
 
-    case "gists_list_commits":
-      return implementations.gists_list_commits(data)
-
-    case "gists_list_forks":
-      return implementations.gists_list_forks(data)
-
     case "gists_fork":
       return implementations.gists_fork(data)
 
@@ -241,56 +235,6 @@ export const implementations = {
     let rawResponse: PathUncheckedResponse | undefined = undefined;
     try {
       await client.delete_(
-        data["id"],
-        {
-          operationOptions: { onResponse: (response) => (rawResponse = response) }
-        }
-      )
-    } catch(error) {
-      return handleApiCallError(error);
-    }
-    return handleRawResponse(rawResponse);;
-  },
-  gists_list_commits: async function gists_list_commits(
-    data: {
-        id: string;
-      },
-  ) {
-    const credential = {
-      key: process.env.APIKEY ?? "UNKNOWN"
-    };
-    const client = new GistsClient(
-      credential,
-      { allowInsecureConnection: true }
-    );
-    let rawResponse: PathUncheckedResponse | undefined = undefined;
-    try {
-      await client.listCommits(
-        data["id"],
-        {
-          operationOptions: { onResponse: (response) => (rawResponse = response) }
-        }
-      )
-    } catch(error) {
-      return handleApiCallError(error);
-    }
-    return handleRawResponse(rawResponse);;
-  },
-  gists_list_forks: async function gists_list_forks(
-    data: {
-        id: string;
-      },
-  ) {
-    const credential = {
-      key: process.env.APIKEY ?? "UNKNOWN"
-    };
-    const client = new GistsClient(
-      credential,
-      { allowInsecureConnection: true }
-    );
-    let rawResponse: PathUncheckedResponse | undefined = undefined;
-    try {
-      await client.listForks(
         data["id"],
         {
           operationOptions: { onResponse: (response) => (rawResponse = response) }

@@ -1,111 +1,79 @@
 namespace Mcp
 {
+    /// <summary>
+    /// Base Gist
+    /// </summary>
     public class Gist
     {
-        public string Id
-        {
-            get;
-            set;
-        }
-        public string NodeId
-        {
-            get;
-            set;
-        }
-        public string Url
-        {
-            get;
-            set;
-        }
-        public string ForksUrl
-        {
-            get;
-            set;
-        }
-        public string CommitsUrl
-        {
-            get;
-            set;
-        }
-        public string GitPullUrl
-        {
-            get;
-            set;
-        }
-        public string GitPushUrl
-        {
-            get;
-            set;
-        }
-        public string HtmlUrl
-        {
-            get;
-            set;
-        }
-        public string CommentsUrl
-        {
-            get;
-            set;
-        }
-        public bool Public
-        {
-            get;
-            set;
-        }
-        public string Description
-        {
-            get;
-            set;
-        }
-        public int Comments
-        {
-            get;
-            set;
-        }
-        public <Unresolved Symbol> User
-        {
-            get;
-            set;
-        }
-        public object Files
-        {
-            get;
-            set;
-        }
-        public string CreatedAt
-        {
-            get;
-            set;
-        }
-        public string UpdatedAt
-        {
-            get;
-            set;
-        }
-        public <Unresolved Symbol> Owner
-        {
-            get;
-            set;
-        }
-        public bool CommentsEnabled
-        {
-            get;
-            set;
-        }
-        public bool Truncated
-        {
-            get;
-            set;
-        }
-        public object Forks
-        {
-            get;
-            set;
-        }
-        public object History
-        {
-            get;
-            set;
-        }
+        public string Id { get; set; }
+        public string NodeId { get; set; }
+        /// <summary>
+        /// URL of the gist
+        /// </summary>
+        public string Url { get; set; }
+        /// <summary>
+        /// API URL for forks
+        /// </summary>
+        public string ForksUrl { get; set; }
+        /// <summary>
+        /// API URL for commits
+        /// </summary>
+        public string CommitsUrl { get; set; }
+        /// <summary>
+        /// Git pull URL
+        /// </summary>
+        public string GitPullUrl { get; set; }
+        /// <summary>
+        /// Git push URL
+        /// </summary>
+        public string GitPushUrl { get; set; }
+        /// <summary>
+        /// HTML URL of the gist
+        /// </summary>
+        public string HtmlUrl { get; set; }
+        /// <summary>
+        /// API URL for comments
+        /// </summary>
+        public string CommentsUrl { get; set; }
+        /// <summary>
+        /// Whether the gist is public
+        /// </summary>
+        public bool Public { get; set; }
+        /// <summary>
+        /// Description of the gist
+        /// </summary>
+        public string Description { get; set; }
+        /// <summary>
+        /// Number of comments
+        /// </summary>
+        public int Comments { get; set; }
+        /// <summary>
+        /// The gist owner (user)
+        /// </summary>
+        public <Unresolved Symbol> User { get; set; }
+        /// <summary>
+        /// Files in the gist
+        /// </summary>
+        public IDictionary<string, <Unresolved Symbol>> Files { get; set; }
+        /// <summary>
+        /// Creation timestamp
+        /// </summary>
+        public string CreatedAt { get; set; }
+        /// <summary>
+        /// Last update timestamp
+        /// </summary>
+        public string UpdatedAt { get; set; }
+        /// <summary>
+        /// Owner of the gist
+        /// </summary>
+        public <Unresolved Symbol> Owner { get; set; }
+        /// <summary>
+        /// Whether comments are enabled
+        /// </summary>
+        public bool CommentsEnabled { get; set; }
+        /// <summary>
+        /// Whether the gist is truncated
+        /// </summary>
+        public bool Truncated { get; set; }
     }
 }

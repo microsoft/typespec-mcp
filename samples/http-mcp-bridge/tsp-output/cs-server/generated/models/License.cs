@@ -2,25 +2,21 @@ namespace Mcp
 {
     public class License
     {
-        public string Key
-        {
-            get;
-            set;
-        }
-        public string Name
-        {
-            get;
-            set;
-        }
-        public string SpdxId
-        {
-            get;
-            set;
-        }
-        public string Url
-        {
-            get;
-            set;
-        }
+        /// <summary>
+        /// Key of the license
+        /// </summary>
+        public string Key { get; set; }
+        /// <summary>
+        /// Name of the license
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// SPDX ID of the license
+        /// </summary>
+        public string SpdxId { get; set; }
+        /// <summary>
+        /// URL of the license
+        /// </summary>
+        public string Url { get; set; }
     }
 }

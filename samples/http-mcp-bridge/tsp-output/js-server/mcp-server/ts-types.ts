@@ -425,14 +425,6 @@ export interface Gist {
    * Whether the gist is truncated
    */
   truncated?: boolean;
-  /**
-   * Forks of the gist
-   */
-  forks?: Array<unknown>;
-  /**
-   * History of the gist
-   */
-  history?: Array<unknown>;
 }
 
 export interface GistArray extends Array<Gist> {
@@ -450,13 +442,5 @@ export interface GistArray_2 extends Array<Gist> {
 }
 
 export interface GistArray_3 extends Array<Gist> {
-
-}
-
-export interface UnknownArray extends Array<unknown> {
-
-}
-
-export interface UnknownArray_2 extends Array<unknown> {
 
 }

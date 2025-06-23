@@ -90,14 +90,14 @@ export function decodeBase64(value: string): Uint8Array | undefined {
     return input_ as any;
   }
     return {
-    id: input_.id,node_id: input_.nodeId,url: input_.url,forks_url: input_.forksUrl,commits_url: input_.commitsUrl,git_pull_url: input_.gitPullUrl,git_push_url: input_.gitPushUrl,html_url: input_.htmlUrl,comments_url: input_.commentsUrl,public: input_.public_,description: input_.description,comments: input_.comments,user: jsonOwnerToTransportTransform(input_.user),files: jsonRecordGistFileToTransportTransform(input_.files),created_at: input_.createdAt,updated_at: input_.updatedAt,owner: jsonOwnerToTransportTransform(input_.owner),comments_enabled: input_.commentsEnabled,truncated: input_.truncated,forks: jsonArrayUnknownToTransportTransform(input_.forks),history: jsonArrayUnknownToTransportTransform(input_.history)
+    id: input_.id,node_id: input_.nodeId,url: input_.url,forks_url: input_.forksUrl,commits_url: input_.commitsUrl,git_pull_url: input_.gitPullUrl,git_push_url: input_.gitPushUrl,html_url: input_.htmlUrl,comments_url: input_.commentsUrl,public: input_.public_,description: input_.description,comments: input_.comments,user: jsonOwnerToTransportTransform(input_.user),files: jsonRecordGistFileToTransportTransform(input_.files),created_at: input_.createdAt,updated_at: input_.updatedAt,owner: jsonOwnerToTransportTransform(input_.owner),comments_enabled: input_.commentsEnabled,truncated: input_.truncated
   }!;
 }export function jsonGistToApplicationTransform(input_?: any): Gist {
   if(!input_) {
     return input_ as any;
   }
     return {
-    id: input_.id,nodeId: input_.node_id,url: input_.url,forksUrl: input_.forks_url,commitsUrl: input_.commits_url,gitPullUrl: input_.git_pull_url,gitPushUrl: input_.git_push_url,htmlUrl: input_.html_url,commentsUrl: input_.comments_url,public_: input_.public,description: input_.description,comments: input_.comments,user: jsonOwnerToApplicationTransform(input_.user),files: jsonRecordGistFileToApplicationTransform(input_.files),createdAt: input_.created_at,updatedAt: input_.updated_at,owner: jsonOwnerToApplicationTransform(input_.owner),commentsEnabled: input_.comments_enabled,truncated: input_.truncated,forks: jsonArrayUnknownToApplicationTransform(input_.forks),history: jsonArrayUnknownToApplicationTransform(input_.history)
+    id: input_.id,nodeId: input_.node_id,url: input_.url,forksUrl: input_.forks_url,commitsUrl: input_.commits_url,gitPullUrl: input_.git_pull_url,gitPushUrl: input_.git_push_url,htmlUrl: input_.html_url,commentsUrl: input_.comments_url,public_: input_.public,description: input_.description,comments: input_.comments,user: jsonOwnerToApplicationTransform(input_.user),files: jsonRecordGistFileToApplicationTransform(input_.files),createdAt: input_.created_at,updatedAt: input_.updated_at,owner: jsonOwnerToApplicationTransform(input_.owner),commentsEnabled: input_.comments_enabled,truncated: input_.truncated
   }!;
 }export function jsonOwnerToTransportTransform(input_?: Owner | null): any {
   if(!input_) {
@@ -159,34 +159,6 @@ export function decodeBase64(value: string): Uint8Array | undefined {
     return {
     filename: input_.filename,type: input_.type,language: input_.language,rawUrl: input_.raw_url,size: input_.size,encoding: input_.encoding
   }!;
-}export function jsonArrayUnknownToTransportTransform(
-  items_?: Array<unknown> | null,
-): any {
-  if(!items_) {
-    return items_ as any;
-  }
-  const _transformedArray = [];
-
-  for (const item of items_ ?? []) {
-    const transformedItem = item as any;
-    _transformedArray.push(transformedItem);
-  }
-
-  return _transformedArray as any;
-}export function jsonArrayUnknownToApplicationTransform(
-  items_?: any,
-): Array<unknown> {
-  if(!items_) {
-    return items_ as any;
-  }
-  const _transformedArray = [];
-
-  for (const item of items_ ?? []) {
-    const transformedItem = item as any;
-    _transformedArray.push(transformedItem);
-  }
-
-  return _transformedArray as any;
 }export function jsonCreateGistToTransportTransform(
   input_?: CreateGist | null,
 ): any {

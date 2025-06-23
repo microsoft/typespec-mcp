@@ -81,14 +81,6 @@ export interface Gist {
    * Whether the gist is truncated
    */
   truncated?: boolean;
-  /**
-   * Forks of the gist
-   */
-  forks?: Array<unknown>;
-  /**
-   * History of the gist
-   */
-  history?: Array<unknown>;
 }
 /**
  * Boolean with `true` and `false` values.
@@ -145,7 +137,6 @@ export interface GistFile {
   size: number;
   encoding?: string;
 }
-
 export interface CreateGist {
   description: string;
   public_: boolean;

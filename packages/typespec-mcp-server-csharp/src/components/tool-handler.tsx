@@ -11,7 +11,7 @@ import { getDoc } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";
 import { TypeExpression } from "@typespec/emitter-framework/csharp";
 import type { ToolDescriptor, ToolGroup } from "../context/utils/tool-descriptor.js";
-import { getToolGroupInferfaceRefkey } from "./tool-group-interface.jsx";
+import { getToolGroupInferfaceRefkey, ReturnTypeExpression } from "./tool-group-interface.jsx";
 
 export interface ToolGroupHandlerProps {
   group: ToolGroup;
@@ -66,7 +66,7 @@ function ToolMethod(props: ToolMethodProps) {
         name={props.tool.originalOp.name + "Async"}
         public
         parameters={parameters}
-        returns={code`Task<${(<TypeExpression type={props.tool.originalOp.returnType} />)}>`}
+        returns={code`Task<${(<ReturnTypeExpression op={props.tool.implementationOp} />)}>`}
       >
         {code`
           return await this.impl.${name}(${parameters.map((p) => p.name).join(", ")});

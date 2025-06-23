@@ -107,12 +107,12 @@ model Gist {
   /**
    * Forks of the gist
    */
-  forks?: unknown[];
+  // forks?: unknown[];
 
   /**
    * History of the gist
    */
-  history?: unknown[];
+  // history?: unknown[];
 }
 
 model CreateGist {
@@ -155,9 +155,9 @@ interface Gists {
   @route("/{id}")
   delete(@path id: string): void;
   /** List gist commits */
-  @tool @route("/{id}/commits") listCommits(@path id: string): unknown[];
+  // @tool @route("/{id}/commits") listCommits(@path id: string): unknown[];
   /** List gist forks */
-  @tool @route("/{id}/forks") listForks(@path id: string): unknown[];
+  // @tool @route("/{id}/forks") listForks(@path id: string): unknown[];
   /** Fork a gist */
   @tool
   @post

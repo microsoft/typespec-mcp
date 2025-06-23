@@ -264,8 +264,6 @@ export const Gist = z
       .optional()
       .describe("Whether comments are enabled"),
     truncated: z.boolean().optional().describe("Whether the gist is truncated"),
-    forks: z.array(z.unknown()).optional().describe("Forks of the gist"),
-    history: z.array(z.unknown()).optional().describe("History of the gist"),
   })
   .describe("Base Gist");
 
@@ -280,10 +278,6 @@ export const CreateGist = z.object({
 export const GistArray_2 = z.array(Gist.describe("Base Gist"));
 
 export const GistArray_3 = z.array(Gist.describe("Base Gist"));
-
-export const UnknownArray = z.array(z.unknown());
-
-export const UnknownArray_2 = z.array(z.unknown());
 
 export const get_repositoryToolZodSchemas = {
   parameters: z.object({
@@ -348,20 +342,6 @@ export const gists_deleteToolZodSchemas = {
     id: z.string(),
   }),
   returnType: z.void(),
-}
-
-export const gists_list_commitsToolZodSchemas = {
-  parameters: z.object({
-    id: z.string(),
-  }),
-  returnType: UnknownArray,
-}
-
-export const gists_list_forksToolZodSchemas = {
-  parameters: z.object({
-    id: z.string(),
-  }),
-  returnType: UnknownArray_2,
 }
 
 export const gists_forkToolZodSchemas = {
