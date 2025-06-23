@@ -70,7 +70,7 @@ function ToolMethod(props: ToolMethodProps) {
             
             await transport.ProcessAsync(message);
 
-            var result = message.Response!.Content.ToObjectFromJson<Gist[]>();
+            var result = message.Response!.Content.ToObjectFromJson<Gist[]>(new JsonSerializerOptions(JsonSerializerDefaults.Web));
 
             if (result == null)
             {

@@ -1,6 +1,8 @@
 namespace Mcp
 {
     using System.ClientModel.Primitives;
+    using System.Text.Json;
+
     public class GistsHttpBinding : IGists
     {
         public async Task<Gist[]> ListAsync(DateTimeOffset? since, CancellationToken cancellationToken = default)
@@ -18,7 +20,7 @@ namespace Mcp
 
             await transport.ProcessAsync(message);
 
-            var result = message.Response!.Content.ToObjectFromJson<Gist[]>();
+            var result = message.Response!.Content.ToObjectFromJson<Gist[]>(new JsonSerializerOptions(JsonSerializerDefaults.Web));
 
             if (result == null)
             {
