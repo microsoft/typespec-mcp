@@ -1,10 +1,11 @@
-import { Block, code, For, List } from "@alloy-js/core";
+import { code, For, List } from "@alloy-js/core";
 import { ClassDeclaration, ClassMethod, UsingDirective, type ParameterProps } from "@alloy-js/csharp";
 import type { Operation } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";
 import { TypeExpression } from "@typespec/emitter-framework/csharp";
-import { getServers, type HttpOperation } from "@typespec/http";
+import { getServers } from "@typespec/http";
 import { useMCPServerContext, type ToolDescriptor, type ToolGroup } from "typespec-mcp-server-csharp";
+import { UriTemplateSerializer } from "./uri-template-serializer.jsx";
 
 interface ToolGroupImplementationProps {
   group: ToolGroup; // Replace 'any' with a more specific type if available
@@ -49,7 +50,6 @@ function ToolMethod(props: ToolMethodProps) {
 
   const servers = getServers($.program, server.container);
   const host = servers![0];
-  const uri = `${host.url}${httpOp.uriTemplate}`;
 
   return (
     <List>
@@ -62,12 +62,12 @@ function ToolMethod(props: ToolMethodProps) {
       >
         {code`
             HttpClientPipelineTransport transport = new(new HttpClient());
-            var uriParams = ${(<UriParams httpOp={httpOp} />)};
-            var uri = Std.UriTemplate.Expand("${uri}", uriParams);
+            var uri = ${(<UriTemplateSerializer server={host} httpOp={httpOp} />)}
             using PipelineMessage message = transport.CreateMessage();
             message.Request.Method = "GET";
             message.Request.Uri = new Uri(uri);
-
+            message.Request.Headers.Add("User-Agent", "TypeSpec Mcp/Http Bridge Client");
+            
             await transport.ProcessAsync(message);
 
             var result = message.Response!.Content.ToObjectFromJson<Gist[]>();
@@ -80,20 +80,6 @@ function ToolMethod(props: ToolMethodProps) {
             return result;
         `}
       </ClassMethod>
-    </List>
-  );
-}
-
-function UriParams(props: { httpOp: HttpOperation }) {
-  const params = props.httpOp.parameters.properties.filter((p) => p.kind === "path" || p.kind === "query");
-  return (
-    <List>
-      {`new Dictionary<string, object?>`}
-      <Block newline>
-        <For each={params}>
-          {(param) => <Block inline>{code`"${param.options.name}", ${param.property.name}.ToString("o")`}</Block>}
-        </For>
-      </Block>
     </List>
   );
 }

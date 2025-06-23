@@ -6,19 +6,18 @@ namespace Mcp
         public async Task<Gist[]> ListAsync(DateTimeOffset? since, CancellationToken cancellationToken = default)
         {
             HttpClientPipelineTransport transport = new(new HttpClient());
-            var uriParams = new Dictionary<string, object?>
+            var uri = Std.UriTemplate.Expand("https://api.github.com/gists{?since}", new Dictionary<string, object?>
 
             {
                 { "since", since?.ToString("o") }
-            };
-            var uri = Std.UriTemplate.Expand("https://api.github.com/gists{?since}", uriParams);
+            });
             using PipelineMessage message = transport.CreateMessage();
             message.Request.Method = "GET";
             message.Request.Uri = new Uri(uri);
-            message.Request.Headers.Add("User-Agent", "Mcp viber");
+            message.Request.Headers.Add("User-Agent", "TypeSpec Mcp/Http Bridge Client");
+
             await transport.ProcessAsync(message);
 
-            Console.Error.WriteLine($"Response status code: {message.Response!.Content.ToString()}");
             var result = message.Response!.Content.ToObjectFromJson<Gist[]>();
 
             if (result == null)
