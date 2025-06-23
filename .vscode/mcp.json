@@ -16,8 +16,8 @@
       }
     },
     "Sample: Github CS": {
-      "command": "node",
-      "args": ["${workspaceFolder}/samples/http-mcp-bridge/dist/tsp-output/cs-server/main.js"],
+      "command": "dotnet",
+      "args": ["run", "--project", "${workspaceFolder}/samples/http-mcp-bridge/tsp-output/cs-server/Mcp.csproj"],
       "env": {
         "APIKEY": "Bearer ${input:githubToken}"
       }

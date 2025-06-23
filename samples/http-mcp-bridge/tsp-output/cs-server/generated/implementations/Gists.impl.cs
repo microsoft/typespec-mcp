@@ -9,15 +9,16 @@ namespace Mcp
             var uriParams = new Dictionary<string, object?>
 
             {
-                { "since", since }
+                { "since", since?.ToString("o") }
             };
             var uri = Std.UriTemplate.Expand("https://api.github.com/gists{?since}", uriParams);
             using PipelineMessage message = transport.CreateMessage();
             message.Request.Method = "GET";
             message.Request.Uri = new Uri(uri);
-
+            message.Request.Headers.Add("User-Agent", "Mcp viber");
             await transport.ProcessAsync(message);
 
+            Console.Error.WriteLine($"Response status code: {message.Response!.Content.ToString()}");
             var result = message.Response!.Content.ToObjectFromJson<Gist[]>();
 
             if (result == null)

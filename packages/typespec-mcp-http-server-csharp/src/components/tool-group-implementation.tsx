@@ -91,7 +91,7 @@ function UriParams(props: { httpOp: HttpOperation }) {
       {`new Dictionary<string, object?>`}
       <Block newline>
         <For each={params}>
-          {(param) => <Block inline>{code`"${param.options.name}", ${param.property.name}`}</Block>}
+          {(param) => <Block inline>{code`"${param.options.name}", ${param.property.name}.ToString("o")`}</Block>}
         </For>
       </Block>
     </List>
