@@ -1,5 +1,5 @@
 emit:
-  # - typespec-mcp-http-server-js
+  - typespec-mcp-http-server-js
   - typespec-mcp-http-server-csharp
 options:
   typespec-mcp-http-server-js:

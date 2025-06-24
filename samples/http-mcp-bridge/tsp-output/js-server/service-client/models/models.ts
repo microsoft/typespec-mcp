@@ -56,7 +56,7 @@ export interface Gist {
   /**
    * The gist owner (user)
    */
-  user: Owner | null;
+  user: User | null;
   /**
    * Files in the gist
    */
@@ -72,7 +72,7 @@ export interface Gist {
   /**
    * Owner of the gist
    */
-  owner?: Owner;
+  owner?: User;
   /**
    * Whether comments are enabled
    */
@@ -106,7 +106,7 @@ export type Numeric = number;
 /**
  * Github user
  */
-export interface Owner {
+export interface User {
   /**
    * The username of the owner
    */
@@ -142,6 +142,19 @@ export interface CreateGist {
   public_: boolean;
   files: Record<string, GistFile>;
 }
+
+export interface GistCommit {
+  url: string;
+  version: string;
+  user: User | null;
+  changeStatus: ChangeStatus;
+  committedAt: string;
+}
+export interface ChangeStatus {
+  total: number;
+  additions: number;
+  deletions: number;
+}
 /**
  * Full representation of a GitHub repository.
  * This model includes all the details of a repository, such as its owner, visibility, license, and various URLs for accessing its resources.
@@ -166,7 +179,7 @@ export interface FullRepository {
   /**
    * The owner of the repository
    */
-  owner: Owner;
+  owner: User;
   /**
    * Whether the repository is private or public
    */

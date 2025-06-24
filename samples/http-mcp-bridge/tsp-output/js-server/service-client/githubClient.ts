@@ -1,6 +1,6 @@
 import type { ApiKeyCredential } from "@typespec/ts-http-runtime";
 import { createGistsClientContext, type GistsClientContext, type GistsClientOptions } from "./api/gistsClient/gistsClientContext.js";
-import { create, type CreateOptions, delete_, type DeleteOptions, fork, type ForkOptions, get, type GetOptions, isStarred, type IsStarredOptions, list, type ListOptions, listPublic, type ListPublicOptions, listStarred, type ListStarredOptions, star, type StarOptions, unstar, type UnstarOptions, update, type UpdateOptions } from "./api/gistsClient/gistsClientOperations.js";
+import { create, type CreateOptions, delete_, type DeleteOptions, fork, type ForkOptions, get, type GetOptions, isStarred, type IsStarredOptions, list, listCommits, type ListCommitsOptions, listForks, type ListForksOptions, type ListOptions, listPublic, type ListPublicOptions, listStarred, type ListStarredOptions, star, type StarOptions, unstar, type UnstarOptions, update, type UpdateOptions } from "./api/gistsClient/gistsClientOperations.js";
 import { createGithubClientContext, type GithubClientContext, type GithubClientOptions } from "./api/githubClientContext.js";
 import { getRepository, type GetRepositoryOptions } from "./api/githubClientOperations.js";
 import type { CreateGist } from "./models/models.js";
@@ -47,6 +47,12 @@ export class GistsClient {
   };
   async delete_(id: string, options?: DeleteOptions) {
     return delete_(this.#context, id, options);
+  };
+  async listCommits(id: string, options?: ListCommitsOptions) {
+    return listCommits(this.#context, id, options);
+  };
+  async listForks(id: string, options?: ListForksOptions) {
+    return listForks(this.#context, id, options);
   };
   async fork(id: string, options?: ForkOptions) {
     return fork(this.#context, id, options);

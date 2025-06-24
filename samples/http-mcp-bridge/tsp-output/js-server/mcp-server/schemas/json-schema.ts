@@ -1,5 +1,5 @@
 import { zodToJsonSchema } from "zod-to-json-schema";
-import { get_repositoryToolZodSchemas, gists_createToolZodSchemas, gists_deleteToolZodSchemas, gists_forkToolZodSchemas, gists_getToolZodSchemas, gists_is_starredToolZodSchemas, gists_list_publicToolZodSchemas, gists_list_starredToolZodSchemas, gists_listToolZodSchemas, gists_starToolZodSchemas, gists_unstarToolZodSchemas, gists_updateToolZodSchemas } from "./zod.js";
+import { get_repositoryToolZodSchemas, gists_createToolZodSchemas, gists_deleteToolZodSchemas, gists_forkToolZodSchemas, gists_getToolZodSchemas, gists_is_starredToolZodSchemas, gists_list_commitsToolZodSchemas, gists_list_forksToolZodSchemas, gists_list_publicToolZodSchemas, gists_list_starredToolZodSchemas, gists_listToolZodSchemas, gists_starToolZodSchemas, gists_unstarToolZodSchemas, gists_updateToolZodSchemas } from "./zod.js";
 
 export const getRepositoryToolJsonSchemas = {
   parameters: zodToJsonSchema(
@@ -67,6 +67,24 @@ export const gistsUpdateToolJsonSchemas = {
 export const gistsDeleteToolJsonSchemas = {
   parameters: zodToJsonSchema(
     gists_deleteToolZodSchemas.parameters,
+    {
+      $refStrategy: "none",
+    }
+  ),
+}
+
+export const gistsListCommitsToolJsonSchemas = {
+  parameters: zodToJsonSchema(
+    gists_list_commitsToolZodSchemas.parameters,
+    {
+      $refStrategy: "none",
+    }
+  ),
+}
+
+export const gistsListForksToolJsonSchemas = {
+  parameters: zodToJsonSchema(
+    gists_list_forksToolZodSchemas.parameters,
     {
       $refStrategy: "none",
     }

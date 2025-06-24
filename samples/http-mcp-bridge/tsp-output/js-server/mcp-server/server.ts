@@ -1,8 +1,8 @@
 import { fromZodError } from "zod-validation-error";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
-import { getRepositoryToolJsonSchemas, gistsCreateToolJsonSchemas, gistsDeleteToolJsonSchemas, gistsForkToolJsonSchemas, gistsGetToolJsonSchemas, gistsIsStarredToolJsonSchemas, gistsListPublicToolJsonSchemas, gistsListStarredToolJsonSchemas, gistsListToolJsonSchemas, gistsStarToolJsonSchemas, gistsUnstarToolJsonSchemas, gistsUpdateToolJsonSchemas } from "./schemas/json-schema.js";
-import { get_repositoryToolZodSchemas, gists_createToolZodSchemas, gists_deleteToolZodSchemas, gists_forkToolZodSchemas, gists_getToolZodSchemas, gists_is_starredToolZodSchemas, gists_list_publicToolZodSchemas, gists_list_starredToolZodSchemas, gists_listToolZodSchemas, gists_starToolZodSchemas, gists_unstarToolZodSchemas, gists_updateToolZodSchemas } from "./schemas/zod.js";
+import { getRepositoryToolJsonSchemas, gistsCreateToolJsonSchemas, gistsDeleteToolJsonSchemas, gistsForkToolJsonSchemas, gistsGetToolJsonSchemas, gistsIsStarredToolJsonSchemas, gistsListCommitsToolJsonSchemas, gistsListForksToolJsonSchemas, gistsListPublicToolJsonSchemas, gistsListStarredToolJsonSchemas, gistsListToolJsonSchemas, gistsStarToolJsonSchemas, gistsUnstarToolJsonSchemas, gistsUpdateToolJsonSchemas } from "./schemas/json-schema.js";
+import { get_repositoryToolZodSchemas, gists_createToolZodSchemas, gists_deleteToolZodSchemas, gists_forkToolZodSchemas, gists_getToolZodSchemas, gists_is_starredToolZodSchemas, gists_list_commitsToolZodSchemas, gists_list_forksToolZodSchemas, gists_list_publicToolZodSchemas, gists_list_starredToolZodSchemas, gists_listToolZodSchemas, gists_starToolZodSchemas, gists_unstarToolZodSchemas, gists_updateToolZodSchemas } from "./schemas/zod.js";
 import { httpToolHandler } from "./tools.js";
 
 export const server = new Server(
@@ -112,8 +112,30 @@ server.setRequestHandler(
           },
         },
         {
+          name: "gists_list_commits",
+          description: "List gist commits",
+          inputSchema: gistsListCommitsToolJsonSchemas.parameters,
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
+        },
+        {
+          name: "gists_list_forks",
+          description: "List gist forks",
+          inputSchema: gistsListForksToolJsonSchemas.parameters,
+          annotations: {
+            readonlyHint: false,
+            destructiveHint: true,
+            idempotentHint: false,
+            openWorldHint: true,
+          },
+        },
+        {
           name: "gists_fork",
-          description: "List gist commitsList gist forksFork a gist",
+          description: "Fork a gist",
           inputSchema: gistsForkToolJsonSchemas.parameters,
           annotations: {
             readonlyHint: false,
@@ -337,6 +359,54 @@ server.setRequestHandler(
               text: JSON.stringify(result, null, 2),
             }
           ],
+        };
+      }
+
+      case "gists_list_commits": {
+        const parsed = gists_list_commitsToolZodSchemas.parameters.safeParse(args);
+        if (!parsed.success) {
+          throw fromZodError(parsed.error, { prefix: "Request validation error" });
+        }
+        const rawResult = await httpToolHandler(
+          "gists_list_commits",
+          parsed.data
+        );
+        const maybeResult = gists_list_commitsToolZodSchemas.returnType.safeParse(rawResult);
+        if (!maybeResult.success) {
+          throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
+        };
+        const result = maybeResult.data;
+        return {
+          content: result.map((item) => {
+            return {
+              type: "text",
+              text: JSON.stringify(item, null, 2),
+            }
+          }),
+        };
+      }
+
+      case "gists_list_forks": {
+        const parsed = gists_list_forksToolZodSchemas.parameters.safeParse(args);
+        if (!parsed.success) {
+          throw fromZodError(parsed.error, { prefix: "Request validation error" });
+        }
+        const rawResult = await httpToolHandler(
+          "gists_list_forks",
+          parsed.data
+        );
+        const maybeResult = gists_list_forksToolZodSchemas.returnType.safeParse(rawResult);
+        if (!maybeResult.success) {
+          throw fromZodError(maybeResult.error, { prefix: "Response validation error"});
+        };
+        const result = maybeResult.data;
+        return {
+          content: result.map((item) => {
+            return {
+              type: "text",
+              text: JSON.stringify(item, null, 2),
+            }
+          }),
         };
       }
 

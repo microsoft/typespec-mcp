@@ -1,7 +1,7 @@
 /**
  * Github user
  */
-export interface Owner {
+export interface User {
   /**
    * The username of the owner
    */
@@ -67,7 +67,7 @@ export interface FullRepository {
   /**
    * The owner of the repository
    */
-  owner: Owner;
+  owner: User;
   /**
    * Whether the repository is private or public
    */
@@ -400,7 +400,7 @@ export interface Gist {
   /**
    * The gist owner (user)
    */
-  user: Owner | null;
+  user: User | null;
   /**
    * Files in the gist
    */
@@ -416,7 +416,7 @@ export interface Gist {
   /**
    * Owner of the gist
    */
-  owner?: Owner;
+  owner?: User;
   /**
    * Whether comments are enabled
    */
@@ -442,5 +442,27 @@ export interface GistArray_2 extends Array<Gist> {
 }
 
 export interface GistArray_3 extends Array<Gist> {
+
+}
+
+export interface ChangeStatus {
+  total: number;
+  additions: number;
+  deletions: number;
+}
+
+export interface GistCommit {
+  url: string;
+  version: string;
+  user: User | null;
+  changeStatus: ChangeStatus;
+  committedAt: string;
+}
+
+export interface GistCommitArray extends Array<GistCommit> {
+
+}
+
+export interface GistArray_4 extends Array<Gist> {
 
 }

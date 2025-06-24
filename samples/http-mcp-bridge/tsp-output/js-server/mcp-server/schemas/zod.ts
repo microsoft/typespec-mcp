@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const Owner = z
+export const User = z
   .object({
     login: z.string().describe("The username of the owner"),
     id: z
@@ -38,7 +38,7 @@ export const FullRepository = z
     full_name: z
       .string()
       .describe("The full name of the repository, including the owner"),
-    owner: Owner.describe("The owner of the repository"),
+    owner: User.describe("The owner of the repository"),
     private: z
       .boolean()
       .describe("Whether the repository is private or public"),
@@ -253,12 +253,12 @@ export const Gist = z
       .lte(2147483647)
       .describe("Number of comments"),
     user: z
-      .union([Owner.describe("Github user"), z.null()])
+      .union([User.describe("Github user"), z.null()])
       .describe("The gist owner (user)"),
     files: z.record(z.string(), GistFile).describe("Files in the gist"),
     created_at: z.string().describe("Creation timestamp"),
     updated_at: z.string().describe("Last update timestamp"),
-    owner: Owner.optional().describe("Owner of the gist"),
+    owner: User.optional().describe("Owner of the gist"),
     comments_enabled: z
       .boolean()
       .optional()
@@ -278,6 +278,24 @@ export const CreateGist = z.object({
 export const GistArray_2 = z.array(Gist.describe("Base Gist"));
 
 export const GistArray_3 = z.array(Gist.describe("Base Gist"));
+
+export const ChangeStatus = z.object({
+  total: z.number().int().gte(-2147483648).lte(2147483647),
+  additions: z.number().int().gte(-2147483648).lte(2147483647),
+  deletions: z.number().int().gte(-2147483648).lte(2147483647),
+});
+
+export const GistCommit = z.object({
+  url: z.string(),
+  version: z.string(),
+  user: z.union([User.describe("Github user"), z.null()]),
+  change_status: ChangeStatus,
+  committed_at: z.string(),
+});
+
+export const GistCommitArray = z.array(GistCommit);
+
+export const GistArray_4 = z.array(Gist.describe("Base Gist"));
 
 export const get_repositoryToolZodSchemas = {
   parameters: z.object({
@@ -342,6 +360,20 @@ export const gists_deleteToolZodSchemas = {
     id: z.string(),
   }),
   returnType: z.void(),
+}
+
+export const gists_list_commitsToolZodSchemas = {
+  parameters: z.object({
+    id: z.string(),
+  }),
+  returnType: GistCommitArray,
+}
+
+export const gists_list_forksToolZodSchemas = {
+  parameters: z.object({
+    id: z.string(),
+  }),
+  returnType: GistArray_4,
 }
 
 export const gists_forkToolZodSchemas = {

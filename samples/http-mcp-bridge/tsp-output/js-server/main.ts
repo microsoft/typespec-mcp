@@ -1,4 +1,4 @@
-import { getRepositoryToolJsonSchemas, gistsCreateToolJsonSchemas, gistsDeleteToolJsonSchemas, gistsForkToolJsonSchemas, gistsGetToolJsonSchemas, gistsIsStarredToolJsonSchemas, gistsListPublicToolJsonSchemas, gistsListStarredToolJsonSchemas, gistsListToolJsonSchemas, gistsStarToolJsonSchemas, gistsUnstarToolJsonSchemas, gistsUpdateToolJsonSchemas } from "./mcp-server/schemas/json-schema.js";
+import { getRepositoryToolJsonSchemas, gistsCreateToolJsonSchemas, gistsDeleteToolJsonSchemas, gistsForkToolJsonSchemas, gistsGetToolJsonSchemas, gistsIsStarredToolJsonSchemas, gistsListCommitsToolJsonSchemas, gistsListForksToolJsonSchemas, gistsListPublicToolJsonSchemas, gistsListStarredToolJsonSchemas, gistsListToolJsonSchemas, gistsStarToolJsonSchemas, gistsUnstarToolJsonSchemas, gistsUpdateToolJsonSchemas } from "./mcp-server/schemas/json-schema.js";
 import { implementations } from "./mcp-server/tools.js";
 
 import { startHttpDispatcher } from "typespec-http-dispatcher";;
@@ -57,6 +57,20 @@ const endpoints = [
     schema: gistsDeleteToolJsonSchemas.parameters,
     handler: async (data: any) => {
       return await implementations.gists_delete(data);
+    }  ,
+  },
+  {
+    name: "gists_list_commits",
+    schema: gistsListCommitsToolJsonSchemas.parameters,
+    handler: async (data: any) => {
+      return await implementations.gists_list_commits(data);
+    }  ,
+  },
+  {
+    name: "gists_list_forks",
+    schema: gistsListForksToolJsonSchemas.parameters,
+    handler: async (data: any) => {
+      return await implementations.gists_list_forks(data);
     }  ,
   },
   {
