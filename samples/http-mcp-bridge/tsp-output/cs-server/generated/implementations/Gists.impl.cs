@@ -123,6 +123,40 @@ namespace Mcp
             return ResponseHandler<Task>.Handle(message);
         }
 
+        public async Task<GistCommit[]> ListCommitsAsync(string id, CancellationToken cancellationToken = default)
+        {
+            HttpClientPipelineTransport transport = new(new HttpClient());
+            var uri = Std.UriTemplate.Expand("https://api.github.com/gists/{id}/commits", new Dictionary<string, object?>
+            {
+                { "id", id }
+            });
+            using PipelineMessage message = transport.CreateMessage();
+            message.Request.Method = "GET";
+            message.Request.Uri = new Uri(uri);
+            message.Request.Headers.Add("User-Agent", "TypeSpec Mcp/Http Bridge Client");
+
+            await transport.ProcessAsync(message);
+
+            return ResponseHandler<GistCommit[]>.Handle(message);
+        }
+
+        public async Task<Gist[]> ListForksAsync(string id, CancellationToken cancellationToken = default)
+        {
+            HttpClientPipelineTransport transport = new(new HttpClient());
+            var uri = Std.UriTemplate.Expand("https://api.github.com/gists/{id}/forks", new Dictionary<string, object?>
+            {
+                { "id", id }
+            });
+            using PipelineMessage message = transport.CreateMessage();
+            message.Request.Method = "GET";
+            message.Request.Uri = new Uri(uri);
+            message.Request.Headers.Add("User-Agent", "TypeSpec Mcp/Http Bridge Client");
+
+            await transport.ProcessAsync(message);
+
+            return ResponseHandler<Gist[]>.Handle(message);
+        }
+
         public async Task<Gist> ForkAsync(string id, CancellationToken cancellationToken = default)
         {
             HttpClientPipelineTransport transport = new(new HttpClient());

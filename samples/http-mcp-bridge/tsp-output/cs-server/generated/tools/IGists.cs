@@ -45,6 +45,18 @@ namespace Mcp
         public Task<Task> DeleteAsync(string id, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// List gist commits
+        /// </summary>
+        ///
+        public Task<GistCommit[]> ListCommitsAsync(string id, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List gist forks
+        /// </summary>
+        ///
+        public Task<Gist[]> ListForksAsync(string id, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Fork a gist
         /// </summary>
         ///

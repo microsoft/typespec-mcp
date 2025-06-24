@@ -56,6 +56,18 @@ namespace Mcp
             return await this.impl.DeleteAsync(id, cancellationToken);
         }
 
+        [McpServerTool(Name = "gists_list_commits"), Description(@"List gist commits")]
+        public async Task<GistCommit[]> ListCommitsAsync(string id, CancellationToken cancellationToken = default)
+        {
+            return await this.impl.ListCommitsAsync(id, cancellationToken);
+        }
+
+        [McpServerTool(Name = "gists_list_forks"), Description(@"List gist forks")]
+        public async Task<Gist[]> ListForksAsync(string id, CancellationToken cancellationToken = default)
+        {
+            return await this.impl.ListForksAsync(id, cancellationToken);
+        }
+
         [McpServerTool(Name = "gists_fork"), Description(@"Fork a gist")]
         public async Task<Gist> ForkAsync(string id, CancellationToken cancellationToken = default)
         {

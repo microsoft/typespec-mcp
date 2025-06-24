@@ -3,7 +3,7 @@ namespace Mcp
     /// <summary>
     /// Github user
     /// </summary>
-    public class Owner
+    public class User
     {
         /// <summary>
         /// The username of the owner

@@ -50,7 +50,7 @@ namespace Mcp
         /// <summary>
         /// The gist owner (user)
         /// </summary>
-        public Owner? User { get; set; }
+        public User? User { get; set; }
         /// <summary>
         /// Files in the gist
         /// </summary>
@@ -66,7 +66,7 @@ namespace Mcp
         /// <summary>
         /// Owner of the gist
         /// </summary>
-        public Owner Owner { get; set; }
+        public User Owner { get; set; }
         /// <summary>
         /// Whether comments are enabled
         /// </summary>
