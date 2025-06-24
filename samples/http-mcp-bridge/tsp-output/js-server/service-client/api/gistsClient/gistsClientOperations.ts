@@ -2,8 +2,8 @@ import { parse } from "uri-template";
 import { GistsClientContext } from "./gistsClientContext.js";
 import { createRestError } from "../../helpers/error.js";
 import type { OperationOptions } from "../../helpers/interfaces.js";
-import { dateRfc3339Serializer, jsonArrayGistToApplicationTransform, jsonArrayUnknownToApplicationTransform, jsonCreateGistToTransportTransform, jsonGistToApplicationTransform } from "../../models/internal/serializers.js";
-import { CreateGist, Gist } from "../../models/models.js";
+import { dateRfc3339Serializer, jsonArrayGistCommitToApplicationTransform, jsonArrayGistToApplicationTransform, jsonCreateGistToTransportTransform, jsonGistToApplicationTransform } from "../../models/internal/serializers.js";
+import { CreateGist, Gist, GistCommit } from "../../models/models.js";
 
 export interface ListOptions extends OperationOptions {
   since?: Date
@@ -260,7 +260,7 @@ export async function listCommits(
   client: GistsClientContext,
   id: string,
   options?: ListCommitsOptions,
-): Promise<Array<unknown>> {
+): Promise<Array<GistCommit>> {
   const path = parse("/gists/{id}/commits").expand({
     id: id
   });
@@ -276,7 +276,7 @@ export async function listCommits(
     options?.operationOptions?.onResponse(response);
   }
   if (+response.status === 200 && response.headers["content-type"]?.includes("application/json")) {
-    return jsonArrayUnknownToApplicationTransform(response.body)!;
+    return jsonArrayGistCommitToApplicationTransform(response.body)!;
   }
   throw createRestError(response);
 }
@@ -295,7 +295,7 @@ export async function listForks(
   client: GistsClientContext,
   id: string,
   options?: ListForksOptions,
-): Promise<Array<unknown>> {
+): Promise<Array<Gist>> {
   const path = parse("/gists/{id}/forks").expand({
     id: id
   });
@@ -311,7 +311,7 @@ export async function listForks(
     options?.operationOptions?.onResponse(response);
   }
   if (+response.status === 200 && response.headers["content-type"]?.includes("application/json")) {
-    return jsonArrayUnknownToApplicationTransform(response.body)!;
+    return jsonArrayGistToApplicationTransform(response.body)!;
   }
   throw createRestError(response);
 }

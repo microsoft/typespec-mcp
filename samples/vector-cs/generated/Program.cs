@@ -2,28 +2,28 @@ namespace Mcp
 {
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using Microsoft.Extensions.Logging;
-    using ModelContextProtocol.Server;
-    using System.ComponentModel;
     public class Program
     {
-        public static async Task Main()
+        public static async Task Main(string[] args)
         {
-            var builder = Host.CreateApplicationBuilder();
-            builder.Logging.AddConsole(consoleLogOptions =>
+            System.CommandLine.Option<McpTransport> transport = new("--transport")
             {
-                // Configure all logs to go to stderr
-                consoleLogOptions.LogToStandardErrorThreshold = LogLevel.Trace;
-            });
+                Description = "What transport to use for the MCP server"
+            };
 
-            builder.Services.AddSingleton<IMath, MathImpl>();
-
-            builder.Services
-                .AddMcpServer()
-                .WithStdioServerTransport()
-                .WithToolsFromAssembly()
-                ;
-            await builder.Build().RunAsync();
+            var rootCommand = new System.CommandLine.RootCommand("Sample app for System.CommandLine");
+            rootCommand.Options.Add(transport);
+            var parsed = rootCommand.Parse(args);
+            var app = McpApplication.Create(
+                new McpApplicationOptions
+                {
+                    Transport = parsed.GetValue(transport)
+                }
+            );
+            await app.RunAsync();
+        }
+        public static void ConfigureServices(IServiceCollection services)
+        {
         }
     }
 }

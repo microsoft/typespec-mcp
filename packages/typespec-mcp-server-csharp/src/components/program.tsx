@@ -1,37 +1,60 @@
-import { code } from "@alloy-js/core";
-import { ClassDeclaration, ClassMethod, SourceFile } from "@alloy-js/csharp";
+import { code, List, type Children } from "@alloy-js/core";
+import { ClassDeclaration, ClassMethod, SourceFile, UsingDirective } from "@alloy-js/csharp";
 
 export function ProgramFile() {
   return (
     <SourceFile path="Program.cs">
-      {code`
-        using Microsoft.Extensions.DependencyInjection;
-        using Microsoft.Extensions.Hosting;
-        using Microsoft.Extensions.Logging;
-        using ModelContextProtocol.Server;
-        using System.ComponentModel;
-        `}
+      <UsingDirective namespaces={["Microsoft.Extensions.Hosting"]} />
       <ClassDeclaration name="Program" public>
-        <ClassMethod name="Main" public static async returns="Task">
-          {<Main />}
-        </ClassMethod>
+        <List doubleHardline>
+          <ProgramMain />
+          <ConfigureServicesMethod>
+            {code`
+              // services.AddSingleton<IFoo, IMyImplementation>();
+            `}
+          </ConfigureServicesMethod>
+        </List>
       </ClassDeclaration>
     </SourceFile>
   );
 }
 
-function Main() {
+export function ProgramMain() {
+  return (
+    <ClassMethod name="Main" public static async returns="Task" parameters={[{ name: "args", type: "string[]" }]}>
+      <ProgramMainContent />
+    </ClassMethod>
+  );
+}
+
+function ProgramMainContent() {
   return code`
-        var builder = Host.CreateApplicationBuilder();
-        builder.Logging.AddConsole(consoleLogOptions =>
-        {
-            // Configure all logs to go to stderr
-            consoleLogOptions.LogToStandardErrorThreshold = LogLevel.Trace;
-        });
-        builder.Services
-            .AddMcpServer()
-            .WithStdioServerTransport()
-            .WithToolsFromAssembly();
-        await builder.Build().RunAsync();
-      `;
+      System.CommandLine.Option<McpTransport> transport = new("--transport")
+      {
+          Description = "What transport to use for the MCP server"
+      };
+
+      var rootCommand = new System.CommandLine.RootCommand("Sample app for System.CommandLine");
+      rootCommand.Options.Add(transport);
+      var parsed = rootCommand.Parse(args);
+      var app = McpApplication.Create(
+          new McpApplicationOptions
+          {
+              Transport = parsed.GetValue(transport)
+          }
+      );
+      await app.RunAsync();
+    `;
+}
+
+export interface ConfigureServicesMethodProps {
+  children?: Children;
+}
+
+export function ConfigureServicesMethod(props: ConfigureServicesMethodProps) {
+  return (
+    <ClassMethod static name="ConfigureServices" public parameters={[{ name: "services", type: "IServiceCollection" }]}>
+      {props.children}
+    </ClassMethod>
+  );
 }

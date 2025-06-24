@@ -1,0 +1,44 @@
+{
+  "name": "typespec-mcp-http-server-csharp",
+  "version": "0.0.0-0",
+  "description": "",
+  "exports": {
+    ".": {
+      "import": "./dist/src/index.js",
+      "types": "./dist/src/index.d.ts"
+    },
+    "./testing": {
+      "import": "./dist/testing/index.js",
+      "types": "./dist/testing/index.d.ts"
+    }
+  },
+  "dependencies": {
+    "typespec-mcp": "workspace:*",
+    "typespec-mcp-server-csharp": "workspace:*"
+  },
+  "peerDependencies": {
+    "@alloy-js/core": "catalog:",
+    "@alloy-js/csharp": "catalog:",
+    "@typespec/compiler": "catalog:",
+    "@typespec/http": "catalog:",
+    "@typespec/emitter-framework": "catalog:",
+    "@typespec/http-client": "catalog:"
+  },
+  "scripts": {
+    "build": "alloy build",
+    "watch": "alloy build --watch",
+    "test": "vitest run",
+    "format": "prettier . --write"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "@alloy-js/cli": "catalog:",
+    "@alloy-js/rollup-plugin": "catalog:",
+    "@types/node": "catalog:",
+    "concurrently": "catalog:",
+    "vitest": "catalog:"
+  }
+}

@@ -3,31 +3,32 @@ using ModelContextProtocol.Server;
 namespace Mcp;
 
 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 
 public class MathImpl : IMath
 {
-    public Vec3 addVector(Vec3 v1, Vec3 v2)
+    public async Task<Vec3> AddVectorAsync(Vec3 v1, Vec3 v2, CancellationToken cancellationToken)
     {
-        return new Vec3 { x = v1.x + v2.x, y = v1.y + v2.y, z = v1.z + v2.z };
+        return new Vec3 { X = v1.X + v2.X, Y = v1.Y + v2.Y, Z = v1.Z + v2.Z };
     }
 
-    public Vec3 crossProduct(Vec3 v1, Vec3 v2)
+    public async Task<Vec3> CrossProductAsync(Vec3 v1, Vec3 v2, CancellationToken cancellationToken)
     {
         return new Vec3
         {
-            x = v1.y * v2.z - v1.z * v2.y,
-            y = v1.z * v2.x - v1.x * v2.z,
-            z = v1.x * v2.y - v1.y * v2.x
+            X = v1.Y * v2.Z - v1.Z * v2.Y,
+            Y = v1.Z * v2.X - v1.X * v2.Z,
+            Z = v1.X * v2.Y - v1.Y * v2.X
         };
     }
 
-    public double dotProduct(Vec3 v1, Vec3 v2)
+    public async Task<double> DotProductAsync(Vec3 v1, Vec3 v2, CancellationToken cancellationToken)
     {
-        return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+        return v1.X * v2.X + v1.Y * v2.Y + v1.Z * v2.Z;
     }
 
-    public Vec3 subVector(Vec3 v1, Vec3 v2)
+    public async Task<Vec3> SubVectorAsync(Vec3 v1, Vec3 v2, CancellationToken cancellationToken)
     {
-        return new Vec3 { x = v1.x - v2.x, y = v1.y - v2.y, z = v1.z - v2.z };
+        return new Vec3 { X = v1.X - v2.X, Y = v1.Y - v2.Y, Z = v1.Z - v2.Z };
     }
 }

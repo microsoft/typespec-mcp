@@ -1,5 +1,5 @@
 /** Github user */
-model Owner {
+model User {
   /** The username of the owner */
   login: string;
 
