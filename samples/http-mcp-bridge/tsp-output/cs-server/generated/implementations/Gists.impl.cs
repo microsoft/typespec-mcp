@@ -2,7 +2,6 @@ namespace Mcp
 {
     using System.ClientModel.Primitives;
     using System.Text.Json;
-
     public class GistsHttpBinding : IGists
     {
         public async Task<Gist[]> ListAsync(DateTimeOffset? since, CancellationToken cancellationToken = default)

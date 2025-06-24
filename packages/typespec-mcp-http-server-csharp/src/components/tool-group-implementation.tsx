@@ -14,7 +14,7 @@ interface ToolGroupImplementationProps {
 export function ToolGroupImplementation(props: ToolGroupImplementationProps) {
   return (
     <List>
-      <UsingDirective namespaces={["System.ClientModel.Primitives"]} />
+      <UsingDirective namespaces={["System.ClientModel.Primitives", "System.Text.Json"]} />
       <ClassDeclaration name={`${props.group.name}HttpBinding`} interfaceTypes={[`I${props.group.name}`]} public>
         <For each={props.group.tools} doubleHardline>
           {(tool) => <ToolMethod tool={tool} />}
