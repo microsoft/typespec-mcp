@@ -52,35 +52,26 @@ function ToolMethod(props: ToolMethodProps) {
   const host = servers![0];
 
   return (
-    <List>
-      <ClassMethod
-        async
-        name={props.tool.originalOp.name + "Async"}
-        public
-        parameters={parameters}
-        returns={code`Task<${(<ReturnTypeExpression op={props.tool.implementationOp} />)}>`}
-      >
-        {code`
-            HttpClientPipelineTransport transport = new(new HttpClient());
-            var uri = ${(<UriTemplateSerializer server={host} httpOp={httpOp} />)}
-            using PipelineMessage message = transport.CreateMessage();
-            message.Request.Method = "GET";
-            message.Request.Uri = new Uri(uri);
-            message.Request.Headers.Add("User-Agent", "TypeSpec Mcp/Http Bridge Client");
-            
-            await transport.ProcessAsync(message);
+    <ClassMethod
+      async
+      name={props.tool.originalOp.name + "Async"}
+      public
+      parameters={parameters}
+      returns={code`Task<${(<ReturnTypeExpression op={props.tool.implementationOp} />)}>`}
+    >
+      {code`
+          HttpClientPipelineTransport transport = new(new HttpClient());
+          var uri = ${(<UriTemplateSerializer server={host} httpOp={httpOp} />)}
+          using PipelineMessage message = transport.CreateMessage();
+          message.Request.Method = "GET";
+          message.Request.Uri = new Uri(uri);
+          message.Request.Headers.Add("User-Agent", "TypeSpec Mcp/Http Bridge Client");
+          
+          await transport.ProcessAsync(message);
 
-            var result = message.Response!.Content.ToObjectFromJson<Gist[]>(new JsonSerializerOptions(JsonSerializerDefaults.Web));
-
-            if (result == null)
-            {
-                throw new InvalidOperationException("Failed to deserialize response to Gist[]");
-            }
-
-            return result;
+          return ResponseHandler<Gist[]>.Handle(message);
         `}
-      </ClassMethod>
-    </List>
+    </ClassMethod>
   );
 }
 

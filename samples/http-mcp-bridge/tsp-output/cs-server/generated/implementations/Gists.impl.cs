@@ -19,14 +19,7 @@ namespace Mcp
 
             await transport.ProcessAsync(message);
 
-            var result = message.Response!.Content.ToObjectFromJson<Gist[]>(new JsonSerializerOptions(JsonSerializerDefaults.Web));
-
-            if (result == null)
-            {
-                throw new InvalidOperationException("Failed to deserialize response to Gist[]");
-            }
-
-            return result;
+            return ResponseHandler<Gist[]>.Handle(message);
         }
 
         public async Task<Gist[]> ListPublicAsync(DateTimeOffset? since, CancellationToken cancellationToken = default)
@@ -44,14 +37,7 @@ namespace Mcp
 
             await transport.ProcessAsync(message);
 
-            var result = message.Response!.Content.ToObjectFromJson<Gist[]>(new JsonSerializerOptions(JsonSerializerDefaults.Web));
-
-            if (result == null)
-            {
-                throw new InvalidOperationException("Failed to deserialize response to Gist[]");
-            }
-
-            return result;
+            return ResponseHandler<Gist[]>.Handle(message);
         }
     }
 }
