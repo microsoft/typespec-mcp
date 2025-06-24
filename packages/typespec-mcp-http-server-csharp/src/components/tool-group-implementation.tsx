@@ -1,21 +1,31 @@
-import { code, For, List } from "@alloy-js/core";
+import { code, For, List, refkey, type Refkey } from "@alloy-js/core";
 import { ClassDeclaration, ClassMethod, UsingDirective, type ParameterProps } from "@alloy-js/csharp";
 import type { Operation } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";
 import { TypeExpression } from "@typespec/emitter-framework/csharp";
 import { getServers, type HttpPayloadBody } from "@typespec/http";
 import { useMCPServerContext, type ToolDescriptor, type ToolGroup } from "typespec-mcp-server-csharp";
+import { getToolGroupInferfaceRefkey } from "typespec-mcp-server-csharp/components";
 import { UriTemplateSerializer } from "./uri-template-serializer.jsx";
 
 interface ToolGroupImplementationProps {
   group: ToolGroup; // Replace 'any' with a more specific type if available
 }
 
+export function getToolGroupImplementationRefkey(group: ToolGroup): Refkey {
+  return refkey(group, "http-binding");
+}
+
 export function ToolGroupImplementation(props: ToolGroupImplementationProps) {
   return (
     <List>
       <UsingDirective namespaces={["System.ClientModel", "System.ClientModel.Primitives", "System.Text.Json"]} />
-      <ClassDeclaration name={`${props.group.name}HttpBinding`} interfaceTypes={[`I${props.group.name}`]} public>
+      <ClassDeclaration
+        name={`${props.group.name}HttpBinding`}
+        refkey={getToolGroupImplementationRefkey(props.group)}
+        interfaceTypes={[getToolGroupInferfaceRefkey(props.group)]}
+        public
+      >
         <For each={props.group.tools} doubleHardline>
           {(tool) => <ToolMethod tool={tool} />}
         </For>

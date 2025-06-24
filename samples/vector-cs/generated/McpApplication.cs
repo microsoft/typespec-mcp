@@ -21,7 +21,7 @@ namespace Mcp
             {
                 var builder = WebApplication.CreateBuilder();
 
-                ConfigureMcpServer(builder.Services, options);
+                ConfigureServices(builder.Services, options);
 
                 var application = builder.Build();
 
@@ -33,7 +33,7 @@ namespace Mcp
             else
             {
                 var builder = Host.CreateApplicationBuilder();
-                ConfigureMcpServer(builder.Services, options);
+                ConfigureServices(builder.Services, options);
                 builder.Logging.AddConsole(consoleLogOptions =>
                 {
                     // Configure all logs to go to stderr
@@ -42,7 +42,13 @@ namespace Mcp
 
                 return builder.Build();
             }
-        }public static void ConfigureMcpServer(IServiceCollection services, McpApplicationOptions options)
+        }
+        private static void ConfigureServices(IServiceCollection services, McpApplicationOptions options)
+        {
+            ConfigureMcpServer(services, options);
+            Program.ConfigureServices(services);
+        }
+        public static void ConfigureMcpServer(IServiceCollection services, McpApplicationOptions options)
         {
             var mcp = services
                 .AddMcpServer();

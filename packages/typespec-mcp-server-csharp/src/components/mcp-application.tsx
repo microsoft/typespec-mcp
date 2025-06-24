@@ -52,19 +52,20 @@ export function McpTransportEnum() {
 export function McpApplicationClass() {
   return (
     <ClassDeclaration public name="McpApplication">
-      <ClassMethod
-        static
-        name="Create"
-        public
-        returns="IHost"
-        parameters={[{ name: "options", type: refkey("McpApplicationOptions") }]}
-      >
-        {code`
+      <List>
+        <ClassMethod
+          static
+          name="Create"
+          public
+          returns="IHost"
+          parameters={[{ name: "options", type: refkey("McpApplicationOptions") }]}
+        >
+          {code`
             if (options.Transport == McpTransport.Sse)
             {
                 var builder = WebApplication.CreateBuilder();
 
-                ConfigureMcpServer(builder.Services, options);
+                ConfigureServices(builder.Services, options);
 
                 var application = builder.Build();
 
@@ -76,7 +77,7 @@ export function McpApplicationClass() {
             else
             {
                 var builder = Host.CreateApplicationBuilder();
-                ConfigureMcpServer(builder.Services, options);
+                ConfigureServices(builder.Services, options);
                 builder.Logging.AddConsole(consoleLogOptions =>
                 {
                     // Configure all logs to go to stderr
@@ -86,18 +87,33 @@ export function McpApplicationClass() {
                 return builder.Build();
             }
         `}
-      </ClassMethod>
+        </ClassMethod>
 
-      <ClassMethod
-        static
-        name="ConfigureMcpServer"
-        public
-        parameters={[
-          { name: "services", type: "IServiceCollection" },
-          { name: "options", type: refkey("McpApplicationOptions") },
-        ]}
-      >
-        {code`
+        <ClassMethod
+          static
+          name="ConfigureServices"
+          private
+          parameters={[
+            { name: "services", type: "IServiceCollection" },
+            { name: "options", type: refkey("McpApplicationOptions") },
+          ]}
+        >
+          {code`
+            ConfigureMcpServer(services, options);
+            Program.ConfigureServices(services);
+            `}
+        </ClassMethod>
+
+        <ClassMethod
+          static
+          name="ConfigureMcpServer"
+          public
+          parameters={[
+            { name: "services", type: "IServiceCollection" },
+            { name: "options", type: refkey("McpApplicationOptions") },
+          ]}
+        >
+          {code`
             var mcp = services
                 .AddMcpServer();
             if (options.Transport == McpTransport.Sse)
@@ -107,7 +123,8 @@ export function McpApplicationClass() {
             
             mcp.WithToolsFromAssembly();
             `}
-      </ClassMethod>
+        </ClassMethod>
+      </List>
     </ClassDeclaration>
   );
 }
