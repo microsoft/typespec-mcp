@@ -115,14 +115,16 @@ export function McpApplicationClass() {
         >
           {code`
             var mcp = services
-                .AddMcpServer();
+                .AddMcpServer()
+                .WithToolsFromAssembly();
+
             if (options.Transport == McpTransport.Sse)
             {
                 mcp.WithHttpTransport();
+            } else {
+                mcp.WithStdioServerTransport();
             }
-            
-            mcp.WithToolsFromAssembly();
-            `}
+          `}
         </ClassMethod>
       </List>
     </ClassDeclaration>

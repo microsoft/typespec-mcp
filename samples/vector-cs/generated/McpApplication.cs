@@ -54,13 +54,15 @@ namespace Mcp
         public static void ConfigureMcpServer(IServiceCollection services, McpApplicationOptions options)
         {
             var mcp = services
-                .AddMcpServer();
+                .AddMcpServer()
+                .WithToolsFromAssembly();
+
             if (options.Transport == McpTransport.Sse)
             {
                 mcp.WithHttpTransport();
+            } else {
+                mcp.WithStdioServerTransport();
             }
-
-            mcp.WithToolsFromAssembly();
         }
     }
 }
