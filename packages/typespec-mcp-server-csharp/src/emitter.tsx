@@ -1,8 +1,9 @@
-import { SourceDirectory } from "@alloy-js/core";
+import { SourceDirectory, type Children } from "@alloy-js/core";
 import { Namespace } from "@alloy-js/csharp";
 import type { EmitContext, Program } from "@typespec/compiler";
 import { Output, writeOutput } from "@typespec/emitter-framework";
 import { CsprojFile } from "./components/csproj.jsx";
+import { McpApplicationFile } from "./components/mcp-application.jsx";
 import { ProgramFile } from "./components/program.jsx";
 import { Tools } from "./components/tools.jsx";
 import { Models } from "./components/types.jsx";
@@ -20,6 +21,7 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
 export interface McpServerProps {
   program: Program;
   scaffold?: boolean;
+  children?: Children;
 }
 
 export function McpServer(props: McpServerProps) {
@@ -29,6 +31,7 @@ export function McpServer(props: McpServerProps) {
       <MCPServerContext.Provider value={mcpServerContext}>
         <CsprojFile />
         <Namespace name="Mcp">
+          {props.children}
           <SourceDirectory path="generated">
             <SourceDirectory path="tools">
               <Tools />
@@ -36,6 +39,7 @@ export function McpServer(props: McpServerProps) {
             <SourceDirectory path="models">
               <Models />
             </SourceDirectory>
+            <McpApplicationFile />
             {props.scaffold && <ProgramFile />}
           </SourceDirectory>
         </Namespace>

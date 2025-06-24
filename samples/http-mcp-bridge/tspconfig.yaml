@@ -1,5 +1,8 @@
 emit:
   - typespec-mcp-http-server-js
+  - typespec-mcp-http-server-csharp
 options:
   typespec-mcp-http-server-js:
-    emitter-output-dir: "{output-dir}/server"
+    emitter-output-dir: "{output-dir}/js-server"
+  typespec-mcp-http-server-csharp:
+    emitter-output-dir: "{output-dir}/cs-server"

@@ -30,7 +30,7 @@ model FullRepository {
   full_name: string;
 
   /** The owner of the repository */
-  owner: Owner;
+  owner: User;
 
   /** Whether the repository is private or public */
   private: boolean;

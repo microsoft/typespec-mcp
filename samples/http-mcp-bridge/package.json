@@ -12,6 +12,7 @@
     "typespec-mcp": "workspace:*",
     "typespec-mcp-server-js": "workspace:*",
     "typespec-mcp-http-server-js": "workspace:*",
+    "typespec-mcp-http-server-csharp": "workspace:*",
     "typespec-http-dispatcher": "workspace:*",
     "zod": "catalog:",
     "zod-to-json-schema": "catalog:",
@@ -25,12 +26,15 @@
     "typescript": "catalog:"
   },
   "scripts": {
-    "build-tsp": "tsp compile .",
-    "build-ts": "tsc -p .",
-    "build": "pnpm build-tsp && pnpm build-ts",
-    "mcp": "mcp-cli node dist/src/mcp-server.js",
+    "build:tsp": "tsp compile .",
+    "build:ts": "tsc -p .",
+    "build:cs": "dotnet build ./tsp-output/cs-server",
+    "build": "pnpm build:tsp && pnpm build:ts && pnpm build:cs",
+    "mcp:ts": "mcp-cli node dist/src/mcp-server.js",
+    "mcp:cs": "mcp-cli -- dotnet run --debug --project ./tsp-output/cs-server/Mcp.csproj",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "inspect": "mcp-inspector node ./dist/tsp-output/server/main.js"
+    "inspect:ts": "mcp-inspector node ./dist/tsp-output/cs-server/main.js",
+    "inspect:cs": "mcp-inspector dotnet run --project ./tsp-output/cs-server/Mcp.csproj"
   },
   "keywords": [],
   "author": "",

@@ -6,7 +6,9 @@ import {
   DocSummary,
   InterfaceDeclaration,
   InterfaceMethod,
+  type ParameterProps,
 } from "@alloy-js/csharp";
+import type { Operation } from "@typespec/compiler";
 import { getReturnsDoc } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";
 import { TypeExpression } from "@typespec/emitter-framework/csharp";
@@ -49,28 +51,44 @@ export interface ToolMethodProps {
   tool: ToolDescriptor;
 }
 
-function ToolMethod(props: ToolMethodProps) {
-  const parameters = [
-    ...[...props.tool.originalOp.parameters.properties.values()].map((p) => {
+export function getToolParameters(tool: ToolDescriptor): ParameterProps[] {
+  return [
+    ...[...tool.originalOp.parameters.properties.values()].map((p) => {
       return {
         name: p.name,
         type: <TypeExpression type={p.type} />,
-        required: !p.optional,
+        optional: p.optional,
       };
     }),
-    { name: "cancellationToken", type: "CancellationToken", required: false },
+    {
+      name: "cancellationToken",
+      type: "CancellationToken",
+      default: "default",
+    },
   ];
+}
+
+function ToolMethod(props: ToolMethodProps) {
+  const parameters: ParameterProps[] = getToolParameters(props.tool);
   return (
     <List>
       <InterfaceMethod
         name={props.tool.originalOp.name + "Async"}
         public
         parameters={parameters}
-        returns={code`Task<${(<TypeExpression type={props.tool.originalOp.returnType} />)}>`}
+        returns={code`Task<${(<ReturnTypeExpression op={props.tool.implementationOp} />)}>`}
         doc={<ToolDoc tool={props.tool} />}
       />
     </List>
   );
+}
+
+export function ReturnTypeExpression(props: { op: Operation }) {
+  const { $ } = useTsp();
+  if (props.op.returnType === $.intrinsic.void) {
+    return "Task";
+  }
+  return <TypeExpression type={props.op.returnType} />;
 }
 
 function ToolDoc(props: ToolMethodProps) {

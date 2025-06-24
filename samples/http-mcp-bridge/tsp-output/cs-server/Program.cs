@@ -22,8 +22,10 @@ namespace Mcp
             );
             await app.RunAsync();
         }
+
         public static void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IGists, GistsHttpBinding>();
         }
     }
 }

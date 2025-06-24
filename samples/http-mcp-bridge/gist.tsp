@@ -72,7 +72,7 @@ model Gist {
   /**
    * The gist owner (user)
    */
-  user: Owner | null;
+  user: User | null;
 
   /**
    * Files in the gist
@@ -92,7 +92,7 @@ model Gist {
   /**
    * Owner of the gist
    */
-  owner?: Owner;
+  owner?: User;
 
   /**
    * Whether comments are enabled
@@ -103,16 +103,20 @@ model Gist {
    * Whether the gist is truncated
    */
   truncated?: boolean;
+}
 
-  /**
-   * Forks of the gist
-   */
-  forks?: unknown[];
+model GistCommit {
+  url: string;
+  version: string;
+  user: User | null;
+  change_status: ChangeStatus;
+  committed_at: string;
+}
 
-  /**
-   * History of the gist
-   */
-  history?: unknown[];
+model ChangeStatus {
+  total: int32;
+  additions: int32;
+  deletions: int32;
 }
 
 model CreateGist {
@@ -155,9 +159,11 @@ interface Gists {
   @route("/{id}")
   delete(@path id: string): void;
   /** List gist commits */
-  @tool @route("/{id}/commits") listCommits(@path id: string): unknown[];
+  @tool
+  @route("/{id}/commits")
+  listCommits(@path id: string): GistCommit[];
   /** List gist forks */
-  @tool @route("/{id}/forks") listForks(@path id: string): unknown[];
+  @tool @route("/{id}/forks") listForks(@path id: string): Gist[];
   /** Fork a gist */
   @tool
   @post
