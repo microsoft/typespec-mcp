@@ -4,15 +4,18 @@ namespace Mcp
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
+
     public record McpApplicationOptions
     {
         public McpTransport Transport { get; init; }
     }
+
     public enum McpTransport
     {
         Stdio,
         Sse,
     }
+
     public class McpApplication
     {
         public static IHost Create(McpApplicationOptions options)

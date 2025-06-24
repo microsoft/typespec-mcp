@@ -13,7 +13,7 @@ import {
 export function McpApplicationFile() {
   return (
     <SourceFile path="McpApplication.cs">
-      <List>
+      <List doubleHardline>
         <UsingDirective
           namespaces={[
             "Microsoft.AspNetCore.Builder",
