@@ -12,19 +12,22 @@ export interface UriTemplateSerializerProps {
  * @param props
  */
 export function UriTemplateSerializer(props: UriTemplateSerializerProps) {
+  const params = props.httpOp.parameters.properties.filter((p) => p.kind === "path" || p.kind === "query");
   const uri = `${props.server.url}${props.httpOp.uriTemplate}`;
+  if (params.length === 0) {
+    return code`"${uri}"`;
+  }
   return code`
-    Std.UriTemplate.Expand("${uri}", ${(<UriTemplateParameters httpOp={props.httpOp} />)});
+    Std.UriTemplate.Expand("${uri}", ${(<UriTemplateParameters params={params} />)})
   `;
 }
 
-function UriTemplateParameters(props: { httpOp: HttpOperation }) {
-  const params = props.httpOp.parameters.properties.filter((p) => p.kind === "path" || p.kind === "query");
+function UriTemplateParameters(props: { params: (HttpProperty & { kind: "path" | "query" })[] }) {
   return (
     <List>
       {`new Dictionary<string, object?>`}
-      <Block newline>
-        <For each={params}>
+      <Block>
+        <For each={props.params}>
           {(param) => (
             <Block inline>{code`"${param.options.name}", ${(<UriTemplateParameter property={param} />)}`}</Block>
           )}

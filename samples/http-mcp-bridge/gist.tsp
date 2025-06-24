@@ -136,43 +136,43 @@ interface Gists {
    * @param since - The time to start listing gists from. Optional. DO NOT PASS an empty string.
    */
   @tool list(@query since?: utcDateTime): Gist[] | BasicError;
-  // /** Create a gist */
-  // @tool @post create(@body gist: CreateGist): Gist;
+  /** Create a gist */
+  @tool @post create(@body gist: CreateGist): Gist;
   /** List public gists */
   @tool @route("/public") listPublic(@query since?: utcDateTime): Gist[];
-  // /** List starred gists */
-  // @tool @route("/starred") listStarred(@query since?: utcDateTime): Gist[];
-  // /** Get a gist */
-  // @tool @route("/{id}") get(@path id: string): Gist | BasicError;
-  // /** Update a gist */
-  // @tool
-  // @patch(#{ implicitOptionality: true })
-  // @route("/{id}")
-  // update(@path id: string, @body gist: CreateGist): Gist;
-  // /** Delete a gist */
-  // @tool
-  // @delete
-  // @route("/{id}")
-  // delete(@path id: string): void;
+  /** List starred gists */
+  @tool @route("/starred") listStarred(@query since?: utcDateTime): Gist[];
+  /** Get a gist */
+  @tool @route("/{id}") get(@path id: string): Gist | BasicError;
+  /** Update a gist */
+  @tool
+  @patch(#{ implicitOptionality: true })
+  @route("/{id}")
+  update(@path id: string, @body gist: CreateGist): Gist;
+  /** Delete a gist */
+  @tool
+  @delete
+  @route("/{id}")
+  delete(@path id: string): void;
   // /** List gist commits */
   // @tool @route("/{id}/commits") listCommits(@path id: string): unknown[];
   // /** List gist forks */
   // @tool @route("/{id}/forks") listForks(@path id: string): unknown[];
-  // /** Fork a gist */
-  // @tool
-  // @post
-  // @route("/{id}/forks")
-  // fork(@path id: string): Gist;
-  // /** Star a gist */
-  // @tool
-  // @put
-  // @route("/{id}/star")
-  // star(@path id: string): void;
-  // /** Unstar a gist */
-  // @tool
-  // @delete
-  // @route("/{id}/star")
-  // unstar(@path id: string): void;
-  // /** Check if a gist is starred */
-  // @tool @route("/{id}/star") isStarred(@path id: string): boolean;
+  /** Fork a gist */
+  @tool
+  @post
+  @route("/{id}/forks")
+  fork(@path id: string): Gist;
+  /** Star a gist */
+  @tool
+  @put
+  @route("/{id}/star")
+  star(@path id: string): void;
+  /** Unstar a gist */
+  @tool
+  @delete
+  @route("/{id}/star")
+  unstar(@path id: string): void;
+  /** Check if a gist is starred */
+  @tool @route("/{id}/star") isStarred(@path id: string): boolean;
 }

@@ -3,7 +3,7 @@ import { ClassDeclaration, ClassMethod, UsingDirective, type ParameterProps } fr
 import type { Operation } from "@typespec/compiler";
 import { useTsp } from "@typespec/emitter-framework";
 import { TypeExpression } from "@typespec/emitter-framework/csharp";
-import { getServers } from "@typespec/http";
+import { getServers, type HttpPayloadBody } from "@typespec/http";
 import { useMCPServerContext, type ToolDescriptor, type ToolGroup } from "typespec-mcp-server-csharp";
 import { UriTemplateSerializer } from "./uri-template-serializer.jsx";
 
@@ -14,7 +14,7 @@ interface ToolGroupImplementationProps {
 export function ToolGroupImplementation(props: ToolGroupImplementationProps) {
   return (
     <List>
-      <UsingDirective namespaces={["System.ClientModel.Primitives", "System.Text.Json"]} />
+      <UsingDirective namespaces={["System.ClientModel", "System.ClientModel.Primitives", "System.Text.Json"]} />
       <ClassDeclaration name={`${props.group.name}HttpBinding`} interfaceTypes={[`I${props.group.name}`]} public>
         <For each={props.group.tools} doubleHardline>
           {(tool) => <ToolMethod tool={tool} />}
@@ -61,15 +61,15 @@ function ToolMethod(props: ToolMethodProps) {
     >
       {code`
           HttpClientPipelineTransport transport = new(new HttpClient());
-          var uri = ${(<UriTemplateSerializer server={host} httpOp={httpOp} />)}
+          var uri = ${(<UriTemplateSerializer server={host} httpOp={httpOp} />)};
           using PipelineMessage message = transport.CreateMessage();
-          message.Request.Method = "GET";
+          message.Request.Method = "${httpOp.verb.toUpperCase()}";
           message.Request.Uri = new Uri(uri);
           message.Request.Headers.Add("User-Agent", "TypeSpec Mcp/Http Bridge Client");
-          
+          ${httpOp.parameters.body ? <ApplyBodyToMessage body={httpOp.parameters.body} /> : ""}
           await transport.ProcessAsync(message);
-
-          return ResponseHandler<Gist[]>.Handle(message);
+ 
+          return ResponseHandler<${(<ReturnTypeExpression op={props.tool.implementationOp} />)}>.Handle(message);
         `}
     </ClassMethod>
   );
@@ -81,4 +81,13 @@ function ReturnTypeExpression(props: { op: Operation }) {
     return "Task";
   }
   return <TypeExpression type={props.op.returnType} />;
+}
+
+// Minimal implementation for ApplyBodyToMessage
+function ApplyBodyToMessage(props: { body: HttpPayloadBody }) {
+  // You should implement the actual logic here as needed
+  return code`
+    message.Request.Headers.Set("Content-Type", "${props.body.contentTypes[0]}");
+    message.Request.Content = BinaryContent.Create(BinaryData.FromObjectAsJson(${props.body.property!.name}));
+  `;
 }
