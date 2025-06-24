@@ -138,8 +138,8 @@ interface Gists {
   @tool list(@query since?: utcDateTime): Gist[] | BasicError;
   // /** Create a gist */
   // @tool @post create(@body gist: CreateGist): Gist;
-  // /** List public gists */
-  // @tool @route("/public") listPublic(@query since?: utcDateTime): Gist[];
+  /** List public gists */
+  @tool @route("/public") listPublic(@query since?: utcDateTime): Gist[];
   // /** List starred gists */
   // @tool @route("/starred") listStarred(@query since?: utcDateTime): Gist[];
   // /** Get a gist */

@@ -19,5 +19,11 @@ namespace Mcp
         {
             return await this.impl.ListAsync(since, cancellationToken);
         }
+
+        [McpServerTool(Name = "gists_list_public"), Description(@"List public gists")]
+        public async Task<Gist[]> ListPublicAsync(DateTimeOffset? since, CancellationToken cancellationToken = default)
+        {
+            return await this.impl.ListPublicAsync(since, cancellationToken);
+        }
     }
 }
