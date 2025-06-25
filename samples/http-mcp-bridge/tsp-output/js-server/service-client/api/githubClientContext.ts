@@ -1,11 +1,11 @@
-import { type ApiKeyCredential, type Client, type ClientOptions, getClient } from "@typespec/ts-http-runtime";
+import { type BearerTokenCredential, type Client, type ClientOptions, getClient } from "@typespec/ts-http-runtime";
 
 export interface GithubClientContext extends Client {
 
 }export interface GithubClientOptions extends ClientOptions {
   endpoint?: string;
 }export function createGithubClientContext(
-  credential: ApiKeyCredential,
+  credential: BearerTokenCredential,
   options?: GithubClientOptions,
 ): GithubClientContext {
   const params: Record<string, any> = {
@@ -15,9 +15,8 @@ export interface GithubClientContext extends Client {
     key in params ? String(params[key]) : (() => { throw new Error(`Missing parameter: ${key}`); })()
   );;return getClient(resolvedEndpoint,{
     ...options,credential,authSchemes: [{
-      kind: "apiKey",
-      apiKeyLocation: "header",
-      name: "Authorization"
+      kind: "http",
+      scheme: "bearer"
     },
     ]
   })
