@@ -70,14 +70,14 @@ function ToolMethod(props: ToolMethodProps) {
       returns={code`Task<${(<ReturnTypeExpression op={props.tool.implementationOp} />)}>`}
     >
       {code`
-          HttpClientPipelineTransport transport = new(new HttpClient());
+          var pipeline = ClientPipeline.Create();
           var uri = ${(<UriTemplateSerializer server={host} httpOp={httpOp} />)};
-          using PipelineMessage message = transport.CreateMessage();
+          using PipelineMessage message = pipeline.CreateMessage();
           message.Request.Method = "${httpOp.verb.toUpperCase()}";
           message.Request.Uri = new Uri(uri);
           message.Request.Headers.Add("User-Agent", "TypeSpec Mcp/Http Bridge Client");
           ${httpOp.parameters.body ? <ApplyBodyToMessage body={httpOp.parameters.body} /> : ""}
-          await transport.ProcessAsync(message);
+          await pipeline.SendAsync(message);
  
           return ResponseHandler<${(<ReturnTypeExpression op={props.tool.implementationOp} />)}>.Handle(message);
         `}
