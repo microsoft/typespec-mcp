@@ -57,7 +57,7 @@ export const implementations = {
       },
   ) {
     const credential = {
-      key: process.env.APIKEY ?? "UNKNOWN"
+      getBearerToken: () => Promise.resolve(process.env.TOKEN ?? "UNKNOWN")
     };
     const client = new GithubClient(
       credential,
@@ -83,7 +83,7 @@ export const implementations = {
       },
   ) {
     const credential = {
-      key: process.env.APIKEY ?? "UNKNOWN"
+      getBearerToken: () => Promise.resolve(process.env.TOKEN ?? "UNKNOWN")
     };
     const client = new GistsClient(
       credential,
@@ -107,7 +107,7 @@ export const implementations = {
       },
   ) {
     const credential = {
-      key: process.env.APIKEY ?? "UNKNOWN"
+      getBearerToken: () => Promise.resolve(process.env.TOKEN ?? "UNKNOWN")
     };
     const client = new GistsClient(
       credential,
@@ -132,7 +132,7 @@ export const implementations = {
       },
   ) {
     const credential = {
-      key: process.env.APIKEY ?? "UNKNOWN"
+      getBearerToken: () => Promise.resolve(process.env.TOKEN ?? "UNKNOWN")
     };
     const client = new GistsClient(
       credential,
@@ -156,7 +156,7 @@ export const implementations = {
       },
   ) {
     const credential = {
-      key: process.env.APIKEY ?? "UNKNOWN"
+      getBearerToken: () => Promise.resolve(process.env.TOKEN ?? "UNKNOWN")
     };
     const client = new GistsClient(
       credential,
@@ -180,7 +180,7 @@ export const implementations = {
       },
   ) {
     const credential = {
-      key: process.env.APIKEY ?? "UNKNOWN"
+      getBearerToken: () => Promise.resolve(process.env.TOKEN ?? "UNKNOWN")
     };
     const client = new GistsClient(
       credential,
@@ -206,7 +206,7 @@ export const implementations = {
       },
   ) {
     const credential = {
-      key: process.env.APIKEY ?? "UNKNOWN"
+      getBearerToken: () => Promise.resolve(process.env.TOKEN ?? "UNKNOWN")
     };
     const client = new GistsClient(
       credential,
@@ -232,7 +232,7 @@ export const implementations = {
       },
   ) {
     const credential = {
-      key: process.env.APIKEY ?? "UNKNOWN"
+      getBearerToken: () => Promise.resolve(process.env.TOKEN ?? "UNKNOWN")
     };
     const client = new GistsClient(
       credential,
@@ -257,7 +257,7 @@ export const implementations = {
       },
   ) {
     const credential = {
-      key: process.env.APIKEY ?? "UNKNOWN"
+      getBearerToken: () => Promise.resolve(process.env.TOKEN ?? "UNKNOWN")
     };
     const client = new GistsClient(
       credential,
@@ -282,7 +282,7 @@ export const implementations = {
       },
   ) {
     const credential = {
-      key: process.env.APIKEY ?? "UNKNOWN"
+      getBearerToken: () => Promise.resolve(process.env.TOKEN ?? "UNKNOWN")
     };
     const client = new GistsClient(
       credential,
@@ -307,7 +307,7 @@ export const implementations = {
       },
   ) {
     const credential = {
-      key: process.env.APIKEY ?? "UNKNOWN"
+      getBearerToken: () => Promise.resolve(process.env.TOKEN ?? "UNKNOWN")
     };
     const client = new GistsClient(
       credential,
@@ -332,7 +332,7 @@ export const implementations = {
       },
   ) {
     const credential = {
-      key: process.env.APIKEY ?? "UNKNOWN"
+      getBearerToken: () => Promise.resolve(process.env.TOKEN ?? "UNKNOWN")
     };
     const client = new GistsClient(
       credential,
@@ -357,7 +357,7 @@ export const implementations = {
       },
   ) {
     const credential = {
-      key: process.env.APIKEY ?? "UNKNOWN"
+      getBearerToken: () => Promise.resolve(process.env.TOKEN ?? "UNKNOWN")
     };
     const client = new GistsClient(
       credential,
@@ -382,7 +382,7 @@ export const implementations = {
       },
   ) {
     const credential = {
-      key: process.env.APIKEY ?? "UNKNOWN"
+      getBearerToken: () => Promise.resolve(process.env.TOKEN ?? "UNKNOWN")
     };
     const client = new GistsClient(
       credential,

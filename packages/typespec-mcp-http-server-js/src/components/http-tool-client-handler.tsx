@@ -201,7 +201,12 @@ function CredentialVariable(props: CredentialVariableProps) {
               </ObjectExpression>
             </Match>
             <Match when={authScheme.type === "http" && authScheme.scheme === "Bearer"}>
-              <></>
+              <ObjectExpression>
+                <ObjectProperty
+                  name="getBearerToken"
+                  value={code`() => Promise.resolve(process.env.TOKEN ?? "UNKNOWN")`}
+                />
+              </ObjectExpression>
             </Match>
             <Match when={authScheme.type === "oauth2"}>
               <></>
