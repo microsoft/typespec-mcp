@@ -7,7 +7,13 @@ namespace Mcp
     {
         public async Task<Gist[]> ListAsync(DateTimeOffset? since, CancellationToken cancellationToken = default)
         {
-            var pipeline = ClientPipeline.Create();
+            var pipeline = ClientPipeline.Create(
+
+                new ClientPipelineOptions(),
+                System.Array.Empty<PipelinePolicy>(),
+                new [] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(new ApiKeyCredential($"Bearer {Environment.GetEnvironmentVariable("TOKEN")}"), "Authorization") },
+                System.Array.Empty<PipelinePolicy>()
+            );
             var uri = Std.UriTemplate.Expand("https://api.github.com/gists{?since}", new Dictionary<string, object?>
             {
                 { "since", since?.ToString("o") }
@@ -24,7 +30,13 @@ namespace Mcp
 
         public async Task<Gist> CreateAsync(CreateGist gist, CancellationToken cancellationToken = default)
         {
-            var pipeline = ClientPipeline.Create();
+            var pipeline = ClientPipeline.Create(
+
+                new ClientPipelineOptions(),
+                System.Array.Empty<PipelinePolicy>(),
+                new [] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(new ApiKeyCredential($"Bearer {Environment.GetEnvironmentVariable("TOKEN")}"), "Authorization") },
+                System.Array.Empty<PipelinePolicy>()
+            );
             var uri = "https://api.github.com/gists";
             using PipelineMessage message = pipeline.CreateMessage();
             message.Request.Method = "POST";
@@ -39,7 +51,13 @@ namespace Mcp
 
         public async Task<Gist[]> ListPublicAsync(DateTimeOffset? since, CancellationToken cancellationToken = default)
         {
-            var pipeline = ClientPipeline.Create();
+            var pipeline = ClientPipeline.Create(
+
+                new ClientPipelineOptions(),
+                System.Array.Empty<PipelinePolicy>(),
+                new [] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(new ApiKeyCredential($"Bearer {Environment.GetEnvironmentVariable("TOKEN")}"), "Authorization") },
+                System.Array.Empty<PipelinePolicy>()
+            );
             var uri = Std.UriTemplate.Expand("https://api.github.com/gists/public{?since}", new Dictionary<string, object?>
             {
                 { "since", since?.ToString("o") }
@@ -56,7 +74,13 @@ namespace Mcp
 
         public async Task<Gist[]> ListStarredAsync(DateTimeOffset? since, CancellationToken cancellationToken = default)
         {
-            var pipeline = ClientPipeline.Create();
+            var pipeline = ClientPipeline.Create(
+
+                new ClientPipelineOptions(),
+                System.Array.Empty<PipelinePolicy>(),
+                new [] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(new ApiKeyCredential($"Bearer {Environment.GetEnvironmentVariable("TOKEN")}"), "Authorization") },
+                System.Array.Empty<PipelinePolicy>()
+            );
             var uri = Std.UriTemplate.Expand("https://api.github.com/gists/starred{?since}", new Dictionary<string, object?>
             {
                 { "since", since?.ToString("o") }
@@ -73,7 +97,13 @@ namespace Mcp
 
         public async Task<Gist> GetAsync(string id, CancellationToken cancellationToken = default)
         {
-            var pipeline = ClientPipeline.Create();
+            var pipeline = ClientPipeline.Create(
+
+                new ClientPipelineOptions(),
+                System.Array.Empty<PipelinePolicy>(),
+                new [] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(new ApiKeyCredential($"Bearer {Environment.GetEnvironmentVariable("TOKEN")}"), "Authorization") },
+                System.Array.Empty<PipelinePolicy>()
+            );
             var uri = Std.UriTemplate.Expand("https://api.github.com/gists/{id}", new Dictionary<string, object?>
             {
                 { "id", id }
@@ -90,7 +120,13 @@ namespace Mcp
 
         public async Task<Gist> UpdateAsync(string id, CreateGist gist, CancellationToken cancellationToken = default)
         {
-            var pipeline = ClientPipeline.Create();
+            var pipeline = ClientPipeline.Create(
+
+                new ClientPipelineOptions(),
+                System.Array.Empty<PipelinePolicy>(),
+                new [] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(new ApiKeyCredential($"Bearer {Environment.GetEnvironmentVariable("TOKEN")}"), "Authorization") },
+                System.Array.Empty<PipelinePolicy>()
+            );
             var uri = Std.UriTemplate.Expand("https://api.github.com/gists/{id}", new Dictionary<string, object?>
             {
                 { "id", id }
@@ -108,7 +144,13 @@ namespace Mcp
 
         public async Task<Task> DeleteAsync(string id, CancellationToken cancellationToken = default)
         {
-            var pipeline = ClientPipeline.Create();
+            var pipeline = ClientPipeline.Create(
+
+                new ClientPipelineOptions(),
+                System.Array.Empty<PipelinePolicy>(),
+                new [] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(new ApiKeyCredential($"Bearer {Environment.GetEnvironmentVariable("TOKEN")}"), "Authorization") },
+                System.Array.Empty<PipelinePolicy>()
+            );
             var uri = Std.UriTemplate.Expand("https://api.github.com/gists/{id}", new Dictionary<string, object?>
             {
                 { "id", id }
@@ -125,7 +167,13 @@ namespace Mcp
 
         public async Task<GistCommit[]> ListCommitsAsync(string id, CancellationToken cancellationToken = default)
         {
-            var pipeline = ClientPipeline.Create();
+            var pipeline = ClientPipeline.Create(
+
+                new ClientPipelineOptions(),
+                System.Array.Empty<PipelinePolicy>(),
+                new [] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(new ApiKeyCredential($"Bearer {Environment.GetEnvironmentVariable("TOKEN")}"), "Authorization") },
+                System.Array.Empty<PipelinePolicy>()
+            );
             var uri = Std.UriTemplate.Expand("https://api.github.com/gists/{id}/commits", new Dictionary<string, object?>
             {
                 { "id", id }
@@ -142,7 +190,13 @@ namespace Mcp
 
         public async Task<Gist[]> ListForksAsync(string id, CancellationToken cancellationToken = default)
         {
-            var pipeline = ClientPipeline.Create();
+            var pipeline = ClientPipeline.Create(
+
+                new ClientPipelineOptions(),
+                System.Array.Empty<PipelinePolicy>(),
+                new [] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(new ApiKeyCredential($"Bearer {Environment.GetEnvironmentVariable("TOKEN")}"), "Authorization") },
+                System.Array.Empty<PipelinePolicy>()
+            );
             var uri = Std.UriTemplate.Expand("https://api.github.com/gists/{id}/forks", new Dictionary<string, object?>
             {
                 { "id", id }
@@ -159,7 +213,13 @@ namespace Mcp
 
         public async Task<Gist> ForkAsync(string id, CancellationToken cancellationToken = default)
         {
-            var pipeline = ClientPipeline.Create();
+            var pipeline = ClientPipeline.Create(
+
+                new ClientPipelineOptions(),
+                System.Array.Empty<PipelinePolicy>(),
+                new [] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(new ApiKeyCredential($"Bearer {Environment.GetEnvironmentVariable("TOKEN")}"), "Authorization") },
+                System.Array.Empty<PipelinePolicy>()
+            );
             var uri = Std.UriTemplate.Expand("https://api.github.com/gists/{id}/forks", new Dictionary<string, object?>
             {
                 { "id", id }
@@ -176,7 +236,13 @@ namespace Mcp
 
         public async Task<Task> StarAsync(string id, CancellationToken cancellationToken = default)
         {
-            var pipeline = ClientPipeline.Create();
+            var pipeline = ClientPipeline.Create(
+
+                new ClientPipelineOptions(),
+                System.Array.Empty<PipelinePolicy>(),
+                new [] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(new ApiKeyCredential($"Bearer {Environment.GetEnvironmentVariable("TOKEN")}"), "Authorization") },
+                System.Array.Empty<PipelinePolicy>()
+            );
             var uri = Std.UriTemplate.Expand("https://api.github.com/gists/{id}/star", new Dictionary<string, object?>
             {
                 { "id", id }
@@ -193,7 +259,13 @@ namespace Mcp
 
         public async Task<Task> UnstarAsync(string id, CancellationToken cancellationToken = default)
         {
-            var pipeline = ClientPipeline.Create();
+            var pipeline = ClientPipeline.Create(
+
+                new ClientPipelineOptions(),
+                System.Array.Empty<PipelinePolicy>(),
+                new [] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(new ApiKeyCredential($"Bearer {Environment.GetEnvironmentVariable("TOKEN")}"), "Authorization") },
+                System.Array.Empty<PipelinePolicy>()
+            );
             var uri = Std.UriTemplate.Expand("https://api.github.com/gists/{id}/star", new Dictionary<string, object?>
             {
                 { "id", id }
@@ -210,7 +282,13 @@ namespace Mcp
 
         public async Task<bool> IsStarredAsync(string id, CancellationToken cancellationToken = default)
         {
-            var pipeline = ClientPipeline.Create();
+            var pipeline = ClientPipeline.Create(
+
+                new ClientPipelineOptions(),
+                System.Array.Empty<PipelinePolicy>(),
+                new [] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(new ApiKeyCredential($"Bearer {Environment.GetEnvironmentVariable("TOKEN")}"), "Authorization") },
+                System.Array.Empty<PipelinePolicy>()
+            );
             var uri = Std.UriTemplate.Expand("https://api.github.com/gists/{id}/star", new Dictionary<string, object?>
             {
                 { "id", id }

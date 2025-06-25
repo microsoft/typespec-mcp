@@ -6,6 +6,7 @@ import { TypeExpression } from "@typespec/emitter-framework/csharp";
 import { getServers, type HttpPayloadBody } from "@typespec/http";
 import { useMCPServerContext, type ToolDescriptor, type ToolGroup } from "typespec-mcp-server-csharp";
 import { getToolGroupInferfaceRefkey } from "typespec-mcp-server-csharp/components";
+import { CreateClientPipeline } from "./client-pipeline.jsx";
 import { UriTemplateSerializer } from "./uri-template-serializer.jsx";
 
 interface ToolGroupImplementationProps {
@@ -70,7 +71,7 @@ function ToolMethod(props: ToolMethodProps) {
       returns={code`Task<${(<ReturnTypeExpression op={props.tool.implementationOp} />)}>`}
     >
       {code`
-          var pipeline = ClientPipeline.Create();
+          var pipeline = ${(<CreateClientPipeline httpOp={httpOp} />)};
           var uri = ${(<UriTemplateSerializer server={host} httpOp={httpOp} />)};
           using PipelineMessage message = pipeline.CreateMessage();
           message.Request.Method = "${httpOp.verb.toUpperCase()}";

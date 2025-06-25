@@ -12,14 +12,14 @@
       "command": "node",
       "args": ["${workspaceFolder}/samples/http-mcp-bridge/dist/tsp-output/js-server/main.js"],
       "env": {
-        "APIKEY": "Bearer ${input:githubToken}"
+        "TOKEN": "${input:githubToken}"
       }
     },
     "Sample: Github CS": {
       "command": "dotnet",
       "args": ["run", "--project", "${workspaceFolder}/samples/http-mcp-bridge/tsp-output/cs-server/Mcp.csproj"],
       "env": {
-        "APIKEY": "Bearer ${input:githubToken}"
+        "TOKEN": "${input:githubToken}"
       }
     },
     "Vector CSharp": {
