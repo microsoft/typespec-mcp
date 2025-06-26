@@ -55,20 +55,22 @@ function ToolMethod(props: ToolMethodProps) {
   const pipelineKey = refkey();
   const messageRefKey = refkey();
 
+  const implementationOp = props.tool.implementationOp;
   return (
     <ClassMethod
       async
       name={props.tool.originalOp.name + "Async"}
       public
       parameters={parameters}
-      returns={code`Task<${(<ReturnTypeExpression op={props.tool.implementationOp} />)}>`}
+      returns={<ReturnTypeExpression op={implementationOp} />}
     >
       <List>
         <VarDeclaration name="pipeline" refkey={pipelineKey} children={<CreateClientPipeline httpOp={httpOp} />} />
         <CreateRequestMessage httpOp={httpOp} inputs={{ pipeline: pipelineKey }} outputs={{ message: messageRefKey }} />
         {code`await ${pipelineKey}.SendAsync(${messageRefKey});`}
-        {code`
-          return ResponseHandler<${(<ReturnTypeExpression op={props.tool.implementationOp} />)}>.Handle(${messageRefKey});
+        {implementationOp.returnType !== $.intrinsic.void &&
+          code`
+          return ResponseHandler<${(<TypeExpression type={implementationOp.returnType} />)}>.Handle(${messageRefKey});
         `}
       </List>
     </ClassMethod>
@@ -80,5 +82,5 @@ function ReturnTypeExpression(props: { op: Operation }) {
   if (props.op.returnType === $.intrinsic.void) {
     return "Task";
   }
-  return <TypeExpression type={props.op.returnType} />;
+  return code`Task<${(<TypeExpression type={props.op.returnType} />)}>`;
 }

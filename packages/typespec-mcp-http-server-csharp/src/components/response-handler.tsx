@@ -14,21 +14,36 @@ export function ResponseHandlerFile() {
 
 export function ResponseHandlerClass() {
   const tRefKey = refkey();
+  const checkSuccessRk = refkey();
   return (
     <ClassDeclaration name="ResponseHandler" public static typeParameters={{ T: tRefKey }}>
-      <ClassMethod
-        public
-        static
-        name="Handle"
-        parameters={[{ name: "message", type: "System.ClientModel.Primitives.PipelineMessage" }]}
-        returns={tRefKey}
-      >
-        {code`
+      <List doubleHardline>
+        <ClassMethod
+          public
+          static
+          name="CheckSuccess"
+          refkey={checkSuccessRk}
+          parameters={[{ name: "message", type: "System.ClientModel.Primitives.PipelineMessage" }]}
+          returns={"System.ClientModel.Primitives.PipelineResponse"}
+        >
+          {code`
             var response = message.Response ?? throw new InvalidOperationException("Expected a response in the message");
             if (response.Status > 299 || response.Status < 200)
             {
                 throw new InvalidOperationException($"Http request failed with status code: {response.Status}. Content:\\n{response.Content}");
             }
+            return response;
+        `}
+        </ClassMethod>
+        <ClassMethod
+          public
+          static
+          name="Handle"
+          parameters={[{ name: "message", type: "System.ClientModel.Primitives.PipelineMessage" }]}
+          returns={tRefKey}
+        >
+          {code`
+            var response = ${checkSuccessRk}(message);
             var result = response.Content.ToObjectFromJson<${tRefKey}>(${(<JsonSerializerOptions />)});
             if (result == null)
             {
@@ -37,7 +52,8 @@ export function ResponseHandlerClass() {
 
             return result;
         `}
-      </ClassMethod>
+        </ClassMethod>
+      </List>
     </ClassDeclaration>
   );
 }

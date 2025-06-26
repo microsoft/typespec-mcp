@@ -1,4 +1,4 @@
-import { code, List, type Refkey } from "@alloy-js/core";
+import { code, List, refkey, type Refkey } from "@alloy-js/core";
 import { VarDeclaration } from "@alloy-js/csharp";
 import { useTsp } from "@typespec/emitter-framework";
 import { getServers, type HttpOperation, type HttpPayloadBody } from "@typespec/http";
@@ -15,6 +15,10 @@ export interface CreateRequestMessageProps {
   };
 }
 
+/**
+ * Render the code to create a request message for the given HTTP operation.
+ * This expect a `pipeline` reference in the inputs, and will create a `message` variable output.
+ */
 export function CreateRequestMessage(props: CreateRequestMessageProps) {
   const httpOp = props.httpOp;
   const mcpContext = useMCPServerContext();
@@ -28,6 +32,7 @@ export function CreateRequestMessage(props: CreateRequestMessageProps) {
   const servers = getServers($.program, server.container);
   const host = servers![0];
 
+  const messageRk = typeof props.outputs.message === "string" ? refkey() : props.outputs.message;
   return (
     <List>
       <>
@@ -42,18 +47,18 @@ export function CreateRequestMessage(props: CreateRequestMessageProps) {
       </>
       {code`
         var uri = ${(<UriTemplateSerializer server={host} httpOp={httpOp} />)};
-        message.Request.Method = "${httpOp.verb.toUpperCase()}";
-        message.Request.Uri = new Uri(uri);
-        message.Request.Headers.Add("User-Agent", "TypeSpec Mcp/Http Bridge Client");
-        ${httpOp.parameters.body ? <ApplyBodyToMessage body={httpOp.parameters.body} /> : ""}
+        ${messageRk}.Request.Method = "${httpOp.verb.toUpperCase()}";
+        ${messageRk}.Request.Uri = new Uri(uri);
+        ${messageRk}.Request.Headers.Add("User-Agent", "TypeSpec Mcp/Http Bridge Client");
+        ${httpOp.parameters.body ? <ApplyBodyToMessage body={httpOp.parameters.body} messageRefkey={messageRk} /> : ""}
     `}
     </List>
   );
 }
 
-function ApplyBodyToMessage(props: { body: HttpPayloadBody }) {
+function ApplyBodyToMessage(props: { body: HttpPayloadBody; messageRefkey: Refkey }) {
   return code`
-    message.Request.Headers.Set("Content-Type", "${props.body.contentTypes[0]}");
-    message.Request.Content = BinaryContent.Create(BinaryData.FromObjectAsJson(${props.body.property!.name}));
+    ${props.messageRefkey}.Request.Headers.Set("Content-Type", "${props.body.contentTypes[0]}");
+    ${props.messageRefkey}.Request.Content = BinaryContent.Create(BinaryData.FromObjectAsJson(${props.body.property!.name}));
   `;
 }

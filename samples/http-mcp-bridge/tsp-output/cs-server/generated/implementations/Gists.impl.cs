@@ -136,7 +136,7 @@ namespace Mcp
             return ResponseHandler<Gist>.Handle(message);
         }
 
-        public async Task<Task> DeleteAsync(string id, CancellationToken cancellationToken = default)
+        public async Task DeleteAsync(string id, CancellationToken cancellationToken = default)
         {
             var pipeline = ClientPipeline.Create(
 
@@ -155,7 +155,6 @@ namespace Mcp
             message.Request.Headers.Add("User-Agent", "TypeSpec Mcp/Http Bridge Client");
 
             await pipeline.SendAsync(message);
-            return ResponseHandler<Task>.Handle(message);
         }
 
         public async Task<GistCommit[]> ListCommitsAsync(string id, CancellationToken cancellationToken = default)
@@ -224,7 +223,7 @@ namespace Mcp
             return ResponseHandler<Gist>.Handle(message);
         }
 
-        public async Task<Task> StarAsync(string id, CancellationToken cancellationToken = default)
+        public async Task StarAsync(string id, CancellationToken cancellationToken = default)
         {
             var pipeline = ClientPipeline.Create(
 
@@ -243,10 +242,9 @@ namespace Mcp
             message.Request.Headers.Add("User-Agent", "TypeSpec Mcp/Http Bridge Client");
 
             await pipeline.SendAsync(message);
-            return ResponseHandler<Task>.Handle(message);
         }
 
-        public async Task<Task> UnstarAsync(string id, CancellationToken cancellationToken = default)
+        public async Task UnstarAsync(string id, CancellationToken cancellationToken = default)
         {
             var pipeline = ClientPipeline.Create(
 
@@ -265,7 +263,6 @@ namespace Mcp
             message.Request.Headers.Add("User-Agent", "TypeSpec Mcp/Http Bridge Client");
 
             await pipeline.SendAsync(message);
-            return ResponseHandler<Task>.Handle(message);
         }
 
         public async Task<bool> IsStarredAsync(string id, CancellationToken cancellationToken = default)
