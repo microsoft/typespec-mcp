@@ -9,7 +9,7 @@
     "build": "pnpm -r build",
     "test": "vitest run",
     "test:watch": "vitest --watch",
-    "lint": "eslint .",
+    "lint": "eslint . --max-warnings=0",
     "format": "prettier . --write",
     "format:check": "prettier . --check"
   },
