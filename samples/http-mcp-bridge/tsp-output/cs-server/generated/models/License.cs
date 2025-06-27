@@ -5,15 +5,15 @@ namespace Mcp
         /// <summary>
         /// Key of the license
         /// </summary>
-        public string Key { get; set; }
+        public required string Key { get; set; }
         /// <summary>
         /// Name of the license
         /// </summary>
-        public string Name { get; set; }
+        public required string Name { get; set; }
         /// <summary>
         /// SPDX ID of the license
         /// </summary>
-        public string SpdxId { get; set; }
+        public required string SpdxId { get; set; }
         /// <summary>
         /// URL of the license
         /// </summary>

@@ -4,11 +4,11 @@ using MCP;
 namespace Github;
 
 model GistFile {
-  filename: string;
-  type: string;
-  language: string | null;
-  raw_url: string;
-  size: int32;
+  filename?: string;
+  type?: string;
+  language?: string;
+  raw_url?: string;
+  size?: int32;
   encoding?: string;
 }
 
@@ -17,42 +17,43 @@ model GistFile {
  */
 model Gist {
   id: string;
-  node_id: string;
+
+  // node_id: string;
 
   /**
    * URL of the gist
    */
   url: string;
 
-  /**
-   * API URL for forks
-   */
-  forks_url: string;
+  // /**
+  //  * API URL for forks
+  //  */
+  // forks_url: string;
 
-  /**
-   * API URL for commits
-   */
-  commits_url: string;
+  // /**
+  //  * API URL for commits
+  //  */
+  // commits_url: string;
 
-  /**
-   * Git pull URL
-   */
-  git_pull_url: string;
+  // /**
+  //  * Git pull URL
+  //  */
+  // git_pull_url: string;
 
-  /**
-   * Git push URL
-   */
-  git_push_url: string;
+  // /**
+  //  * Git push URL
+  //  */
+  // git_push_url: string;
 
-  /**
-   * HTML URL of the gist
-   */
-  html_url: string;
+  // /**
+  //  * HTML URL of the gist
+  //  */
+  // html_url: string;
 
-  /**
-   * API URL for comments
-   */
-  comments_url: string;
+  // /**
+  //  * API URL for comments
+  //  */
+  // comments_url: string;
 
   /**
    * Whether the gist is public
@@ -72,32 +73,32 @@ model Gist {
   /**
    * The gist owner (user)
    */
-  user: User | null;
+  user: string | null;
 
   /**
    * Files in the gist
    */
   files: Record<GistFile>;
 
-  /**
-   * Creation timestamp
-   */
-  created_at: string;
+  // /**
+  //  * Creation timestamp
+  //  */
+  // created_at: string;
 
-  /**
-   * Last update timestamp
-   */
-  updated_at: string;
+  // /**
+  //  * Last update timestamp
+  //  */
+  // updated_at: string;
 
   /**
    * Owner of the gist
    */
-  owner?: User;
+  owner?: SimpleUser;
 
-  /**
-   * Whether comments are enabled
-   */
-  comments_enabled?: boolean;
+  // /**
+  //  * Whether comments are enabled
+  //  */
+  // comments_enabled?: boolean;
 
   /**
    * Whether the gist is truncated
@@ -108,7 +109,7 @@ model Gist {
 model GistCommit {
   url: string;
   version: string;
-  user: User | null;
+  user: SimpleUser | null;
   change_status: ChangeStatus;
   committed_at: string;
 }
@@ -120,9 +121,22 @@ model ChangeStatus {
 }
 
 model CreateGist {
+  /** Description of the gist */
+  @example("Example Ruby script")
   description: string;
-  public: boolean;
-  files: Record<GistFile>;
+
+  /** Flag indicating whether the gist is public */
+  @example(true)
+  public: boolean = false;
+
+  /** Names and content for the files that make up the gist */
+  @example(#{ `hello.rb`: #{ content: "puts 'Hello, world!'" } })
+  files: Record<CreateGistFile>;
+}
+
+model CreateGistFile {
+  /** Content of the file */
+  content: string;
 }
 
 @error
@@ -141,7 +155,18 @@ interface Gists {
    */
   @tool list(@query since?: utcDateTime): Gist[] | BasicError;
   /** Create a gist */
-  @tool @post create(@body gist: CreateGist): Gist;
+  @opExample(#{
+    parameters: #{
+      gist: #{
+        description: "Example Ruby script",
+        public: true,
+        files: #{ `hello.rb`: #{ content: "puts 'Hello, world!'" } },
+      },
+    },
+  })
+  @tool
+  @post
+  create(@body gist: CreateGist): Gist;
   /** List public gists */
   @tool @route("/public") listPublic(@query since?: utcDateTime): Gist[];
   /** List starred gists */

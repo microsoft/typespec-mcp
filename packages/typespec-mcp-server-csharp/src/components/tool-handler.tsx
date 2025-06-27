@@ -47,6 +47,8 @@ function ToolMethod(props: ToolMethodProps) {
   const parameters = getToolParameters(props.tool);
   const policy = useCSharpNamePolicy();
   const name = policy.getName(props.tool.originalOp.name + "Async", "class-method");
+  const op = props.tool.implementationOp;
+  const { $ } = useTsp();
   return (
     <List>
       <ToolAttributes tool={props.tool} />
@@ -55,10 +57,10 @@ function ToolMethod(props: ToolMethodProps) {
         name={props.tool.originalOp.name + "Async"}
         public
         parameters={parameters}
-        returns={code`Task<${(<ReturnTypeExpression op={props.tool.implementationOp} />)}>`}
+        returns={<ReturnTypeExpression op={op} />}
       >
         {code`
-          return await this.impl.${name}(${parameters.map((p) => p.name).join(", ")});
+          ${op.returnType !== $.intrinsic.void && "return "}await this.impl.${name}(${parameters.map((p) => p.name).join(", ")});
         `}
       </ClassMethod>
     </List>

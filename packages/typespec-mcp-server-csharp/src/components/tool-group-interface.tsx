@@ -76,7 +76,7 @@ function ToolMethod(props: ToolMethodProps) {
         name={props.tool.originalOp.name + "Async"}
         public
         parameters={parameters}
-        returns={code`Task<${(<ReturnTypeExpression op={props.tool.implementationOp} />)}>`}
+        returns={<ReturnTypeExpression op={props.tool.implementationOp} />}
         doc={<ToolDoc tool={props.tool} />}
       />
     </List>
@@ -88,7 +88,7 @@ export function ReturnTypeExpression(props: { op: Operation }) {
   if (props.op.returnType === $.intrinsic.void) {
     return "Task";
   }
-  return <TypeExpression type={props.op.returnType} />;
+  return code`Task<${(<TypeExpression type={props.op.returnType} />)}>`;
 }
 
 function ToolDoc(props: ToolMethodProps) {

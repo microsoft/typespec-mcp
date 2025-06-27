@@ -42,7 +42,7 @@ namespace Mcp
         /// Delete a gist
         /// </summary>
         ///
-        public Task<Task> DeleteAsync(string id, CancellationToken cancellationToken = default);
+        public Task DeleteAsync(string id, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List gist commits
@@ -66,13 +66,13 @@ namespace Mcp
         /// Star a gist
         /// </summary>
         ///
-        public Task<Task> StarAsync(string id, CancellationToken cancellationToken = default);
+        public Task StarAsync(string id, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Unstar a gist
         /// </summary>
         ///
-        public Task<Task> UnstarAsync(string id, CancellationToken cancellationToken = default);
+        public Task UnstarAsync(string id, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Check if a gist is starred

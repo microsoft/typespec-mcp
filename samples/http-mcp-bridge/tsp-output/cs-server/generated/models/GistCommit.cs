@@ -2,10 +2,10 @@ namespace Mcp
 {
     public class GistCommit
     {
-        public string Url { get; set; }
-        public string Version { get; set; }
-        public User? User { get; set; }
-        public ChangeStatus ChangeStatus { get; set; }
-        public string CommittedAt { get; set; }
+        public required string Url { get; set; }
+        public required string Version { get; set; }
+        public required SimpleUser? User { get; set; }
+        public required ChangeStatus ChangeStatus { get; set; }
+        public required string CommittedAt { get; set; }
     }
 }

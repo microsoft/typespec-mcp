@@ -51,9 +51,9 @@ namespace Mcp
         }
 
         [McpServerTool(Name = "gists_delete"), Description(@"Delete a gist")]
-        public async Task<Task> DeleteAsync(string id, CancellationToken cancellationToken = default)
+        public async Task DeleteAsync(string id, CancellationToken cancellationToken = default)
         {
-            return await this.impl.DeleteAsync(id, cancellationToken);
+            await this.impl.DeleteAsync(id, cancellationToken);
         }
 
         [McpServerTool(Name = "gists_list_commits"), Description(@"List gist commits")]
@@ -75,15 +75,15 @@ namespace Mcp
         }
 
         [McpServerTool(Name = "gists_star"), Description(@"Star a gist")]
-        public async Task<Task> StarAsync(string id, CancellationToken cancellationToken = default)
+        public async Task StarAsync(string id, CancellationToken cancellationToken = default)
         {
-            return await this.impl.StarAsync(id, cancellationToken);
+            await this.impl.StarAsync(id, cancellationToken);
         }
 
         [McpServerTool(Name = "gists_unstar"), Description(@"Unstar a gist")]
-        public async Task<Task> UnstarAsync(string id, CancellationToken cancellationToken = default)
+        public async Task UnstarAsync(string id, CancellationToken cancellationToken = default)
         {
-            return await this.impl.UnstarAsync(id, cancellationToken);
+            await this.impl.UnstarAsync(id, cancellationToken);
         }
 
         [McpServerTool(Name = "gists_is_starred"), Description(@"Check if a gist is starred")]
