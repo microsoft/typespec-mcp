@@ -46,12 +46,16 @@ namespace Mcp
                 return builder.Build();
             }
         }
-        private static void ConfigureServices(IServiceCollection services, McpApplicationOptions options)
+        private static void ConfigureServices(
+            IServiceCollection services, McpApplicationOptions options
+        )
         {
             ConfigureMcpServer(services, options);
             Program.ConfigureServices(services);
         }
-        public static void ConfigureMcpServer(IServiceCollection services, McpApplicationOptions options)
+        public static void ConfigureMcpServer(
+            IServiceCollection services, McpApplicationOptions options
+        )
         {
             var mcp = services
                 .AddMcpServer()
