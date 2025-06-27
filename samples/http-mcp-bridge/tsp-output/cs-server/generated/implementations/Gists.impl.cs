@@ -5,9 +5,7 @@ namespace Mcp
     using System.Text.Json;
     public class GistsHttpBinding : IGists
     {
-        public async Task<Gist[]> ListAsync(
-            DateTimeOffset? since, CancellationToken cancellationToken = default
-        )
+        public async Task<Gist[]> ListAsync(DateTimeOffset? since, CancellationToken cancellationToken = default)
         {
             var pipeline = ClientPipeline.Create(
 
@@ -29,9 +27,7 @@ namespace Mcp
             return ResponseHandler.Handle<Gist[]>(message);
         }
 
-        public async Task<Gist> CreateAsync(
-            CreateGist gist, CancellationToken cancellationToken = default
-        )
+        public async Task<Gist> CreateAsync(CreateGist gist, CancellationToken cancellationToken = default)
         {
             var pipeline = ClientPipeline.Create(
 
@@ -51,9 +47,7 @@ namespace Mcp
             return ResponseHandler.Handle<Gist>(message);
         }
 
-        public async Task<Gist[]> ListPublicAsync(
-            DateTimeOffset? since, CancellationToken cancellationToken = default
-        )
+        public async Task<Gist[]> ListPublicAsync(DateTimeOffset? since, CancellationToken cancellationToken = default)
         {
             var pipeline = ClientPipeline.Create(
 
@@ -75,9 +69,7 @@ namespace Mcp
             return ResponseHandler.Handle<Gist[]>(message);
         }
 
-        public async Task<Gist[]> ListStarredAsync(
-            DateTimeOffset? since, CancellationToken cancellationToken = default
-        )
+        public async Task<Gist[]> ListStarredAsync(DateTimeOffset? since, CancellationToken cancellationToken = default)
         {
             var pipeline = ClientPipeline.Create(
 
@@ -99,9 +91,7 @@ namespace Mcp
             return ResponseHandler.Handle<Gist[]>(message);
         }
 
-        public async Task<Gist> GetAsync(
-            string id, CancellationToken cancellationToken = default
-        )
+        public async Task<Gist> GetAsync(string id, CancellationToken cancellationToken = default)
         {
             var pipeline = ClientPipeline.Create(
 
@@ -123,9 +113,7 @@ namespace Mcp
             return ResponseHandler.Handle<Gist>(message);
         }
 
-        public async Task<Gist> UpdateAsync(
-            string id, CreateGist gist, CancellationToken cancellationToken = default
-        )
+        public async Task<Gist> UpdateAsync(string id, CreateGist gist, CancellationToken cancellationToken = default)
         {
             var pipeline = ClientPipeline.Create(
 
@@ -148,9 +136,7 @@ namespace Mcp
             return ResponseHandler.Handle<Gist>(message);
         }
 
-        public async Task DeleteAsync(
-            string id, CancellationToken cancellationToken = default
-        )
+        public async Task DeleteAsync(string id, CancellationToken cancellationToken = default)
         {
             var pipeline = ClientPipeline.Create(
 
@@ -172,9 +158,7 @@ namespace Mcp
             ResponseHandler.CheckSuccess(message);
         }
 
-        public async Task<GistCommit[]> ListCommitsAsync(
-            string id, CancellationToken cancellationToken = default
-        )
+        public async Task<GistCommit[]> ListCommitsAsync(string id, CancellationToken cancellationToken = default)
         {
             var pipeline = ClientPipeline.Create(
 
@@ -196,9 +180,7 @@ namespace Mcp
             return ResponseHandler.Handle<GistCommit[]>(message);
         }
 
-        public async Task<Gist[]> ListForksAsync(
-            string id, CancellationToken cancellationToken = default
-        )
+        public async Task<Gist[]> ListForksAsync(string id, CancellationToken cancellationToken = default)
         {
             var pipeline = ClientPipeline.Create(
 
@@ -220,9 +202,7 @@ namespace Mcp
             return ResponseHandler.Handle<Gist[]>(message);
         }
 
-        public async Task<Gist> ForkAsync(
-            string id, CancellationToken cancellationToken = default
-        )
+        public async Task<Gist> ForkAsync(string id, CancellationToken cancellationToken = default)
         {
             var pipeline = ClientPipeline.Create(
 
@@ -244,9 +224,7 @@ namespace Mcp
             return ResponseHandler.Handle<Gist>(message);
         }
 
-        public async Task StarAsync(
-            string id, CancellationToken cancellationToken = default
-        )
+        public async Task StarAsync(string id, CancellationToken cancellationToken = default)
         {
             var pipeline = ClientPipeline.Create(
 
@@ -268,9 +246,7 @@ namespace Mcp
             ResponseHandler.CheckSuccess(message);
         }
 
-        public async Task UnstarAsync(
-            string id, CancellationToken cancellationToken = default
-        )
+        public async Task UnstarAsync(string id, CancellationToken cancellationToken = default)
         {
             var pipeline = ClientPipeline.Create(
 
@@ -292,9 +268,7 @@ namespace Mcp
             ResponseHandler.CheckSuccess(message);
         }
 
-        public async Task<bool> IsStarredAsync(
-            string id, CancellationToken cancellationToken = default
-        )
+        public async Task<bool> IsStarredAsync(string id, CancellationToken cancellationToken = default)
         {
             var pipeline = ClientPipeline.Create(
 

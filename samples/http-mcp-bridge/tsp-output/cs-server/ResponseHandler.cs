@@ -15,9 +15,7 @@ namespace Mcp
             return response;
         }
 
-        public static T Handle<T>(
-            System.ClientModel.Primitives.PipelineMessage message
-        )
+        public static T Handle<T>(System.ClientModel.Primitives.PipelineMessage message)
         {
             var response = CheckSuccess(message);
             var result = response.Content.ToObjectFromJson<T>(new System.Text.Json.JsonSerializerOptions(System.Text.Json.JsonSerializerDefaults.Web));
