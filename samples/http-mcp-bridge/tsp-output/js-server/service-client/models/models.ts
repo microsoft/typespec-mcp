@@ -138,9 +138,25 @@ export interface GistFile {
   encoding?: string;
 }
 export interface CreateGist {
+  /**
+   * Description of the gist
+   */
   description: string;
+  /**
+   * Flag indicating whether the gist is public
+   */
   public_: boolean;
-  files: Record<string, GistFile>;
+  /**
+   * Names and content for the files that make up the gist
+   */
+  files: Record<string, CreateGistFile>;
+}
+
+export interface CreateGistFile {
+  /**
+   * Content of the file
+   */
+  content: string;
 }
 
 export interface GistCommit {

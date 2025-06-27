@@ -269,10 +269,19 @@ export const Gist = z
 
 export const GistArray = z.array(Gist.describe("Base Gist"));
 
+export const CreateGistFile = z.object({
+  content: z.string().describe("Content of the file"),
+});
+
 export const CreateGist = z.object({
-  description: z.string(),
-  public: z.boolean(),
-  files: z.record(z.string(), GistFile),
+  description: z.string().describe("Description of the gist"),
+  public: z
+    .boolean()
+    .default(false)
+    .describe("Flag indicating whether the gist is public"),
+  files: z
+    .record(z.string(), CreateGistFile)
+    .describe("Names and content for the files that make up the gist"),
 });
 
 export const GistArray_2 = z.array(Gist.describe("Base Gist"));

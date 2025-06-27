@@ -120,9 +120,22 @@ model ChangeStatus {
 }
 
 model CreateGist {
+  /** Description of the gist */
+  @example("Example Ruby script")
   description: string;
-  public: boolean;
-  files: Record<GistFile>;
+
+  /** Flag indicating whether the gist is public */
+  @example(true)
+  public: boolean = false;
+
+  /** Names and content for the files that make up the gist */
+  @example(#{ `hello.rb`: #{ content: "puts 'Hello, world!'" } })
+  files: Record<CreateGistFile>;
+}
+
+model CreateGistFile {
+  /** Content of the file */
+  content: string;
 }
 
 @error
@@ -141,7 +154,18 @@ interface Gists {
    */
   @tool list(@query since?: utcDateTime): Gist[] | BasicError;
   /** Create a gist */
-  @tool @post create(@body gist: CreateGist): Gist;
+  @opExample(#{
+    parameters: #{
+      gist: #{
+        description: "Example Ruby script",
+        public: true,
+        files: #{ `hello.rb`: #{ content: "puts 'Hello, world!'" } },
+      },
+    },
+  })
+  @tool
+  @post
+  create(@body gist: CreateGist): Gist;
   /** List public gists */
   @tool @route("/public") listPublic(@query since?: utcDateTime): Gist[];
   /** List starred gists */

@@ -1,5 +1,6 @@
 import { code, List, refkey } from "@alloy-js/core";
 import { ClassDeclaration, ClassMethod, SourceFile, UsingDirective } from "@alloy-js/csharp";
+import { JsonSerializerOptions } from "./json-serializer-options.jsx";
 
 export function ResponseHandlerFile() {
   return (
@@ -57,8 +58,4 @@ export function ResponseHandlerClass() {
       </List>
     </ClassDeclaration>
   );
-}
-
-function JsonSerializerOptions() {
-  return code`new System.Text.Json.JsonSerializerOptions(System.Text.Json.JsonSerializerDefaults.Web)`;
 }

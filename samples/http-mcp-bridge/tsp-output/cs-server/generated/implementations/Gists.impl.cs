@@ -42,7 +42,7 @@ namespace Mcp
             message.Request.Uri = new Uri(uri);
             message.Request.Headers.Add("User-Agent", "TypeSpec Mcp/Http Bridge Client");
             message.Request.Headers.Set("Content-Type", "application/json");
-            message.Request.Content = BinaryContent.Create(BinaryData.FromObjectAsJson(gist));
+            message.Request.Content = BinaryContent.Create(BinaryData.FromObjectAsJson(gist, new System.Text.Json.JsonSerializerOptions(System.Text.Json.JsonSerializerDefaults.Web)));
             await pipeline.SendAsync(message);
             return ResponseHandler.Handle<Gist>(message);
         }
@@ -131,7 +131,7 @@ namespace Mcp
             message.Request.Uri = new Uri(uri);
             message.Request.Headers.Add("User-Agent", "TypeSpec Mcp/Http Bridge Client");
             message.Request.Headers.Set("Content-Type", "application/json");
-            message.Request.Content = BinaryContent.Create(BinaryData.FromObjectAsJson(gist));
+            message.Request.Content = BinaryContent.Create(BinaryData.FromObjectAsJson(gist, new System.Text.Json.JsonSerializerOptions(System.Text.Json.JsonSerializerDefaults.Web)));
             await pipeline.SendAsync(message);
             return ResponseHandler.Handle<Gist>(message);
         }

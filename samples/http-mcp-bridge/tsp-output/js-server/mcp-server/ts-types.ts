@@ -431,10 +431,26 @@ export interface GistArray extends Array<Gist> {
 
 }
 
+export interface CreateGistFile {
+  /**
+   * Content of the file
+   */
+  content: string;
+}
+
 export interface CreateGist {
+  /**
+   * Description of the gist
+   */
   description: string;
+  /**
+   * Flag indicating whether the gist is public
+   */
   public_: boolean;
-  files: Record<string, GistFile>;
+  /**
+   * Names and content for the files that make up the gist
+   */
+  files: Record<string, CreateGistFile>;
 }
 
 export interface GistArray_2 extends Array<Gist> {

@@ -1,4 +1,4 @@
-import { ChangeStatus, CreateGist, FullRepository, Gist, GistCommit, GistFile, License, User } from "../models.js";
+import { ChangeStatus, CreateGist, CreateGistFile, FullRepository, Gist, GistCommit, GistFile, License, User } from "../models.js";
 
 export function decodeBase64(value: string): Uint8Array | undefined {
   if(!value) {
@@ -166,7 +166,7 @@ export function decodeBase64(value: string): Uint8Array | undefined {
     return input_ as any;
   }
     return {
-    description: input_.description,public: input_.public_,files: jsonRecordGistFileToTransportTransform(input_.files)
+    description: input_.description,public: input_.public_,files: jsonRecordCreateGistFileToTransportTransform(input_.files)
   }!;
 }export function jsonCreateGistToApplicationTransform(
   input_?: any,
@@ -175,7 +175,55 @@ export function decodeBase64(value: string): Uint8Array | undefined {
     return input_ as any;
   }
     return {
-    description: input_.description,public_: input_.public,files: jsonRecordGistFileToApplicationTransform(input_.files)
+    description: input_.description,public_: input_.public,files: jsonRecordCreateGistFileToApplicationTransform(input_.files)
+  }!;
+}export function jsonRecordCreateGistFileToTransportTransform(
+  items_?: Record<string, any> | null,
+): any {
+  if(!items_) {
+    return items_ as any;
+  }
+
+  const _transformedRecord: any = {};
+
+  for (const [key, value] of Object.entries(items_ ?? {})) {
+    const transformedItem = jsonCreateGistFileToTransportTransform(value as any);
+    _transformedRecord[key] = transformedItem;
+  }
+
+  return _transformedRecord;
+}export function jsonRecordCreateGistFileToApplicationTransform(
+  items_?: any,
+): Record<string, any> {
+  if(!items_) {
+    return items_ as any;
+  }
+
+  const _transformedRecord: any = {};
+
+  for (const [key, value] of Object.entries(items_ ?? {})) {
+    const transformedItem = jsonCreateGistFileToApplicationTransform(value as any);
+    _transformedRecord[key] = transformedItem;
+  }
+
+  return _transformedRecord;
+}export function jsonCreateGistFileToTransportTransform(
+  input_?: CreateGistFile | null,
+): any {
+  if(!input_) {
+    return input_ as any;
+  }
+    return {
+    content: input_.content
+  }!;
+}export function jsonCreateGistFileToApplicationTransform(
+  input_?: any,
+): CreateGistFile {
+  if(!input_) {
+    return input_ as any;
+  }
+    return {
+    content: input_.content
   }!;
 }export function jsonArrayGistCommitToTransportTransform(
   items_?: Array<GistCommit> | null,

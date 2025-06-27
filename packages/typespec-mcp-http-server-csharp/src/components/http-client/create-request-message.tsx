@@ -3,6 +3,7 @@ import { VarDeclaration } from "@alloy-js/csharp";
 import { useTsp } from "@typespec/emitter-framework";
 import { getServers, type HttpOperation, type HttpPayloadBody } from "@typespec/http";
 import { useMCPServerContext } from "typespec-mcp-server-csharp";
+import { JsonSerializerOptions } from "../json-serializer-options.jsx";
 import { UriTemplateSerializer } from "../uri-template-serializer.jsx";
 
 export interface CreateRequestMessageProps {
@@ -59,6 +60,6 @@ export function CreateRequestMessage(props: CreateRequestMessageProps) {
 function ApplyBodyToMessage(props: { body: HttpPayloadBody; messageRefkey: Refkey }) {
   return code`
     ${props.messageRefkey}.Request.Headers.Set("Content-Type", "${props.body.contentTypes[0]}");
-    ${props.messageRefkey}.Request.Content = BinaryContent.Create(BinaryData.FromObjectAsJson(${props.body.property!.name}));
+    ${props.messageRefkey}.Request.Content = BinaryContent.Create(BinaryData.FromObjectAsJson(${props.body.property!.name}, ${(<JsonSerializerOptions />)}));
   `;
 }
