@@ -1,7 +1,15 @@
 /**
  * Github user
  */
-export interface User {
+export interface SimpleUser {
+  /**
+   * The name of the user
+   */
+  name?: string;
+  /**
+   * The email of the user
+   */
+  email?: string;
   /**
    * The username of the owner
    */
@@ -10,18 +18,6 @@ export interface User {
    * Unique identifier of the owner
    */
   id: number;
-  /**
-   * Node ID of the owner
-   */
-  nodeId: string;
-  /**
-   * Avatar URL of the owner
-   */
-  avatarUrl: string;
-  /**
-   * HTML URL of the owner's profile
-   */
-  htmlUrl: string;
 }
 
 export interface License {
@@ -67,7 +63,7 @@ export interface FullRepository {
   /**
    * The owner of the repository
    */
-  owner: User;
+  owner: SimpleUser;
   /**
    * Whether the repository is private or public
    */
@@ -343,11 +339,11 @@ export interface FullRepository {
 }
 
 export interface GistFile {
-  filename: string;
-  type: string;
-  language: string | null;
-  rawUrl: string;
-  size: number;
+  filename?: string;
+  type?: string;
+  language?: string;
+  rawUrl?: string;
+  size?: number;
   encoding?: string;
 }
 
@@ -356,35 +352,10 @@ export interface GistFile {
  */
 export interface Gist {
   id: string;
-  nodeId: string;
   /**
    * URL of the gist
    */
   url: string;
-  /**
-   * API URL for forks
-   */
-  forksUrl: string;
-  /**
-   * API URL for commits
-   */
-  commitsUrl: string;
-  /**
-   * Git pull URL
-   */
-  gitPullUrl: string;
-  /**
-   * Git push URL
-   */
-  gitPushUrl: string;
-  /**
-   * HTML URL of the gist
-   */
-  htmlUrl: string;
-  /**
-   * API URL for comments
-   */
-  commentsUrl: string;
   /**
    * Whether the gist is public
    */
@@ -400,27 +371,15 @@ export interface Gist {
   /**
    * The gist owner (user)
    */
-  user: User | null;
+  user: string | null;
   /**
    * Files in the gist
    */
   files: Record<string, GistFile>;
   /**
-   * Creation timestamp
-   */
-  createdAt: string;
-  /**
-   * Last update timestamp
-   */
-  updatedAt: string;
-  /**
    * Owner of the gist
    */
-  owner?: User;
-  /**
-   * Whether comments are enabled
-   */
-  commentsEnabled?: boolean;
+  owner?: SimpleUser;
   /**
    * Whether the gist is truncated
    */
@@ -470,7 +429,7 @@ export interface ChangeStatus {
 export interface GistCommit {
   url: string;
   version: string;
-  user: User | null;
+  user: SimpleUser | null;
   changeStatus: ChangeStatus;
   committedAt: string;
 }

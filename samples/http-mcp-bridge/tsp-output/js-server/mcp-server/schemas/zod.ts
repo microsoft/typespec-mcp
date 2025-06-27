@@ -1,7 +1,9 @@
 import { z } from "zod";
 
-export const User = z
+export const SimpleUser = z
   .object({
+    name: z.string().optional().describe("The name of the user"),
+    email: z.string().optional().describe("The email of the user"),
     login: z.string().describe("The username of the owner"),
     id: z
       .number()
@@ -9,9 +11,6 @@ export const User = z
       .gte(-2147483648)
       .lte(2147483647)
       .describe("Unique identifier of the owner"),
-    node_id: z.string().describe("Node ID of the owner"),
-    avatar_url: z.string().describe("Avatar URL of the owner"),
-    html_url: z.string().describe("HTML URL of the owner's profile"),
   })
   .describe("Github user");
 
@@ -38,7 +37,7 @@ export const FullRepository = z
     full_name: z
       .string()
       .describe("The full name of the repository, including the owner"),
-    owner: User.describe("The owner of the repository"),
+    owner: SimpleUser.describe("The owner of the repository"),
     private: z
       .boolean()
       .describe("Whether the repository is private or public"),
@@ -223,25 +222,18 @@ export const FullRepository = z
     .describe("Full representation of a GitHub repository. This model includes all the details of a repository, such as its owner, visibility, license, and various URLs for accessing its resources.");
 
 export const GistFile = z.object({
-  filename: z.string(),
-  type: z.string(),
-  language: z.union([z.string(), z.null()]),
-  raw_url: z.string(),
-  size: z.number().int().gte(-2147483648).lte(2147483647),
+  filename: z.string().optional(),
+  type: z.string().optional(),
+  language: z.string().optional(),
+  raw_url: z.string().optional(),
+  size: z.number().int().gte(-2147483648).lte(2147483647).optional(),
   encoding: z.string().optional(),
 });
 
 export const Gist = z
   .object({
     id: z.string(),
-    node_id: z.string(),
     url: z.string().describe("URL of the gist"),
-    forks_url: z.string().describe("API URL for forks"),
-    commits_url: z.string().describe("API URL for commits"),
-    git_pull_url: z.string().describe("Git pull URL"),
-    git_push_url: z.string().describe("Git push URL"),
-    html_url: z.string().describe("HTML URL of the gist"),
-    comments_url: z.string().describe("API URL for comments"),
     public: z.boolean().describe("Whether the gist is public"),
     description: z
       .union([z.string(), z.null()])
@@ -252,17 +244,9 @@ export const Gist = z
       .gte(-2147483648)
       .lte(2147483647)
       .describe("Number of comments"),
-    user: z
-      .union([User.describe("Github user"), z.null()])
-      .describe("The gist owner (user)"),
+    user: z.union([z.string(), z.null()]).describe("The gist owner (user)"),
     files: z.record(z.string(), GistFile).describe("Files in the gist"),
-    created_at: z.string().describe("Creation timestamp"),
-    updated_at: z.string().describe("Last update timestamp"),
-    owner: User.optional().describe("Owner of the gist"),
-    comments_enabled: z
-      .boolean()
-      .optional()
-      .describe("Whether comments are enabled"),
+    owner: SimpleUser.optional().describe("Owner of the gist"),
     truncated: z.boolean().optional().describe("Whether the gist is truncated"),
   })
   .describe("Base Gist");
@@ -297,7 +281,7 @@ export const ChangeStatus = z.object({
 export const GistCommit = z.object({
   url: z.string(),
   version: z.string(),
-  user: z.union([User.describe("Github user"), z.null()]),
+  user: z.union([SimpleUser.describe("Github user"), z.null()]),
   change_status: ChangeStatus,
   committed_at: z.string(),
 });

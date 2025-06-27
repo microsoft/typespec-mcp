@@ -25,7 +25,7 @@ namespace Mcp
         /// <summary>
         /// The owner of the repository
         /// </summary>
-        public required User Owner { get; set; }
+        public required SimpleUser Owner { get; set; }
         /// <summary>
         /// Whether the repository is private or public
         /// </summary>

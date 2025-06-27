@@ -1,7 +1,7 @@
 import "typespec-mcp";
 import "@typespec/http";
 import "./gist.tsp";
-import "./user.tsp";
+import "./simple-user.tsp";
 
 using MCP;
 using Http;
@@ -30,7 +30,7 @@ model FullRepository {
   full_name: string;
 
   /** The owner of the repository */
-  owner: User;
+  owner: SimpleUser;
 
   /** Whether the repository is private or public */
   private: boolean;
