@@ -1,9 +1,11 @@
 namespace Mcp
 {
 
-    public static class ResponseHandler<T>
+    public static class ResponseHandler
     {
-        public static System.ClientModel.Primitives.PipelineResponse CheckSuccess(System.ClientModel.Primitives.PipelineMessage message)
+        public static System.ClientModel.Primitives.PipelineResponse CheckSuccess(
+            System.ClientModel.Primitives.PipelineMessage message
+        )
         {
             var response = message.Response ?? throw new InvalidOperationException("Expected a response in the message");
             if (response.Status > 299 || response.Status < 200)
@@ -13,7 +15,9 @@ namespace Mcp
             return response;
         }
 
-        public static T Handle(System.ClientModel.Primitives.PipelineMessage message)
+        public static T Handle<T>(
+            System.ClientModel.Primitives.PipelineMessage message
+        )
         {
             var response = CheckSuccess(message);
             var result = response.Content.ToObjectFromJson<T>(new System.Text.Json.JsonSerializerOptions(System.Text.Json.JsonSerializerDefaults.Web));

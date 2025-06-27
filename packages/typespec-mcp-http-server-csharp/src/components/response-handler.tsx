@@ -16,7 +16,7 @@ export function ResponseHandlerClass() {
   const tRefKey = refkey();
   const checkSuccessRk = refkey();
   return (
-    <ClassDeclaration name="ResponseHandler" public static typeParameters={{ T: tRefKey }}>
+    <ClassDeclaration name="ResponseHandler" public static>
       <List doubleHardline>
         <ClassMethod
           public
@@ -40,6 +40,7 @@ export function ResponseHandlerClass() {
           static
           name="Handle"
           parameters={[{ name: "message", type: "System.ClientModel.Primitives.PipelineMessage" }]}
+          typeParameters={[{ name: "T", refkey: tRefKey }]}
           returns={tRefKey}
         >
           {code`

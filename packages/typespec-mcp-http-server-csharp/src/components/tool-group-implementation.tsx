@@ -68,10 +68,13 @@ function ToolMethod(props: ToolMethodProps) {
         <VarDeclaration name="pipeline" refkey={pipelineKey} children={<CreateClientPipeline httpOp={httpOp} />} />
         <CreateRequestMessage httpOp={httpOp} inputs={{ pipeline: pipelineKey }} outputs={{ message: messageRefKey }} />
         {code`await ${pipelineKey}.SendAsync(${messageRefKey});`}
-        {implementationOp.returnType !== $.intrinsic.void &&
-          code`
-          return ResponseHandler<${(<TypeExpression type={implementationOp.returnType} />)}>.Handle(${messageRefKey});
-        `}
+        {implementationOp.returnType === $.intrinsic.void
+          ? code`
+            ResponseHandler.CheckSuccess(${messageRefKey});
+          `
+          : code`
+            return ResponseHandler.Handle<${(<TypeExpression type={implementationOp.returnType} />)}>(${messageRefKey});
+          `}
       </List>
     </ClassMethod>
   );
