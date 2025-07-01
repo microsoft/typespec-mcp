@@ -7,8 +7,8 @@ settings:
 catalogs:
   default:
     '@alloy-js/cli':
-      specifier: ~0.17.0
-      version: 0.17.0
+      specifier: ~0.18.0
+      version: 0.18.0
     '@alloy-js/rollup-plugin':
       specifier: ^0.1.0
       version: 0.1.0
@@ -72,7 +72,7 @@ importers:
     devDependencies:
       '@eslint/js':
         specifier: ^9.28.0
-        version: 9.29.0
+        version: 9.30.0
       '@types/node':
         specifier: 'catalog:'
         version: 22.15.33
@@ -81,10 +81,10 @@ importers:
         version: 1.1.0
       '@vitest/eslint-plugin':
         specifier: ^1.2.1
-        version: 1.3.3(eslint@9.29.0)(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.33)(yaml@2.7.1))
+        version: 1.3.3(eslint@9.30.0)(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.33)(yaml@2.7.1))
       eslint:
         specifier: ^9.23.0
-        version: 9.29.0
+        version: 9.30.0
       prettier:
         specifier: 'catalog:'
         version: 3.6.2
@@ -96,7 +96,7 @@ importers:
         version: 5.8.3
       typescript-eslint:
         specifier: ^8.33.0
-        version: 8.35.0(eslint@9.29.0)(typescript@5.8.3)
+        version: 8.35.1(eslint@9.30.0)(typescript@5.8.3)
       vitest:
         specifier: 'catalog:'
         version: 3.2.4(@types/node@22.15.33)(yaml@2.7.1)
@@ -201,22 +201,22 @@ importers:
     dependencies:
       '@alloy-js/core':
         specifier: ~0.18.0-dev
-        version: 0.18.0-dev.5
+        version: 0.18.0
       '@alloy-js/csharp':
         specifier: ~0.18.0-dev.22
-        version: 0.18.0-dev.23
+        version: 0.18.0
       '@typespec/compiler':
         specifier: 'catalog:'
         version: 1.1.0(@types/node@22.15.33)
       '@typespec/emitter-framework':
         specifier: https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655
-        version: https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0-dev.5)(@alloy-js/csharp@0.18.0-dev.23)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))
+        version: https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0)(@alloy-js/csharp@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))
       '@typespec/http':
         specifier: 'catalog:'
         version: 1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))
       '@typespec/http-client':
         specifier: ^0.8.0-dev
-        version: 0.8.0-dev.1(@alloy-js/core@0.18.0-dev.5)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/emitter-framework@https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0-dev.5)(@alloy-js/csharp@0.18.0-dev.23)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))
+        version: 0.8.0-dev.1(@alloy-js/core@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/emitter-framework@https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0)(@alloy-js/csharp@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))
       typespec-mcp:
         specifier: workspace:*
         version: link:../typespec-mcp
@@ -226,7 +226,7 @@ importers:
     devDependencies:
       '@alloy-js/cli':
         specifier: 'catalog:'
-        version: 0.17.0
+        version: 0.18.0
       '@alloy-js/rollup-plugin':
         specifier: 'catalog:'
         version: 0.1.0(@babel/core@7.27.7)(rollup@4.44.1)
@@ -244,25 +244,25 @@ importers:
     dependencies:
       '@alloy-js/core':
         specifier: ~0.18.0-dev
-        version: 0.18.0-dev.5
+        version: 0.18.0
       '@alloy-js/typescript':
         specifier: ~0.18.0-dev
-        version: 0.18.0-dev.5
+        version: 0.18.0
       '@typespec/compiler':
         specifier: 'catalog:'
         version: 1.1.0(@types/node@22.15.33)
       '@typespec/emitter-framework':
         specifier: https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655
-        version: https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0-dev.5)(@alloy-js/csharp@0.18.0-dev.23)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))
+        version: https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0)(@alloy-js/csharp@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))
       '@typespec/http':
         specifier: 'catalog:'
         version: 1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))
       '@typespec/http-client':
         specifier: ^0.8.0-dev
-        version: 0.8.0-dev.1(@alloy-js/core@0.18.0-dev.5)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/emitter-framework@https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0-dev.5)(@alloy-js/csharp@0.18.0-dev.23)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))
+        version: 0.8.0-dev.1(@alloy-js/core@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/emitter-framework@https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0)(@alloy-js/csharp@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))
       '@typespec/http-client-js':
         specifier: ^0.7.0-dev
-        version: 0.7.0-dev.1(@alloy-js/csharp@0.18.0-dev.23)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))
+        version: 0.7.0-dev.1(@alloy-js/csharp@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))
       typespec-mcp:
         specifier: workspace:*
         version: link:../typespec-mcp
@@ -271,11 +271,11 @@ importers:
         version: link:../typespec-mcp-server-js
       typespec-zod:
         specifier: 'catalog:'
-        version: 0.0.0-52(@alloy-js/core@0.18.0-dev.5)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/emitter-framework@https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0-dev.5)(@alloy-js/csharp@0.18.0-dev.23)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))))
+        version: 0.0.0-52(@alloy-js/core@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/emitter-framework@https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0)(@alloy-js/csharp@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))))
     devDependencies:
       '@alloy-js/cli':
         specifier: 'catalog:'
-        version: 0.17.0
+        version: 0.18.0
       '@alloy-js/rollup-plugin':
         specifier: 'catalog:'
         version: 0.1.0(@babel/core@7.27.7)(rollup@4.44.1)
@@ -293,16 +293,16 @@ importers:
     dependencies:
       '@alloy-js/core':
         specifier: ~0.18.0-dev
-        version: 0.18.0-dev.5
+        version: 0.18.0
       '@alloy-js/csharp':
         specifier: ~0.18.0-dev.22
-        version: 0.18.0-dev.23
+        version: 0.18.0
       '@typespec/compiler':
         specifier: 'catalog:'
         version: 1.1.0(@types/node@22.15.33)
       '@typespec/emitter-framework':
         specifier: https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655
-        version: https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0-dev.5)(@alloy-js/csharp@0.18.0-dev.23)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))
+        version: https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0)(@alloy-js/csharp@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))
       change-case:
         specifier: 'catalog:'
         version: 5.4.4
@@ -311,11 +311,11 @@ importers:
         version: link:../typespec-mcp
       typespec-zod:
         specifier: 'catalog:'
-        version: 0.0.0-52(@alloy-js/core@0.18.0-dev.5)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/emitter-framework@https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0-dev.5)(@alloy-js/csharp@0.18.0-dev.23)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))))
+        version: 0.0.0-52(@alloy-js/core@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/emitter-framework@https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0)(@alloy-js/csharp@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))))
     devDependencies:
       '@alloy-js/cli':
         specifier: 'catalog:'
-        version: 0.17.0
+        version: 0.18.0
       '@alloy-js/rollup-plugin':
         specifier: 'catalog:'
         version: 0.1.0(@babel/core@7.27.7)(rollup@4.44.1)
@@ -333,16 +333,16 @@ importers:
     dependencies:
       '@alloy-js/core':
         specifier: ~0.18.0-dev
-        version: 0.18.0-dev.5
+        version: 0.18.0
       '@alloy-js/typescript':
         specifier: ~0.18.0-dev
-        version: 0.18.0-dev.5
+        version: 0.18.0
       '@typespec/compiler':
         specifier: 'catalog:'
         version: 1.1.0(@types/node@22.15.33)
       '@typespec/emitter-framework':
         specifier: https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655
-        version: https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0-dev.5)(@alloy-js/csharp@0.18.0-dev.23)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))
+        version: https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0)(@alloy-js/csharp@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))
       change-case:
         specifier: 'catalog:'
         version: 5.4.4
@@ -351,11 +351,11 @@ importers:
         version: link:../typespec-mcp
       typespec-zod:
         specifier: 'catalog:'
-        version: 0.0.0-52(@alloy-js/core@0.18.0-dev.5)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/emitter-framework@https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0-dev.5)(@alloy-js/csharp@0.18.0-dev.23)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))))
+        version: 0.0.0-52(@alloy-js/core@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/emitter-framework@https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0)(@alloy-js/csharp@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))))
     devDependencies:
       '@alloy-js/cli':
         specifier: 'catalog:'
-        version: 0.17.0
+        version: 0.18.0
       '@alloy-js/rollup-plugin':
         specifier: 'catalog:'
         version: 0.1.0(@babel/core@7.27.7)(rollup@4.44.1)
@@ -522,20 +522,26 @@ packages:
   '@alloy-js/babel-preset@0.2.1':
     resolution: {integrity: sha512-vz9kvQwx5qBzHIw4ryqUaQqpgNOMBmkdDcV3e2zZfMq8Pp16ePFtvviHh6RwyLcvXQQClex3ZZy8ON9TifMnxw==}
 
-  '@alloy-js/cli@0.17.0':
-    resolution: {integrity: sha512-kSWwWQiIOCKcOgduBK6WX2gB008z71xyR7M3I6+Cg5Vh8mxvHidD2CFFz7fVq6MWpXE5OIKtjKa2NB/w/GSVRg==}
+  '@alloy-js/cli@0.18.0':
+    resolution: {integrity: sha512-NqoInA4MHKdSceAjdmqROKLhG5ZOjCGKcDiQIXbhMQtltyq7EXEB/5JjLzusGaZXTWXU7iM8qTjCRmYDL/yClw==}
     engines: {node: '>=18.0.0'}
     hasBin: true
+
+  '@alloy-js/core@0.18.0':
+    resolution: {integrity: sha512-o/Gw4SpQgIOJ4ViuSGFdrzwVjJZGpEfWu08OwjZID1ARxNC3WQwG1DDKDtTyU2oz8ZVNkKuUZIGv+dRlneM7WA==}
 
   '@alloy-js/core@0.18.0-dev.5':
     resolution: {integrity: sha512-AZmUKkHnZFMR1wD64VidGBREG3CTsH25JDgjWjtKmT/gHtYJpbiIrASBq0XIQ+30POA+BL5hbF6aSAoOl0Y7yg==}
 
-  '@alloy-js/csharp@0.18.0-dev.23':
-    resolution: {integrity: sha512-/r8jNGVJYcFCRg6z6VpMaurGBQIwq9bhFkDTAZteI419OzStAgwWXPIon4qXfZ0YAhzsm+lhvr+/xUMN067m/Q==}
+  '@alloy-js/csharp@0.18.0':
+    resolution: {integrity: sha512-y/Xex8Mjw1kbMSt9G3FhrT5925N6zFyX2TVVCnHJ06UAwD19UemrvWuvh5hLsLTpszF+4q5d2NRn7BGQxIi4ug==}
 
   '@alloy-js/rollup-plugin@0.1.0':
     resolution: {integrity: sha512-MXR8mBdSh/pxMP8kIXAcMYKsm5yOWZ+igxcaRX1vBXFiHU4eK7gE/5q6Fk8Vdydh+MItWtgekwIhUWvcszdNFQ==}
     engines: {node: '>=18.0.0'}
+
+  '@alloy-js/typescript@0.18.0':
+    resolution: {integrity: sha512-jVhpgO8twQGoXs0p3/YjxZfKQ65r/H6LjdybJLL0m6tw8YONY6MMKNlkqPmtgvtkmglnJKESFPKvFCNQ8McUxQ==}
 
   '@alloy-js/typescript@0.18.0-dev.5':
     resolution: {integrity: sha512-Y7vQAOUmZSqaC6xfpV4S5bh3MiKIy/SNgXvqEifpQmNpJvFWseBrxl4++CFpdeMDRxNHuNB9VxJvE96m1FB67Q==}
@@ -845,12 +851,12 @@ packages:
     resolution: {integrity: sha512-CCZCDJuduB9OUkFkY2IgppNZMi2lBQgD2qzwXkEia16cge2pijY/aXi96CJMquDMn3nJdlPV1A5KrJEXwfLNzQ==}
     engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
 
-  '@eslint/config-array@0.20.1':
-    resolution: {integrity: sha512-OL0RJzC/CBzli0DrrR31qzj6d6i6Mm3HByuhflhl4LOBiWxN+3i6/t/ZQQNii4tjksXi8r2CRW1wMpWA2ULUEw==}
+  '@eslint/config-array@0.21.0':
+    resolution: {integrity: sha512-ENIdc4iLu0d93HeYirvKmrzshzofPw6VkZRKQGe9Nv46ZnWUzcF1xV01dcvEg/1wXUR61OmmlSfyeyO7EvjLxQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@eslint/config-helpers@0.2.3':
-    resolution: {integrity: sha512-u180qk2Um1le4yf0ruXH3PYFeEZeYC3p/4wCTKrr2U1CmGdzGi3KtY0nuPDH48UJxlKCC5RDzbcbh4X0XlqgHg==}
+  '@eslint/config-helpers@0.3.0':
+    resolution: {integrity: sha512-ViuymvFmcJi04qdZeDc2whTHryouGcDlaxPqarTD0ZE10ISpxGUVZGZDx4w01upyIynL3iu6IXH2bS1NhclQMw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/core@0.14.0':
@@ -865,8 +871,8 @@ packages:
     resolution: {integrity: sha512-gtF186CXhIl1p4pJNGZw8Yc6RlshoePRvE0X91oPGb3vZ8pM3qOS9W9NGPat9LziaBV7XrJWGylNQXkGcnM3IQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@eslint/js@9.29.0':
-    resolution: {integrity: sha512-3PIF4cBw/y+1u2EazflInpV+lYsSG0aByVIQzAgb1m1MhHFSbqTyNqtBKHgWf/9Ykud+DhILS9EGkmekVhbKoQ==}
+  '@eslint/js@9.30.0':
+    resolution: {integrity: sha512-Wzw3wQwPvc9sHM+NjakWTcPx11mbZyiYHuwWa/QfZ7cIRX7WK54PSk7bdyXDaoaopUcMatv1zaQvOAAO8hCdww==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/object-schema@2.1.6':
@@ -1663,16 +1669,16 @@ packages:
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
 
-  '@typescript-eslint/eslint-plugin@8.35.0':
-    resolution: {integrity: sha512-ijItUYaiWuce0N1SoSMrEd0b6b6lYkYt99pqCPfybd+HKVXtEvYhICfLdwp42MhiI5mp0oq7PKEL+g1cNiz/Eg==}
+  '@typescript-eslint/eslint-plugin@8.35.1':
+    resolution: {integrity: sha512-9XNTlo7P7RJxbVeICaIIIEipqxLKguyh+3UbXuT2XQuFp6d8VOeDEGuz5IiX0dgZo8CiI6aOFLg4e8cF71SFVg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
-      '@typescript-eslint/parser': ^8.35.0
+      '@typescript-eslint/parser': ^8.35.1
       eslint: ^8.57.0 || ^9.0.0
       typescript: '>=4.8.4 <5.9.0'
 
-  '@typescript-eslint/parser@8.35.0':
-    resolution: {integrity: sha512-6sMvZePQrnZH2/cJkwRpkT7DxoAWh+g6+GFRK6bV3YQo7ogi3SX5rgF6099r5Q53Ma5qeT7LGmOmuIutF4t3lA==}
+  '@typescript-eslint/parser@8.35.1':
+    resolution: {integrity: sha512-3MyiDfrfLeK06bi/g9DqJxP5pV74LNv4rFTyvGDmT3x2p1yp1lOd+qYZfiRPIOf/oON+WRZR5wxxuF85qOar+w==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
@@ -1684,8 +1690,18 @@ packages:
     peerDependencies:
       typescript: '>=4.8.4 <5.9.0'
 
+  '@typescript-eslint/project-service@8.35.1':
+    resolution: {integrity: sha512-VYxn/5LOpVxADAuP3NrnxxHYfzVtQzLKeldIhDhzC8UHaiQvYlXvKuVho1qLduFbJjjy5U5bkGwa3rUGUb1Q6Q==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      typescript: '>=4.8.4 <5.9.0'
+
   '@typescript-eslint/scope-manager@8.35.0':
     resolution: {integrity: sha512-+AgL5+mcoLxl1vGjwNfiWq5fLDZM1TmTPYs2UkyHfFhgERxBbqHlNjRzhThJqz+ktBqTChRYY6zwbMwy0591AA==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@typescript-eslint/scope-manager@8.35.1':
+    resolution: {integrity: sha512-s/Bpd4i7ht2934nG+UoSPlYXd08KYz3bmjLEb7Ye1UVob0d1ENiT3lY8bsCmik4RqfSbPw9xJJHbugpPpP5JUg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@typescript-eslint/tsconfig-utils@8.35.0':
@@ -1694,8 +1710,14 @@ packages:
     peerDependencies:
       typescript: '>=4.8.4 <5.9.0'
 
-  '@typescript-eslint/type-utils@8.35.0':
-    resolution: {integrity: sha512-ceNNttjfmSEoM9PW87bWLDEIaLAyR+E6BoYJQ5PfaDau37UGca9Nyq3lBk8Bw2ad0AKvYabz6wxc7DMTO2jnNA==}
+  '@typescript-eslint/tsconfig-utils@8.35.1':
+    resolution: {integrity: sha512-K5/U9VmT9dTHoNowWZpz+/TObS3xqC5h0xAIjXPw+MNcKV9qg6eSatEnmeAwkjHijhACH0/N7bkhKvbt1+DXWQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      typescript: '>=4.8.4 <5.9.0'
+
+  '@typescript-eslint/type-utils@8.35.1':
+    resolution: {integrity: sha512-HOrUBlfVRz5W2LIKpXzZoy6VTZzMu2n8q9C2V/cFngIC5U1nStJgv0tMV4sZPzdf4wQm9/ToWUFPMN9Vq9VJQQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
@@ -1705,8 +1727,18 @@ packages:
     resolution: {integrity: sha512-0mYH3emanku0vHw2aRLNGqe7EXh9WHEhi7kZzscrMDf6IIRUQ5Jk4wp1QrledE/36KtdZrVfKnE32eZCf/vaVQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@typescript-eslint/types@8.35.1':
+    resolution: {integrity: sha512-q/O04vVnKHfrrhNAscndAn1tuQhIkwqnaW+eu5waD5IPts2eX1dgJxgqcPx5BX109/qAz7IG6VrEPTOYKCNfRQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
   '@typescript-eslint/typescript-estree@8.35.0':
     resolution: {integrity: sha512-F+BhnaBemgu1Qf8oHrxyw14wq6vbL8xwWKKMwTMwYIRmFFY/1n/9T/jpbobZL8vp7QyEUcC6xGrnAO4ua8Kp7w==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      typescript: '>=4.8.4 <5.9.0'
+
+  '@typescript-eslint/typescript-estree@8.35.1':
+    resolution: {integrity: sha512-Vvpuvj4tBxIka7cPs6Y1uvM7gJgdF5Uu9F+mBJBPY4MhvjrjWGK4H0lVgLJd/8PWZ23FTqsaJaLEkBCFUk8Y9g==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       typescript: '>=4.8.4 <5.9.0'
@@ -1718,8 +1750,19 @@ packages:
       eslint: ^8.57.0 || ^9.0.0
       typescript: '>=4.8.4 <5.9.0'
 
+  '@typescript-eslint/utils@8.35.1':
+    resolution: {integrity: sha512-lhnwatFmOFcazAsUm3ZnZFpXSxiwoa1Lj50HphnDe1Et01NF4+hrdXONSUHIcbVu2eFb1bAf+5yjXkGVkXBKAQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      eslint: ^8.57.0 || ^9.0.0
+      typescript: '>=4.8.4 <5.9.0'
+
   '@typescript-eslint/visitor-keys@8.35.0':
     resolution: {integrity: sha512-zTh2+1Y8ZpmeQaQVIc/ZZxsx8UzgKJyNg1PTvjzC7WMhPSVS8bfDX34k1SrwOf016qd5RU3az2UxUNue3IfQ5g==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@typescript-eslint/visitor-keys@8.35.1':
+    resolution: {integrity: sha512-VRwixir4zBWCSTP/ljEo091lbpypz57PoeAQ9imjG+vbeof9LplljsL1mos4ccG6H9IjfrVGM359RozUnuFhpw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@typespec/compiler@1.1.0':
@@ -1729,7 +1772,7 @@ packages:
 
   '@typespec/emitter-framework@https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655':
     resolution: {tarball: https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655}
-    version: 0.9.0-pr-7655.249
+    version: 0.9.0-pr-7655.282
     peerDependencies:
       '@alloy-js/core': ~0.18.0-dev
       '@alloy-js/csharp': ~0.18.0-dev.22
@@ -2210,8 +2253,8 @@ packages:
     resolution: {integrity: sha512-Uhdk5sfqcee/9H/rCOJikYz67o0a2Tw2hGRPOG2Y1R2dg7brRe1uG0yaNQDHu+TO/uQPF/5eCapvYSmHUjt7JQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  eslint@9.29.0:
-    resolution: {integrity: sha512-GsGizj2Y1rCWDu6XoEekL3RLilp0voSePurjZIkxL3wlm5o5EC9VpgaP7lrCvjnkuLvzFBQWB3vWB3K5KQTveQ==}
+  eslint@9.30.0:
+    resolution: {integrity: sha512-iN/SiPxmQu6EVkf+m1qpBxzUhE12YqFLOSySuOyVLJLEF9nzTf+h/1AJYc1JWzCnktggeNrjvQGLngDzXirU6g==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     hasBin: true
     peerDependencies:
@@ -3259,8 +3302,8 @@ packages:
     peerDependencies:
       typescript: 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x || 5.5.x || 5.6.x || 5.7.x || 5.8.x
 
-  typescript-eslint@8.35.0:
-    resolution: {integrity: sha512-uEnz70b7kBz6eg/j0Czy6K5NivaYopgxRjsnAJ2Fx5oTLo3wefTHIbL7AkQr1+7tJCRVpTs/wiM8JR/11Loq9A==}
+  typescript-eslint@8.35.1:
+    resolution: {integrity: sha512-xslJjFzhOmHYQzSB/QTeASAHbjmxOGEP6Coh93TXmUBFQoJ1VU35UHIDmG06Jd6taf3wqqC1ntBnCMeymy5Ovw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
@@ -3561,7 +3604,7 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@alloy-js/cli@0.17.0':
+  '@alloy-js/cli@0.18.0':
     dependencies:
       '@alloy-js/babel-preset': 0.2.1(@babel/core@7.27.7)
       '@babel/core': 7.27.7
@@ -3571,6 +3614,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@alloy-js/core@0.18.0':
+    dependencies:
+      '@vue/reactivity': 3.5.17
+      cli-table3: 0.6.5
+      pathe: 2.0.3
+      picocolors: 1.1.1
+      prettier: 3.6.2
+
   '@alloy-js/core@0.18.0-dev.5':
     dependencies:
       '@vue/reactivity': 3.5.17
@@ -3579,9 +3630,9 @@ snapshots:
       picocolors: 1.1.1
       prettier: 3.6.2
 
-  '@alloy-js/csharp@0.18.0-dev.23':
+  '@alloy-js/csharp@0.18.0':
     dependencies:
-      '@alloy-js/core': 0.18.0-dev.5
+      '@alloy-js/core': 0.18.0
       change-case: 5.4.4
       marked: 15.0.12
       pathe: 2.0.3
@@ -3596,6 +3647,12 @@ snapshots:
       - '@types/babel__core'
       - rollup
       - supports-color
+
+  '@alloy-js/typescript@0.18.0':
+    dependencies:
+      '@alloy-js/core': 0.18.0
+      change-case: 5.4.4
+      pathe: 2.0.3
 
   '@alloy-js/typescript@0.18.0-dev.5':
     dependencies:
@@ -3885,14 +3942,14 @@ snapshots:
   '@esbuild/win32-x64@0.25.5':
     optional: true
 
-  '@eslint-community/eslint-utils@4.7.0(eslint@9.29.0)':
+  '@eslint-community/eslint-utils@4.7.0(eslint@9.30.0)':
     dependencies:
-      eslint: 9.29.0
+      eslint: 9.30.0
       eslint-visitor-keys: 3.4.3
 
   '@eslint-community/regexpp@4.12.1': {}
 
-  '@eslint/config-array@0.20.1':
+  '@eslint/config-array@0.21.0':
     dependencies:
       '@eslint/object-schema': 2.1.6
       debug: 4.4.1
@@ -3900,7 +3957,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@eslint/config-helpers@0.2.3': {}
+  '@eslint/config-helpers@0.3.0': {}
 
   '@eslint/core@0.14.0':
     dependencies:
@@ -3924,7 +3981,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@eslint/js@9.29.0': {}
+  '@eslint/js@9.30.0': {}
 
   '@eslint/object-schema@2.1.6': {}
 
@@ -4709,15 +4766,15 @@ snapshots:
 
   '@types/unist@3.0.3': {}
 
-  '@typescript-eslint/eslint-plugin@8.35.0(@typescript-eslint/parser@8.35.0(eslint@9.29.0)(typescript@5.8.3))(eslint@9.29.0)(typescript@5.8.3)':
+  '@typescript-eslint/eslint-plugin@8.35.1(@typescript-eslint/parser@8.35.1(eslint@9.30.0)(typescript@5.8.3))(eslint@9.30.0)(typescript@5.8.3)':
     dependencies:
       '@eslint-community/regexpp': 4.12.1
-      '@typescript-eslint/parser': 8.35.0(eslint@9.29.0)(typescript@5.8.3)
-      '@typescript-eslint/scope-manager': 8.35.0
-      '@typescript-eslint/type-utils': 8.35.0(eslint@9.29.0)(typescript@5.8.3)
-      '@typescript-eslint/utils': 8.35.0(eslint@9.29.0)(typescript@5.8.3)
-      '@typescript-eslint/visitor-keys': 8.35.0
-      eslint: 9.29.0
+      '@typescript-eslint/parser': 8.35.1(eslint@9.30.0)(typescript@5.8.3)
+      '@typescript-eslint/scope-manager': 8.35.1
+      '@typescript-eslint/type-utils': 8.35.1(eslint@9.30.0)(typescript@5.8.3)
+      '@typescript-eslint/utils': 8.35.1(eslint@9.30.0)(typescript@5.8.3)
+      '@typescript-eslint/visitor-keys': 8.35.1
+      eslint: 9.30.0
       graphemer: 1.4.0
       ignore: 7.0.5
       natural-compare: 1.4.0
@@ -4726,14 +4783,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/parser@8.35.0(eslint@9.29.0)(typescript@5.8.3)':
+  '@typescript-eslint/parser@8.35.1(eslint@9.30.0)(typescript@5.8.3)':
     dependencies:
-      '@typescript-eslint/scope-manager': 8.35.0
-      '@typescript-eslint/types': 8.35.0
-      '@typescript-eslint/typescript-estree': 8.35.0(typescript@5.8.3)
-      '@typescript-eslint/visitor-keys': 8.35.0
+      '@typescript-eslint/scope-manager': 8.35.1
+      '@typescript-eslint/types': 8.35.1
+      '@typescript-eslint/typescript-estree': 8.35.1(typescript@5.8.3)
+      '@typescript-eslint/visitor-keys': 8.35.1
       debug: 4.4.1
-      eslint: 9.29.0
+      eslint: 9.30.0
       typescript: 5.8.3
     transitivePeerDependencies:
       - supports-color
@@ -4747,27 +4804,47 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@typescript-eslint/project-service@8.35.1(typescript@5.8.3)':
+    dependencies:
+      '@typescript-eslint/tsconfig-utils': 8.35.1(typescript@5.8.3)
+      '@typescript-eslint/types': 8.35.1
+      debug: 4.4.1
+      typescript: 5.8.3
+    transitivePeerDependencies:
+      - supports-color
+
   '@typescript-eslint/scope-manager@8.35.0':
     dependencies:
       '@typescript-eslint/types': 8.35.0
       '@typescript-eslint/visitor-keys': 8.35.0
 
+  '@typescript-eslint/scope-manager@8.35.1':
+    dependencies:
+      '@typescript-eslint/types': 8.35.1
+      '@typescript-eslint/visitor-keys': 8.35.1
+
   '@typescript-eslint/tsconfig-utils@8.35.0(typescript@5.8.3)':
     dependencies:
       typescript: 5.8.3
 
-  '@typescript-eslint/type-utils@8.35.0(eslint@9.29.0)(typescript@5.8.3)':
+  '@typescript-eslint/tsconfig-utils@8.35.1(typescript@5.8.3)':
     dependencies:
-      '@typescript-eslint/typescript-estree': 8.35.0(typescript@5.8.3)
-      '@typescript-eslint/utils': 8.35.0(eslint@9.29.0)(typescript@5.8.3)
+      typescript: 5.8.3
+
+  '@typescript-eslint/type-utils@8.35.1(eslint@9.30.0)(typescript@5.8.3)':
+    dependencies:
+      '@typescript-eslint/typescript-estree': 8.35.1(typescript@5.8.3)
+      '@typescript-eslint/utils': 8.35.1(eslint@9.30.0)(typescript@5.8.3)
       debug: 4.4.1
-      eslint: 9.29.0
+      eslint: 9.30.0
       ts-api-utils: 2.1.0(typescript@5.8.3)
       typescript: 5.8.3
     transitivePeerDependencies:
       - supports-color
 
   '@typescript-eslint/types@8.35.0': {}
+
+  '@typescript-eslint/types@8.35.1': {}
 
   '@typescript-eslint/typescript-estree@8.35.0(typescript@5.8.3)':
     dependencies:
@@ -4785,13 +4862,40 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/utils@8.35.0(eslint@9.29.0)(typescript@5.8.3)':
+  '@typescript-eslint/typescript-estree@8.35.1(typescript@5.8.3)':
     dependencies:
-      '@eslint-community/eslint-utils': 4.7.0(eslint@9.29.0)
+      '@typescript-eslint/project-service': 8.35.1(typescript@5.8.3)
+      '@typescript-eslint/tsconfig-utils': 8.35.1(typescript@5.8.3)
+      '@typescript-eslint/types': 8.35.1
+      '@typescript-eslint/visitor-keys': 8.35.1
+      debug: 4.4.1
+      fast-glob: 3.3.3
+      is-glob: 4.0.3
+      minimatch: 9.0.5
+      semver: 7.7.2
+      ts-api-utils: 2.1.0(typescript@5.8.3)
+      typescript: 5.8.3
+    transitivePeerDependencies:
+      - supports-color
+
+  '@typescript-eslint/utils@8.35.0(eslint@9.30.0)(typescript@5.8.3)':
+    dependencies:
+      '@eslint-community/eslint-utils': 4.7.0(eslint@9.30.0)
       '@typescript-eslint/scope-manager': 8.35.0
       '@typescript-eslint/types': 8.35.0
       '@typescript-eslint/typescript-estree': 8.35.0(typescript@5.8.3)
-      eslint: 9.29.0
+      eslint: 9.30.0
+      typescript: 5.8.3
+    transitivePeerDependencies:
+      - supports-color
+
+  '@typescript-eslint/utils@8.35.1(eslint@9.30.0)(typescript@5.8.3)':
+    dependencies:
+      '@eslint-community/eslint-utils': 4.7.0(eslint@9.30.0)
+      '@typescript-eslint/scope-manager': 8.35.1
+      '@typescript-eslint/types': 8.35.1
+      '@typescript-eslint/typescript-estree': 8.35.1(typescript@5.8.3)
+      eslint: 9.30.0
       typescript: 5.8.3
     transitivePeerDependencies:
       - supports-color
@@ -4799,6 +4903,11 @@ snapshots:
   '@typescript-eslint/visitor-keys@8.35.0':
     dependencies:
       '@typescript-eslint/types': 8.35.0
+      eslint-visitor-keys: 4.2.1
+
+  '@typescript-eslint/visitor-keys@8.35.1':
+    dependencies:
+      '@typescript-eslint/types': 8.35.1
       eslint-visitor-keys: 4.2.1
 
   '@typespec/compiler@1.1.0(@types/node@22.15.33)':
@@ -4823,34 +4932,34 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@typespec/emitter-framework@https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0-dev.5)(@alloy-js/csharp@0.18.0-dev.23)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))':
+  '@typespec/emitter-framework@https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0)(@alloy-js/csharp@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))':
     dependencies:
-      '@alloy-js/core': 0.18.0-dev.5
-      '@alloy-js/csharp': 0.18.0-dev.23
-      '@alloy-js/typescript': 0.18.0-dev.5
+      '@alloy-js/core': 0.18.0
+      '@alloy-js/csharp': 0.18.0
+      '@alloy-js/typescript': 0.18.0
       '@typespec/compiler': 1.1.0(@types/node@22.15.33)
       '@typespec/http': 1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))
       '@typespec/rest': 0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))
 
-  '@typespec/http-client-js@0.7.0-dev.1(@alloy-js/csharp@0.18.0-dev.23)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))':
+  '@typespec/http-client-js@0.7.0-dev.1(@alloy-js/csharp@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))':
     dependencies:
-      '@alloy-js/core': 0.18.0-dev.5
-      '@alloy-js/typescript': 0.18.0-dev.5
+      '@alloy-js/core': 0.18.0
+      '@alloy-js/typescript': 0.18.0
       '@typespec/compiler': 1.1.0(@types/node@22.15.33)
-      '@typespec/emitter-framework': https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0-dev.5)(@alloy-js/csharp@0.18.0-dev.23)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))
+      '@typespec/emitter-framework': https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0)(@alloy-js/csharp@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))
       '@typespec/http': 1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))
-      '@typespec/http-client': 0.8.0-dev.1(@alloy-js/core@0.18.0-dev.5)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/emitter-framework@https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0-dev.5)(@alloy-js/csharp@0.18.0-dev.23)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))
+      '@typespec/http-client': 0.8.0-dev.1(@alloy-js/core@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/emitter-framework@https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0)(@alloy-js/csharp@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))
       '@typespec/rest': 0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))
       prettier: 3.5.3
     transitivePeerDependencies:
       - '@alloy-js/csharp'
 
-  '@typespec/http-client@0.8.0-dev.1(@alloy-js/core@0.18.0-dev.5)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/emitter-framework@https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0-dev.5)(@alloy-js/csharp@0.18.0-dev.23)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))':
+  '@typespec/http-client@0.8.0-dev.1(@alloy-js/core@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/emitter-framework@https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0)(@alloy-js/csharp@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))':
     dependencies:
-      '@alloy-js/core': 0.18.0-dev.5
-      '@alloy-js/typescript': 0.18.0-dev.5
+      '@alloy-js/core': 0.18.0
+      '@alloy-js/typescript': 0.18.0
       '@typespec/compiler': 1.1.0(@types/node@22.15.33)
-      '@typespec/emitter-framework': https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0-dev.5)(@alloy-js/csharp@0.18.0-dev.23)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))
+      '@typespec/emitter-framework': https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0)(@alloy-js/csharp@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))
       '@typespec/http': 1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))
 
   '@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))':
@@ -4889,10 +4998,10 @@ snapshots:
       - '@types/node'
       - typescript
 
-  '@vitest/eslint-plugin@1.3.3(eslint@9.29.0)(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.33)(yaml@2.7.1))':
+  '@vitest/eslint-plugin@1.3.3(eslint@9.30.0)(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.33)(yaml@2.7.1))':
     dependencies:
-      '@typescript-eslint/utils': 8.35.0(eslint@9.29.0)(typescript@5.8.3)
-      eslint: 9.29.0
+      '@typescript-eslint/utils': 8.35.0(eslint@9.30.0)(typescript@5.8.3)
+      eslint: 9.30.0
     optionalDependencies:
       typescript: 5.8.3
       vitest: 3.2.4(@types/node@22.15.33)(yaml@2.7.1)
@@ -5338,15 +5447,15 @@ snapshots:
 
   eslint-visitor-keys@4.2.1: {}
 
-  eslint@9.29.0:
+  eslint@9.30.0:
     dependencies:
-      '@eslint-community/eslint-utils': 4.7.0(eslint@9.29.0)
+      '@eslint-community/eslint-utils': 4.7.0(eslint@9.30.0)
       '@eslint-community/regexpp': 4.12.1
-      '@eslint/config-array': 0.20.1
-      '@eslint/config-helpers': 0.2.3
+      '@eslint/config-array': 0.21.0
+      '@eslint/config-helpers': 0.3.0
       '@eslint/core': 0.14.0
       '@eslint/eslintrc': 3.3.1
-      '@eslint/js': 9.29.0
+      '@eslint/js': 9.30.0
       '@eslint/plugin-kit': 0.3.3
       '@humanfs/node': 0.16.6
       '@humanwhocodes/module-importer': 1.0.1
@@ -6394,24 +6503,24 @@ snapshots:
       typescript: 5.8.3
       yaml: 2.7.1
 
-  typescript-eslint@8.35.0(eslint@9.29.0)(typescript@5.8.3):
+  typescript-eslint@8.35.1(eslint@9.30.0)(typescript@5.8.3):
     dependencies:
-      '@typescript-eslint/eslint-plugin': 8.35.0(@typescript-eslint/parser@8.35.0(eslint@9.29.0)(typescript@5.8.3))(eslint@9.29.0)(typescript@5.8.3)
-      '@typescript-eslint/parser': 8.35.0(eslint@9.29.0)(typescript@5.8.3)
-      '@typescript-eslint/utils': 8.35.0(eslint@9.29.0)(typescript@5.8.3)
-      eslint: 9.29.0
+      '@typescript-eslint/eslint-plugin': 8.35.1(@typescript-eslint/parser@8.35.1(eslint@9.30.0)(typescript@5.8.3))(eslint@9.30.0)(typescript@5.8.3)
+      '@typescript-eslint/parser': 8.35.1(eslint@9.30.0)(typescript@5.8.3)
+      '@typescript-eslint/utils': 8.35.1(eslint@9.30.0)(typescript@5.8.3)
+      eslint: 9.30.0
       typescript: 5.8.3
     transitivePeerDependencies:
       - supports-color
 
   typescript@5.8.3: {}
 
-  typespec-zod@0.0.0-52(@alloy-js/core@0.18.0-dev.5)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/emitter-framework@https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0-dev.5)(@alloy-js/csharp@0.18.0-dev.23)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))):
+  typespec-zod@0.0.0-52(@alloy-js/core@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/emitter-framework@https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0)(@alloy-js/csharp@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))):
     dependencies:
-      '@alloy-js/core': 0.18.0-dev.5
-      '@alloy-js/typescript': 0.18.0-dev.5
+      '@alloy-js/core': 0.18.0
+      '@alloy-js/typescript': 0.18.0
       '@typespec/compiler': 1.1.0(@types/node@22.15.33)
-      '@typespec/emitter-framework': https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0-dev.5)(@alloy-js/csharp@0.18.0-dev.23)(@alloy-js/typescript@0.18.0-dev.5)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))
+      '@typespec/emitter-framework': https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655(@alloy-js/core@0.18.0)(@alloy-js/csharp@0.18.0)(@alloy-js/typescript@0.18.0)(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33)))(@typespec/rest@0.71.0(@typespec/compiler@1.1.0(@types/node@22.15.33))(@typespec/http@1.1.0(@typespec/compiler@1.1.0(@types/node@22.15.33))))
 
   uc.micro@2.1.0: {}
 
