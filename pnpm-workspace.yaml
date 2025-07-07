@@ -29,8 +29,7 @@ catalog:
   "zod-validation-error": "^3.4.0"
 
 overrides:
-  # "@typespec/emitter-framework": ^0.9.0-dev
-  "@typespec/emitter-framework": https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7843
+  "@typespec/emitter-framework": ^0.9.0-dev
   "@typespec/http-client": ^0.8.0-dev
   "@typespec/http-client-js": ^0.7.0-dev
   # "@alloy-js/core": ~0.18.0-dev
