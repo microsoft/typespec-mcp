@@ -3,11 +3,11 @@ packages:
   - "samples/*"
 
 catalog:
-  "@alloy-js/cli": ~0.17.0
-  "@alloy-js/core": ~0.17.0
-  "@alloy-js/typescript": ~0.17.0
+  "@alloy-js/cli": ~0.18.0
+  "@alloy-js/core": ~0.18.0
+  "@alloy-js/typescript": ~0.18.0
   "@alloy-js/rollup-plugin": ^0.1.0
-  "@alloy-js/csharp": ~0.17.0
+  "@alloy-js/csharp": ~0.18.0
   "@rollup/plugin-babel": ^6.0.4
   "@types/node": ^22.14.0
   "@typespec/compiler": ^1.1.0
@@ -29,9 +29,10 @@ catalog:
   "zod-validation-error": "^3.4.0"
 
 overrides:
-  "@typespec/emitter-framework": https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7655
+  # "@typespec/emitter-framework": ^0.9.0-dev
+  "@typespec/emitter-framework": https://pkg.pr.new/microsoft/typespec/@typespec/emitter-framework@7843
   "@typespec/http-client": ^0.8.0-dev
   "@typespec/http-client-js": ^0.7.0-dev
-  "@alloy-js/core": ~0.18.0-dev
-  "@alloy-js/typescript": ~0.18.0-dev
-  "@alloy-js/csharp": ~0.18.0-dev.22
+  # "@alloy-js/core": ~0.18.0-dev
+  # "@alloy-js/typescript": ~0.18.0-dev
+  # "@alloy-js/csharp": ~0.18.0-dev.22
