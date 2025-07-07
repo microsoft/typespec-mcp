@@ -10,7 +10,7 @@ catalogs:
       specifier: ~0.18.0
       version: 0.18.0
     '@alloy-js/core':
-      specifier: ~0.18.0
+      specifier: ~0.18.2
       version: 0.18.2
     '@alloy-js/csharp':
       specifier: ~0.18.0
