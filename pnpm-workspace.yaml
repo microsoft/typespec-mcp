@@ -10,14 +10,14 @@ catalog:
   "@alloy-js/csharp": ~0.18.0
   "@rollup/plugin-babel": ^6.0.4
   "@types/node": ^22.14.0
-  "@typespec/compiler": ^1.2.0
-  "@typespec/emitter-framework": ^0.8.0
-  "@typespec/http-client": ^0.7.0
-  "@typespec/http-client-js": ^0.6.0
-  "@typespec/http": ^1.2.0
-  "@typespec/tspd": "^0.72.0"
-  "@modelcontextprotocol/inspector": ^0.14.3
-  "@modelcontextprotocol/sdk": ^1.11.4
+  "@typespec/compiler": ^1.2.1
+  "@typespec/emitter-framework": ^0.9.0
+  "@typespec/http-client": ^0.8.0
+  "@typespec/http-client-js": ^0.7.0
+  "@typespec/http": ^1.2.1
+  "@typespec/tspd": "^0.72.1"
+  "@modelcontextprotocol/inspector": ^0.16.1
+  "@modelcontextprotocol/sdk": ^1.15.1
   concurrently: ^9.1.2
   change-case: "^5.4.4"
   prettier: ^3.5.3
@@ -29,9 +29,9 @@ catalog:
   "zod-validation-error": "^3.4.0"
 
 overrides:
-  "@typespec/emitter-framework": ^0.9.0-dev
-  "@typespec/http-client": ^0.8.0-dev
-  "@typespec/http-client-js": ^0.7.0-dev
+  # "@typespec/emitter-framework": ^0.9.0-dev
+  # "@typespec/http-client": ^0.8.0-dev
+  # "@typespec/http-client-js": ^0.7.0-dev
   # "@alloy-js/core": ~0.18.0-dev
   # "@alloy-js/typescript": ~0.18.0-dev
   # "@alloy-js/csharp": ~0.18.0-dev.22
