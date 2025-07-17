@@ -1,0 +1,50 @@
+{
+  "templates": {
+    "vector-cs": {
+      "title": "Generated Template",
+      "description": "Scaffold generated from sample: vector-cs",
+      "files": [
+        {
+          "path": "Mcp.csproj",
+          "destination": "Mcp.csproj"
+        },
+        {
+          "path": "main.tsp",
+          "destination": "main.tsp"
+        },
+        {
+          "path": "package.json",
+          "destination": "package.json"
+        },
+        {
+          "path": "tspconfig.yaml",
+          "destination": "tspconfig.yaml"
+        },
+        {
+          "path": "generated/McpApplication.cs",
+          "destination": "generated/McpApplication.cs"
+        },
+        {
+          "path": "generated/Program.cs",
+          "destination": "generated/Program.cs"
+        },
+        {
+          "path": "tools/Math.impl.cs",
+          "destination": "tools/Math.impl.cs"
+        },
+        {
+          "path": "generated/models/Vec3.cs",
+          "destination": "generated/models/Vec3.cs"
+        },
+        {
+          "path": "generated/tools/IMath.cs",
+          "destination": "generated/tools/IMath.cs"
+        },
+        {
+          "path": "generated/tools/Math.cs",
+          "destination": "generated/tools/Math.cs"
+        }
+      ]
+    }
+  }
+}
