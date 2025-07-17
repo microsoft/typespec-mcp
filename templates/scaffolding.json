@@ -1,7 +1,7 @@
 {
   "vector-cs": {
-    "title": "vector-cs",
-    "description": "Scaffold generated from sample: vector-cs",
+    "title": "C# Mcp Server",
+    "description": "Scaffold a C# Mcp Server.",
     "files": [
       {
         "path": "vector-cs/Mcp.csproj",

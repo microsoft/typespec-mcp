@@ -48,7 +48,14 @@ function patchPackageJson(content: string): string {
   return JSON.stringify(newPkg, null, 2);
 }
 
-async function createTemplateFromSample(sampleName: string) {
+type TemplateConfig = {
+  sample: string;
+  title: string;
+  description: string;
+};
+
+async function createTemplateFromSample(config: TemplateConfig) {
+  const { sample: sampleName, title, description } = config;
   const sampleDir = join(SAMPLES_DIR, sampleName);
   const templateDir = join(TEMPLATE_DIR, sampleName);
   const filesToCopy: string[] = await globby(`${sampleDir}/**`, {
@@ -76,17 +83,23 @@ async function createTemplateFromSample(sampleName: string) {
     destination: relative(sampleDir, file),
   }));
   return {
-    title: sampleName,
-    description: "Scaffold generated from sample: " + sampleName,
+    title,
+    description,
     files: scaffoldFiles,
   };
 }
 
 async function main() {
-  const samples = ["vector-cs"];
-  const templates = {};
-  for (const sample of samples) {
-    templates[sample] = await createTemplateFromSample(sample);
+  const templateConfigs: TemplateConfig[] = [
+    {
+      sample: "vector-cs",
+      title: "C# Mcp Server",
+      description: "Scaffold a C# Mcp Server.",
+    },
+  ];
+  const templates: Record<string, any> = {};
+  for (const config of templateConfigs) {
+    templates[config.sample] = await createTemplateFromSample(config);
   }
   await writeFile(SCAFFOLDING_PATH, JSON.stringify(templates, null, 2));
   console.log(`Templates generated and scaffolding.json at ${SCAFFOLDING_PATH}.`);
