@@ -57,11 +57,11 @@ async function createTemplateFromSample(sampleName: string) {
   }
   // Generate scaffolding.json from copied files
   const scaffoldFiles: { path: string; destination: string }[] = filesToCopy.map((file) => ({
-    path: relative(sampleDir, file),
+    path: join(sampleName, relative(sampleDir, file)),
     destination: relative(sampleDir, file),
   }));
   return {
-    title: "Generated Template",
+    title: sampleName,
     description: "Scaffold generated from sample: " + sampleName,
     files: scaffoldFiles,
   };
@@ -71,11 +71,9 @@ async function main() {
   const samples = ["vector-cs"];
   const templates = {};
   for (const sample of samples) {
-    const template = await createTemplateFromSample(sample);
-    templates[sample] = template;
+    templates[sample] = await createTemplateFromSample(sample);
   }
-  const scaffolding = { templates };
-  await writeFile(SCAFFOLDING_PATH, JSON.stringify(scaffolding, null, 2));
+  await writeFile(SCAFFOLDING_PATH, JSON.stringify(templates, null, 2));
   console.log(`Templates generated and scaffolding.json at ${SCAFFOLDING_PATH}.`);
 }
 
