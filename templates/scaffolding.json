@@ -1,0 +1,48 @@
+{
+  "vector-cs": {
+    "title": "C# Mcp Server",
+    "description": "Scaffold a C# Mcp Server.",
+    "files": [
+      {
+        "path": "vector-cs/Mcp.csproj",
+        "destination": "Mcp.csproj"
+      },
+      {
+        "path": "vector-cs/main.tsp",
+        "destination": "main.tsp"
+      },
+      {
+        "path": "vector-cs/package.json",
+        "destination": "package.json"
+      },
+      {
+        "path": "vector-cs/tspconfig.yaml",
+        "destination": "tspconfig.yaml"
+      },
+      {
+        "path": "vector-cs/generated/McpApplication.cs",
+        "destination": "generated/McpApplication.cs"
+      },
+      {
+        "path": "vector-cs/generated/Program.cs",
+        "destination": "generated/Program.cs"
+      },
+      {
+        "path": "vector-cs/tools/Math.impl.cs",
+        "destination": "tools/Math.impl.cs"
+      },
+      {
+        "path": "vector-cs/generated/models/Vec3.cs",
+        "destination": "generated/models/Vec3.cs"
+      },
+      {
+        "path": "vector-cs/generated/tools/IMath.cs",
+        "destination": "generated/tools/IMath.cs"
+      },
+      {
+        "path": "vector-cs/generated/tools/Math.cs",
+        "destination": "generated/tools/Math.cs"
+      }
+    ]
+  }
+}
