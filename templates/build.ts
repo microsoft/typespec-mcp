@@ -30,6 +30,20 @@ function replaceVersions(obj: any) {
   return obj;
 }
 
+function patchPackageJson(content: string): string {
+  const pkgObj = JSON.parse(content);
+  const newPkg = replaceVersions(pkgObj);
+  // Replace all 'pnpm' references with 'npm run' in scripts
+  if (newPkg.scripts) {
+    for (const [k, v] of Object.entries(newPkg.scripts)) {
+      if (typeof v === "string") {
+        newPkg.scripts[k] = v.replace(/pnpm(?!\s*run)/g, "npm run");
+      }
+    }
+  }
+  return JSON.stringify(newPkg, null, 2);
+}
+
 async function createTemplateFromSample(sampleName: string) {
   const sampleDir = join(SAMPLES_DIR, sampleName);
   const templateDir = join(TEMPLATE_DIR, sampleName);
@@ -48,10 +62,7 @@ async function createTemplateFromSample(sampleName: string) {
     await mkdir(dirname(dest), { recursive: true });
     let content = await readFile(filepath, "utf-8");
     if (file === "package.json") {
-      // Replace versions in package.json
-      const pkgObj = JSON.parse(content);
-      const newPkg = replaceVersions(pkgObj);
-      content = JSON.stringify(newPkg, null, 2);
+      content = patchPackageJson(content);
     }
     await writeFile(dest, content);
   }

@@ -22,7 +22,7 @@
   "scripts": {
     "build:tsp": "tsp compile .",
     "build:cs": "dotnet build Mcp.csproj",
-    "build": "pnpm build:tsp && pnpm build:cs",
+    "build": "npm run build:tsp && npm run build:cs",
     "mcp": "mcp-cli node dist/src/mcp-server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "inspect": "mcp-inspector dotnet run --project Mcp.csproj"
