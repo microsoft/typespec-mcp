@@ -30,6 +30,10 @@ function replaceVersions(obj: any) {
   return obj;
 }
 
+/**
+ * Patches the package.json content to replace pnpm commands with npm run commands.
+ * This is necessary for compatibility with npm-based workflows.
+ */
 function patchPackageJson(content: string): string {
   const pkgObj = JSON.parse(content);
   const newPkg = replaceVersions(pkgObj);
