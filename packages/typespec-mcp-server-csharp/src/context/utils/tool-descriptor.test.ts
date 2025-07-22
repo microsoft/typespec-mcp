@@ -1,16 +1,15 @@
+import { Tester } from "#test/tester.js";
 import { $ } from "@typespec/compiler/typekit";
 import { describe, expect, it } from "vitest";
-import { createTestRunner } from "../../../test/test-host.js";
 import { createMcpNamingPolicy } from "../name-policy.js";
 import { resolveToolDescriptors } from "./tool-descriptor.js";
 
 async function getToolDescriptors(code: string) {
   const namingPolicy = createMcpNamingPolicy();
-  const runner = await createTestRunner();
-  await runner.compile(code);
+  const { program } = await Tester.compile(code);
 
-  const server = $(runner.program).mcp.servers.list()[0];
-  return resolveToolDescriptors(runner.program, server, namingPolicy);
+  const server = $(program).mcp.servers.list()[0];
+  return resolveToolDescriptors(program, server, namingPolicy);
 }
 
 describe("tool name", () => {

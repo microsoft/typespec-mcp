@@ -15,6 +15,9 @@
       "types": "./dist/testing/index.d.ts"
     }
   },
+  "imports": {
+    "#test/*": "./test/*"
+  },
   "dependencies": {
     "change-case": "catalog:",
     "typespec-mcp": "workspace:*",
