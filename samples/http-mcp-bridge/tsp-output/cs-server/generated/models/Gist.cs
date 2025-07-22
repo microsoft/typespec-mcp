@@ -1,4 +1,4 @@
-namespace Mcp
+namespace Github
 {
     /// <summary>
     /// Base Gist

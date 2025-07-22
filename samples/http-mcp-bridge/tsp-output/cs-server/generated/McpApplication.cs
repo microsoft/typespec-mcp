@@ -1,4 +1,4 @@
-namespace Mcp
+namespace Github
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.DependencyInjection;

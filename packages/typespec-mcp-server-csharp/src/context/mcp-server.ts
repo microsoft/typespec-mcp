@@ -1,5 +1,5 @@
 import { type ComponentContext, createContext, type NamePolicy, useContext } from "@alloy-js/core";
-import { navigateType, type Program, type Type } from "@typespec/compiler";
+import { getTypeName, navigateType, type Program, type Type } from "@typespec/compiler";
 import { $ } from "@typespec/compiler/typekit";
 import type { McpServer } from "typespec-mcp";
 import { createMcpNamingPolicy, type McpElements } from "./name-policy.js";
@@ -40,6 +40,8 @@ export interface MCPServerKeys {}
 
 export interface MCPServerContext {
   name: string;
+  /** C# namespace for the project */
+  namespace: string;
   server?: McpServer;
   structure: ToolGroup;
   allTypes: Type[];
@@ -71,6 +73,7 @@ export function createMCPServerContext(program: Program): MCPServerContext {
   return {
     namePolicy: naming,
     name: server?.name ?? "MCP Server",
+    namespace: server ? getTypeName(server.container) : "MCP.Server",
     server,
     structure: toolGroup,
     allTypes,

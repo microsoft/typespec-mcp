@@ -1,4 +1,4 @@
-namespace Mcp
+namespace VectorMCP
 {
     /// <summary>
     /// Perform math operations on vectors

@@ -1,4 +1,4 @@
-namespace Mcp
+namespace Github
 {
     using System.ClientModel;
     using System.ClientModel.Primitives;

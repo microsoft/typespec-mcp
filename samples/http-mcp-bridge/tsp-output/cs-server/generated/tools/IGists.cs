@@ -1,4 +1,4 @@
-namespace Mcp
+namespace Github
 {
     public interface IGists
     {

@@ -1,4 +1,4 @@
-namespace Mcp
+namespace Github
 {
     /// <summary>
     /// Full representation of a GitHub repository.

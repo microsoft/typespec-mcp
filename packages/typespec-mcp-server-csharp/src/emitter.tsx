@@ -29,8 +29,8 @@ export function McpServer(props: McpServerProps) {
   return (
     <Output program={props.program} namePolicy={mcpServerContext.namePolicy}>
       <MCPServerContext.Provider value={mcpServerContext}>
-        <CsprojFile />
-        <Namespace name="Mcp">
+        {props.scaffold && <CsprojFile />}
+        <Namespace name={mcpServerContext.namespace}>
           {props.children}
           <SourceDirectory path="generated">
             <SourceDirectory path="tools">
