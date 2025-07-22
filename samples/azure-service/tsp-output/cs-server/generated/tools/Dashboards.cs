@@ -14,10 +14,12 @@ namespace Test
             this.impl = impl;
         }
 
-        [McpServerTool(Name = "dashboards_get"), Description(@"Gets the Dashboard.")]
-        public async Task<Dashboard> GetAsync(CancellationToken cancellationToken = default)
+        [McpServerTool(Name = "dashboards_list"), Description(@"Gets the Dashboard.")]
+        public async Task<ResourceListResult> ListAsync(
+            string subscriptionId, string apiVersion, CancellationToken cancellationToken = default
+        )
         {
-            return await this.impl.GetAsync(cancellationToken);
+            return await this.impl.ListAsync(subscriptionId, apiVersion, cancellationToken);
         }
     }
 }

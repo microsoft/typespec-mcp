@@ -6,6 +6,8 @@ namespace Test
         /// Gets the Dashboard.
         /// </summary>
         ///
-        public Task<Dashboard> GetAsync(CancellationToken cancellationToken = default);
+        public Task<ResourceListResult> ListAsync(
+            string subscriptionId, string apiVersion, CancellationToken cancellationToken = default
+        );
     }
 }

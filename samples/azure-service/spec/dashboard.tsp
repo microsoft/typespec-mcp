@@ -19,9 +19,10 @@ interface Dashboards {
   /**
    * Gets the Dashboard.
    */
-  //   get is ArmResourceRead<Dashboard>;
+  // get is ArmResourceRead<Dashboard>;
   @MCP.tool
-  get(): Dashboard;
+  @route("/subscriptions/{subscriptionId}/providers/Test/dashboards")
+  list(@path subscriptionId: string, @query("api-version") apiVersion: string): ResourceListResult<Dashboard>;
 
   //   /**
   //    * Creates or updates a Dashboard.
@@ -47,5 +48,5 @@ interface Dashboards {
   //   /**
   //    * Gets all the dashboards within a subscription.
   //    */
-  //   listBySubscription is ArmListBySubscription<Dashboard>;
+  // listBySubscription is ArmListBySubscription<Dashboard>;
 }
