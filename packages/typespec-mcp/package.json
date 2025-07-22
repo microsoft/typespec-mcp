@@ -17,6 +17,9 @@
       "types": "./dist/src/typekit/index.d.ts"
     }
   },
+  "imports": {
+    "#test/*": "./test/*"
+  },
   "peerDependencies": {
     "@typespec/compiler": "catalog:"
   },
