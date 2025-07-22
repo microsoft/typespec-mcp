@@ -1,4 +1,4 @@
-namespace Mcp
+namespace VectorMCP
 {
     /// <summary>
     /// A vector in 3D space.

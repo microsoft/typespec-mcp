@@ -27,10 +27,17 @@ jobs:
       - name: Test
         run: pnpm test
 
-      - run: |
-          git status --porcelain
-          git diff --no-ext-diff --quiet --exit-code
-        name: Check not out of date generated files
+      - name: Check for git changes
+        run: |
+          git_changes=$(git status --porcelain)
+          if [ -n "$git_changes" ]; then
+            echo "❌ Git changes detected after validation:"
+            echo "$git_changes"
+            git diff --color=always
+            exit 1
+          else
+            echo "✅ No git changes detected"
+          fi
 
   format:
     runs-on: ubuntu-latest

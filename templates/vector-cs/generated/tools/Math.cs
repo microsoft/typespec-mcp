@@ -1,4 +1,4 @@
-namespace Mcp
+namespace VectorMCP
 {
     using ModelContextProtocol.Server;
     using System.ComponentModel;
