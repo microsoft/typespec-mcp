@@ -11,7 +11,7 @@ namespace Test
 
                 new ClientPipelineOptions(),
                 System.Array.Empty<PipelinePolicy>(),
-                new [] { /* unsupported authentication type: oauth2*/ },
+                System.Array.Empty<PipelinePolicy>(),
                 System.Array.Empty<PipelinePolicy>()
             );
             using PipelineMessage message = pipeline.CreateMessage();
