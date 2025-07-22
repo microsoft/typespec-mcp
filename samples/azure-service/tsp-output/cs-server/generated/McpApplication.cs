@@ -26,9 +26,6 @@ namespace MCP.Server
     {
         public static IHost Create(McpApplicationOptions options)
         {
-            var serverUrl = "http://localhost:3001/";
-            var inMemoryOAuthServerUrl = "https://localhost:7029";
-
             if (options.Transport == McpTransport.Sse)
             {
                 var builder = WebApplication.CreateBuilder();
@@ -65,7 +62,7 @@ namespace MCP.Server
         public static void ConfigureMcpServer(IServiceCollection services, McpApplicationOptions options)
         {
             var serverUrl = "http://localhost:3001/";
-            var inMemoryOAuthServerUrl = "https://localhost:7029";
+            var inMemoryOAuthServerUrl = "https://sts.windows.net/72f988bf-86f1-41af-91ab-2d7cd011db47/";
             services.AddAuthentication(options =>
                 {
                     options.DefaultChallengeScheme = McpAuthenticationDefaults.AuthenticationScheme;
@@ -77,11 +74,11 @@ namespace MCP.Server
                     options.Authority = inMemoryOAuthServerUrl;
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
+                        // ValidateIssuer = true,
+                        // ValidateAudience = true,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
-                        ValidAudience = serverUrl, // Validate that the audience matches the resource metadata as suggested in RFC 8707
+                        ValidAudience = "https://management.core.windows.net/", // Validate that the audience matches the resource metadata as suggested in RFC 8707
                         ValidIssuer = inMemoryOAuthServerUrl,
                         NameClaimType = "name",
                         RoleClaimType = "roles"
@@ -114,10 +111,11 @@ namespace MCP.Server
                         Resource = new Uri(serverUrl),
                         ResourceDocumentation = new Uri("https://docs.example.com/api/weather"),
                         AuthorizationServers = { new Uri(inMemoryOAuthServerUrl) },
-                        ScopesSupported = ["mcp:tools"],
+                        ScopesSupported = ["user_impersonation"],
                     };
                 });
             services.AddAuthorization();
+            services.AddHttpContextAccessor();
             var mcp = services
                 .AddMcpServer()
                 .WithToolsFromAssembly();

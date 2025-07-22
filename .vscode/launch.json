@@ -10,7 +10,6 @@
       "request": "launch",
       "preLaunchTask": "build",
       "program": "${workspaceFolder}/samples/azure-service/tsp-output/cs-server/bin/Debug/net8.0/Mcp.dll",
-      "runtimeArgs": ["--roll-forward", "Major"],
       "args": ["--transport", "sse"],
       "cwd": "${workspaceFolder}/samples/azure-service/tsp-output/cs-server",
       "console": "internalConsole",
