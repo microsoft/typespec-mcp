@@ -68,4 +68,23 @@ describe("$.mcp.servers.list()", () => {
       expectTypeEquals(server[1].container, Service2);
     });
   });
+
+  it("set properties", async () => {
+    const { program } = await Tester.compile(t.code`
+      @mcpServer(#{
+        name: "MyService",
+        instructions: "This is a test service",
+        version: "0.1.0",
+      })
+      interface Service {}
+    `);
+
+    const server = $(program).mcp.servers.list();
+    expect(server).toHaveLength(1);
+    expect(server[0]).toMatchObject({
+      name: "MyService",
+      instructions: "This is a test service",
+      version: "0.1.0",
+    });
+  });
 });
