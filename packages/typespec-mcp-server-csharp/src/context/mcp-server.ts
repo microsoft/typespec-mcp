@@ -63,6 +63,7 @@ export function createMCPServerContext(program: Program): MCPServerContext {
   const tk = $(program);
   const server = tk.mcp.servers.list()[0] as McpServer | undefined;
 
+  console.log("S", server);
   const toolGroup = resolveToolDescriptors(program, server, naming);
   const allTools = toolGroup.allTools;
   const allTypes = discoverTypesFrom(
