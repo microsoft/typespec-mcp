@@ -1,4 +1,4 @@
-namespace Mcp
+namespace Github
 {
     using ModelContextProtocol.Server;
     using System.ComponentModel;

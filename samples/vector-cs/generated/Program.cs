@@ -1,4 +1,4 @@
-namespace Mcp
+namespace VectorMCP
 {
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
