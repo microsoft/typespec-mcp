@@ -89,6 +89,24 @@ function listUnder(container: Namespace | Interface) {
   return ops;
 }
 
+function listContainersUnder(container: Namespace): (Namespace | Interface)[] {
+  const result: (Namespace | Interface)[] = [];
+
+  function visitNamespace(ns: Namespace) {
+    result.push(ns);
+    for (const member of ns.namespaces.values()) {
+      visitNamespace(member);
+    }
+    for (const member of ns.interfaces.values()) {
+      result.push(member);
+    }
+  }
+
+  visitNamespace(container);
+
+  return result;
+}
+
 defineKit<TypekitExtension>({
   mcp: {
     tools: {
@@ -159,7 +177,7 @@ defineKit<TypekitExtension>({
 
     servers: {
       list() {
-        return Array.from(this.program.getGlobalNamespaceType().namespaces.values())
+        return listContainersUnder(this.program.getGlobalNamespaceType())
           .map((x) => getMcpServer(this.program, x))
           .filter((x) => x !== undefined);
       },
