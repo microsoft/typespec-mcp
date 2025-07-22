@@ -5,6 +5,7 @@ import { writeOutput } from "@typespec/emitter-framework";
 import { McpServer, useMCPServerContext } from "typespec-mcp-server-csharp";
 import {
   ConfigureServicesMethod,
+  CsprojFile,
   getToolGroupInferfaceRefkey,
   ProgramMain,
 } from "typespec-mcp-server-csharp/components";
@@ -16,6 +17,7 @@ export async function $onEmit(context: EmitContext) {
   await writeOutput(
     context.program,
     <McpServer program={context.program}>
+      <CsprojFile />
       <ProgramFile />
       <ResponseHandlerFile />
       <Implementations />
