@@ -1,0 +1,6 @@
+emit:
+  - typespec-mcp-http-server-csharp
+output-dir: "{project-root}/../tsp-output"
+options:
+  typespec-mcp-http-server-csharp:
+    emitter-output-dir: "{output-dir}/cs-server"

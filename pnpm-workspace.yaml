@@ -15,6 +15,8 @@ catalog:
   "@typespec/http-client": ^0.8.0
   "@typespec/http-client-js": ^0.7.0
   "@typespec/http": ^1.2.1
+  "@typespec/rest": ^0.72.1
+  "@typespec/versioning": ^0.72.1
   "@typespec/tspd": "^0.72.1"
   "@modelcontextprotocol/inspector": ^0.16.1
   "@modelcontextprotocol/sdk": ^1.15.1
@@ -27,6 +29,8 @@ catalog:
   "zod": "^3.24.2"
   "zod-to-json-schema": "^3.24.5"
   "zod-validation-error": "^3.4.0"
+  "@azure-tools/typespec-azure-core": "latest"
+  "@azure-tools/typespec-azure-resource-manager": "latest"
 
 overrides:
   # "@typespec/emitter-framework": ^0.9.0-dev

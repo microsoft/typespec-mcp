@@ -7,7 +7,7 @@
       "type": "process",
       "args": [
         "build",
-        "${workspaceFolder}/samples/http-mcp-bridge/tsp-output/cs-server/Mcp.csproj",
+        "${workspaceFolder}/samples/azure-service/tsp-output/cs-server/Mcp.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary;ForceNoAlign"
       ],

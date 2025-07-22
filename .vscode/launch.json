@@ -9,9 +9,9 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/samples/http-mcp-bridge/tsp-output/cs-server/bin/Debug/net8.0/Mcp.dll",
+      "program": "${workspaceFolder}/samples/azure-service/tsp-output/cs-server/bin/Debug/net8.0/Mcp.dll",
       "args": ["--transport", "sse"],
-      "cwd": "${workspaceFolder}/samples/http-mcp-bridge/tsp-output/cs-server",
+      "cwd": "${workspaceFolder}/samples/azure-service/tsp-output/cs-server",
       "console": "internalConsole",
       "stopAtEntry": false
     },

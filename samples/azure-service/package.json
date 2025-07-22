@@ -1,0 +1,47 @@
+{
+  "name": "demo",
+  "private": true,
+  "version": "0.1.0",
+  "description": "",
+  "dependencies": {
+    "@modelcontextprotocol/inspector": "catalog:",
+    "@modelcontextprotocol/sdk": "catalog:",
+    "@typespec/compiler": "catalog:",
+    "@typespec/http": "catalog:",
+    "@typespec/versioning": "catalog:",
+    "@typespec/rest": "catalog:",
+    "@azure-tools/typespec-azure-core": "catalog:",
+    "@azure-tools/typespec-azure-resource-manager": "catalog:",
+    "@typespec/ts-http-runtime": "0.3.0",
+    "typespec-mcp": "workspace:*",
+    "typespec-mcp-server-js": "workspace:*",
+    "typespec-mcp-http-server-js": "workspace:*",
+    "typespec-mcp-http-server-csharp": "workspace:*",
+    "typespec-http-dispatcher": "workspace:*",
+    "zod": "catalog:",
+    "zod-to-json-schema": "catalog:",
+    "zod-validation-error": "catalog:",
+    "uri-template": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "@wong2/mcp-cli": "^1.6.0",
+    "prettier": "^3.5.3",
+    "typescript": "catalog:"
+  },
+  "scripts": {
+    "build:tsp": "tsp compile ./spec",
+    "build:ts": "tsc -p .",
+    "build:cs": "dotnet build ./tsp-output/cs-server",
+    "build": "pnpm build:tsp && pnpm build:cs",
+    "mcp:ts": "mcp-cli node dist/src/mcp-server.js",
+    "mcp:cs": "mcp-cli -- dotnet run --debug --project ./tsp-output/cs-server/Mcp.csproj",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "inspect:ts": "DANGEROUSLY_OMIT_AUTH=true mcp-inspector node ./dist/tsp-output/cs-server/main.js",
+    "inspect:cs": "DANGEROUSLY_OMIT_AUTH=true mcp-inspector dotnet run --project ./tsp-output/cs-server/Mcp.csproj"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}
