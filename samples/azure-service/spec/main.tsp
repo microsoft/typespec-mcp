@@ -22,4 +22,5 @@ using TypeSpec.Versioning;
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-namespace Microsoft.Portal;
+@MCP.mcpServer
+namespace Test;

@@ -1,4 +1,4 @@
-namespace MCP.Server
+namespace Test
 {
     /// <summary>
     /// Common fields that are returned in the response for all Azure Resource Manager resources

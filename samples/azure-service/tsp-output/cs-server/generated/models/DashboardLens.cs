@@ -1,4 +1,4 @@
-namespace MCP.Server
+namespace Test
 {
     /// <summary>
     /// A dashboard lens.

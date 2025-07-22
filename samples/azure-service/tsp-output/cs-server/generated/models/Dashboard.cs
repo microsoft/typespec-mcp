@@ -1,4 +1,4 @@
-namespace MCP.Server
+namespace Test
 {
     /// <summary>
     /// The shared dashboard resource definition.

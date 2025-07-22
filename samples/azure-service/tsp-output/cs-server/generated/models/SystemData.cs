@@ -1,4 +1,4 @@
-namespace MCP.Server
+namespace Test
 {
     /// <summary>
     /// Metadata pertaining to creation and last modification of the resource.

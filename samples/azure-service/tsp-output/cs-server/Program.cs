@@ -1,4 +1,4 @@
-namespace MCP.Server
+namespace Test
 {
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
@@ -25,7 +25,7 @@ namespace MCP.Server
 
         public static void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IMicrosoft, MicrosoftHttpBinding>();
+            services.AddSingleton<IDashboards, DashboardsHttpBinding>();
         }
     }
 }

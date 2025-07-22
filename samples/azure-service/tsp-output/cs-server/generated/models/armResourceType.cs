@@ -1,4 +1,4 @@
-namespace MCP.Server
+namespace Test
 {
     public class ArmResourceType : System.BinaryData
     {

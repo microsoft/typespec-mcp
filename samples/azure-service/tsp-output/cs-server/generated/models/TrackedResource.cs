@@ -1,4 +1,4 @@
-namespace MCP.Server
+namespace Test
 {
     /// <summary>
     /// The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'

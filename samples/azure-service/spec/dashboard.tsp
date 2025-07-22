@@ -6,7 +6,7 @@ import "./models.tsp";
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
-namespace Microsoft.Portal;
+namespace Test;
 /**
  * The shared dashboard resource definition.
  */
@@ -20,6 +20,7 @@ interface Dashboards {
    * Gets the Dashboard.
    */
   //   get is ArmResourceRead<Dashboard>;
+  @MCP.tool
   get(): Dashboard;
 
   //   /**

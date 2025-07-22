@@ -6,7 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
-namespace Microsoft.Portal;
+namespace Test;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
