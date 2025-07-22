@@ -7,7 +7,7 @@ import { httpToolHandler } from "./tools.js";
 
 export const server = new Server(
   {
-    name: "VectorMCP",
+    name: "Github API",
     version: "1.0.0",
     instructions: "Use this MCP to access GitHub API.\n- DO NOT pass optional parameters if they are empty. DO NOT PASS an empty string",
   },
