@@ -260,48 +260,6 @@ model MarkdownPartMetadataSettings {
  */
 model MarkdownPartMetadataSettingsContent {
   /**
-   * The setting of the content of markdown part.
-   */
-  @removed(Versions.v2025_04_01_preview)
-  settings?: MarkdownPartMetadataSettingsContentSettings;
-
-  /**
-   * The content of the markdown part.
-   */
-  @added(Versions.v2025_04_01_preview)
-  content?: string;
-
-  /**
-   * The title of the markdown part.
-   */
-  @added(Versions.v2025_04_01_preview)
-  title?: string;
-
-  /**
-   * The subtitle of the markdown part.
-   */
-  @added(Versions.v2025_04_01_preview)
-  subtitle?: string;
-
-  /**
-   * The source of the content of the markdown part.
-   */
-  @added(Versions.v2025_04_01_preview)
-  markdownSource?: int32;
-
-  /**
-   * The uri of markdown content.
-   */
-  @added(Versions.v2025_04_01_preview)
-  markdownUri?: string;
-}
-
-/**
- * The setting of the content of markdown part.
- */
-@removed(Versions.v2025_04_01_preview)
-model MarkdownPartMetadataSettingsContentSettings {
-  /**
    * The content of the markdown part.
    */
   content?: string;
