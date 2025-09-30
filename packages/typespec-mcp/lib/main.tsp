@@ -9,11 +9,6 @@ namespace MCP;
 extern dec tool(target: Reflection.Operation);
 
 /**
- * Declare an operation that is an MCP Resource.
- */
-extern dec resource(target: Reflection.Operation);
-
-/**
  * Tool does not modify its environment.
  * @param value - Default is true.
  */
@@ -35,6 +30,11 @@ extern dec idempotent(target: Reflection.Operation, value?: boolean);
  * @param value - Default is true.
  */
 extern dec closedWorld(target: Reflection.Operation, value?: boolean);
+
+/**
+ * Declare an operation to be a MCP Resource.
+ */
+extern dec resource(target: Reflection.Operation);
 
 model McpServerOptions {
   name?: string;
