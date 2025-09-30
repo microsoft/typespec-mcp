@@ -14,6 +14,11 @@ export interface McpServerOptions {
 export type ToolDecorator = (context: DecoratorContext, target: Operation) => void;
 
 /**
+ * Declare an operation that is an MCP Resource.
+ */
+export type ResourceDecorator = (context: DecoratorContext, target: Operation) => void;
+
+/**
  * Tool does not modify its environment.
  *
  * @param value Default is true.
@@ -53,6 +58,7 @@ export type McpServerDecorator = (
 
 export type MCPDecorators = {
   tool: ToolDecorator;
+  resource: ResourceDecorator;
   readonly: ReadonlyDecorator;
   nondestructive: NondestructiveDecorator;
   idempotent: IdempotentDecorator;

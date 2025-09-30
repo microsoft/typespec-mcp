@@ -7,6 +7,7 @@ import type {
   McpServerOptions,
   NondestructiveDecorator,
   ReadonlyDecorator,
+  ResourceDecorator,
   ToolDecorator,
 } from "../generated-defs/MCP.js";
 import { stateKeys } from "./lib.js";
@@ -27,6 +28,9 @@ function createMarkerDecorator<T extends DecoratorFunction>(
 }
 
 export const [isTool, markTool, toolDecorator] = createMarkerDecorator<ToolDecorator>(stateKeys.tool);
+export const [isResource, markResource, resourceDecorator] = createMarkerDecorator<ResourceDecorator>(
+  stateKeys.resource,
+);
 export const [isReadonly, markReadonly, readonlyDecorator] = createMarkerDecorator<ReadonlyDecorator>(
   stateKeys.readonly,
 );

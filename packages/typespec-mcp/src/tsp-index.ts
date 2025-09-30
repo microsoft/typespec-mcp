@@ -7,6 +7,7 @@ import {
   idempotentDecorator,
   nondestructiveDecorator,
   readonlyDecorator,
+  resourceDecorator,
   toolDecorator,
 } from "./decorators.js";
 
@@ -15,6 +16,7 @@ export const $decorators = {
   "MCP": {
     mcpServer: $mcpServer,
     tool: toolDecorator,
+    resource: resourceDecorator,
     readonly: readonlyDecorator,
     nondestructive: nondestructiveDecorator,
     idempotent: idempotentDecorator,

@@ -5,6 +5,7 @@ export const $lib = createTypeSpecLibrary({
   diagnostics: {},
   state: {
     tool: { description: "An MCP tool" },
+    resource: { description: "An MCP resource" },
     readonly: { description: "Readonly tool" },
     nondestructive: { description: "Non destructive tool" },
     idempotent: { description: "Idempotent tool" },

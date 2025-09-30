@@ -9,6 +9,11 @@ namespace MCP;
 extern dec tool(target: Reflection.Operation);
 
 /**
+ * Declare an operation that is an MCP Resource.
+ */
+extern dec resource(target: Reflection.Operation);
+
+/**
  * Tool does not modify its environment.
  * @param value - Default is true.
  */
