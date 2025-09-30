@@ -58,10 +58,10 @@ export type McpServerDecorator = (
 
 export type MCPDecorators = {
   tool: ToolDecorator;
-  resource: ResourceDecorator;
   readonly: ReadonlyDecorator;
   nondestructive: NondestructiveDecorator;
   idempotent: IdempotentDecorator;
   closedWorld: ClosedWorldDecorator;
+  resource: ResourceDecorator;
   mcpServer: McpServerDecorator;
 };
