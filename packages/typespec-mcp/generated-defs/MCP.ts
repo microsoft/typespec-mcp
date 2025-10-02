@@ -1,9 +1,28 @@
 import type { DecoratorContext, Interface, Namespace, Operation, Type } from "@typespec/compiler";
 
+export interface ResourceOptions {
+  readonly name?: string;
+  readonly uri?: string;
+  readonly parameters?: Record<string, ResourceUriParameterDetail>;
+  readonly mimeType?: string;
+  readonly size?: number;
+  readonly annotations?: ResourceAnnotations;
+}
+
 export interface McpServerOptions {
   readonly name?: string;
   readonly version?: string;
   readonly instructions?: string;
+}
+
+export interface ResourceUriParameterDetail {
+  readonly description?: string;
+}
+
+export interface ResourceAnnotations {
+  readonly audience?: readonly ("user" | "assistant")[];
+  readonly priority?: number;
+  readonly lastModified?: string;
 }
 
 /**
@@ -41,10 +60,7 @@ export type IdempotentDecorator = (context: DecoratorContext, target: Operation,
  */
 export type ClosedWorldDecorator = (context: DecoratorContext, target: Operation, value?: Type) => void;
 
-/**
- * Declare an operation to be a MCP Resource.
- */
-export type ResourceDecorator = (context: DecoratorContext, target: Operation) => void;
+export type ResourceDecorator = (context: DecoratorContext, target: Operation, options?: ResourceOptions) => void;
 
 /**
  * Declare a namespace or interface as an MCP Server and provide server

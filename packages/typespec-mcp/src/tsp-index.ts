@@ -2,12 +2,12 @@ import type { MCPDecorators } from "../generated-defs/MCP.js";
 import type { MCPPrivateDecorators } from "../generated-defs/MCP.Private.js";
 import {
   $mcpServer,
+  $resource,
   $serializeAsText,
   closedWorldDecorator,
   idempotentDecorator,
   nondestructiveDecorator,
   readonlyDecorator,
-  resourceDecorator,
   toolDecorator,
 } from "./decorators.js";
 
@@ -16,7 +16,7 @@ export const $decorators = {
   "MCP": {
     mcpServer: $mcpServer,
     tool: toolDecorator,
-    resource: resourceDecorator,
+    resource: $resource,
     readonly: readonlyDecorator,
     nondestructive: nondestructiveDecorator,
     idempotent: idempotentDecorator,

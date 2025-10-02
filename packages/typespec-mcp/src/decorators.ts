@@ -1,14 +1,16 @@
-import type { DecoratorContext, DecoratorFunction, Interface, Namespace, Type } from "@typespec/compiler";
+import type { DecoratorContext, DecoratorFunction, Interface, Namespace, Operation, Type } from "@typespec/compiler";
 import { useStateMap, useStateSet } from "@typespec/compiler/utils";
-import type {
-  ClosedWorldDecorator,
-  IdempotentDecorator,
-  McpServerDecorator,
-  McpServerOptions,
-  NondestructiveDecorator,
-  ReadonlyDecorator,
-  ResourceDecorator,
-  ToolDecorator,
+import {
+  type ClosedWorldDecorator,
+  type IdempotentDecorator,
+  type McpServerDecorator,
+  type McpServerOptions,
+  type NondestructiveDecorator,
+  type ReadonlyDecorator,
+  type ResourceDecorator,
+  type ResourceOptions as ResourceDecoratorOptions,
+  type ResourceUriParameterDetail,
+  type ToolDecorator,
 } from "../generated-defs/MCP.js";
 import { stateKeys } from "./lib.js";
 
@@ -28,9 +30,6 @@ function createMarkerDecorator<T extends DecoratorFunction>(
 }
 
 export const [isTool, markTool, toolDecorator] = createMarkerDecorator<ToolDecorator>(stateKeys.tool);
-export const [isResource, markResource, resourceDecorator] = createMarkerDecorator<ResourceDecorator>(
-  stateKeys.resource,
-);
 export const [isReadonly, markReadonly, readonlyDecorator] = createMarkerDecorator<ReadonlyDecorator>(
   stateKeys.readonly,
 );
@@ -67,5 +66,30 @@ export const $mcpServer: McpServerDecorator = (
   setMcpServer(context.program, target, {
     ...options,
     container: target,
+  });
+};
+
+export interface Resource extends ResourceDecoratorOptions {
+  target: Operation;
+}
+
+export const [getResource, setResource] = useStateMap<Operation, Resource>(stateKeys.resource);
+export const $resource: ResourceDecorator = (
+  context: DecoratorContext,
+  target: Operation,
+  options?: ResourceDecoratorOptions,
+) => {
+  const params = options?.uri?.match(/\{[^}]+\}/g)?.map((s) => s.slice(1, -1)) ?? [];
+  const processedParameters: Record<string, ResourceUriParameterDetail> = {};
+  // normalize parameters to ensure the map contains and only contains all the parameters in the uri
+  for (const p of params) {
+    processedParameters[p] = {
+      description: options?.parameters?.[p]?.description,
+    };
+  }
+  setResource(context.program, target, {
+    ...(options ?? {}),
+    target: target,
+    parameters: processedParameters,
   });
 };
