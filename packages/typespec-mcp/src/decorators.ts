@@ -8,8 +8,6 @@ import {
   type NondestructiveDecorator,
   type ReadonlyDecorator,
   type ResourceDecorator,
-  type ResourceOptions as ResourceDecoratorOptions,
-  type ResourceUriParameterDetail,
   type ToolDecorator,
 } from "../generated-defs/MCP.js";
 import { stateKeys } from "./lib.js";
@@ -69,27 +67,13 @@ export const $mcpServer: McpServerDecorator = (
   });
 };
 
-export interface Resource extends ResourceDecoratorOptions {
-  target: Operation;
+export interface Resource {
+  uri: string;
 }
 
 export const [getResource, setResource] = useStateMap<Operation, Resource>(stateKeys.resource);
-export const $resource: ResourceDecorator = (
-  context: DecoratorContext,
-  target: Operation,
-  options?: ResourceDecoratorOptions,
-) => {
-  const params = options?.uri?.match(/\{[^}]+\}/g)?.map((s) => s.slice(1, -1)) ?? [];
-  const processedParameters: Record<string, ResourceUriParameterDetail> = {};
-  // normalize parameters to ensure the map contains and only contains all the parameters in the uri
-  for (const p of params) {
-    processedParameters[p] = {
-      description: options?.parameters?.[p]?.description,
-    };
-  }
+export const $resource: ResourceDecorator = (context: DecoratorContext, target: Operation, uri?: string) => {
   setResource(context.program, target, {
-    ...(options ?? {}),
-    target: target,
-    parameters: processedParameters,
+    uri: uri ?? "",
   });
 };

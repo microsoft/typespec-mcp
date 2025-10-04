@@ -31,48 +31,7 @@ extern dec idempotent(target: Reflection.Operation, value?: boolean);
  */
 extern dec closedWorld(target: Reflection.Operation, value?: boolean);
 
-model ResourceUriParameterDetail {
-  description?: string;
-}
-
-model ResourceAnnotations {
-  /**
-   * An array indicating the intended audience(s) for this resource. Valid values are "user" and "assistant".
-   * For example, ["user", "assistant"] indicates content useful for both.
-   */
-  audience?: ("user" | "assistant")[];
-
-  /**
-   * A number from 0.0 to 1.0 indicating the importance of this resource.
-   * A value of 1 means “most important” (effectively required), while 0 means “least important” (entirely optional).
-   */
-  priority?: float32;
-
-  /**
-   * An ISO 8601 formatted timestamp indicating when the resource was last modified (e.g., "2025-01-12T15:00:58Z").
-   */
-  lastModified?: string;
-}
-
-model ResourceOptions {
-  name?: string;
-
-  /** Unique identifier for the resource */
-  uri?: string;
-
-  /** details of the parameters in the uri */
-  parameters?: Record<ResourceUriParameterDetail>;
-
-  /** MIME type */
-  mimeType?: string;
-
-  /** Size in bytes */
-  size?: int32;
-
-  annotations?: ResourceAnnotations;
-}
-
-extern dec resource(target: Reflection.Operation, options?: valueof ResourceOptions);
+extern dec resource(target: Reflection.Operation, uri?: valueof string);
 
 model McpServerOptions {
   name?: string;
