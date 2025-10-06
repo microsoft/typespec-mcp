@@ -41,6 +41,8 @@ export type IdempotentDecorator = (context: DecoratorContext, target: Operation,
  */
 export type ClosedWorldDecorator = (context: DecoratorContext, target: Operation, value?: Type) => void;
 
+export type ResourceDecorator = (context: DecoratorContext, target: Operation, uri?: string) => void;
+
 /**
  * Declare a namespace or interface as an MCP Server and provide server
  * metadata.
@@ -57,5 +59,6 @@ export type MCPDecorators = {
   nondestructive: NondestructiveDecorator;
   idempotent: IdempotentDecorator;
   closedWorld: ClosedWorldDecorator;
+  resource: ResourceDecorator;
   mcpServer: McpServerDecorator;
 };

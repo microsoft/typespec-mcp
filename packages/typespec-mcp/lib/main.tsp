@@ -31,6 +31,8 @@ extern dec idempotent(target: Reflection.Operation, value?: boolean);
  */
 extern dec closedWorld(target: Reflection.Operation, value?: boolean);
 
+extern dec resource(target: Reflection.Operation, uri?: valueof string);
+
 model McpServerOptions {
   name?: string;
   version?: string;

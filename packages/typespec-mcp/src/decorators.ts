@@ -1,13 +1,14 @@
-import type { DecoratorContext, DecoratorFunction, Interface, Namespace, Type } from "@typespec/compiler";
+import type { DecoratorContext, DecoratorFunction, Interface, Namespace, Operation, Type } from "@typespec/compiler";
 import { useStateMap, useStateSet } from "@typespec/compiler/utils";
-import type {
-  ClosedWorldDecorator,
-  IdempotentDecorator,
-  McpServerDecorator,
-  McpServerOptions,
-  NondestructiveDecorator,
-  ReadonlyDecorator,
-  ToolDecorator,
+import {
+  type ClosedWorldDecorator,
+  type IdempotentDecorator,
+  type McpServerDecorator,
+  type McpServerOptions,
+  type NondestructiveDecorator,
+  type ReadonlyDecorator,
+  type ResourceDecorator,
+  type ToolDecorator,
 } from "../generated-defs/MCP.js";
 import { stateKeys } from "./lib.js";
 
@@ -63,5 +64,16 @@ export const $mcpServer: McpServerDecorator = (
   setMcpServer(context.program, target, {
     ...options,
     container: target,
+  });
+};
+
+export interface Resource {
+  uri: string;
+}
+
+export const [getResource, setResource] = useStateMap<Operation, Resource>(stateKeys.resource);
+export const $resource: ResourceDecorator = (context: DecoratorContext, target: Operation, uri?: string) => {
+  setResource(context.program, target, {
+    uri: uri ?? "",
   });
 };
