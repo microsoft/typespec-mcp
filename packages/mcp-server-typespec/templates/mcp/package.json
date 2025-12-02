@@ -5,7 +5,7 @@
   "description": "",
   "dependencies": {
     "@modelcontextprotocol/inspector": "0.14.1",
-    "@modelcontextprotocol/sdk": "1.11.4",
+    "@modelcontextprotocol/sdk": "1.24.0",
     "@typespec/compiler": "1.0.0",
     "typespec-mcp": "0.0.0-61",
     "typespec-zod": "0.0.0-51",
