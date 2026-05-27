@@ -12,10 +12,10 @@ The TypeSpec MCP Server implements the [MCP specification](https://modelcontextp
 
 Currently this repo contains the following packages:
 
-- [mcp-server-typespec](https://github.com/bterlson/typespec-mcp/tree/main/packages/mcp-server-typespec) - an MCP server which assists in developing MCP extensions using TypeSpec.
-- [typespec-mcp](https://github.com/bterlson/typespec-mcp/tree/main/packages/typespec-mcp) - a TypeSpec library for describing MCP servers, for example the `@tool` decorator.
-- [typespec-mcp-server-js](https://github.com/bterlson/typespec-mcp/tree/main/packages/typespec-mcp-server-js) - A TypeSpec emitter that generates a server implementation in JavaScript for an MCP tool.
-- [typespec-mcp-http-server-js](https://github.com/bterlson/typespec-mcp/tree/main/packages/typespec-mcp-http-server-js) - A TypeSpec emitter that generates a server implementation in JavaScript for calling a remote REST API.
+- [mcp-server-typespec](https://github.com/microsoft/typespec-mcp/tree/main/packages/mcp-server-typespec) - an MCP server which assists in developing MCP extensions using TypeSpec.
+- [typespec-mcp](https://github.com/microsoft/typespec-mcp/tree/main/packages/typespec-mcp) - a TypeSpec library for describing MCP servers, for example the `@tool` decorator.
+- [typespec-mcp-server-js](https://github.com/microsoft/typespec-mcp/tree/main/packages/typespec-mcp-server-js) - A TypeSpec emitter that generates a server implementation in JavaScript for an MCP tool.
+- [typespec-mcp-http-server-js](https://github.com/microsoft/typespec-mcp/tree/main/packages/typespec-mcp-http-server-js) - A TypeSpec emitter that generates a server implementation in JavaScript for calling a remote REST API.
 
 ## Currently Supported Tools
 
@@ -79,13 +79,13 @@ For a step-by-step installation, follow these instructions:
 
 ## Troubleshooting
 
-See [Troubleshooting guide](https://github.com/bterlson/typespec-mcp/blob/main/TROUBLESHOOTING.md) for help with common issues and logging.
+See [Troubleshooting guide](https://github.com/microsoft/typespec-mcp/blob/main/TROUBLESHOOTING.md) for help with common issues and logging.
 
 ## Contributing
 
 We welcome contributions to the TypeSpec MCP Server! Whether you're fixing bugs, adding new features, or improving documentation, your contributions are welcome.
 
-Please read our [Contributing Guide](https://github.com/bterlson/typespec-mcp/blob/main/CONTRIBUTING.md) for more information on how to contribute.
+Please read our [Contributing Guide](https://github.com/microsoft/typespec-mcp/blob/main/CONTRIBUTING.md) for more information on how to contribute.
 
 ## Code of Conduct
 
