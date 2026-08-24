@@ -16,3 +16,12 @@ updates:
       - dependency-name: "@alloy-js/*"
       - dependency-name: "@typespec/*"
       - dependency-name: "typespec-zod"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    groups:
+      github-actions:
+        patterns: ["*"]
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7
